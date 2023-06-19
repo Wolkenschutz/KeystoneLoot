@@ -1,7 +1,6 @@
 local AddonName, Addon = ...;
 
 local MainFrame = Addon.Frames.Main;
-local ClassFilter = Addon.Frames.Filter.Class;
 
 local CreateInstanceFrame = Addon.CreateInstanceFrame;
 local CreateItemFrame = Addon.CreateItemFrame;
@@ -9,24 +8,6 @@ local CreateItemFrame = Addon.CreateItemFrame;
 
 -- Test test
 C_Timer.After(5, function()
-	local text;
-	local classID, specID = EJ_GetLootFilter();
-	specID = GetSpecializationInfo(3);
-
-	local classInfo = C_CreatureInfo.GetClassInfo(classID);
-	local classColorStr = RAID_CLASS_COLORS[classInfo.classFile].colorStr;
-
-	if (specID > 0) then
-		local specName = GetSpecializationNameForSpecID(specID);
-
-		text = HEIRLOOMS_CLASS_SPEC_FILTER_FORMAT:format(classColorStr, classInfo.className, specName);
-	else
-		text = HEIRLOOMS_CLASS_FILTER_FORMAT:format(classColorStr, classInfo.className);
-	end
-
-	ClassFilter:SetText(text);
-
-
 	local selectedTier = 0;
 
 	for i=1, EJ_GetNumTiers() do
@@ -47,7 +28,7 @@ C_Timer.After(5, function()
 	local _, name, _, _, buttonImage = EJ_GetInstanceByIndex(i, false);
 
 	while (name) do
-		local InstanceFrame = CreateInstanceFrame(MainFrame);
+		local InstanceFrame = CreateInstanceFrame();
 
 		InstanceFrame.Title:SetText(name);
 		InstanceFrame.Bg:SetTexture(buttonImage);

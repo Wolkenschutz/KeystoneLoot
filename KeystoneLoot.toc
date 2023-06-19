@@ -1,6 +1,6 @@
 ## Interface: 100100
 ## Title: |cff9d5db8Keystone Loot|r
-## Notes: [PH] Shows the items from the mythic plus instances
+## Notes: Shows the items from the mythic plus instances in a compact overview
 ## Author: Selina Ruesch
 ## X-Email: selina.ruesch@gmail.com
 ## Version: 0.0.1
@@ -10,6 +10,8 @@
 frames/main.lua
 frames/instance.lua
 frames/filter.lua
+frames/filter_class.lua
+frames/filter_slot.lua
 frames/item.lua
 
 core.lua

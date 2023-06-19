@@ -1,14 +1,16 @@
 local AddonName, Addon = ...;
 
 
+local MainFrame = Addon.Frames.Main;
+
 local INSTANCE_FRAMES = {};
 local ROWS = 1;
 
 
-local function CreateInstanceFrame(parent)
+local function CreateInstanceFrame()
 	local i = #INSTANCE_FRAMES + 1;
 
-	local Frame = CreateFrame('Frame', nil, parent, 'InsetFrameTemplate');
+	local Frame = CreateFrame('Frame', nil, MainFrame, 'InsetFrameTemplate');
 	Frame.ItemFrames = {};
 	Frame:SetSize(180, 90);
 
