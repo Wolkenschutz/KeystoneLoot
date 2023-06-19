@@ -1,7 +1,7 @@
 local AddonName, Addon = ...;
 
 local MainFrame = Addon.Frames.MainFrame;
-local GearFilter = Addon.Frames.Filter.Gear;
+local ClassFilter = Addon.Frames.Filter.Class;
 
 local CreateInstanceFrame = Addon.CreateInstanceFrame;
 local CreateItemFrame = Addon.CreateItemFrame;
@@ -24,7 +24,7 @@ C_Timer.After(5, function()
 		text = HEIRLOOMS_CLASS_FILTER_FORMAT:format(classColorStr, classInfo.className);
 	end
 
-	GearFilter:SetText(text);
+	ClassFilter:SetText(text);
 
 
 	local selectedTier = 0;

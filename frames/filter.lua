@@ -13,29 +13,29 @@ FilterBg:SetBlendMode('ADD');
 FilterBg:SetVertexColor(0.1, 0.1, 0.1, 1);
 
 
-local function GearFilter_OnClick(self)
-	print('Gear filter clicked');
+local function ClassFilter_OnClick(self)
+	print('Class filter clicked');
 	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 end
 
-local GearFilter = CreateFrame('Button', nil, MainFrame, 'UIMenuButtonStretchTemplate');
-Addon.Frames.Filter.Gear = GearFilter;
+local ClassFilter = CreateFrame('Button', nil, MainFrame, 'UIMenuButtonStretchTemplate');
+Addon.Frames.Filter.Class = ClassFilter;
 
-GearFilter:SetSize(100, 24);
-GearFilter:SetPoint('TOP', -55, -35);
-GearFilter:SetScript('OnClick', GearFilter_OnClick);
+ClassFilter:SetSize(100, 24);
+ClassFilter:SetPoint('TOP', -55, -35);
+ClassFilter:SetScript('OnClick', ClassFilter_OnClick);
 
-local GearFilterIcon = GearFilter:CreateTexture(nil, 'ARTWORK');
-GearFilter.Icon = GearFilterIcon;
-GearFilterIcon:SetSize(10, 12);
-GearFilterIcon:SetPoint('RIGHT', -5, 0);
-GearFilterIcon:SetTexture('Interface\\ChatFrame\\ChatFrameExpandArrow');
+local ClassFilterIcon = ClassFilter:CreateTexture(nil, 'ARTWORK');
+ClassFilter.Icon = ClassFilterIcon;
+ClassFilterIcon:SetSize(10, 12);
+ClassFilterIcon:SetPoint('RIGHT', -5, 0);
+ClassFilterIcon:SetTexture('Interface\\ChatFrame\\ChatFrameExpandArrow');
 
-local GearFilterText = GearFilter.Text;
-GearFilterText:SetWordWrap(false);
-GearFilterText:SetJustifyH('LEFT');
-GearFilterText:SetPoint('LEFT', 8, 0);
-GearFilterText:SetPoint('RIGHT', GearFilterIcon, 'LEFT', -2, 0);
+local ClassFilterText = ClassFilter.Text;
+ClassFilterText:SetWordWrap(false);
+ClassFilterText:SetJustifyH('LEFT');
+ClassFilterText:SetPoint('LEFT', 8, 0);
+ClassFilterText:SetPoint('RIGHT', ClassFilterIcon, 'LEFT', -2, 0);
 
 
 local function SlotFilter_OnClick(self)
@@ -44,7 +44,7 @@ local function SlotFilter_OnClick(self)
 end
 
 local SlotFilter = CreateFrame('Button', nil, MainFrame, 'UIMenuButtonStretchTemplate');
-Addon.Frames.Filter.Slot = GearFilter;
+Addon.Frames.Filter.Slot = SlotFilter;
 
 SlotFilter:SetSize(100, 24);
 SlotFilter:SetPoint('TOP', 55, -35);
