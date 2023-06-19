@@ -4,10 +4,11 @@
 ## Author: Selina Ruesch
 ## X-Email: selina.ruesch@gmail.com
 ## Version: 0.0.1
-## IconTexture: Interface\EncounterJournal\UI-EJ-PortraitIcon
+## IconTexture: Interface\Icons\INV_Relics_Hourglass_02
 ## SavedVariablesPerCharacter: KEYSTONE_LOOT_CHAR_DB
 
 frames/main.lua
 frames/instance.lua
+frames/filter.lua
 
 core.lua

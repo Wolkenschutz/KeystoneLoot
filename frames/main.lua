@@ -1,8 +1,5 @@
 local AddonName, Addon = ...;
-
-if (Addon.Frames == nil) then
-	Addon.Frames = {};
-end
+Addon.Frames = {};
 
 
 local function Frame_OnShow(self)
@@ -35,7 +32,7 @@ Frame:SetScript('OnDragStop', Frame.StopMovingOrSizing);
 Frame:SetScript('OnShow', Frame_OnShow);
 Frame:SetScript('OnHide', Frame_OnHide);
 
-Frame:SetPortraitToAsset('Interface\\EncounterJournal\\UI-EJ-PortraitIcon');
+Frame:SetPortraitToAsset('Interface\\Icons\\INV_Relics_Hourglass_02');
 Frame:SetTitle('Keystone Loot');
 
 
