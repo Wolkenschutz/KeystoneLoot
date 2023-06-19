@@ -2,7 +2,6 @@ local AddonName, Addon = ...;
 
 
 local INSTANCE_FRAMES = {};
-local INSTANCE_MAX_WIDTH = 256 * (90 / 128);
 local ROWS = 1;
 
 
@@ -11,10 +10,10 @@ local function CreateInstanceFrame(parent)
 
 	local Frame = CreateFrame('Frame', nil, parent, 'InsetFrameTemplate');
 	Frame.ItemFrames = {};
-	Frame:SetSize(INSTANCE_MAX_WIDTH, 90);
+	Frame:SetSize(180, 90);
 
 	if (i == 1) then
-		Frame:SetPoint('TOP', -((INSTANCE_MAX_WIDTH / 2)+20), -100);
+		Frame:SetPoint('TOP', -110, -100);
 	elseif (mod(i, 2) == 1) then
 		Frame:SetPoint('TOP', INSTANCE_FRAMES[i - 2], 'BOTTOM', 0, -40);
 
