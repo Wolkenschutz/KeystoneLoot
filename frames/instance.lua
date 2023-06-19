@@ -10,7 +10,7 @@ local function CreateInstanceFrame(parent)
 	local i = #INSTANCE_FRAMES + 1;
 
 	local Frame = CreateFrame('Frame', nil, parent, 'InsetFrameTemplate');
-
+	Frame.ItemFrames = {};
 	Frame:SetSize(INSTANCE_MAX_WIDTH, 90);
 
 	if (i == 1) then
@@ -31,15 +31,6 @@ local function CreateInstanceFrame(parent)
 	local Title = Frame:CreateFontString('ARTWORK', nil, 'GameFontDisableLarge');
 	Frame.Title = Title;
 	Title:SetPoint('BOTTOM', Frame, 'TOP', 0, 5);
-
-
-	Frame.SetBackground = function(self, texture)
-		self.Bg:SetTexture(texture);
-	end
-
-	Frame.SetTitle = function(self, title)
-		self.Title:SetText(title);
-	end
 
 
 	-- TODO: Main frame dynamische Höhe

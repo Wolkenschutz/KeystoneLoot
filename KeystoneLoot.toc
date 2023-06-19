@@ -10,5 +10,6 @@
 frames/main.lua
 frames/instance.lua
 frames/filter.lua
+frames/item.lua
 
 core.lua

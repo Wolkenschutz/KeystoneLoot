@@ -2,7 +2,9 @@ local AddonName, Addon = ...;
 
 local MainFrame = Addon.Frames.MainFrame;
 local GearFilter = Addon.Frames.Filter.Gear;
+
 local CreateInstanceFrame = Addon.CreateInstanceFrame;
+local CreateItemFrame = Addon.CreateItemFrame;
 
 
 -- Test test
@@ -47,8 +49,19 @@ C_Timer.After(5, function()
 	while (name) do
 		local InstanceFrame = CreateInstanceFrame(MainFrame);
 
-		InstanceFrame:SetTitle(name);
-		InstanceFrame:SetBackground(buttonImage);
+		InstanceFrame.Title:SetText(name);
+		InstanceFrame.Bg:SetTexture(buttonImage);
+
+		local rand = random(0, 5);
+		InstanceFrame.Bg:SetDesaturated(rand == 0);
+		InstanceFrame:SetAlpha(rand == 0 and 0.8 or 1);
+		InstanceFrame.Title:SetFontObject('GameFont'..(rand == 0 and 'Disable' or 'Highlight')..'Large');
+
+		for i=1, rand do
+			local ItemFrame = CreateItemFrame(InstanceFrame);
+
+			ItemFrame.Icon:SetTexture('Interface\\Icons\\temp');
+		end
 
 		i = i+1;
 		_, name, _, _, buttonImage = EJ_GetInstanceByIndex(i, false);
