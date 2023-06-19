@@ -1,0 +1,13 @@
+## Interface: 100100
+## Title: |cff9d5db8Keystone Loot|r
+## Notes: [PH] Shows the items from the mythic plus instances
+## Author: Selina Ruesch
+## X-Email: selina.ruesch@gmail.com
+## Version: 0.0.1
+## IconTexture: Interface\EncounterJournal\UI-EJ-PortraitIcon
+## SavedVariablesPerCharacter: KEYSTONE_LOOT_CHAR_DB
+
+frames/main.lua
+frames/instance.lua
+
+core.lua
