@@ -14,7 +14,7 @@ local function Frame_OnHide(self)
 end
 
 local Frame = CreateFrame('Frame', nil, UIParent, 'PortraitFrameTexturedBaseTemplate');
-Addon.Frames.MainFrame = Frame;
+Addon.Frames.Main = Frame;
 
 Frame:SetSize(476, 620);
 Frame:SetPoint('CENTER');

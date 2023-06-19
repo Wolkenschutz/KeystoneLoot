@@ -2,7 +2,7 @@ local AddonName, Addon = ...;
 Addon.Frames.Filter = {};
 
 
-local MainFrame = Addon.Frames.MainFrame;
+local MainFrame = Addon.Frames.Main;
 
 
 local FilterBg = MainFrame:CreateTexture(nil, 'BACKGROUND');

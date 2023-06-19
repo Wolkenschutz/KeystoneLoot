@@ -1,6 +1,6 @@
 local AddonName, Addon = ...;
 
-local MainFrame = Addon.Frames.MainFrame;
+local MainFrame = Addon.Frames.Main;
 local ClassFilter = Addon.Frames.Filter.Class;
 
 local CreateInstanceFrame = Addon.CreateInstanceFrame;
