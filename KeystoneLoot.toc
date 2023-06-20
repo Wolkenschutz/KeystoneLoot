@@ -7,6 +7,9 @@
 ## IconTexture: Interface\Icons\INV_Relics_Hourglass_02
 ## SavedVariablesPerCharacter: KEYSTONE_LOOT_CHAR_DB
 
+api/util.lua
+api/instance.lua
+
 frames/main.lua
 frames/instance.lua
 frames/filter.lua

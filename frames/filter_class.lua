@@ -2,14 +2,15 @@ local AddonName, Addon = ...;
 
 
 local CreateFilterButton = Addon.CreateFilterButton;
+local GetInstanceLoot = Addon.GetInstanceLoot;
 
-local SELECTED_CLASS_ID = 0;
-local SELECTED_SPEC_ID = 0;
+Addon.SELECTED_CLASS_ID = 0;
+Addon.SELECTED_SPEC_ID = 0;
 
 
 local function SetClassFilter(self, classID, specID)
-	SELECTED_CLASS_ID = classID;
-	SELECTED_SPEC_ID = specID;
+	Addon.SELECTED_CLASS_ID = classID;
+	Addon.SELECTED_SPEC_ID = specID;
 
 	local text;
 	local classInfo = C_CreatureInfo.GetClassInfo(classID);
@@ -25,18 +26,24 @@ local function SetClassFilter(self, classID, specID)
 
 	UIDropDownMenu_SetText(Addon.SELECTED_FILTER_BUTTON, text);
 
+	Addon.API.UpdateInstances();
+
 	CloseDropDownMenus(1);
 end
 
 local function InitClassDropDownMenu(self, level)
+	local SELECTED_CLASS_ID = Addon.SELECTED_CLASS_ID;
+	local SELECTED_SPEC_ID = Addon.SELECTED_SPEC_ID;
+
 	local info = UIDropDownMenu_CreateInfo();
 	info.keepShownOnClick = nil;
 
 	if (UIDROPDOWNMENU_MENU_VALUE == 1) then
 		for i=1, GetNumClasses() do
-			local classDisplayName, _, classID = GetClassInfo(i);
+			local classDisplayName, classFile, classID = GetClassInfo(i);
+			local classColorStr = RAID_CLASS_COLORS[classFile].colorStr;
 
-			info.text = classDisplayName;
+			info.text = HEIRLOOMS_CLASS_FILTER_FORMAT:format(classColorStr, classDisplayName);
 			info.checked = SELECTED_CLASS_ID == classID;
 			info.arg1 = classID;
 			info.arg2 = 0;
@@ -46,7 +53,7 @@ local function InitClassDropDownMenu(self, level)
 	end
 
 	if (level == 1) then
-		local classDisplayName, _, classID;
+		local classDisplayName, classFile, classID;
 
 		info.text = CLASS;
 		info.func =  nil;
@@ -57,12 +64,18 @@ local function InitClassDropDownMenu(self, level)
 
 		if (SELECTED_CLASS_ID > 0) then
 			classID = SELECTED_CLASS_ID;
-			classDisplayName = C_CreatureInfo.GetClassInfo(SELECTED_CLASS_ID).className;
+			
+			local classInfo = C_CreatureInfo.GetClassInfo(classID);
+
+			classDisplayName = classInfo.className;
+			classFile = classInfo.classFile;
 		else
-			classDisplayName, _, classID = UnitClass('player');
+			classDisplayName, classFile, classID = UnitClass('player');
 		end
 
-		info.text = classDisplayName;
+		local classColorStr = RAID_CLASS_COLORS[classFile].colorStr;
+
+		info.text = HEIRLOOMS_CLASS_FILTER_FORMAT:format(classColorStr, classDisplayName);
 		info.notCheckable = true;
 		info.arg1 = nil;
 		info.arg2 = nil;
@@ -98,13 +111,15 @@ Addon.Frames.Filter.Class = ClassFilter;
 
 ClassFilter:SetPoint('TOP', -55, -35);
 ClassFilter:RegisterEvent('PLAYER_ENTERING_WORLD');
-ClassFilter:SetScript('OnEvent', function(self)
+ClassFilter:SetScript('OnEvent', function(self) -- NOTE: Funktion kann ruhig direkt reingeschrieben werden, da sie nur einmal aufgerufen wird.
 	self:UnregisterAllEvents();
 
 	local _, _, classID = UnitClass('player');
-	SELECTED_CLASS_ID = classID;
-	SELECTED_SPEC_ID = (GetSpecializationInfo(GetSpecialization()));
+	local specID = (GetSpecializationInfo(GetSpecialization()));
+
+	Addon.SELECTED_CLASS_ID = classID;
+	Addon.SELECTED_SPEC_ID = specID;
 	Addon.SELECTED_FILTER_BUTTON = self;
 
-	SetClassFilter(nil, SELECTED_CLASS_ID, SELECTED_SPEC_ID);
+	SetClassFilter(nil, classID, specID);
 end);

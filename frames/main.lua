@@ -2,20 +2,24 @@ local AddonName, Addon = ...;
 Addon.Frames = {};
 
 
-local function Frame_OnShow(self)
+local function OnShow(self)
+	Addon.API.UpdateInstances();
+
 	self:SetAlpha(0);
 	UIFrameFadeIn(self, 0.2, 0, 1);
 
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN);
 end
 
-local function Frame_OnHide(self)
+local function OnHide(self)
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE);
 end
+
 
 local Frame = CreateFrame('Frame', nil, UIParent, 'PortraitFrameTexturedBaseTemplate');
 Addon.Frames.Main = Frame;
 
+Frame:Hide();
 Frame:SetSize(476, 620);
 Frame:SetPoint('CENTER');
 
@@ -29,8 +33,8 @@ Frame:RegisterForDrag('LeftButton');
 
 Frame:SetScript('OnDragStart', Frame.StartMoving);
 Frame:SetScript('OnDragStop', Frame.StopMovingOrSizing);
-Frame:SetScript('OnShow', Frame_OnShow);
-Frame:SetScript('OnHide', Frame_OnHide);
+Frame:SetScript('OnShow', OnShow);
+Frame:SetScript('OnHide', OnHide);
 
 Frame:SetPortraitToAsset('Interface\\Icons\\INV_Relics_Hourglass_02');
 Frame:SetTitle('Keystone Loot');

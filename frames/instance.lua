@@ -7,8 +7,8 @@ local INSTANCE_FRAMES = {};
 local ROWS = 1;
 
 
-local function CreateInstanceFrame()
-	local i = #INSTANCE_FRAMES + 1;
+local function CreateInstanceFrame(i)
+	
 
 	local Frame = CreateFrame('Frame', nil, MainFrame, 'InsetFrameTemplate');
 	Frame.ItemFrames = {};
@@ -34,10 +34,16 @@ local function CreateInstanceFrame()
 	Title:SetPoint('BOTTOM', Frame, 'TOP', 0, 5);
 
 
-	-- TODO: Main frame dynamische Höhe
 	table.insert(INSTANCE_FRAMES, Frame);
 
 	return Frame;
 end
 
-Addon.CreateInstanceFrame = CreateInstanceFrame;
+local function GetInstanceFrame(i)
+	if (INSTANCE_FRAMES[i]) then
+		return INSTANCE_FRAMES[i];
+	end
+
+	return CreateInstanceFrame(i);
+end
+Addon.GetInstanceFrame = GetInstanceFrame;

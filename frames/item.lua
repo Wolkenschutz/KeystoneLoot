@@ -1,11 +1,22 @@
 local AddonName, Addon = ...;
 
 
-local function CreateItemFrame(parent)
-	local i = #parent.ItemFrames + 1;
+local function OnEnter(self)
+	GameTooltip:SetOwner(self, 'ANCHOR_BOTTOMRIGHT');
+	GameTooltip:SetHyperlink(self.link);
+	GameTooltip:Show();
+end
 
+local function OnLeave(self)
+	GameTooltip:Hide()
+end
+
+local function CreateItemFrame(i, parent)
 	local Frame = CreateFrame('Frame', nil, parent);
 	Frame:SetSize(32, 32);
+
+	Frame:SetScript('OnEnter', OnEnter);
+	Frame:SetScript('OnLeave', OnLeave);
 
 	if (i == 1) then
 		Frame:SetPoint('TOPLEFT', 11, -10);
@@ -33,4 +44,12 @@ local function CreateItemFrame(parent)
 	return Frame;
 end
 
-Addon.CreateItemFrame = CreateItemFrame;
+
+local function GetItemFrame(i, parent)
+	if (parent.ItemFrames[i]) then
+		return parent.ItemFrames[i];
+	end
+
+	return CreateItemFrame(i, parent);
+end
+Addon.GetItemFrame = GetItemFrame;

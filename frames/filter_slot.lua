@@ -3,7 +3,7 @@ local AddonName, Addon = ...;
 
 local CreateFilterButton = Addon.CreateFilterButton;
 
-local SELECTED_SLOT_ID = -1;
+Addon.SELECTED_SLOT_ID = -1;
 
 
 local SlotFilterToSlotName = {
@@ -26,13 +26,17 @@ local SlotFilterToSlotName = {
 
 
 local function SetSlotFilter(self, slotID)
-	SELECTED_SLOT_ID = slotID
+	Addon.SELECTED_SLOT_ID = slotID
 	UIDropDownMenu_SetText(Addon.SELECTED_FILTER_BUTTON, slotID == -1 and FAVORITES or SlotFilterToSlotName[slotID]);
+
+	Addon.API.UpdateInstances();
 
 	CloseDropDownMenus(1);
 end
 
 local function InitSlotDropDownMenu(self, level)
+	local SELECTED_SLOT_ID = Addon.SELECTED_SLOT_ID;
+
 	local info = UIDropDownMenu_CreateInfo();
 	info.text = FAVORITES;
 	info.checked = SELECTED_SLOT_ID == -1;
