@@ -46,8 +46,9 @@ end
 
 
 local function GetItemFrame(i, parent)
-	if (parent.ItemFrames[i]) then
-		return parent.ItemFrames[i];
+	local Frame = parent.ItemFrames[i];
+	if (Frame) then
+		return Frame;
 	end
 
 	return CreateItemFrame(i, parent);

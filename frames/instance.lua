@@ -8,8 +8,6 @@ local ROWS = 1;
 
 
 local function CreateInstanceFrame(i)
-	
-
 	local Frame = CreateFrame('Frame', nil, MainFrame, 'InsetFrameTemplate');
 	Frame.ItemFrames = {};
 	Frame:SetSize(180, 90);
@@ -40,10 +38,37 @@ local function CreateInstanceFrame(i)
 end
 
 local function GetInstanceFrame(i)
-	if (INSTANCE_FRAMES[i]) then
-		return INSTANCE_FRAMES[i];
+	local Frame = INSTANCE_FRAMES[i];
+	if (Frame) then
+		return Frame;
 	end
 
 	return CreateInstanceFrame(i);
 end
 Addon.GetInstanceFrame = GetInstanceFrame;
+
+local function CreateInstanceFrames()
+	local mythicTierID = Addon.API.GetMythicTierID();
+	if (mythicTierID == nil) then
+		-- TODO: Text einblenden, dass keine vorhanden sind.
+		return;
+	end
+
+	EJ_SelectTier(mythicTierID);
+	EJ_SetDifficulty(DifficultyUtil.ID.DungeonChallenge);
+
+	local i = 1;
+	local id, name, _, _, buttonImage = EJ_GetInstanceByIndex(i, false);
+
+	while (name) do
+		local InstanceFrame = GetInstanceFrame(i);
+		InstanceFrame.instanceID = id;
+
+		InstanceFrame.Title:SetText(name);
+		InstanceFrame.Bg:SetTexture(buttonImage);
+
+		i = i+1;
+		id, name, _, _, buttonImage = EJ_GetInstanceByIndex(i, false);
+	end
+end
+Addon.CreateInstanceFrames = CreateInstanceFrames;

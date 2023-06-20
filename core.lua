@@ -1,20 +1,33 @@
 local AddonName, Addon = ...;
 
+
 local MainFrame = Addon.Frames.Main;
 
 
 	-- TODO: Main frame dynamische Höhe (Falls neue Season anfängt und die Anzahl nur 3 Reihen sind)
-	-- FIXME: Beim ersten Mal werden keine Items angezeigt.
-	-- FIXME: UpdateInstances() brauch nen Rework. Dirty shit!
-	-- NOTE: Update-Rework: Wenn man das erste mal einloggt: Instanz-Frames werden
-	-- erstellt und eingestellt. Beim öffnen werden die dann weder erstellt, noch
-	-- eingestellt. Dann werden nur noch Item-Frames erstellt und eingestellt. 
+	-- TODO: Favoriten-Funktion hinzufügen.
+	-- TODO: Minimap-Button hinzufügen.
+	-- TODO: Slot ausgrauen, die keine Items haben.
+	-- FIXME: Blocked function: SetTab() -???- Workaround? Meldung einfach schliessen? Nachforschung betreiben.
 
 
--- Test test
-C_Timer.After(5, function()
+local function OnEvent(self, event, ...)
+	if (event == 'ADDON_LOADED' and (...) == AddonName) then
+		self:UnregisterEvent(event);
+		self:RegisterEvent('PLAYER_ENTERING_WORLD');
 
-end);
+		KEYSTONE_LOOT_CHAR_DB = KEYSTONE_LOOT_CHAR_DB or {};
+	elseif (event == 'PLAYER_ENTERING_WORLD') then
+		self:UnregisterEvent(event);
+
+		Addon.CreateInstanceFrames();
+	elseif (event == 'EJ_LOOT_DATA_RECIEVED') then
+		Addon.API.UpdateLoot();
+	end
+end
+
+MainFrame:RegisterEvent('ADDON_LOADED');
+MainFrame:SetScript('OnEvent', OnEvent);
 
 
 SlashCmdList.KEYSTONELOOT = function(msg)

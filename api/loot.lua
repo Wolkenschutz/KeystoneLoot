@@ -1,17 +1,15 @@
 local AddonName, Addon = ...;
 
 
-local GetMythicTierID = Addon.API.GetMythicTierID
-
-
-local function UpdateInstances()
-	if (Addon.SELECTED_SLOT_ID == -1) then
-		print('STOP! Fav selected');
+local function UpdateLoot()
+	local mythicTierID = Addon.API.GetMythicTierID();
+	if (mythicTierID == nil) then
 		return;
 	end
 
-	local mythicTierID = GetMythicTierID();
-	if (mythicTierID == nil) then
+	if (Addon.SELECTED_SLOT_ID == -1) then
+		print('STOP! Fav selected');
+		-- DB werden icon, link, instanceID, classID und specID gespeichert. DB durchschauen und bei den Instanzen setzen.
 		return;
 	end
 
@@ -34,33 +32,22 @@ local function UpdateInstances()
 
 		local InstanceFrame = Addon.GetInstanceFrame(i);
 
-		InstanceFrame.Title:SetText(name);
-		InstanceFrame.Bg:SetTexture(buttonImage);
-
-		local numHide = 1;
-
 		for i=1, 8 do
+			local ItemFrame = Addon.GetItemFrame(i, InstanceFrame);
 			local itemInfo = C_EncounterJournal.GetLootInfoByIndex(i);
+
 			if (itemInfo == nil) then
-				break;
+				ItemFrame:Hide();
+			else
+				ItemFrame.link = itemInfo.link;
+				ItemFrame.Icon:SetTexture(itemInfo.icon);
+				ItemFrame:Show();
 			end
-
-			local ItemFrame = Addon.GetItemFrame(i, InstanceFrame);
-			ItemFrame.link = itemInfo.link;
-			ItemFrame.Icon:SetTexture(itemInfo.icon);
-			ItemFrame:Show();
-
-			numHide = i + 1;
-		end
-
-		for i=numHide, 8 do
-			local ItemFrame = Addon.GetItemFrame(i, InstanceFrame);
-			ItemFrame:Hide();
 		end
 
 		local numLoot = EJ_GetNumLoot();
 
-		InstanceFrame.Title:SetFontObject('GameFont'..(numLoot == 0 and 'Disable' or 'Highlight')..'Large');
+		InstanceFrame.Title:SetTextColor((numLoot == 0 and GRAY_FONT_COLOR or NORMAL_FONT_COLOR):GetRGB());
 		InstanceFrame.Bg:SetDesaturated(numLoot == 0);
 		InstanceFrame:SetAlpha(numLoot == 0 and 0.8 or 1);
 
@@ -68,4 +55,4 @@ local function UpdateInstances()
 		id, name, _, _, buttonImage = EJ_GetInstanceByIndex(i, false);
 	end
 end
-Addon.API.UpdateInstances = UpdateInstances;
+Addon.API.UpdateLoot = UpdateLoot;

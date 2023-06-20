@@ -8,7 +8,7 @@
 ## SavedVariablesPerCharacter: KEYSTONE_LOOT_CHAR_DB
 
 api/util.lua
-api/instance.lua
+api/loot.lua
 
 frames/main.lua
 frames/instance.lua

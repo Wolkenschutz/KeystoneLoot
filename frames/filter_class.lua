@@ -2,7 +2,6 @@ local AddonName, Addon = ...;
 
 
 local CreateFilterButton = Addon.CreateFilterButton;
-local GetInstanceLoot = Addon.GetInstanceLoot;
 
 Addon.SELECTED_CLASS_ID = 0;
 Addon.SELECTED_SPEC_ID = 0;
@@ -26,7 +25,7 @@ local function SetClassFilter(self, classID, specID)
 
 	UIDropDownMenu_SetText(Addon.SELECTED_FILTER_BUTTON, text);
 
-	Addon.API.UpdateInstances();
+	Addon.API.UpdateLoot();
 
 	CloseDropDownMenus(1);
 end
@@ -64,7 +63,7 @@ local function InitClassDropDownMenu(self, level)
 
 		if (SELECTED_CLASS_ID > 0) then
 			classID = SELECTED_CLASS_ID;
-			
+
 			local classInfo = C_CreatureInfo.GetClassInfo(classID);
 
 			classDisplayName = classInfo.className;

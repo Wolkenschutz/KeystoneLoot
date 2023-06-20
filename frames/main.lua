@@ -3,7 +3,9 @@ Addon.Frames = {};
 
 
 local function OnShow(self)
-	Addon.API.UpdateInstances();
+	self:RegisterEvent('EJ_LOOT_DATA_RECIEVED');
+
+	Addon.API.UpdateLoot();
 
 	self:SetAlpha(0);
 	UIFrameFadeIn(self, 0.2, 0, 1);
@@ -12,6 +14,8 @@ local function OnShow(self)
 end
 
 local function OnHide(self)
+	self:UnregisterEvent('EJ_LOOT_DATA_RECIEVED');
+
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE);
 end
 
