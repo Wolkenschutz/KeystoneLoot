@@ -24,6 +24,13 @@ local SlotFilterToSlotName = {
 	[Enum.ItemSlotFilterType.Other] = EJ_LOOT_SLOT_FILTER_OTHER
 }
 
+-- NOTE: Obere Liste wird komplett durcheinandergewürfelt...?
+local SortedFilterList = {};
+for id in next, SlotFilterToSlotName do
+	table.insert(SortedFilterList, id);
+end
+table.sort(SortedFilterList);
+
 
 local function SetSlotFilter(self, slotID)
 	Addon.SELECTED_SLOT_ID = slotID
@@ -44,10 +51,10 @@ local function InitSlotDropDownMenu(self, level)
 	info.func = SetSlotFilter;
 	UIDropDownMenu_AddButton(info);
 
-	for filter, name in next, SlotFilterToSlotName do
-		info.text = name;
-		info.checked = SELECTED_SLOT_ID == filter;
-		info.arg1 = filter;
+	for _, id in ipairs(SortedFilterList) do
+		info.text = SlotFilterToSlotName[id];
+		info.checked = SELECTED_SLOT_ID == id;
+		info.arg1 = id;
 		UIDropDownMenu_AddButton(info);
 	end
 end
