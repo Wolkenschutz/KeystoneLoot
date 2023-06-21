@@ -60,7 +60,7 @@ local function CreateInstanceFrames()
 	local i = 1;
 	local id, name, _, _, buttonImage = EJ_GetInstanceByIndex(i, false);
 
-	while (name) do
+	while (id) do
 		local InstanceFrame = GetInstanceFrame(i);
 		InstanceFrame.instanceID = id;
 

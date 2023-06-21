@@ -25,9 +25,9 @@ local function UpdateLoot()
 	EJ_SetDifficulty(DifficultyUtil.ID.DungeonChallenge);
 
 	local i = 1;
-	local id, name, _, _, buttonImage = EJ_GetInstanceByIndex(i, false);
+	local id = EJ_GetInstanceByIndex(i, false);
 
-	while (name) do
+	while (id) do
 		EJ_SelectInstance(id);
 
 		local InstanceFrame = Addon.GetInstanceFrame(i);
@@ -52,7 +52,7 @@ local function UpdateLoot()
 		InstanceFrame:SetAlpha(numLoot == 0 and 0.8 or 1);
 
 		i = i+1;
-		id, name, _, _, buttonImage = EJ_GetInstanceByIndex(i, false);
+		id = EJ_GetInstanceByIndex(i, false);
 	end
 end
 Addon.API.UpdateLoot = UpdateLoot;

@@ -1,8 +1,6 @@
 local AddonName, Addon = ...;
 
 
-local CreateFilterButton = Addon.CreateFilterButton;
-
 Addon.SELECTED_CLASS_ID = 0;
 Addon.SELECTED_SPEC_ID = 0;
 
@@ -105,9 +103,7 @@ local function InitClassDropDownMenu(self, level)
 end
 
 
-local ClassFilter = CreateFilterButton('class', InitClassDropDownMenu);
-Addon.Frames.Filter.Class = ClassFilter;
-
+local ClassFilter = Addon.CreateFilterButton('class', InitClassDropDownMenu);
 ClassFilter:SetPoint('TOP', -55, -35);
 ClassFilter:RegisterEvent('PLAYER_ENTERING_WORLD');
 ClassFilter:SetScript('OnEvent', function(self) -- NOTE: Funktion kann ruhig direkt reingeschrieben werden, da sie nur einmal aufgerufen wird.
