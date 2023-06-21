@@ -24,7 +24,7 @@ local Frame = CreateFrame('Frame', nil, UIParent, 'PortraitFrameTexturedBaseTemp
 Addon.Frames.Main = Frame;
 
 Frame:Hide();
-Frame:SetSize(476, 620);
+Frame:SetSize(476, 100);
 Frame:SetPoint('CENTER');
 
 Frame:SetToplevel(true);

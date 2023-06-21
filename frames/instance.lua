@@ -55,7 +55,6 @@ Addon.GetInstanceFrames = GetInstanceFrames;
 local function CreateInstanceFrames()
 	local mythicTierID = Addon.API.GetMythicTierID();
 	if (mythicTierID == nil) then
-		-- TODO: Text einblenden, dass keine vorhanden sind.
 		return;
 	end
 
@@ -75,5 +74,7 @@ local function CreateInstanceFrames()
 		i = i+1;
 		id, name, _, _, buttonImage = EJ_GetInstanceByIndex(i, false);
 	end
+
+	MainFrame:SetHeight(100 + (ROWS * 130));
 end
 Addon.CreateInstanceFrames = CreateInstanceFrames;

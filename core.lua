@@ -4,7 +4,6 @@ local AddonName, Addon = ...;
 local MainFrame = Addon.Frames.Main;
 
 
-	-- TODO: Main frame dynamische Höhe (Falls neue Season anfängt und die Anzahl nur 3 Reihen sind)
 	-- TODO: Favoriten-Funktion hinzufügen.
 	-- TODO: Minimap-Button hinzufügen.
 	-- TODO: Slot ausgrauen, die keine Items haben.
