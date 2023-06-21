@@ -5,18 +5,57 @@ local function OnEnter(self)
 	GameTooltip:SetOwner(self, 'ANCHOR_BOTTOMRIGHT');
 	GameTooltip:SetHyperlink(self.link);
 	GameTooltip:Show();
+
+	local _, _, classID = UnitClass('player');
+	if (not self.isFavorite and (Addon.SELECTED_CLASS_ID == classID or Addon.SELECTED_SLOT_ID == -1)) then
+		local FavoriteStar = self.FavoriteStar;
+
+		FavoriteStar:SetDesaturated(true);
+		FavoriteStar:Show();
+	end
 end
 
 local function OnLeave(self)
-	GameTooltip:Hide()
+	GameTooltip:Hide();
+
+	if (not self.isFavorite) then
+		self.FavoriteStar:Hide();
+	end
+end
+
+local function OnClick(self)
+	if (IsModifierKeyDown()) then
+		HandleModifiedItemClick(self.link);
+		return;
+	end
+
+	local instanceID = self:GetParent().instanceID;
+	local itemID = self.itemID;
+	local icon = self.Icon:GetTexture();
+	local link = self.link;
+
+	local _, _, classID = UnitClass('player');
+	local db = Addon.API.GetFavorite(instanceID, itemID);
+	if (db == nil and (Addon.SELECTED_CLASS_ID == classID or Addon.SELECTED_SLOT_ID == -1)) then
+		self.isFavorite = true;
+		self.FavoriteStar:SetDesaturated(false);
+
+		Addon.API.SetFavorite(instanceID, itemID, icon, link);
+	else
+		self.isFavorite = false;
+		self.FavoriteStar:SetDesaturated(true);
+
+		Addon.API.RemoveFavorite(instanceID, itemID);
+	end
 end
 
 local function CreateItemFrame(i, parent)
-	local Frame = CreateFrame('Frame', nil, parent);
+	local Frame = CreateFrame('Button', nil, parent);
 	Frame:SetSize(32, 32);
 
 	Frame:SetScript('OnEnter', OnEnter);
 	Frame:SetScript('OnLeave', OnLeave);
+	Frame:SetScript('OnClick', OnClick);
 
 	if (i == 1) then
 		Frame:SetPoint('TOPLEFT', 11, -10);
@@ -34,9 +73,17 @@ local function CreateItemFrame(i, parent)
 
 	local IconBorder = Frame:CreateTexture();
 	IconBorder:SetDrawLayer('ARTWORK', 2);
-	IconBorder:SetSize(32+26, 32+26);
+	IconBorder:SetSize(58, 58);
 	IconBorder:SetPoint('CENTER', Icon);
 	IconBorder:SetTexture('Interface\\Buttons\\UI-Quickslot2');
+
+	local FavoriteStar = Frame:CreateTexture();
+	Frame.FavoriteStar = FavoriteStar;
+	FavoriteStar:SetDrawLayer('ARTWORK', 3);
+	FavoriteStar:SetSize(24, 24);
+	FavoriteStar:SetPoint('TOPRIGHT', 8, 8);
+	FavoriteStar:SetAtlas('PetJournal-FavoritesIcon');
+	FavoriteStar:Hide();
 
 
 	table.insert(parent.ItemFrames, Frame);

@@ -8,6 +8,7 @@ local MainFrame = Addon.Frames.Main;
 	-- TODO: Favoriten-Funktion hinzufügen.
 	-- TODO: Minimap-Button hinzufügen.
 	-- TODO: Slot ausgrauen, die keine Items haben.
+	-- TODO: Checken, ob neue Season ist und anschliessend Fav leeren
 	-- FIXME: Blocked function: SetTab() -???- Workaround? Meldung einfach schliessen? Nachforschung betreiben.
 
 

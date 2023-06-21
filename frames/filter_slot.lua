@@ -49,6 +49,8 @@ local function InitSlotDropDownMenu(self, level)
 	info.func = SetSlotFilter;
 	UIDropDownMenu_AddButton(info);
 
+	UIDropDownMenu_AddSeparator();
+
 	for _, id in ipairs(SortedFilterList) do
 		info.text = SlotFilterToSlotName[id];
 		info.checked = SELECTED_SLOT_ID == id;

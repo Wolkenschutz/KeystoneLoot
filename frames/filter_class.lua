@@ -57,7 +57,9 @@ local function InitClassDropDownMenu(self, level)
 		info.notCheckable = true;
 		info.hasArrow = true;
 		info.value = 1;
-		UIDropDownMenu_AddButton(info, level)
+		UIDropDownMenu_AddButton(info, level);
+
+		
 
 		if (SELECTED_CLASS_ID > 0) then
 			classID = SELECTED_CLASS_ID;
@@ -73,13 +75,14 @@ local function InitClassDropDownMenu(self, level)
 		local classColorStr = RAID_CLASS_COLORS[classFile].colorStr;
 
 		info.text = HEIRLOOMS_CLASS_FILTER_FORMAT:format(classColorStr, classDisplayName);
-		info.notCheckable = true;
 		info.arg1 = nil;
 		info.arg2 = nil;
-		info.func =  nil;
+		info.func = nil;
 		info.hasArrow = false;
+		info.disabled = true;
 		UIDropDownMenu_AddButton(info, level);
 		info.notCheckable = nil;
+		info.disabled = nil;
 
 		for i=1, GetNumSpecializationsForClassID(classID) do
 			local specID, specName = GetSpecializationInfoForClassID(classID, i);
@@ -93,7 +96,6 @@ local function InitClassDropDownMenu(self, level)
 		end
 
 		info.text = ALL_SPECS;
-		info.leftPadding = 10;
 		info.checked = (SELECTED_CLASS_ID == classID and SELECTED_SPEC_ID == 0);
 		info.arg1 = classID;
 		info.arg2 = 0;

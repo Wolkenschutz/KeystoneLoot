@@ -47,6 +47,11 @@ local function GetInstanceFrame(i)
 end
 Addon.GetInstanceFrame = GetInstanceFrame;
 
+local function GetInstanceFrames()
+	return INSTANCE_FRAMES;
+end
+Addon.GetInstanceFrames = GetInstanceFrames;
+
 local function CreateInstanceFrames()
 	local mythicTierID = Addon.API.GetMythicTierID();
 	if (mythicTierID == nil) then

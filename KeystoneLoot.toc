@@ -9,6 +9,7 @@
 
 api/util.lua
 api/loot.lua
+api/favorite.lua
 
 frames/main.lua
 frames/instance.lua
