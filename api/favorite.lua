@@ -17,6 +17,11 @@ local function RemoveFavorite(instanceID, itemID)
 end
 Addon.API.RemoveFavorite = RemoveFavorite;
 
+local function RemoveAllFavorites()
+	KEYSTONE_LOOT_CHAR_DB = {};
+end
+Addon.API.RemoveAllFavorites = RemoveAllFavorites;
+
 local function GetFavorite(instanceID, itemID)
 	if (KEYSTONE_LOOT_CHAR_DB[instanceID] == nil) then
 		return;
