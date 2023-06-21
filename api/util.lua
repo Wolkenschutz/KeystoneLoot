@@ -5,7 +5,7 @@ Addon.API = {};
 local MYTHIC_TIER_ID;
 
 
- local function GetMythicTierID()
+local function GetMythicTierID()
 	if (MYTHIC_TIER_ID) then
 		return MYTHIC_TIER_ID;
 	end
