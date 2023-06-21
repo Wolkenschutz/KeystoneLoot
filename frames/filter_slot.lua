@@ -1,8 +1,6 @@
 local AddonName, Addon = ...;
 
 
-local CreateFilterButton = Addon.CreateFilterButton;
-
 Addon.SELECTED_SLOT_ID = -1;
 
 
@@ -60,8 +58,6 @@ local function InitSlotDropDownMenu(self, level)
 end
 
 
-local SlotFilter = CreateFilterButton('slot', InitSlotDropDownMenu);
-Addon.Frames.Filter.Slot = SlotFilter;
-
+local SlotFilter = Addon.CreateFilterButton('slot', InitSlotDropDownMenu);
 SlotFilter:SetPoint('TOP', 55, -35);
 SlotFilter:SetText(FAVORITES);
