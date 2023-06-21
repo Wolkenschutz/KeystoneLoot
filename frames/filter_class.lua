@@ -8,6 +8,7 @@ Addon.SELECTED_SPEC_ID = 0;
 local function SetClassFilter(self, classID, specID)
 	Addon.SELECTED_CLASS_ID = classID;
 	Addon.SELECTED_SPEC_ID = specID;
+	Addon.API.UpdateLoot();
 
 	local text;
 	local classInfo = C_CreatureInfo.GetClassInfo(classID);
@@ -23,10 +24,9 @@ local function SetClassFilter(self, classID, specID)
 
 	UIDropDownMenu_SetText(Addon.SELECTED_FILTER_BUTTON, text);
 
-	Addon.API.UpdateLoot();
-
 	CloseDropDownMenus(1);
 end
+Addon.SetClassFilter = SetClassFilter;
 
 local function InitClassDropDownMenu(self, level)
 	local SELECTED_CLASS_ID = Addon.SELECTED_CLASS_ID;
@@ -105,16 +105,5 @@ end
 
 local ClassFilter = Addon.CreateFilterButton('class', InitClassDropDownMenu);
 ClassFilter:SetPoint('TOP', -65, -35);
-ClassFilter:RegisterEvent('PLAYER_ENTERING_WORLD');
-ClassFilter:SetScript('OnEvent', function(self) -- NOTE: Funktion kann ruhig direkt reingeschrieben werden, da sie nur einmal aufgerufen wird.
-	self:UnregisterAllEvents();
 
-	local _, _, classID = UnitClass('player');
-	local specID = (GetSpecializationInfo(GetSpecialization()));
-
-	Addon.SELECTED_CLASS_ID = classID;
-	Addon.SELECTED_SPEC_ID = specID;
-	Addon.SELECTED_FILTER_BUTTON = self;
-
-	SetClassFilter(nil, classID, specID);
-end);
+Addon.SELECTED_FILTER_BUTTON = ClassFilter;

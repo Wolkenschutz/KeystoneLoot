@@ -32,9 +32,9 @@ table.sort(SortedFilterList);
 
 local function SetSlotFilter(self, slotID)
 	Addon.SELECTED_SLOT_ID = slotID
-	UIDropDownMenu_SetText(Addon.SELECTED_FILTER_BUTTON, slotID == -1 and FAVORITES or SlotFilterToSlotName[slotID]);
-
 	Addon.API.UpdateLoot();
+
+	UIDropDownMenu_SetText(Addon.SELECTED_FILTER_BUTTON, slotID == -1 and FAVORITES or SlotFilterToSlotName[slotID]);
 
 	CloseDropDownMenus(1);
 end

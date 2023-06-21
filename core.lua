@@ -20,6 +20,13 @@ local function OnEvent(self, event, ...)
 	elseif (event == 'PLAYER_ENTERING_WORLD') then
 		self:UnregisterEvent(event);
 
+		local _, _, classID = UnitClass('player');
+		local specID = (GetSpecializationInfo(GetSpecialization()));
+
+		Addon.SELECTED_CLASS_ID = classID;
+		Addon.SELECTED_SPEC_ID = specID;
+
+		Addon.SetClassFilter(nil, classID, specID);
 		Addon.CreateInstanceFrames();
 	elseif (event == 'EJ_LOOT_DATA_RECIEVED') then
 		Addon.API.UpdateLoot();
