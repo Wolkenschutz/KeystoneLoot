@@ -104,7 +104,7 @@ end
 
 
 local ClassFilter = Addon.CreateFilterButton('class', InitClassDropDownMenu);
-ClassFilter:SetPoint('TOP', -55, -35);
+ClassFilter:SetPoint('TOP', -65, -35);
 ClassFilter:RegisterEvent('PLAYER_ENTERING_WORLD');
 ClassFilter:SetScript('OnEvent', function(self) -- NOTE: Funktion kann ruhig direkt reingeschrieben werden, da sie nur einmal aufgerufen wird.
 	self:UnregisterAllEvents();

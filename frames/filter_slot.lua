@@ -59,5 +59,5 @@ end
 
 
 local SlotFilter = Addon.CreateFilterButton('slot', InitSlotDropDownMenu);
-SlotFilter:SetPoint('TOP', 55, -35);
+SlotFilter:SetPoint('TOP', 65, -35);
 SlotFilter:SetText(FAVORITES);

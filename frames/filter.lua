@@ -20,7 +20,7 @@ local function CreateFilterButton(filterType, initDropDownFunction)
 	local DropDownMenu = CreateFrame('Frame', nil, nil, 'UIDropDownMenuTemplate');
 	Button.DropDownMenu = DropDownMenu;
 
-	Button:SetSize(100, 24);
+	Button:SetSize(120, 24);
 	Button:SetPoint('TOP', -55, -35);
 	Button:SetScript('OnClick', OnClick);
 
@@ -44,7 +44,7 @@ Addon.CreateFilterButton = CreateFilterButton;
 
 
 local FilterBg = MainFrame:CreateTexture(nil, 'BACKGROUND');
-FilterBg:SetSize(300, 34);
+FilterBg:SetSize(340, 34);
 FilterBg:SetPoint('TOP', 0, -30);
 FilterBg:SetTexture('Interface\\QuestFrame\\UI-QuestLogTitleHighlight');
 FilterBg:SetBlendMode('ADD');
