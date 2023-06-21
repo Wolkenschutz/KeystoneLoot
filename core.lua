@@ -6,13 +6,13 @@ local MainFrame = Addon.Frames.Main;
 
 	-- TODO: Minimap-Button hinzufügen.
 	-- TODO: Slot ausgrauen, die keine Items haben.
-	-- FIXME: Blocked function: SetTab() -???- Workaround? Meldung einfach schliessen? Nachforschung betreiben.
 
 
 local function OnEvent(self, event, ...)
 	if (event == 'ADDON_LOADED' and (...) == AddonName) then
 		self:UnregisterEvent(event);
 		self:RegisterEvent('PLAYER_ENTERING_WORLD');
+		self:RegisterEvent('ADDON_ACTION_FORBIDDEN');
 
 		KEYSTONE_LOOT_CHAR_DB = KEYSTONE_LOOT_CHAR_DB or {};
 	elseif (event == 'PLAYER_ENTERING_WORLD') then
@@ -36,6 +36,8 @@ local function OnEvent(self, event, ...)
 		end
 	elseif (event == 'EJ_LOOT_DATA_RECIEVED') then
 		Addon.API.UpdateLoot();
+	elseif (event == 'ADDON_ACTION_FORBIDDEN' and (...) == AddonName) then
+		StaticPopup1Button2:Click(); -- FIXME: Dirty... SetTab()?!
 	end
 end
 
