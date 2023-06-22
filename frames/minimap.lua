@@ -1,6 +1,8 @@
 local AddonName, Addon = ...;
 
 
+local Translate = Addon.Translate;
+
 -- https://wowwiki-archive.fandom.com/wiki/USERAPI_GetMinimapShape
 local MINIMAP_SHAPES = {
 	['ROUND'] = { true, true, true, true },
@@ -78,8 +80,8 @@ end
 local function OnEnter(self)
 	GameTooltip:SetOwner(self, 'ANCHOR_LEFT');
 	GameTooltip:SetText('Keystone Loot', 1, 1, 1);
-	GameTooltip:AddLine('Left click: Open overview'); -- TODO: Übersetzen
-	GameTooltip:AddLine('Right click: Open settings'); -- TODO: Übersetzen
+	GameTooltip:AddLine(Translate['Left click: Open overview']);
+	GameTooltip:AddLine(Translate['Right click: Open settings']);
 	GameTooltip:Show();
 end
 
