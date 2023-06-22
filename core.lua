@@ -14,6 +14,10 @@ local function OnEvent(self, event, ...)
 		self:RegisterEvent('PLAYER_ENTERING_WORLD');
 		self:RegisterEvent('ADDON_ACTION_FORBIDDEN');
 
+		KEYSTONE_LOOT_DB = KEYSTONE_LOOT_DB or {
+			minimapButtonPosition = 195,
+			minimapButtonShown = true
+		};
 		KEYSTONE_LOOT_CHAR_DB = KEYSTONE_LOOT_CHAR_DB or {};
 	elseif (event == 'PLAYER_ENTERING_WORLD') then
 		self:UnregisterEvent(event);
@@ -26,6 +30,7 @@ local function OnEvent(self, event, ...)
 
 		Addon.SetClassFilter(nil, classID, specID);
 		Addon.CreateInstanceFrames();
+		Addon.UpdateMinimapButton();
 
 		local currentSeasonDB = KEYSTONE_LOOT_CHAR_DB.currSeasion;
 		local currentSeason = C_MythicPlus.GetCurrentUIDisplaySeason();
