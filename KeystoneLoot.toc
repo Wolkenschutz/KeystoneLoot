@@ -8,9 +8,8 @@
 ## SavedVariables: KEYSTONE_LOOT_DB
 ## SavedVariablesPerCharacter: KEYSTONE_LOOT_CHAR_DB
 
-locale.lua
-
 api/util.lua
+api/locale.lua
 api/loot.lua
 api/favorite.lua
 

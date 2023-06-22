@@ -1,7 +1,7 @@
 local AddonName, Addon = ...;
 
 
-local Translate = Addon.Translate;
+local Translate = Addon.API.Translate;
 
 -- https://wowwiki-archive.fandom.com/wiki/USERAPI_GetMinimapShape
 local MINIMAP_SHAPES = {

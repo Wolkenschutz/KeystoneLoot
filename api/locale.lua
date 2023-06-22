@@ -51,7 +51,7 @@ elseif (clientLocale == 'zhCN' or clientLocale == 'zhTW') then
 	};
 end
 
-Addon.Translate = setmetatable(translation, {
+Addon.API.Translate = setmetatable(translation, {
 	__index = function (t, key)
 		rawset(t, key, key);
 		return key;
