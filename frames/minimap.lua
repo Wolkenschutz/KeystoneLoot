@@ -120,7 +120,7 @@ local function OnClick(self, button)
 end
 
 
-local Frame = CreateFrame('Button', nil, Minimap);
+local Frame = CreateFrame('Button', AddonName..'MinimapButton', Minimap);
 Addon.Frames.MinimapButton = Frame;
 
 Frame:SetSize(31, 31);
