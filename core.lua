@@ -8,7 +8,6 @@ local function OnEvent(self, event, ...)
 	if (event == 'ADDON_LOADED' and (...) == AddonName) then
 		self:UnregisterEvent(event);
 		self:RegisterEvent('PLAYER_ENTERING_WORLD');
-		self:RegisterEvent('ADDON_ACTION_FORBIDDEN');
 
 		KEYSTONE_LOOT_DB = KEYSTONE_LOOT_DB or {
 			minimapButtonPosition = 195,
@@ -17,6 +16,8 @@ local function OnEvent(self, event, ...)
 		KEYSTONE_LOOT_CHAR_DB = KEYSTONE_LOOT_CHAR_DB or {};
 	elseif (event == 'PLAYER_ENTERING_WORLD') then
 		self:UnregisterEvent(event);
+
+		LoadAddOn('Blizzard_EncounterJournal');
 
 		local _, _, classID = UnitClass('player');
 		local specID = (GetSpecializationInfo(GetSpecialization()));
@@ -37,8 +38,6 @@ local function OnEvent(self, event, ...)
 		end
 	elseif (event == 'EJ_LOOT_DATA_RECIEVED') then
 		Addon.API.UpdateLoot();
-	elseif (event == 'ADDON_ACTION_FORBIDDEN' and (...) == AddonName) then
-		StaticPopup1Button2:Click(); -- FIXME: Dirty... SetTab()?!
 	end
 end
 
