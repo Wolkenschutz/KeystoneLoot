@@ -21,4 +21,8 @@ frames/filter_slot.lua
 frames/item.lua
 frames/minimap.lua
 
+frames/settings/register.lua
+frames/settings/header.lua
+frames/settings/minimap.lua
+
 core.lua

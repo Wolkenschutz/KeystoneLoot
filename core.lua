@@ -4,10 +4,6 @@ local AddonName, Addon = ...;
 local MainFrame = Addon.Frames.Main;
 
 
-	-- TODO: Minimap-Button hinzufügen.
-	-- TODO: Slot ausgrauen, die keine Items haben.
-
-
 local function OnEvent(self, event, ...)
 	if (event == 'ADDON_LOADED' and (...) == AddonName) then
 		self:UnregisterEvent(event);
@@ -16,7 +12,7 @@ local function OnEvent(self, event, ...)
 
 		KEYSTONE_LOOT_DB = KEYSTONE_LOOT_DB or {
 			minimapButtonPosition = 195,
-			minimapButtonShown = true
+			minimapButtonEnabled = true
 		};
 		KEYSTONE_LOOT_CHAR_DB = KEYSTONE_LOOT_CHAR_DB or {};
 	elseif (event == 'PLAYER_ENTERING_WORLD') then

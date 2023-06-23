@@ -56,7 +56,7 @@ end
 local function UpdateMinimapButton()
 	local Frame = Addon.Frames.MinimapButton;
 
-	Frame:SetShown(KEYSTONE_LOOT_DB.minimapButtonShown);
+	Frame:SetShown(KEYSTONE_LOOT_DB.minimapButtonEnabled);
 	Frame:SetPoint(GetPosition(KEYSTONE_LOOT_DB.minimapButtonPosition, 5));
 end
 Addon.UpdateMinimapButton = UpdateMinimapButton;
@@ -112,8 +112,7 @@ end
 
 local function OnClick(self, button)
 	if (button == 'RightButton') then
-		print('Open settings failed... not exists! :p');
-		-- TODO: Open Settings
+		Settings.OpenToCategory(Addon.SETTINGS_ID);
 		return;
 	end
 
@@ -158,3 +157,16 @@ IconBorder:SetDrawLayer('ARTWORK', 3);
 IconBorder:SetSize(50, 50);
 IconBorder:SetPoint('TOPLEFT');
 IconBorder:SetTexture('Interface\\Minimap\\MiniMap-TrackingBorder');
+
+
+AddonCompartmentFrame:RegisterAddon({
+	text = 'Keystone Loot',
+	icon = 'Interface\\Icons\\INV_Relics_Hourglass_02',
+	notCheckable = true,
+	registerForAnyClick = true,
+	func = function(_, _, _, _, mouseButton)
+		OnClick(Frame, mouseButton);
+	end,
+	funcOnEnter = OnEnter,
+	funcOnLeave = OnLeave
+});
