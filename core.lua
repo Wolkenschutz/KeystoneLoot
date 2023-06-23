@@ -28,14 +28,6 @@ local function OnEvent(self, event, ...)
 		Addon.SetClassFilter(nil, classID, specID);
 		Addon.CreateInstanceFrames();
 		Addon.UpdateMinimapButton();
-
-		local currentSeasonDB = KEYSTONE_LOOT_CHAR_DB.currSeasion;
-		local currentSeason = C_MythicPlus.GetCurrentUIDisplaySeason();
-		if (currentSeason ~= currentSeasonDB) then
-			Addon.API.RemoveAllFavorites();
-
-			KEYSTONE_LOOT_CHAR_DB.currSeasion = currentSeason;
-		end
 	elseif (event == 'EJ_LOOT_DATA_RECIEVED') then
 		Addon.API.UpdateLoot();
 	end

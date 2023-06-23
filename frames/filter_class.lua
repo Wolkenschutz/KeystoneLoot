@@ -59,8 +59,6 @@ local function InitClassDropDownMenu(self, level)
 		info.value = 1;
 		UIDropDownMenu_AddButton(info, level);
 
-		
-
 		if (SELECTED_CLASS_ID > 0) then
 			classID = SELECTED_CLASS_ID;
 
