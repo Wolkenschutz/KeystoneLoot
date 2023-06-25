@@ -3,7 +3,7 @@
 ## Notes: Shows the items from the mythic plus instances in a compact overview
 ## Author: Selina Ruesch
 ## X-Email: selina.ruesch@gmail.com
-## Version: 1.0.0
+## Version: 1.0.1
 ## IconTexture: Interface\Icons\INV_Relics_Hourglass_02
 ## SavedVariables: KEYSTONE_LOOT_DB
 ## SavedVariablesPerCharacter: KEYSTONE_LOOT_CHAR_DB

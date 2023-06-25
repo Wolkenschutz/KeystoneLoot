@@ -53,12 +53,7 @@ end
 Addon.GetInstanceFrames = GetInstanceFrames;
 
 local function CreateInstanceFrames()
-	local mythicTierID = Addon.API.GetMythicTierID();
-	if (mythicTierID == nil) then
-		return;
-	end
-
-	EJ_SelectTier(mythicTierID);
+	EJ_SelectTier(Addon.API.GetMythicTierID());
 	EJ_SetDifficulty(DifficultyUtil.ID.DungeonChallenge);
 
 	local i = 1;
