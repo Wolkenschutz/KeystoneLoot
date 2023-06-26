@@ -19,14 +19,6 @@ local function OnEvent(self, event, ...)
 
 		LoadAddOn('Blizzard_EncounterJournal');
 
-		local _, _, classID = UnitClass('player');
-		local specID = (GetSpecializationInfo(GetSpecialization()));
-
-		Addon.SELECTED_CLASS_ID = classID;
-		Addon.SELECTED_SPEC_ID = specID;
-
-		Addon.SetClassFilter(nil, classID, specID);
-		Addon.CreateInstanceFrames();
 		Addon.UpdateMinimapButton();
 	elseif (event == 'EJ_LOOT_DATA_RECIEVED') then
 		Addon.API.UpdateLoot();

@@ -2,21 +2,43 @@ local AddonName, Addon = ...;
 Addon.Frames = {};
 
 
-local function CleanUpDatabase()
-	local currentSeasonDB = KEYSTONE_LOOT_CHAR_DB.currSeasion;
+local Translate = Addon.API.Translate;
+local onlyOnce = false;
+
+
+local function UpdateTitle(self)
 	local currentSeason = C_MythicPlus.GetCurrentUIDisplaySeason();
-
-	if (currentSeason ~= currentSeasonDB) then
-		Addon.API.RemoveAllFavorites();
-
-		KEYSTONE_LOOT_CHAR_DB.currSeasion = currentSeason;
+	if (not currentSeason) then
+		self:SetTitle('Keystone Loot');
+		return;
 	end
+
+	local expansionName = _G['EXPANSION_NAME'..GetExpansionLevel()] or UNKNOWN;
+	local title = (Translate['%s (%s Season %d)']):format('Keystone Loot', expansionName, currentSeason);
+
+	self:SetTitle(title);
 end
 
 local function OnShow(self)
 	self:RegisterEvent('EJ_LOOT_DATA_RECIEVED');
 
-	CleanUpDatabase();
+	if (not onlyOnce) then
+		onlyOnce = true;
+
+		local _, _, classID = UnitClass('player');
+		local specID = (GetSpecializationInfo(GetSpecialization()));
+
+		Addon.SELECTED_CLASS_ID = classID;
+		Addon.SELECTED_SPEC_ID = specID;
+
+		Addon.SetClassFilter(nil, classID, specID);
+		Addon.CreateInstanceFrames();
+
+		Addon.API.CleanUpDatabase();
+
+		UpdateTitle(self);
+	end
+
 	Addon.API.UpdateLoot();
 
 	self:SetAlpha(0);
@@ -36,7 +58,7 @@ local Frame = CreateFrame('Frame', nil, UIParent, 'PortraitFrameTexturedBaseTemp
 Addon.Frames.Main = Frame;
 
 Frame:Hide();
-Frame:SetSize(476, 100);
+Frame:SetSize(476, 230);
 Frame:SetPoint('CENTER');
 
 Frame:SetToplevel(true);
@@ -53,7 +75,14 @@ Frame:SetScript('OnShow', OnShow);
 Frame:SetScript('OnHide', OnHide);
 
 Frame:SetPortraitToAsset('Interface\\Icons\\INV_Relics_Hourglass_02');
-Frame:SetTitle('Keystone Loot');
+
+
+local NoSeason = Frame:CreateFontString('ARTWORK', nil, 'GameFontHighlightLarge');
+Addon.Frames.NoSeason = NoSeason;
+NoSeason:Hide();
+NoSeason:SetPoint('TOPLEFT', 20, -80);
+NoSeason:SetPoint('BOTTOMRIGHT', -20, 26);
+NoSeason:SetText(MYTHIC_PLUS_TAB_DISABLE_TEXT);
 
 
 local function CloseButton_OnClick(self)

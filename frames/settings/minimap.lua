@@ -2,7 +2,6 @@ local AddonName, Addon = ...;
 
 
 local Main = Addon.Frames.Settings.Main;
-
 local Translate = Addon.API.Translate;
 
 

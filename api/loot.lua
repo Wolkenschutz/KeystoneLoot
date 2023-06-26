@@ -2,6 +2,11 @@ local AddonName, Addon = ...;
 
 
 local function UpdateLoot()
+	local mythicTierID = Addon.API.GetMythicTierID();
+	if (not mythicTierID) then
+		return;
+	end
+
 	if (Addon.SELECTED_SLOT_ID == -1) then
 		for _, InstanceFrame in next, Addon.GetInstanceFrames() do
 			local instanceID = InstanceFrame.instanceID;
@@ -49,7 +54,7 @@ local function UpdateLoot()
 	C_EncounterJournal.SetSlotFilter(Addon.SELECTED_SLOT_ID);
 	C_EncounterJournal.SetPreviewMythicPlusLevel(16); -- FIXME: ??? Kaputt seit Dragonflight. Alternative?
 
-	EJ_SelectTier(Addon.API.GetMythicTierID());
+	EJ_SelectTier(mythicTierID);
 	EJ_SetDifficulty(DifficultyUtil.ID.DungeonChallenge);
 
 	local i = 1;

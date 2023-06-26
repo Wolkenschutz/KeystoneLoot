@@ -2,6 +2,7 @@ local AddonName, Addon = ...;
 
 
 local MainFrame = Addon.Frames.Main;
+local NoSeason = Addon.Frames.NoSeason;
 
 local INSTANCE_FRAMES = {};
 local ROWS = 1;
@@ -53,7 +54,13 @@ end
 Addon.GetInstanceFrames = GetInstanceFrames;
 
 local function CreateInstanceFrames()
-	EJ_SelectTier(Addon.API.GetMythicTierID());
+	local mythicTierID = Addon.API.GetMythicTierID();
+	if (not mythicTierID) then
+		NoSeason:Show();
+		return;
+	end
+
+	EJ_SelectTier(mythicTierID);
 	EJ_SetDifficulty(DifficultyUtil.ID.DungeonChallenge);
 
 	local i = 1;
