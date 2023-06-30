@@ -5,7 +5,7 @@ Addon.SELECTED_CLASS_ID = 0;
 Addon.SELECTED_SPEC_ID = 0;
 
 
-local function SetClassFilter(self, classID, specID)
+local function SetFilter(self, classID, specID)
 	Addon.SELECTED_CLASS_ID = classID;
 	Addon.SELECTED_SPEC_ID = specID;
 	Addon.API.UpdateLoot();
@@ -26,9 +26,9 @@ local function SetClassFilter(self, classID, specID)
 
 	CloseDropDownMenus(1);
 end
-Addon.SetClassFilter = SetClassFilter;
+Addon.SetClassFilter = SetFilter;
 
-local function InitClassDropDownMenu(self, level)
+local function InitDropDownMenu(self, level)
 	local SELECTED_CLASS_ID = Addon.SELECTED_CLASS_ID;
 	local SELECTED_SPEC_ID = Addon.SELECTED_SPEC_ID;
 
@@ -44,7 +44,7 @@ local function InitClassDropDownMenu(self, level)
 			info.checked = SELECTED_CLASS_ID == classID;
 			info.arg1 = classID;
 			info.arg2 = 0;
-			info.func = SetClassFilter;
+			info.func = SetFilter;
 			UIDropDownMenu_AddButton(info, level);
 		end
 	end
@@ -89,7 +89,7 @@ local function InitClassDropDownMenu(self, level)
 			info.checked = SELECTED_SPEC_ID == specID;
 			info.arg1 = classID;
 			info.arg2 = specID;
-			info.func = SetClassFilter;
+			info.func = SetFilter;
 			UIDropDownMenu_AddButton(info, level);
 		end
 
@@ -97,13 +97,13 @@ local function InitClassDropDownMenu(self, level)
 		info.checked = (SELECTED_CLASS_ID == classID and SELECTED_SPEC_ID == 0);
 		info.arg1 = classID;
 		info.arg2 = 0;
-		info.func = SetClassFilter;
+		info.func = SetFilter;
 		UIDropDownMenu_AddButton(info, level);
 	end
 end
 
 
-local ClassFilter = Addon.CreateFilterButton('class', InitClassDropDownMenu);
-ClassFilter:SetPoint('TOP', -65, -35);
+local Filter = Addon.CreateFilterButton('class', InitDropDownMenu);
+Filter:SetPoint('TOP', -120, -35);
 
-Addon.SELECTED_FILTER_BUTTON = ClassFilter;
+Addon.SELECTED_FILTER_BUTTON = Filter;

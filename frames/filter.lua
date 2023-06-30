@@ -20,7 +20,7 @@ local function CreateFilterButton(filterType, initDropDownFunction)
 	local DropDownMenu = CreateFrame('Frame', nil, nil, 'UIDropDownMenuTemplate');
 	Button.DropDownMenu = DropDownMenu;
 
-	Button:SetSize(120, 24);
+	Button:SetSize(110, 24);
 	Button:SetPoint('TOP', -55, -35);
 	Button:SetScript('OnClick', OnClick);
 

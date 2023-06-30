@@ -2,8 +2,16 @@ local AddonName, Addon = ...;
 
 
 local function OnEnter(self)
+
 	GameTooltip:SetOwner(self, 'ANCHOR_BOTTOMRIGHT');
-	GameTooltip:SetHyperlink(self.link);
+	
+	local itemLink = Addon.API.UpgradeItemTo(self.link, Addon.SELECTED_ITEMLEVEL);
+	if (itemLink) then
+		GameTooltip:SetHyperlink(itemLink);
+	else
+		GameTooltip:SetText(RETRIEVING_ITEM_INFO, RED_FONT_COLOR:GetRGB());
+	end
+
 	GameTooltip:Show();
 
 	local _, _, classID = UnitClass('player');

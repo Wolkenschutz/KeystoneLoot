@@ -52,7 +52,6 @@ local function UpdateLoot()
 	EJ_SetLootFilter(Addon.SELECTED_CLASS_ID, Addon.SELECTED_SPEC_ID);
 
 	C_EncounterJournal.SetSlotFilter(Addon.SELECTED_SLOT_ID);
-	C_EncounterJournal.SetPreviewMythicPlusLevel(16); -- FIXME: ??? Kaputt seit Dragonflight. Alternative?
 
 	EJ_SelectTier(mythicTierID);
 	EJ_SetDifficulty(DifficultyUtil.ID.DungeonChallenge);
