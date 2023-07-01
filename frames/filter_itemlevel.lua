@@ -15,11 +15,11 @@ local ITEMLEVEL_NAME = {
 	[424] = '424 (+15 +16)',
 	[428] = '428 (+17 +18)',
 	[431] = '431 (+19 +20)',
-	[434] = '434 (Vault)',
-	[437] = '437 (Vault)',
-	[441] = '441 (Vault)',
-	[444] = '444 (Vault)',
-	[447] = '447 (Vault)'
+	[434] = '434 ('..RATED_PVP_WEEKLY_VAULT..')',
+	[437] = '437 ('..RATED_PVP_WEEKLY_VAULT..')',
+	[441] = '441 ('..RATED_PVP_WEEKLY_VAULT..')',
+	[444] = '444 ('..RATED_PVP_WEEKLY_VAULT..')',
+	[447] = '447 ('..RATED_PVP_WEEKLY_VAULT..')'
 };
 
 local SortedFilterList = {};
