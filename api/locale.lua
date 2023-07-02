@@ -45,7 +45,8 @@ elseif (clientLocale == 'ruRU') then
 		['Left click: Open overview'] = 'ЛКМ: Открыть окно KeystoneLoot',
 		['Right click: Open settings'] = 'ПКМ: Открыть настройки',
 		['Enable Minimap Button'] = 'Включить кнопку миникарты',
-		['%s (%s Season %d)'] = '%s (%s сезон %d)'
+		['%s (%s Season %d)'] = '%s (%s сезон %d)',
+		['Made with LOVE in Germany'] = 'Сделано с ЛЮБОВЬЮ в Германии'
 	};
 elseif (clientLocale == 'koKR') then
 	translation = {
