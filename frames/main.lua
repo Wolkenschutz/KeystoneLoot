@@ -98,4 +98,4 @@ CloseButton:SetScript('OnClick', CloseButton_OnClick);
 local AddonMarker = Frame:CreateFontString('ARTWORK', nil, 'GameFontDisableSmall');
 AddonMarker:SetPoint('BOTTOM', 0, 6);
 AddonMarker:SetShadowOffset(0, 0);
-AddonMarker:SetText('Made with LOVE in Germany');
+AddonMarker:SetText(Translate['Made with LOVE in Germany']);
