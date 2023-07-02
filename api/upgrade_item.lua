@@ -19,11 +19,18 @@ local ITEMLEVEL_TITLE_BONUSID = {
 	[421] = 9323,
 	[424] = 9324,
 	[428] = 9330,
-	[431] = 9331
+	[431] = 9331,
+	[441] = 9380,
+	[444] = 9381,
+	[447] = 9382
 };
 
 
 local function UpgradeItemTo(targetItemLink, targetItemLevel)
+	if (Addon.SELECTED_SLOT_ID == Enum.ItemSlotFilterType.Other) then
+		return targetItemLink;
+	end
+
 	local itemID = (targetItemLink):match('item:(%d+)');
 
 	local _, _, baseItemLevel = GetDetailedItemLevelInfo(itemID);

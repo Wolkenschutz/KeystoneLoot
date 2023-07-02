@@ -24,7 +24,7 @@ local function OnClick(self)
 
 	KEYSTONE_LOOT_DB.minimapButtonEnabled = isChecked;
 	Addon.UpdateMinimapButton();
-
+	
 	if (isChecked) then
 		PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 	else 

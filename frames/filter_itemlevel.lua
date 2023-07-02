@@ -15,11 +15,11 @@ local ITEMLEVEL_NAME = {
 	[424] = '424 (+15 +16)',
 	[428] = '428 (+17 +18)',
 	[431] = '431 (+19 +20)',
-	[434] = '434 (Vault)',
-	[437] = '437 (Vault)',
-	[441] = '441 (Vault)',
-	[444] = '444 (Vault)',
-	[447] = '447 (Vault)'
+	[434] = '434 ('..RATED_PVP_WEEKLY_VAULT..' +12 +13)',
+	[437] = '437 ('..RATED_PVP_WEEKLY_VAULT..' +14 +15)',
+	[441] = '441 ('..RATED_PVP_WEEKLY_VAULT..' +16 +17)',
+	[444] = '444 ('..RATED_PVP_WEEKLY_VAULT..' +18 +19)',
+	[447] = '447 ('..RATED_PVP_WEEKLY_VAULT..' +20)'
 };
 
 local SortedFilterList = {};
@@ -29,26 +29,27 @@ end
 table.sort(SortedFilterList);
 
 
-local function SetFilter(self, itemLevel)
+local function SetFilter(itemLevel)
 	Addon.SELECTED_ITEMLEVEL = itemLevel
 
-	UIDropDownMenu_SetText(Addon.SELECTED_FILTER_BUTTON, ITEMLEVEL_NAME[itemLevel]);
-
-	CloseDropDownMenus(1);
+	Addon.API.SetDropDownMenuText(ITEMLEVEL_NAME[itemLevel]);
 end
 
-local function InitDropDownMenu(self, level)
+local function InitDropDownMenu()
 	local SELECTED_ITEMLEVEL = Addon.SELECTED_ITEMLEVEL;
-
-	local info = UIDropDownMenu_CreateInfo();
-	info.func = SetFilter;
+	local list = {};
 
 	for _, itemLevel in ipairs(SortedFilterList) do
+		local info = {};
 		info.text = ITEMLEVEL_NAME[itemLevel];
 		info.checked = SELECTED_ITEMLEVEL == itemLevel;
-		info.arg1 = itemLevel;
-		UIDropDownMenu_AddButton(info);
+		info.disabled = info.checked;
+		info.args = itemLevel;
+		info.func = SetFilter;
+		table.insert(list, info);
 	end
+
+	return list;
 end
 
 

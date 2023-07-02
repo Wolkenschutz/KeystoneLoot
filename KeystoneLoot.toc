@@ -3,7 +3,7 @@
 ## Notes: Shows the items from the mythic plus instances in a compact overview
 ## Author: Selina Ruesch
 ## X-Email: selina.ruesch@gmail.com
-## Version: 1.1.0
+## Version: 1.2.0
 ## IconTexture: Interface\Icons\INV_Relics_Hourglass_02
 ## SavedVariables: KEYSTONE_LOOT_DB
 ## SavedVariablesPerCharacter: KEYSTONE_LOOT_CHAR_DB
@@ -13,6 +13,7 @@ api/locale.lua
 api/loot.lua
 api/favorite.lua
 api/upgrade_item.lua
+api/dropdown.lua
 
 frames/main.lua
 frames/instance.lua
@@ -22,6 +23,7 @@ frames/filter_slot.lua
 frames/filter_itemlevel.lua
 frames/item.lua
 frames/minimap.lua
+frames/dropdown.lua
 
 frames/settings/register.lua
 frames/settings/header.lua

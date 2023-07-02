@@ -59,14 +59,14 @@ elseif (clientLocale == 'zhCN') then
 		['Left click: Open overview'] = '左键点击：打开概览',
 		['Right click: Open settings'] = '右键点击：打开设置',
 		['Enable Minimap Button'] = '启用小地图按钮',
-		['%s (%s Season %d)'] = '%s（%s 赛季 %d）'
+		['%s (%s Season %d)'] = '%s（%s 第 %d 赛季）'
 	};
 elseif (clientLocale == 'zhTW') then
 	translation = {
 		['Left click: Open overview'] = '左鍵點擊：開啟概覽',
 		['Right click: Open settings'] = '右鍵點擊：開啟設定',
 		['Enable Minimap Button'] = '啟用小地圖按鈕',
-		['%s (%s Season %d)'] = '%s(%s季%d)'
+		['%s (%s Season %d)'] = '%s（%s 第 %d 賽季）'
 	};
 end
 

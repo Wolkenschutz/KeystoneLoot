@@ -31,7 +31,7 @@ local function OnShow(self)
 		Addon.SELECTED_CLASS_ID = classID;
 		Addon.SELECTED_SPEC_ID = specID;
 
-		Addon.SetClassFilter(nil, classID, specID);
+		Addon.SetClassFilter(classID, specID);
 		Addon.CreateInstanceFrames();
 
 		Addon.API.CleanUpDatabase();
@@ -49,6 +49,8 @@ end
 
 local function OnHide(self)
 	self:UnregisterEvent('EJ_LOOT_DATA_RECIEVED');
+
+	Addon.API.CloseDropDownMenu();
 
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE);
 end

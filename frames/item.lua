@@ -2,9 +2,8 @@ local AddonName, Addon = ...;
 
 
 local function OnEnter(self)
-
 	GameTooltip:SetOwner(self, 'ANCHOR_BOTTOMRIGHT');
-	
+
 	local itemLink = Addon.API.UpgradeItemTo(self.link, Addon.SELECTED_ITEMLEVEL);
 	if (itemLink) then
 		GameTooltip:SetHyperlink(itemLink);
@@ -21,6 +20,14 @@ local function OnEnter(self)
 		FavoriteStar:SetDesaturated(true);
 		FavoriteStar:Show();
 	end
+
+	if (IsModifiedClick('DRESSUP')) then
+		ShowInspectCursor();
+	else
+		ResetCursor();
+	end
+
+	Addon.API.CloseDropDownMenu();
 end
 
 local function OnLeave(self)
@@ -29,6 +36,8 @@ local function OnLeave(self)
 	if (not self.isFavorite) then
 		self.FavoriteStar:Hide();
 	end
+
+	ResetCursor();
 end
 
 local function OnClick(self)
@@ -61,6 +70,7 @@ local function CreateItemFrame(i, parent)
 	local Frame = CreateFrame('Button', nil, parent);
 	Frame:SetSize(32, 32);
 
+	Frame.UpdateTooltip = OnEnter;
 	Frame:SetScript('OnEnter', OnEnter);
 	Frame:SetScript('OnLeave', OnLeave);
 	Frame:SetScript('OnClick', OnClick);

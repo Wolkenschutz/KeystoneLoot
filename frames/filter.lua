@@ -6,19 +6,16 @@ local MainFrame = Addon.Frames.Main;
 
 
 local function OnClick(self)
-	Addon.SELECTED_FILTER_BUTTON = self;
+	Addon.API.ToogleDropDownMenu(self, self.ListFunction);
 
-	ToggleDropDownMenu(1, nil, self.DropDownMenu, self, 5, 0);
 	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 end
 
 
-local function CreateFilterButton(filterType, initDropDownFunction)
+local function CreateFilterButton(filterType, ListFunction)
 	local Button = CreateFrame('Button', nil, MainFrame, 'UIMenuButtonStretchTemplate');
 	Button.filterType = filterType;
-
-	local DropDownMenu = CreateFrame('Frame', nil, nil, 'UIDropDownMenuTemplate');
-	Button.DropDownMenu = DropDownMenu;
+	Button.ListFunction = ListFunction;
 
 	Button:SetSize(110, 24);
 	Button:SetPoint('TOP', -55, -35);
@@ -35,8 +32,6 @@ local function CreateFilterButton(filterType, initDropDownFunction)
 	Text:SetJustifyH('LEFT');
 	Text:SetPoint('LEFT', 8, 0);
 	Text:SetPoint('RIGHT', Icon, 'LEFT', -2, 0);
-
-	UIDropDownMenu_Initialize(DropDownMenu, initDropDownFunction, 'MENU');
 
 	return Button;
 end

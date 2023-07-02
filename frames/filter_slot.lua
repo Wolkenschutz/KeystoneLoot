@@ -29,33 +29,40 @@ end
 table.sort(SortedFilterList);
 
 
-local function SetFilter(self, slotID)
+local function SetFilter(slotID)
 	Addon.SELECTED_SLOT_ID = slotID
 	Addon.API.UpdateLoot();
 
-	UIDropDownMenu_SetText(Addon.SELECTED_FILTER_BUTTON, slotID == -1 and FAVORITES or SLOT_NAME[slotID]);
-
-	CloseDropDownMenus(1);
+	Addon.API.SetDropDownMenuText(slotID == -1 and FAVORITES or SLOT_NAME[slotID]);
 end
 
-local function InitDropDownMenu(self, level)
+local function InitDropDownMenu()
 	local SELECTED_SLOT_ID = Addon.SELECTED_SLOT_ID;
+	local list = {};
 
-	local info = UIDropDownMenu_CreateInfo();
+	local info = {};
 	info.text = FAVORITES;
 	info.checked = SELECTED_SLOT_ID == -1;
-	info.arg1 = -1;
+	info.disabled = info.checked;
+	info.args = -1;
 	info.func = SetFilter;
-	UIDropDownMenu_AddButton(info);
+	table.insert(list, info);
 
-	UIDropDownMenu_AddSeparator();
+	local info = {};
+	info.divider = true;
+	table.insert(list, info);
 
 	for _, id in ipairs(SortedFilterList) do
+		local info = {};
 		info.text = SLOT_NAME[id];
 		info.checked = SELECTED_SLOT_ID == id;
-		info.arg1 = id;
-		UIDropDownMenu_AddButton(info);
+		info.disabled = info.checked;
+		info.args = id;
+		info.func = SetFilter;
+		table.insert(list, info);
 	end
+
+	return list;
 end
 
 
