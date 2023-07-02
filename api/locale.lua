@@ -42,8 +42,8 @@ elseif (clientLocale == 'ptBR') then
 	};
 elseif (clientLocale == 'ruRU') then
 	translation = {
-		['Left click: Open overview'] = 'Левый клик: Открыть обзор',
-		['Right click: Open settings'] = 'Правый клик: Открыть настройки',
+		['Left click: Open overview'] = 'ЛКМ: Открыть окно KeystoneLoot',
+		['Right click: Open settings'] = 'ПКМ: Открыть настройки',
 		['Enable Minimap Button'] = 'Включить кнопку миникарты',
 		['%s (%s Season %d)'] = '%s (%s сезон %d)'
 	};
