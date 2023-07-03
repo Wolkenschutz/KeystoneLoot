@@ -16,8 +16,8 @@ local function ToogleDropDownMenu(parent, ListFunction)
 	else
 		Addon.SELECTED_FILTER_BUTTON = parent;
 
-		local minWidth = 0;
 		local shownButtons = 0;
+		local dropdownWidth = 0;
 		local dropdownHeight = 0;
 
 		for i, info in next, ListFunction() do
@@ -76,16 +76,16 @@ local function ToogleDropDownMenu(parent, ListFunction)
 
 			Button.info = info;
 
-			minWidth = math.max(minWidth, Button.Text:GetWidth() + leftPadding);
+			dropdownWidth = math.max(dropdownWidth, Button.Text:GetWidth() + leftPadding);
 		end
 
 		local buttons = Addon.GetDropDownButtons();
-		for i = (shownButtons + 1), #buttons do
+		for i=(shownButtons + 1), #buttons do
 			local Button = Addon.GetDropDownButton(i);
 			Button:Hide();
 		end
 
-		DropDownMenu:SetSize(minWidth + 50, dropdownHeight + 20);
+		DropDownMenu:SetSize(dropdownWidth + 50, dropdownHeight + 20);
 		DropDownMenu:SetPoint('TOPLEFT', parent, 'BOTTOMLEFT', 5, 0);
 		DropDownMenu:Show();
 	end

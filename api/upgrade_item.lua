@@ -9,24 +9,17 @@ local ADD_ITEMLEVEL_BONUSID = {
 	[401] = 9455, [402] = 9456, [403] = 9457, [404] = 9458, [405] = 9459, [406] = 9460, [407] = 9461, [408] = 9464, [409] = 9465, [410] = 9466
 };
 
-local ITEMLEVEL_TITLE_BONUSID = {
-	[402] = 9313,
-	[405] = 9314,
-	[408] = 9315,
-	[411] = 9316,
-	[415] = 9321,
-	[418] = 9322,
-	[421] = 9323,
-	[424] = 9324,
-	[428] = 9330,
-	[431] = 9331,
-	[441] = 9380,
-	[444] = 9381,
-	[447] = 9382
+local ADD_SUBTITLE_BONUSID = {
+	['veteran-1'] = 9313, ['veteran-2'] = 9314, ['veteran-3'] = 9315, ['veteran-4'] = 9316,
+	['veteran-5'] = 9317, ['veteran-6'] = 9318, ['veteran-7'] = 9319, ['veteran-8'] = 9320,
+	['champion-1'] = 9321, ['champion-2'] = 9322, ['champion-3'] = 9323, ['champion-4'] = 9324,
+	['champion-5'] = 9325, ['champion-6'] = 9327, ['champion-7'] = 9328, ['champion-8'] = 9329,
+	['hero-1'] = 9330, ['hero-2'] = 9331, ['hero-3'] = 9332, ['hero-4'] = 9333, ['hero-5'] = 9334,
+	['myth-1'] = 9380, ['myth-2'] = 9381, ['myth-3'] = 9382
 };
 
 
-local function UpgradeItemTo(targetItemLink, targetItemLevel)
+local function UpgradeItemTo(targetItemLink, targetItemLevel, targetBonusID)
 	if (Addon.SELECTED_SLOT_ID == Enum.ItemSlotFilterType.Other) then
 		return targetItemLink;
 	end
@@ -49,7 +42,7 @@ local function UpgradeItemTo(targetItemLink, targetItemLevel)
 
 	itemLink = itemLink..'::16:5:1674:'..bonusLevelID;
 
-	local bonusTitleID = ITEMLEVEL_TITLE_BONUSID[baseItemLevel + diffItemLevel];
+	local bonusTitleID = ADD_SUBTITLE_BONUSID[targetBonusID];
 	if (bonusTitleID == nil) then
 		return itemLink;
 	end

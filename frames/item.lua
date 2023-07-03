@@ -4,7 +4,7 @@ local AddonName, Addon = ...;
 local function OnEnter(self)
 	GameTooltip:SetOwner(self, 'ANCHOR_BOTTOMRIGHT');
 
-	local itemLink = Addon.API.UpgradeItemTo(self.link, Addon.SELECTED_ITEMLEVEL);
+	local itemLink = Addon.API.UpgradeItemTo(self.link, Addon.SELECTED_ITEMLEVEL, Addon.SELECTED_ITEMLEVEL_BONUSID);
 	if (itemLink) then
 		GameTooltip:SetHyperlink(itemLink);
 	else

@@ -35,24 +35,25 @@ local function InitDropDownMenu()
 	for i=1, numClasses do
 		local classDisplayName, classFile, classID = GetClassInfo(i);
 		local classColorStr = RAID_CLASS_COLORS[classFile].colorStr;
+		local isSelectedClass = classID == SELECTED_CLASS_ID;
 
-		if (classID == SELECTED_CLASS_ID and i ~= 1) then
+		if (isSelectedClass and i ~= 1) then
 			local info = {};
 			info.divider = true;
 			table.insert(list, info);
 		end
 
 		local info = {};
-		info.text = HEIRLOOMS_CLASS_FILTER_FORMAT:format(classColorStr, classDisplayName);
-		info.checked = SELECTED_CLASS_ID == classID;
-		info.notCheckable = info.checked;
-		info.disabled = info.checked;
+		info.text = HEIRLOOMS_CLASS_FILTER_FORMAT:format(classColorStr, classDisplayName)..(isSelectedClass and '' or ' ...');
+		info.checked = isSelectedClass;
+		info.notCheckable = isSelectedClass;
+		info.disabled = isSelectedClass;
 		info.args = { classID, 0 };
 		info.func = SetFilter;
 		info.keepShownOnClick = true;
 		table.insert(list, info);
 
-		if (classID == SELECTED_CLASS_ID) then
+		if (isSelectedClass) then
 			for y=1, GetNumSpecializationsForClassID(classID) do
 				local specID, specName = GetSpecializationInfoForClassID(classID, y);
 
