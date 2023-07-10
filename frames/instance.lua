@@ -39,12 +39,7 @@ local function CreateInstanceFrame(i)
 end
 
 local function GetInstanceFrame(i)
-	local Frame = INSTANCE_FRAMES[i];
-	if (Frame) then
-		return Frame;
-	end
-
-	return CreateInstanceFrame(i);
+	return INSTANCE_FRAMES[i] or CreateInstanceFrame(i);
 end
 Addon.GetInstanceFrame = GetInstanceFrame;
 
@@ -63,18 +58,18 @@ local function CreateInstanceFrames()
 	EJ_SelectTier(mythicTierID);
 	EJ_SetDifficulty(DifficultyUtil.ID.DungeonChallenge);
 
-	local i = 1;
-	local id, name, _, _, buttonImage = EJ_GetInstanceByIndex(i, false);
+	local instanceIndex = 1;
+	local instanceID, name, _, _, buttonImage = EJ_GetInstanceByIndex(instanceIndex, false);
 
-	while (id) do
-		local InstanceFrame = GetInstanceFrame(i);
-		InstanceFrame.instanceID = id;
+	while (instanceID) do
+		local InstanceFrame = GetInstanceFrame(instanceIndex);
+		InstanceFrame.instanceID = instanceID;
 
 		InstanceFrame.Title:SetText(name);
 		InstanceFrame.Bg:SetTexture(buttonImage);
 
-		i = i+1;
-		id, name, _, _, buttonImage = EJ_GetInstanceByIndex(i, false);
+		instanceIndex = instanceIndex+1;
+		instanceID, name, _, _, buttonImage = EJ_GetInstanceByIndex(instanceIndex, false);
 	end
 
 	MainFrame:SetHeight(100 + (ROWS * 130));

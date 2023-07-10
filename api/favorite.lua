@@ -1,11 +1,10 @@
 local AddonName, Addon = ...;
 
 
-local function SetFavorite(instanceID, itemID, icon, link)
+local function SetFavorite(instanceID, itemID, icon)
 	KEYSTONE_LOOT_CHAR_DB[instanceID] = KEYSTONE_LOOT_CHAR_DB[instanceID] or {};
 	KEYSTONE_LOOT_CHAR_DB[instanceID][itemID] = {
-		icon = icon,
-		link = link
+		icon = icon
 	}
 end
 Addon.API.SetFavorite = SetFavorite;
@@ -23,19 +22,11 @@ end
 Addon.API.RemoveAllFavorites = RemoveAllFavorites;
 
 local function GetFavorite(instanceID, itemID)
-	if (KEYSTONE_LOOT_CHAR_DB[instanceID] == nil) then
-		return;
-	end
-
-	return KEYSTONE_LOOT_CHAR_DB[instanceID][itemID];
+	return KEYSTONE_LOOT_CHAR_DB[instanceID] and KEYSTONE_LOOT_CHAR_DB[instanceID][itemID];
 end
 Addon.API.GetFavorite = GetFavorite;
 
 local function GetInstanceFavorites(instanceID)
-	if (KEYSTONE_LOOT_CHAR_DB[instanceID] == nil) then
-		return;
-	end
-
 	return KEYSTONE_LOOT_CHAR_DB[instanceID];
 end
 Addon.API.GetInstanceFavorites = GetInstanceFavorites;

@@ -15,7 +15,8 @@ if (clientLocale == 'deDE') then
 		['Veteran'] = 'Veteran',
 		['Champion'] = 'Champion',
 		['Hero'] = 'Held',
-		['Great Vault'] = 'Große Schatzkammer'
+		['Great Vault'] = 'Große Schatzkammer',
+		['Revival Catalyst'] = 'Belebungskatalysator'
 	};
 elseif (clientLocale == 'esES' or clientLocale == 'esMX') then
 	translation = {
@@ -27,6 +28,7 @@ elseif (clientLocale == 'esES' or clientLocale == 'esMX') then
 		['Champion'] = 'Campeón',
 		['Hero'] = 'Héroe',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
+		['Revival Catalyst'] = 'Catalizador de reanimación'
 	};
 elseif (clientLocale == 'frFR') then
 	translation = {
@@ -38,6 +40,7 @@ elseif (clientLocale == 'frFR') then
 		['Champion'] = 'Champion',
 		['Hero'] = 'Héros',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
+		['Revival Catalyst'] = 'Catalyseur de renouveau'
 	};
 elseif (clientLocale == 'itIT') then
 	translation = {
@@ -49,6 +52,7 @@ elseif (clientLocale == 'itIT') then
 		['Champion'] = 'Campione',
 		['Hero'] = 'Eroe',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
+		['Revival Catalyst'] = 'Catalizzatore del Ripristino'
 	};
 elseif (clientLocale == 'ptBR') then
 	translation = {
@@ -60,6 +64,7 @@ elseif (clientLocale == 'ptBR') then
 		['Champion'] = 'Campeão',
 		['Hero'] = 'Herói',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
+		['Revival Catalyst'] = 'Catalisador de Revivescência'
 	};
 elseif (clientLocale == 'ruRU') then
 	translation = {
@@ -72,6 +77,7 @@ elseif (clientLocale == 'ruRU') then
 		['Champion'] = 'Защитник',
 		['Hero'] = 'Герой',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
+		['Revival Catalyst'] = 'Катализатор возрождения'
 	};
 elseif (clientLocale == 'koKR') then
 	translation = {
@@ -83,6 +89,7 @@ elseif (clientLocale == 'koKR') then
 		['Champion'] = '챔피언',
 		['Hero'] = '영웅',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
+		['Revival Catalyst'] = '소생의 촉매'
 	};
 elseif (clientLocale == 'zhCN') then
 	translation = {
@@ -94,6 +101,7 @@ elseif (clientLocale == 'zhCN') then
 		['Champion'] = '勇士',
 		['Hero'] = '英雄',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
+		['Revival Catalyst'] = '复苏化生台'
 	};
 elseif (clientLocale == 'zhTW') then
 	translation = {
@@ -105,6 +113,7 @@ elseif (clientLocale == 'zhTW') then
 		['Champion'] = '勇士',
 		['Hero'] = '英雄',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
+		['Revival Catalyst'] = '复苏化生台'
 	};
 end
 

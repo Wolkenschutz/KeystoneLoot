@@ -6,16 +6,20 @@ Addon.SELECTED_SPEC_ID = 0;
 
 
 local function SetFilter(classID, specID)
+	local specName = GetSpecializationNameForSpecID(specID);
+	if (specName == nil or specName == '') then
+		specID = 0;
+	end
+
 	Addon.SELECTED_CLASS_ID = classID;
 	Addon.SELECTED_SPEC_ID = specID;
 	Addon.API.UpdateLoot();
 
-	local text;
 	local classInfo = C_CreatureInfo.GetClassInfo(classID);
 	local classColorStr = RAID_CLASS_COLORS[classInfo.classFile].colorStr;
 
+	local text;
 	if (specID > 0) then
-		local specName = GetSpecializationNameForSpecID(specID) or UNKNOWN;
 
 		text = HEIRLOOMS_CLASS_SPEC_FILTER_FORMAT:format(classColorStr, classInfo.className, specName);
 	else

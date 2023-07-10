@@ -4,7 +4,7 @@
 ## Notes-ruRU: Компактный аддон, который показывает уровни предметов из подземелий М+
 ## Author: Selina Ruesch
 ## X-Email: selina.ruesch@gmail.com
-## Version: 1.2.1
+## Version: 1.3.0
 ## IconTexture: Interface\Icons\INV_Relics_Hourglass_02
 ## SavedVariables: KEYSTONE_LOOT_DB
 ## SavedVariablesPerCharacter: KEYSTONE_LOOT_CHAR_DB
@@ -15,6 +15,7 @@ api/loot.lua
 api/favorite.lua
 api/upgrade_item.lua
 api/dropdown.lua
+api/catalyst.lua
 
 frames/main.lua
 frames/instance.lua
@@ -25,6 +26,7 @@ frames/filter_itemlevel.lua
 frames/item.lua
 frames/minimap.lua
 frames/dropdown.lua
+frames/catalyst.lua
 
 frames/settings/register.lua
 frames/settings/header.lua

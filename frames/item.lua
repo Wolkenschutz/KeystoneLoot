@@ -42,14 +42,14 @@ end
 
 local function OnClick(self)
 	if (IsModifierKeyDown()) then
-		HandleModifiedItemClick(self.link);
+		local _, itemLink = GetItemInfo(self.link); -- NOTE: Man kann keine modifizierten Items posten
+		HandleModifiedItemClick(itemLink);
 		return;
 	end
 
 	local instanceID = self:GetParent().instanceID;
 	local itemID = self.itemID;
 	local icon = self.Icon:GetTexture();
-	local link = self.link;
 
 	local _, _, classID = UnitClass('player');
 	local db = Addon.API.GetFavorite(instanceID, itemID);
@@ -57,7 +57,7 @@ local function OnClick(self)
 		self.isFavorite = true;
 		self.FavoriteStar:SetDesaturated(false);
 
-		Addon.API.SetFavorite(instanceID, itemID, icon, link);
+		Addon.API.SetFavorite(instanceID, itemID, icon);
 	else
 		self.isFavorite = false;
 		self.FavoriteStar:SetDesaturated(true);
@@ -111,11 +111,6 @@ end
 
 
 local function GetItemFrame(i, parent)
-	local Frame = parent.ItemFrames[i];
-	if (Frame) then
-		return Frame;
-	end
-
-	return CreateItemFrame(i, parent);
+	return parent.ItemFrames[i] or CreateItemFrame(i, parent);
 end
 Addon.GetItemFrame = GetItemFrame;

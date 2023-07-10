@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0
+* Revival Catalyst items are now also displayed if the selected slot has one.
+* Minor adjustments in the code.
+
 ## 1.2.1
 * Restructured item level dropdown menu.
 * Update ruRU. (Thanks Valdemar@Github)
