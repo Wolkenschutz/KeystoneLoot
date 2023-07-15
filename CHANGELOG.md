@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.1
+* Favorites are now saved based on the selected specialization.
+
 ## 1.3.0
 * Revival Catalyst items are now also displayed if the selected slot has one.
 * Minor adjustments in the code.

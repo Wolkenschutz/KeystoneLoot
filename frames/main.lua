@@ -6,6 +6,28 @@ local Translate = Addon.API.Translate;
 local onlyOnce = false;
 
 
+local function FixFavDB()
+	if (KEYSTONE_LOOT_CHAR_DB.favFix) then
+		return;
+	end
+
+	local classSlug = Addon.SELECTED_CLASS_ID..':'..Addon.SELECTED_SPEC_ID;
+
+	local tempDB = {};
+	tempDB.currSeasion = KEYSTONE_LOOT_CHAR_DB.currSeasion;
+
+	for instanceID, data in next, KEYSTONE_LOOT_CHAR_DB do
+		if (type(instanceID) == 'number' or instanceID == 'catalyst') then
+			tempDB[instanceID] = tempDB[instanceID] or {};
+			tempDB[instanceID][classSlug] = tempDB[instanceID][classSlug] or {};
+			tempDB[instanceID][classSlug] = data
+		end
+	end
+
+	KEYSTONE_LOOT_CHAR_DB = tempDB;
+	KEYSTONE_LOOT_CHAR_DB.favFix = true
+end
+
 local function UpdateTitle(self)
 	local currentSeason = C_MythicPlus.GetCurrentUIDisplaySeason();
 	if (not currentSeason) then
@@ -35,6 +57,7 @@ local function OnShow(self)
 		Addon.CreateInstanceFrames();
 
 		Addon.API.CleanUpDatabase();
+		FixFavDB();
 
 		UpdateTitle(self);
 	end

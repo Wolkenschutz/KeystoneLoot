@@ -46,8 +46,8 @@ local DROPDOWN_CATEGORY_RANKS = {
 	},
 	vault = {
 		{ itemLevel = 441, bonusID = 'myth-1', text = ITEM_EPIC_COLOR_CODE..'441|r | +16 +17' },
-		{ itemLevel = 444, bonusID = 'myth-2', text = ITEM_EPIC_COLOR_CODE..'444|r | +18 +19' },
-		{ itemLevel = 447, bonusID = 'myth-3', text = ITEM_LEGENDARY_COLOR_CODE..'447|r | +20' }
+		{ itemLevel = 444, bonusID = 'myth-2', text = ITEM_EPIC_COLOR_CODE..'444|r | +18 +19 | '..ITEM_UPGRADE },
+		{ itemLevel = 447, bonusID = 'myth-3', text = ITEM_LEGENDARY_COLOR_CODE..'447|r | +20 | '..ITEM_UPGRADE }
 	}
 };
 

@@ -91,12 +91,7 @@ local function CreateDropDownButton(i)
 end
 
 local function GetDropDownButton(i)
-	local Button = BUTTONS[i];
-	if (Button) then
-		return Button;
-	end
-
-	return CreateDropDownButton(i);
+	return BUTTONS[i] or CreateDropDownButton(i);
 end
 Addon.GetDropDownButton = GetDropDownButton;
 
