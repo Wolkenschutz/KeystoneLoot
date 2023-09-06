@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.2
+* TOC bump for Patch 10.1.7
+
 ## 1.3.1
 * Favorites are now saved based on the selected specialization.
 
