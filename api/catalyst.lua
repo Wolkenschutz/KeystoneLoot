@@ -148,7 +148,7 @@ Addon.API.GetCatalystItem = GetCatalystItem;
 local function UpdateCatalystLoot()
 	local CatalystPopout = Addon.Frames.CatalystPopout;
 
-	if (C_MythicPlus.GetCurrentUIDisplaySeason() ~= 2) then
+	if (Addon.API.GetTocVersion() >= 100200) then
 		CatalystPopout:Hide();
 		return;
 	end

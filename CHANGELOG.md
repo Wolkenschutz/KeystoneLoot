@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.3
+* Preparations for Patch 10.2.0 (New Dropdown Entries)
+
 ## 1.3.2
 * TOC bump for Patch 10.1.7
 

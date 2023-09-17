@@ -2,6 +2,12 @@ local AddonName, Addon = ...;
 Addon.API = {};
 
 
+local function GetTocVersion()
+	local _, _, _, tocVersion = GetBuildInfo();
+	return tocVersion;
+end
+Addon.API.GetTocVersion = GetTocVersion;
+
 local function GetMythicTierID()
 	return C_MythicPlus.IsMythicPlusActive() and EJ_GetNumTiers();
 end
