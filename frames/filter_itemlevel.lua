@@ -52,6 +52,8 @@ local DROPDOWN_CATEGORY_RANKS = {
 };
 
 if (Addon.API.GetTocVersion() >= 100200) then
+	Addon.SELECTED_ITEMLEVEL = 441;
+
 	DROPDOWN_CATEGORY_RANKS = {
 		veteran = {
 			{ itemLevel = 441, bonusID = 'veteran-1', text = ITEM_POOR_COLOR_CODE..'441|r | +2' },
@@ -68,24 +70,24 @@ if (Addon.API.GetTocVersion() >= 100200) then
 			{ itemLevel = 457, bonusID = 'champion-2', text = ITEM_POOR_COLOR_CODE..'457|r | +11 +12' },
 			{ itemLevel = 460, bonusID = 'champion-3', text = ITEM_POOR_COLOR_CODE..'460|r | +13 +14' },
 			{ itemLevel = 463, bonusID = 'champion-4', text = ITEM_POOR_COLOR_CODE..'463|r | +15 +16' },
-			{ itemLevel = 467, bonusID = 'champion-5', text = ITEM_POOR_COLOR_CODE..'467|r | '..ITEM_UPGRADE }, -- TODO: Need check
-			{ itemLevel = 470, bonusID = 'champion-6', text = ITEM_POOR_COLOR_CODE..'470|r | '..ITEM_UPGRADE }, -- TODO: Need check
-			{ itemLevel = 473, bonusID = 'champion-7', text = ITEM_POOR_COLOR_CODE..'473|r | '..ITEM_UPGRADE }, -- TODO: Need check
-			{ itemLevel = 476, bonusID = 'champion-8', text = ITEM_POOR_COLOR_CODE..'476|r | '..ITEM_UPGRADE } -- TODO: Need check
+			{ itemLevel = 467, bonusID = 'champion-5', text = ITEM_POOR_COLOR_CODE..'467|r | '..ITEM_UPGRADE },
+			{ itemLevel = 470, bonusID = 'champion-6', text = ITEM_POOR_COLOR_CODE..'470|r | '..ITEM_UPGRADE },
+			{ itemLevel = 473, bonusID = 'champion-7', text = ITEM_POOR_COLOR_CODE..'473|r | '..ITEM_UPGRADE },
+			{ itemLevel = 476, bonusID = 'champion-8', text = ITEM_POOR_COLOR_CODE..'476|r | '..ITEM_UPGRADE }
 		},
 		hero = {
 			{ itemLevel = 467, bonusID = 'hero-1', text = ITEM_POOR_COLOR_CODE..'467|r | +17 +18' },
 			{ itemLevel = 470, bonusID = 'hero-2', text = ITEM_POOR_COLOR_CODE..'470|r | +19 +20' },
-			{ itemLevel = 473, bonusID = 'hero-3', text = ITEM_POOR_COLOR_CODE..'473|r | '..ITEM_UPGRADE }, -- TODO: Need check
-			{ itemLevel = 476, bonusID = 'hero-4', text = ITEM_POOR_COLOR_CODE..'476|r | '..ITEM_UPGRADE }, -- TODO: Need check
-			{ itemLevel = 480, bonusID = 'hero-5', text = ITEM_POOR_COLOR_CODE..'480|r | '..ITEM_UPGRADE }, -- TODO: Need check
-			{ itemLevel = 483, bonusID = 'hero-6', text = ITEM_POOR_COLOR_CODE..'483|r | '..ITEM_UPGRADE } -- TODO: Need check
+			{ itemLevel = 473, bonusID = 'hero-3', text = ITEM_POOR_COLOR_CODE..'473|r | '..ITEM_UPGRADE },
+			{ itemLevel = 476, bonusID = 'hero-4', text = ITEM_POOR_COLOR_CODE..'476|r | '..ITEM_UPGRADE },
+			{ itemLevel = 480, bonusID = 'hero-5', text = ITEM_POOR_COLOR_CODE..'480|r | '..ITEM_UPGRADE },
+			{ itemLevel = 483, bonusID = 'hero-6', text = ITEM_POOR_COLOR_CODE..'483|r | '..ITEM_UPGRADE }
 		},
 		vault = {
 			{ itemLevel = 480, bonusID = 'myth-1', text = ITEM_POOR_COLOR_CODE..'480|r | +18 +19' },
 			{ itemLevel = 483, bonusID = 'myth-2', text = ITEM_POOR_COLOR_CODE..'483|r | +20 | '..ITEM_UPGRADE },
-			{ itemLevel = 486, bonusID = 'myth-3', text = ITEM_POOR_COLOR_CODE..'486|r | '..ITEM_UPGRADE }, -- TODO: Need check
-			{ itemLevel = 489, bonusID = 'myth-4', text = ITEM_POOR_COLOR_CODE..'489|r | '..ITEM_UPGRADE } -- TODO: Need check
+			{ itemLevel = 486, bonusID = 'myth-3', text = ITEM_POOR_COLOR_CODE..'486|r | '..ITEM_UPGRADE },
+			{ itemLevel = 489, bonusID = 'myth-4', text = ITEM_POOR_COLOR_CODE..'489|r | '..ITEM_UPGRADE }
 		}
 	};
 end
