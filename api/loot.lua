@@ -50,13 +50,11 @@ local function UpdateLoot()
 
 	EJ_ClearSearch();
 
-	EJ_SetDifficulty(DifficultyUtil.ID.DungeonChallenge);
-	EJ_SetLootFilter(Addon.SELECTED_CLASS_ID, Addon.SELECTED_SPEC_ID);
-
-	C_EncounterJournal.SetSlotFilter(Addon.SELECTED_SLOT_ID);
-
 	EJ_SelectTier(mythicTierID);
 	EJ_SetDifficulty(DifficultyUtil.ID.DungeonChallenge);
+
+	EJ_SetLootFilter(Addon.SELECTED_CLASS_ID, Addon.SELECTED_SPEC_ID);
+	C_EncounterJournal.SetSlotFilter(Addon.SELECTED_SLOT_ID);
 
 	local instanceIndex = 1;
 	local instanceID = EJ_GetInstanceByIndex(instanceIndex, false);

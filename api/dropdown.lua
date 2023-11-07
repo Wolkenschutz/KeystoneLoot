@@ -69,7 +69,7 @@ local function ToogleDropDownMenu(parent, ListFunction)
 					leftPadding = leftPadding + info.leftPadding;
 				end
 
-				Check:SetPoint('LEFT', leftPadding, 0);
+				Check:SetPoint('LEFT', leftPadding, 1);
 
 				dropdownHeight = dropdownHeight + 18;
 			end

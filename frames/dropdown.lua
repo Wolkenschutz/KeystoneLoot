@@ -83,7 +83,7 @@ local function CreateDropDownButton(i)
 	local Text = Button:CreateFontString('ARTWORK', nil, 'GameFontHighlightSmallLeft');
 	Button.Text = Text;
 	Text:SetWordWrap(false);
-	Text:SetPoint('LEFT', Check, 'RIGHT', 4, 0);
+	Text:SetPoint('LEFT', Check, 'RIGHT', 4, -1);
 
 	table.insert(BUTTONS, Button);
 
