@@ -105,7 +105,6 @@ Frame:SetPortraitToAsset('Interface\\Icons\\INV_Relics_Hourglass_02');
 
 local NoSeason = Frame:CreateFontString('ARTWORK', nil, 'GameFontHighlightLarge');
 Addon.Frames.NoSeason = NoSeason;
-NoSeason:Hide();
 NoSeason:SetPoint('TOPLEFT', 20, -80);
 NoSeason:SetPoint('BOTTOMRIGHT', -20, 26);
 NoSeason:SetText(MYTHIC_PLUS_TAB_DISABLE_TEXT);

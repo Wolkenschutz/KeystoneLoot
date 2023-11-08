@@ -51,7 +51,6 @@ Addon.GetInstanceFrames = GetInstanceFrames;
 local function CreateInstanceFrames()
 	local mythicTierID = Addon.API.GetMythicTierID();
 	if (not mythicTierID) then
-		NoSeason:Show();
 		return;
 	end
 
@@ -70,6 +69,8 @@ local function CreateInstanceFrames()
 
 		instanceIndex = instanceIndex+1;
 		instanceID, name, _, _, buttonImage = EJ_GetInstanceByIndex(instanceIndex, false);
+
+		NoSeason:Hide();
 	end
 
 	MainFrame:SetHeight(100 + (ROWS * 130));
