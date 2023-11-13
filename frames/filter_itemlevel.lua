@@ -6,7 +6,7 @@ local Translate = Addon.API.Translate;
 local SELECTED_ITEMLEVEL_CATEGORY = 'veteran';
 local SELECTED_ITEMLEVEL_RANK = 1;
 
-Addon.SELECTED_ITEMLEVEL = 402;
+Addon.SELECTED_ITEMLEVEL = 441;
 Addon.SELECTED_ITEMLEVEL_BONUSID = 'veteran-1';
 
 local DROPDOWN_CATEGORIES = {
@@ -18,79 +18,40 @@ local DROPDOWN_CATEGORIES = {
 
 local DROPDOWN_CATEGORY_RANKS = {
 	veteran = {
-		{ itemLevel = 402, bonusID = 'veteran-1', text = ITEM_POOR_COLOR_CODE..'402|r | +2' },
-		{ itemLevel = 405, bonusID = 'veteran-2', text = ITEM_POOR_COLOR_CODE..'405|r | +3 +4' },
-		{ itemLevel = 408, bonusID = 'veteran-3', text = ITEM_POOR_COLOR_CODE..'408|r | +5 +6' },
-		{ itemLevel = 411, bonusID = 'veteran-4', text = ITEM_POOR_COLOR_CODE..'411|r | +7 +8' },
-		{ itemLevel = 415, bonusID = 'veteran-5', text = ITEM_GOOD_COLOR_CODE..'415|r | '..ITEM_UPGRADE },
-		{ itemLevel = 418, bonusID = 'veteran-6', text = ITEM_GOOD_COLOR_CODE..'418|r | '..ITEM_UPGRADE },
-		{ itemLevel = 421, bonusID = 'veteran-7', text = ITEM_GOOD_COLOR_CODE..'421|r | '..ITEM_UPGRADE },
-		{ itemLevel = 424, bonusID = 'veteran-8', text = ITEM_GOOD_COLOR_CODE..'424|r | '..ITEM_UPGRADE }
+		{ itemLevel = 441, bonusID = 'veteran-1', text = ITEM_POOR_COLOR_CODE..'441|r | +2' },
+		{ itemLevel = 444, bonusID = 'veteran-2', text = ITEM_POOR_COLOR_CODE..'444|r | +3 +4' },
+		{ itemLevel = 447, bonusID = 'veteran-3', text = ITEM_POOR_COLOR_CODE..'447|r | +5 +6' },
+		{ itemLevel = 450, bonusID = 'veteran-4', text = ITEM_POOR_COLOR_CODE..'450|r | +7 +8' },
+		{ itemLevel = 454, bonusID = 'veteran-5', text = ITEM_GOOD_COLOR_CODE..'454|r | '..ITEM_UPGRADE },
+		{ itemLevel = 457, bonusID = 'veteran-6', text = ITEM_GOOD_COLOR_CODE..'457|r | '..ITEM_UPGRADE },
+		{ itemLevel = 460, bonusID = 'veteran-7', text = ITEM_GOOD_COLOR_CODE..'460|r | '..ITEM_UPGRADE },
+		{ itemLevel = 463, bonusID = 'veteran-8', text = ITEM_GOOD_COLOR_CODE..'463|r | '..ITEM_UPGRADE }
 	},
 	champion = {
-		{ itemLevel = 415, bonusID = 'champion-1', text = ITEM_GOOD_COLOR_CODE..'415|r | +9 +10' },
-		{ itemLevel = 418, bonusID = 'champion-2', text = ITEM_GOOD_COLOR_CODE..'418|r | +11 +12' },
-		{ itemLevel = 421, bonusID = 'champion-3', text = ITEM_GOOD_COLOR_CODE..'421|r | +13 +14' },
-		{ itemLevel = 424, bonusID = 'champion-4', text = ITEM_GOOD_COLOR_CODE..'424|r | +15 +16' },
-		{ itemLevel = 428, bonusID = 'champion-5', text = ITEM_SUPERIOR_COLOR_CODE..'428|r | '..ITEM_UPGRADE },
-		{ itemLevel = 431, bonusID = 'champion-6', text = ITEM_SUPERIOR_COLOR_CODE..'431|r | '..ITEM_UPGRADE },
-		{ itemLevel = 434, bonusID = 'champion-7', text = ITEM_SUPERIOR_COLOR_CODE..'434|r | '..ITEM_UPGRADE },
-		{ itemLevel = 437, bonusID = 'champion-8', text = ITEM_SUPERIOR_COLOR_CODE..'437|r | '..ITEM_UPGRADE }
+		{ itemLevel = 454, bonusID = 'champion-1', text = ITEM_GOOD_COLOR_CODE..'454|r | +9 +10' },
+		{ itemLevel = 457, bonusID = 'champion-2', text = ITEM_GOOD_COLOR_CODE..'457|r | +11 +12' },
+		{ itemLevel = 460, bonusID = 'champion-3', text = ITEM_GOOD_COLOR_CODE..'460|r | +13 +14' },
+		{ itemLevel = 463, bonusID = 'champion-4', text = ITEM_GOOD_COLOR_CODE..'463|r | +15 +16' },
+		{ itemLevel = 467, bonusID = 'champion-5', text = ITEM_SUPERIOR_COLOR_CODE..'467|r | '..ITEM_UPGRADE },
+		{ itemLevel = 470, bonusID = 'champion-6', text = ITEM_SUPERIOR_COLOR_CODE..'470|r | '..ITEM_UPGRADE },
+		{ itemLevel = 473, bonusID = 'champion-7', text = ITEM_SUPERIOR_COLOR_CODE..'473|r | '..ITEM_UPGRADE },
+		{ itemLevel = 476, bonusID = 'champion-8', text = ITEM_SUPERIOR_COLOR_CODE..'476|r | '..ITEM_UPGRADE }
 	},
 	hero = {
-		{ itemLevel = 428, bonusID = 'hero-1', text = ITEM_SUPERIOR_COLOR_CODE..'428|r | +17 +18' },
-		{ itemLevel = 431, bonusID = 'hero-2', text = ITEM_SUPERIOR_COLOR_CODE..'431|r | +19 +20' },
-		{ itemLevel = 434, bonusID = 'hero-3', text = ITEM_SUPERIOR_COLOR_CODE..'434|r | '..ITEM_UPGRADE },
-		{ itemLevel = 437, bonusID = 'hero-4', text = ITEM_SUPERIOR_COLOR_CODE..'437|r | '..ITEM_UPGRADE },
-		{ itemLevel = 441, bonusID = 'hero-5', text = ITEM_EPIC_COLOR_CODE..'441|r | '..ITEM_UPGRADE }
+		{ itemLevel = 467, bonusID = 'hero-1', text = ITEM_SUPERIOR_COLOR_CODE..'467|r | +17 +18' },
+		{ itemLevel = 470, bonusID = 'hero-2', text = ITEM_SUPERIOR_COLOR_CODE..'470|r | +19 +20' },
+		{ itemLevel = 473, bonusID = 'hero-3', text = ITEM_SUPERIOR_COLOR_CODE..'473|r | '..ITEM_UPGRADE },
+		{ itemLevel = 476, bonusID = 'hero-4', text = ITEM_SUPERIOR_COLOR_CODE..'476|r | '..ITEM_UPGRADE },
+		{ itemLevel = 480, bonusID = 'hero-5', text = ITEM_EPIC_COLOR_CODE..'480|r | '..ITEM_UPGRADE },
+		{ itemLevel = 483, bonusID = 'hero-6', text = ITEM_EPIC_COLOR_CODE..'483|r | '..ITEM_UPGRADE }
 	},
 	vault = {
-		{ itemLevel = 441, bonusID = 'myth-1', text = ITEM_EPIC_COLOR_CODE..'441|r | +16 +17' },
-		{ itemLevel = 444, bonusID = 'myth-2', text = ITEM_EPIC_COLOR_CODE..'444|r | +18 +19 | '..ITEM_UPGRADE },
-		{ itemLevel = 447, bonusID = 'myth-3', text = ITEM_LEGENDARY_COLOR_CODE..'447|r | +20 | '..ITEM_UPGRADE }
+		{ itemLevel = 480, bonusID = 'myth-1', text = ITEM_EPIC_COLOR_CODE..'480|r | +18 +19' },
+		{ itemLevel = 483, bonusID = 'myth-2', text = ITEM_EPIC_COLOR_CODE..'483|r | +20 | '..ITEM_UPGRADE },
+		{ itemLevel = 486, bonusID = 'myth-3', text = ITEM_LEGENDARY_COLOR_CODE..'486|r | '..ITEM_UPGRADE },
+		{ itemLevel = 489, bonusID = 'myth-4', text = ITEM_LEGENDARY_COLOR_CODE..'489|r | '..ITEM_UPGRADE }
 	}
 };
-
-if (Addon.API.GetTocVersion() >= 100200) then
-	Addon.SELECTED_ITEMLEVEL = 441;
-
-	DROPDOWN_CATEGORY_RANKS = {
-		veteran = {
-			{ itemLevel = 441, bonusID = 'veteran-1', text = ITEM_POOR_COLOR_CODE..'441|r | +2' },
-			{ itemLevel = 444, bonusID = 'veteran-2', text = ITEM_POOR_COLOR_CODE..'444|r | +3 +4' },
-			{ itemLevel = 447, bonusID = 'veteran-3', text = ITEM_POOR_COLOR_CODE..'447|r | +5 +6' },
-			{ itemLevel = 450, bonusID = 'veteran-4', text = ITEM_POOR_COLOR_CODE..'450|r | +7 +8' },
-			{ itemLevel = 454, bonusID = 'veteran-5', text = ITEM_GOOD_COLOR_CODE..'454|r | '..ITEM_UPGRADE },
-			{ itemLevel = 457, bonusID = 'veteran-6', text = ITEM_GOOD_COLOR_CODE..'457|r | '..ITEM_UPGRADE },
-			{ itemLevel = 460, bonusID = 'veteran-7', text = ITEM_GOOD_COLOR_CODE..'460|r | '..ITEM_UPGRADE },
-			{ itemLevel = 463, bonusID = 'veteran-8', text = ITEM_GOOD_COLOR_CODE..'463|r | '..ITEM_UPGRADE }
-		},
-		champion = {
-			{ itemLevel = 454, bonusID = 'champion-1', text = ITEM_GOOD_COLOR_CODE..'454|r | +9 +10' },
-			{ itemLevel = 457, bonusID = 'champion-2', text = ITEM_GOOD_COLOR_CODE..'457|r | +11 +12' },
-			{ itemLevel = 460, bonusID = 'champion-3', text = ITEM_GOOD_COLOR_CODE..'460|r | +13 +14' },
-			{ itemLevel = 463, bonusID = 'champion-4', text = ITEM_GOOD_COLOR_CODE..'463|r | +15 +16' },
-			{ itemLevel = 467, bonusID = 'champion-5', text = ITEM_SUPERIOR_COLOR_CODE..'467|r | '..ITEM_UPGRADE },
-			{ itemLevel = 470, bonusID = 'champion-6', text = ITEM_SUPERIOR_COLOR_CODE..'470|r | '..ITEM_UPGRADE },
-			{ itemLevel = 473, bonusID = 'champion-7', text = ITEM_SUPERIOR_COLOR_CODE..'473|r | '..ITEM_UPGRADE },
-			{ itemLevel = 476, bonusID = 'champion-8', text = ITEM_SUPERIOR_COLOR_CODE..'476|r | '..ITEM_UPGRADE }
-		},
-		hero = {
-			{ itemLevel = 467, bonusID = 'hero-1', text = ITEM_SUPERIOR_COLOR_CODE..'467|r | +17 +18' },
-			{ itemLevel = 470, bonusID = 'hero-2', text = ITEM_SUPERIOR_COLOR_CODE..'470|r | +19 +20' },
-			{ itemLevel = 473, bonusID = 'hero-3', text = ITEM_SUPERIOR_COLOR_CODE..'473|r | '..ITEM_UPGRADE },
-			{ itemLevel = 476, bonusID = 'hero-4', text = ITEM_SUPERIOR_COLOR_CODE..'476|r | '..ITEM_UPGRADE },
-			{ itemLevel = 480, bonusID = 'hero-5', text = ITEM_EPIC_COLOR_CODE..'480|r | '..ITEM_UPGRADE },
-			{ itemLevel = 483, bonusID = 'hero-6', text = ITEM_EPIC_COLOR_CODE..'483|r | '..ITEM_UPGRADE }
-		},
-		vault = {
-			{ itemLevel = 480, bonusID = 'myth-1', text = ITEM_EPIC_COLOR_CODE..'480|r | +18 +19' },
-			{ itemLevel = 483, bonusID = 'myth-2', text = ITEM_EPIC_COLOR_CODE..'483|r | +20 | '..ITEM_UPGRADE },
-			{ itemLevel = 486, bonusID = 'myth-3', text = ITEM_LEGENDARY_COLOR_CODE..'486|r | '..ITEM_UPGRADE },
-			{ itemLevel = 489, bonusID = 'myth-4', text = ITEM_LEGENDARY_COLOR_CODE..'489|r | '..ITEM_UPGRADE }
-		}
-	};
-end
 
 
 local function SetFilter(category, index)

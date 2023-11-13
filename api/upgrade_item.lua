@@ -11,25 +11,11 @@ local ADD_ITEMLEVEL_BONUSID = {
 };
 
 local ADD_SUBTITLE_BONUSID = {
-	['veteran-1'] = 9313, ['veteran-2'] = 9314, ['veteran-3'] = 9315, ['veteran-4'] = 9316,
-	['veteran-5'] = 9317, ['veteran-6'] = 9318, ['veteran-7'] = 9319, ['veteran-8'] = 9320,
-	['champion-1'] = 9321, ['champion-2'] = 9322, ['champion-3'] = 9323, ['champion-4'] = 9324,
-	['champion-5'] = 9325, ['champion-6'] = 9327, ['champion-7'] = 9328, ['champion-8'] = 9329,
-	['hero-1'] = 9330, ['hero-2'] = 9331, ['hero-3'] = 9332, ['hero-4'] = 9333, ['hero-5'] = 9334,
-	['myth-1'] = 9380, ['myth-2'] = 9381, ['myth-3'] = 9382
+	['veteran-1'] = 9552, ['veteran-2'] = 9553, ['veteran-3'] = 9554, ['veteran-4'] = 9555, ['veteran-5'] = 9556, ['veteran-6'] = 9557, ['veteran-7'] = 9558, ['veteran-8'] = 9559,
+	['champion-1'] = 9560, ['champion-2'] = 9561, ['champion-3'] = 9562, ['champion-4'] = 9563, ['champion-5'] = 9564, ['champion-6'] = 9565, ['champion-7'] = 9566, ['champion-8'] = 9567,
+	['hero-1'] = 9568, ['hero-2'] = 9569, ['hero-3'] = 9570, ['hero-4'] = 9571, ['hero-5'] = 9572, ['hero-6'] = 9581,
+	['myth-1'] = 9573, ['myth-2'] = 9574, ['myth-3'] = 9575, ['myth-4'] = 9576
 };
-
-if (Addon.API.GetTocVersion() >= 100200) then
-	ADD_SUBTITLE_BONUSID = {
-		['veteran-1'] = 9552, ['veteran-2'] = 9553, ['veteran-3'] = 9554, ['veteran-4'] = 9555,
-		['veteran-5'] = 9556, ['veteran-6'] = 9557, ['veteran-7'] = 9558, ['veteran-8'] = 9559,
-		['champion-1'] = 9560, ['champion-2'] = 9561, ['champion-3'] = 9562, ['champion-4'] = 9563,
-		['champion-5'] = 9564, ['champion-6'] = 9565, ['champion-7'] = 9566, ['champion-8'] = 9567,
-		['hero-1'] = 9568, ['hero-2'] = 9569, ['hero-3'] = 9570, ['hero-4'] = 9571,
-		['hero-5'] = 9572, ['hero-6'] = 9581,
-		['myth-1'] = 9573, ['myth-2'] = 9574, ['myth-3'] = 9575, ['myth-4'] = 9576
-	};
-end
 
 local function UpgradeItemTo(targetItemLink, targetItemLevel, targetBonusID)
 	if (Addon.SELECTED_SLOT_ID == Enum.ItemSlotFilterType.Other) then
