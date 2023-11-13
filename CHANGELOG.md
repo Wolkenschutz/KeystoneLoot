@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.4
+* Old Season 2 removed. (Addon is automatically ready for Season 3 as soon as it starts)
+
 ## 1.3.3
 * Preparations for Patch 10.2.0 (New Dropdown Entries, New Catalyst Items)
 
