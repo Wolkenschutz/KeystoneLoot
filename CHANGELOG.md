@@ -4,7 +4,7 @@
 * An issue has been fixed where the item level of some items was not displayed correctly.
 
 ## 1.3.5
-* An issue has resolved fixed where Season 3 Catalyst items were not visible.
+* An issue has been resolved where Season 3 Catalyst items were not visible.
 
 ## 1.3.4
 * Old Season 2 removed. (Addon is automatically ready for Season 3 as soon as it starts)
