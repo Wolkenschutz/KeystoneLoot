@@ -26,12 +26,22 @@ local function UpdateLoot()
 			if (instanceFavorites ~= nil) then
 				for itemID, itemInfo in next, instanceFavorites do
 					numLoot = numLoot + 1;
+					if (numLoot > 8) then
+						break;
+					end
 
 					local ItemFrame = Addon.GetItemFrame(numLoot, InstanceFrame);
 					local FavoriteStar = ItemFrame.FavoriteStar;
+					local SubText = ItemFrame.SubText;
 
 					FavoriteStar:SetDesaturated(false);
 					FavoriteStar:Show();
+
+					if (itemInfo.subText) then
+						SubText:SetText(itemInfo.subText);
+					else
+						SubText:SetText('');
+					end
 
 					ItemFrame.isFavorite = true;
 					ItemFrame.link = 'item:'..itemID;
@@ -71,7 +81,10 @@ local function UpdateLoot()
 			if (itemInfo == nil) then
 				ItemFrame:Hide();
 			else
+				local _, _, journalEncounterID = EJ_GetEncounterInfo(itemInfo.encounterID);
+
 				local FavoriteStar = ItemFrame.FavoriteStar;
+				local SubText = ItemFrame.SubText;
 
 				local itemID = itemInfo.itemID;
 				local favoriteItem = Addon.API.GetFavorite(instanceID, itemID);
@@ -79,6 +92,14 @@ local function UpdateLoot()
 
 				FavoriteStar:SetDesaturated(not isFavorite);
 				FavoriteStar:SetShown(isFavorite);
+
+				if (instanceID == 1209 and (journalEncounterID == 2521 or journalEncounterID == 2528 or journalEncounterID == 2535 or journalEncounterID == 2537)) then
+					SubText:SetText('FALL');
+				elseif (instanceID == 1209) then
+					SubText:SetText('RISE');
+				else
+					SubText:SetText('');
+				end
 
 				ItemFrame.isFavorite = isFavorite;
 				ItemFrame.link = 'item:'..itemID;

@@ -1,7 +1,7 @@
 local AddonName, Addon = ...;
 
 
-local function SetFavorite(instanceID, itemID, icon)
+local function SetFavorite(instanceID, itemID, icon, subText)
 	local classSlug = Addon.SELECTED_CLASS_ID..':'..Addon.SELECTED_SPEC_ID;
 
 	if (KEYSTONE_LOOT_CHAR_DB[instanceID] == nil) then
@@ -13,7 +13,8 @@ local function SetFavorite(instanceID, itemID, icon)
 	end
 
 	KEYSTONE_LOOT_CHAR_DB[instanceID][classSlug][itemID] = {
-		icon = icon
+		icon = icon,
+		subText = subText
 	}
 end
 Addon.API.SetFavorite = SetFavorite;
