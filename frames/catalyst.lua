@@ -14,7 +14,7 @@ end
 local Frame = CreateFrame('Frame', nil, MainFrame);
 Addon.Frames.CatalystPopout = Frame;
 
-Frame.instanceID = 'catalyst';
+Frame.mapID = 'catalyst';
 Frame.ItemFrames = {};
 
 Frame:Hide();

@@ -157,7 +157,7 @@ local function UpdateCatalystLoot()
 	local ITEM_LIST = {};
 
 	if (Addon.SELECTED_SLOT_ID == -1) then
-		ITEM_LIST = Addon.API.GetFavorites(CatalystPopout.instanceID) or {};
+		ITEM_LIST = Addon.API.GetFavorites(CatalystPopout.mapID) or {};
 	elseif (ITEMS_TO_CHANGE[Addon.SELECTED_SLOT_ID] ~= nil) then
 		local itemInfo = ITEMS_TO_CHANGE[Addon.SELECTED_SLOT_ID][Addon.SELECTED_CLASS_ID];
 
@@ -172,7 +172,7 @@ local function UpdateCatalystLoot()
 		local ItemFrame = Addon.GetCatalystItemFrame(numIcons);
 		local FavoriteStar = ItemFrame.FavoriteStar;
 
-		local favoriteItem = Addon.API.GetFavorite(CatalystPopout.instanceID, itemID);
+		local favoriteItem = Addon.API.GetFavorite(CatalystPopout.mapID, itemID);
 		local isFavorite = favoriteItem ~= nil;
 
 		FavoriteStar:SetDesaturated(not isFavorite);
