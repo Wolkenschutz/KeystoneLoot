@@ -47,23 +47,22 @@ local function OnClick(self)
 		return;
 	end
 
-	local instanceID = self:GetParent().instanceID;
+	local mapID = self:GetParent().mapID;
 	local itemID = self.itemID;
 	local icon = self.Icon:GetTexture();
-	local subText = self.SubText:GetText();
 
 	local _, _, classID = UnitClass('player');
-	local db = Addon.API.GetFavorite(instanceID, itemID);
+	local db = Addon.API.GetFavorite(mapID, itemID);
 	if (db == nil and (Addon.SELECTED_CLASS_ID == classID or Addon.SELECTED_SLOT_ID == -1)) then
 		self.isFavorite = true;
 		self.FavoriteStar:SetDesaturated(false);
 
-		Addon.API.SetFavorite(instanceID, itemID, icon, subText);
+		Addon.API.SetFavorite(mapID, itemID, icon);
 	else
 		self.isFavorite = false;
 		self.FavoriteStar:SetDesaturated(true);
 
-		Addon.API.RemoveFavorite(instanceID, itemID);
+		Addon.API.RemoveFavorite(mapID, itemID);
 	end
 end
 
@@ -103,12 +102,6 @@ local function CreateItemFrame(i, parent)
 	FavoriteStar:SetPoint('TOPRIGHT', 8, 8);
 	FavoriteStar:SetAtlas('PetJournal-FavoritesIcon');
 	FavoriteStar:Hide();
-
-	local SubText = Frame:CreateFontString('ARTWORK', nil, 'NumberFontNormal');
-	Frame.SubText = SubText;
-	SubText:SetDrawLayer('ARTWORK', 3);
-	SubText:SetPoint('BOTTOM', 0, 2);
-
 
 	table.insert(parent.ItemFrames, Frame);
 

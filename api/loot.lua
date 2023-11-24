@@ -11,37 +11,22 @@ local function UpdateLoot()
 
 	if (Addon.SELECTED_SLOT_ID == -1) then
 		for _, InstanceFrame in next, Addon.GetInstanceFrames() do
-			local instanceID = InstanceFrame.instanceID;
-			local instanceFavorites = Addon.API.GetInstanceFavorites(instanceID);
-
-			for itemIndex=1, 8 do
-				local ItemFrame = Addon.GetItemFrame(itemIndex, InstanceFrame);
-				local FavoriteStar = ItemFrame.FavoriteStar;
-
-				ItemFrame:Hide();
-				FavoriteStar:Hide();
-			end
-
 			local numLoot = 0;
+			local instanceFavorites = Addon.API.GetFavorites(InstanceFrame.mapID);
+
 			if (instanceFavorites ~= nil) then
 				for itemID, itemInfo in next, instanceFavorites do
 					numLoot = numLoot + 1;
+
 					if (numLoot > 8) then
 						break;
 					end
 
 					local ItemFrame = Addon.GetItemFrame(numLoot, InstanceFrame);
 					local FavoriteStar = ItemFrame.FavoriteStar;
-					local SubText = ItemFrame.SubText;
 
 					FavoriteStar:SetDesaturated(false);
 					FavoriteStar:Show();
-
-					if (itemInfo.subText) then
-						SubText:SetText(itemInfo.subText);
-					else
-						SubText:SetText('');
-					end
 
 					ItemFrame.isFavorite = true;
 					ItemFrame.link = 'item:'..itemID;
@@ -49,6 +34,11 @@ local function UpdateLoot()
 					ItemFrame.Icon:SetTexture(itemInfo.icon);
 					ItemFrame:Show();
 				end
+			end
+
+			for index=(numLoot + 1), 8 do
+				local ItemFrame = Addon.GetItemFrame(index, InstanceFrame);
+				ItemFrame:Hide();
 			end
 
 			InstanceFrame.Title:SetTextColor((numLoot == 0 and GRAY_FONT_COLOR or HIGHLIGHT_FONT_COLOR):GetRGB());
@@ -66,57 +56,61 @@ local function UpdateLoot()
 	EJ_SetLootFilter(Addon.SELECTED_CLASS_ID, Addon.SELECTED_SPEC_ID);
 	C_EncounterJournal.SetSlotFilter(Addon.SELECTED_SLOT_ID);
 
-	local instanceIndex = 1;
-	local instanceID = EJ_GetInstanceByIndex(instanceIndex, false);
+	for _, InstanceFrame in next, Addon.GetInstanceFrames() do
+		local instanceID = InstanceFrame.instanceID;
+		local mapID = InstanceFrame.mapID;
 
-	while (instanceID) do
 		EJ_SelectInstance(instanceID);
 
-		local InstanceFrame = Addon.GetInstanceFrame(instanceIndex);
+		local numLoot = 0;
+		local itemFrameIndex = 1;
+		local lootIndex = 1;
 
-		for itemIndex=1, 8 do
-			local ItemFrame = Addon.GetItemFrame(itemIndex, InstanceFrame);
+		local itemInfo = C_EncounterJournal.GetLootInfoByIndex(lootIndex);
+		while (itemInfo and itemFrameIndex <= 8) do
+			local encounterID = itemInfo.encounterID;
+			local itemSkip = false;
 
-			local itemInfo = C_EncounterJournal.GetLootInfoByIndex(itemIndex);
-			if (itemInfo == nil) then
-				ItemFrame:Hide();
-			else
-				local _, _, journalEncounterID = EJ_GetEncounterInfo(itemInfo.encounterID);
+			if (
+				(mapID == 463 and (encounterID == 2526 or encounterID == 2536 or encounterID == 2534 or encounterID == 2538)) or -- Fall brauch keine Items aus Rise
+				(mapID == 464 and (encounterID == 2521 or encounterID == 2528 or encounterID == 2535 or encounterID == 2537)) -- Rise brauch keine Items aus Fall
+			) then
+				itemSkip = true;
+			end
 
+			if (not itemSkip) then
+				local ItemFrame = Addon.GetItemFrame(itemFrameIndex, InstanceFrame);
 				local FavoriteStar = ItemFrame.FavoriteStar;
-				local SubText = ItemFrame.SubText;
 
 				local itemID = itemInfo.itemID;
-				local favoriteItem = Addon.API.GetFavorite(instanceID, itemID);
+				local favoriteItem = Addon.API.GetFavorite(mapID, itemID);
 				local isFavorite = favoriteItem ~= nil;
 
 				FavoriteStar:SetDesaturated(not isFavorite);
 				FavoriteStar:SetShown(isFavorite);
-
-				if (instanceID == 1209 and (journalEncounterID == 2521 or journalEncounterID == 2528 or journalEncounterID == 2535 or journalEncounterID == 2537)) then
-					SubText:SetText('FALL');
-				elseif (instanceID == 1209) then
-					SubText:SetText('RISE');
-				else
-					SubText:SetText('');
-				end
 
 				ItemFrame.isFavorite = isFavorite;
 				ItemFrame.link = 'item:'..itemID;
 				ItemFrame.itemID = itemID;
 				ItemFrame.Icon:SetTexture(itemInfo.icon);
 				ItemFrame:Show();
+
+				itemFrameIndex = itemFrameIndex + 1;
+				numLoot = numLoot + 1;
 			end
+
+			lootIndex = lootIndex + 1;
+			itemInfo = C_EncounterJournal.GetLootInfoByIndex(lootIndex);
 		end
 
-		local numLoot = EJ_GetNumLoot();
+		for index=itemFrameIndex, 8 do
+			local ItemFrame = Addon.GetItemFrame(index, InstanceFrame);
+			ItemFrame:Hide();
+		end
 
 		InstanceFrame.Title:SetTextColor((numLoot == 0 and GRAY_FONT_COLOR or HIGHLIGHT_FONT_COLOR):GetRGB());
 		InstanceFrame.Bg:SetDesaturated(numLoot == 0);
 		InstanceFrame:SetAlpha(numLoot == 0 and 0.8 or 1);
-
-		instanceIndex = instanceIndex+1;
-		instanceID = EJ_GetInstanceByIndex(instanceIndex, false);
 	end
 end
 Addon.API.UpdateLoot = UpdateLoot;

@@ -1,7 +1,7 @@
 local AddonName, Addon = ...;
 
 
-local function ToogleDropDownMenu(parent, ListFunction)
+local function ToggleDropDownMenu(parent, ListFunction)
 	local DropDownMenu = Addon.Frames.DropDownMenu;
 
 	if (DropDownMenu:IsShown()) then
@@ -90,7 +90,7 @@ local function ToogleDropDownMenu(parent, ListFunction)
 		DropDownMenu:Show();
 	end
 end
-Addon.API.ToogleDropDownMenu = ToogleDropDownMenu;
+Addon.API.ToggleDropDownMenu = ToggleDropDownMenu;
 
 local function CloseDropDownMenu()
 	Addon.Frames.DropDownMenu:Hide();
@@ -103,7 +103,7 @@ local function UpdateDropDownMenu()
 	local parent = Addon.SELECTED_FILTER_BUTTON;
 	local ListFunction = parent.ListFunction;
 
-	ToogleDropDownMenu(parent, ListFunction);
+	ToggleDropDownMenu(parent, ListFunction);
 end
 Addon.API.UpdateDropDownMenu = UpdateDropDownMenu;
 

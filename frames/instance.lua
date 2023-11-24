@@ -8,19 +8,22 @@ local INSTANCE_FRAMES = {};
 local ROWS = 1;
 
 
-local function CreateInstanceFrame(i)
+local function CreateInstanceFrame(mapID)
+	local index = #INSTANCE_FRAMES + 1;
+
 	local Frame = CreateFrame('Frame', nil, MainFrame, 'InsetFrameTemplate');
+	Frame.mapID = mapID;
 	Frame.ItemFrames = {};
 	Frame:SetSize(180, 90);
 
-	if (i == 1) then
+	if (index == 1) then
 		Frame:SetPoint('TOP', -110, -100);
-	elseif (mod(i, 2) == 1) then
-		Frame:SetPoint('TOP', INSTANCE_FRAMES[i - 2], 'BOTTOM', 0, -40);
+	elseif (mod(index, 2) == 1) then
+		Frame:SetPoint('TOP', INSTANCE_FRAMES[index - 2], 'BOTTOM', 0, -40);
 
 		ROWS = ROWS + 1;
 	else
-		Frame:SetPoint('LEFT', INSTANCE_FRAMES[i - 1], 'RIGHT', 40, 0);
+		Frame:SetPoint('LEFT', INSTANCE_FRAMES[index - 1], 'RIGHT', 40, 0);
 	end
 
 	local FrameBg = Frame.Bg;
@@ -38,11 +41,6 @@ local function CreateInstanceFrame(i)
 	return Frame;
 end
 
-local function GetInstanceFrame(i)
-	return INSTANCE_FRAMES[i] or CreateInstanceFrame(i);
-end
-Addon.GetInstanceFrame = GetInstanceFrame;
-
 local function GetInstanceFrames()
 	return INSTANCE_FRAMES;
 end
@@ -55,21 +53,12 @@ local function CreateInstanceFrames()
 		return;
 	end
 
-	EJ_SelectTier(mythicTierID);
-	EJ_SetDifficulty(DifficultyUtil.ID.DungeonChallenge);
+	for _, dungeon in next, Addon.API.GetSeasonDungeons() do
+		local InstanceFrame = CreateInstanceFrame(dungeon.mapID);
+		InstanceFrame.instanceID = dungeon.instanceID;
 
-	local instanceIndex = 1;
-	local instanceID, name, _, _, buttonImage = EJ_GetInstanceByIndex(instanceIndex, false);
-
-	while (instanceID) do
-		local InstanceFrame = GetInstanceFrame(instanceIndex);
-		InstanceFrame.instanceID = instanceID;
-
-		InstanceFrame.Title:SetText(name);
-		InstanceFrame.Bg:SetTexture(buttonImage);
-
-		instanceIndex = instanceIndex+1;
-		instanceID, name, _, _, buttonImage = EJ_GetInstanceByIndex(instanceIndex, false);
+		InstanceFrame.Title:SetText(dungeon.name);
+		InstanceFrame.Bg:SetTexture(dungeon.bgTexture);
 	end
 
 	MainFrame:SetHeight(100 + (ROWS * 130));

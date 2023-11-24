@@ -6,7 +6,7 @@ local MainFrame = Addon.Frames.Main;
 
 
 local function OnClick(self)
-	Addon.API.ToogleDropDownMenu(self, self.ListFunction);
+	Addon.API.ToggleDropDownMenu(self, self.ListFunction);
 
 	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 end

@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.4.0
+* "Dawn of the Infinite" is now displayed as 2 dungeons! Unfortunately, this requires resetting the favorites for this dungeon...
+
 ## 1.3.6
 * An issue has been fixed where the item level of some items was not displayed correctly, and Divergent items now have their bonus effect!
 * Added a small text for the mega dungeon to better understand from which section you obtain this item. Previously favorited items must be favored again for the text to be displayed.

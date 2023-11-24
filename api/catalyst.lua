@@ -157,7 +157,7 @@ local function UpdateCatalystLoot()
 	local ITEM_LIST = {};
 
 	if (Addon.SELECTED_SLOT_ID == -1) then
-		ITEM_LIST = Addon.API.GetInstanceFavorites(CatalystPopout.instanceID) or {};
+		ITEM_LIST = Addon.API.GetFavorites(CatalystPopout.instanceID) or {};
 	elseif (ITEMS_TO_CHANGE[Addon.SELECTED_SLOT_ID] ~= nil) then
 		local itemInfo = ITEMS_TO_CHANGE[Addon.SELECTED_SLOT_ID][Addon.SELECTED_CLASS_ID];
 

@@ -1,4 +1,5 @@
 ﻿local AddonName, Addon = ...;
+Addon.API = {};
 
 
 local clientLocale = GetLocale();
@@ -16,7 +17,9 @@ if (clientLocale == 'deDE') then
 		['Champion'] = 'Champion',
 		['Hero'] = 'Held',
 		['Great Vault'] = 'Große Schatzkammer',
-		['Revival Catalyst'] = 'Belebungskatalysator'
+		['Revival Catalyst'] = 'Belebungskatalysator',
+		['Dämmerung des Ewigen: Galakronds Sturz'] = 'Galakronds Sturz',
+		['Dämmerung des Ewigen: Murozonds Erhebung'] = 'Murozonds Erhebung'
 	};
 elseif (clientLocale == 'esES' or clientLocale == 'esMX') then
 	translation = {
@@ -28,7 +31,9 @@ elseif (clientLocale == 'esES' or clientLocale == 'esMX') then
 		['Champion'] = 'Campeón',
 		['Hero'] = 'Héroe',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
-		['Revival Catalyst'] = 'Catalizador de reanimación'
+		['Revival Catalyst'] = 'Catalizador de reanimación',
+		['El Alba del Infinito: Caída de Galakrond'] = 'Caída de Galakrond',
+		['El Alba del Infinito: El Ascenso de Murozond'] = 'Ascenso de Murozond'
 	};
 elseif (clientLocale == 'frFR') then
 	translation = {
@@ -40,7 +45,9 @@ elseif (clientLocale == 'frFR') then
 		['Champion'] = 'Champion',
 		['Hero'] = 'Héros',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
-		['Revival Catalyst'] = 'Catalyseur de renouveau'
+		['Revival Catalyst'] = 'Catalyseur de renouveau',
+		['Aube de l’Infini : Repos de Galakrond'] = 'Repos de Galakrond',
+		['Aube de l’Infini : cime de Murozond'] = 'cime de Murozond'
 	};
 elseif (clientLocale == 'itIT') then
 	translation = {
@@ -52,7 +59,9 @@ elseif (clientLocale == 'itIT') then
 		['Champion'] = 'Campione',
 		['Hero'] = 'Eroe',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
-		['Revival Catalyst'] = 'Catalizzatore del Ripristino'
+		['Revival Catalyst'] = 'Catalizzatore del Ripristino',
+		['Alba degli Infiniti: Caduta di Galakrond'] = 'Caduta di Galakrond',
+		['Alba degli Infiniti: Ascesa di Murozond'] = 'Ascesa di Murozond'
 	};
 elseif (clientLocale == 'ptBR') then
 	translation = {
@@ -64,7 +73,9 @@ elseif (clientLocale == 'ptBR') then
 		['Champion'] = 'Campeão',
 		['Hero'] = 'Herói',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
-		['Revival Catalyst'] = 'Catalisador de Revivescência'
+		['Revival Catalyst'] = 'Catalisador de Revivescência',
+		['Despertar do Infinito: Ruína de Galakrond'] = 'Ruína de Galakrond',
+		['Despertar do Infinito: Ascensão de Murozond'] = 'Ascensão de Murozond'
 	};
 elseif (clientLocale == 'ruRU') then
 	translation = {
@@ -114,6 +125,11 @@ elseif (clientLocale == 'zhTW') then
 		['Hero'] = '英雄',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
 		['Revival Catalyst'] = '复苏化生台'
+	};
+else
+	translation = {
+		['Dawn of the Infinite: Galakrond\'s Fall'] = 'Galakrond\'s Fall',
+		['Dawn of the Infinite: Murozond\'s Rise'] = 'Murozond\'s Rise'
 	};
 end
 
