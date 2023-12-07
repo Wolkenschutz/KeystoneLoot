@@ -141,7 +141,7 @@ local ITEMS_TO_CHANGE = {
 
 
 local function GetCatalystItem(slotType)
-	return ITEMS_TO_CHANGE[slotType] and ITEMS_TO_CHANGE[slotType][Addon.SELECTED_CLASS_ID];
+	return ITEMS_TO_CHANGE[slotType] and ITEMS_TO_CHANGE[slotType][KEYSTONE_LOOT_CHAR_DB.SELECTED_CLASS_ID];
 end
 Addon.API.GetCatalystItem = GetCatalystItem;
 
@@ -156,10 +156,10 @@ local function UpdateCatalystLoot()
 	local numIcons = 0;
 	local ITEM_LIST = {};
 
-	if (Addon.SELECTED_SLOT_ID == -1) then
+	if (KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID == -1) then
 		ITEM_LIST = Addon.API.GetFavorites(CatalystPopout.mapID) or {};
-	elseif (ITEMS_TO_CHANGE[Addon.SELECTED_SLOT_ID] ~= nil) then
-		local itemInfo = ITEMS_TO_CHANGE[Addon.SELECTED_SLOT_ID][Addon.SELECTED_CLASS_ID];
+	elseif (ITEMS_TO_CHANGE[KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID] ~= nil) then
+		local itemInfo = ITEMS_TO_CHANGE[KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID][KEYSTONE_LOOT_CHAR_DB.SELECTED_CLASS_ID];
 
 		ITEM_LIST = {
 			[itemInfo.itemID] = { icon = itemInfo.icon }

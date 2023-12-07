@@ -3,11 +3,11 @@ local AddonName, Addon = ...;
 
 local Translate = Addon.API.Translate;
 
-local SELECTED_ITEMLEVEL_CATEGORY = 'veteran';
-local SELECTED_ITEMLEVEL_RANK = 1;
+local DEFAULT_CATEGORY = 'veteran';
+local DEFAULT_RANK = 1;
 
 Addon.SELECTED_ITEMLEVEL = 441;
-Addon.SELECTED_ITEMLEVEL_BONUSID = 'veteran-1';
+Addon.SELECTED_ITEMLEVEL_BONUSID = DEFAULT_CATEGORY..'-'..DEFAULT_RANK;
 
 local DROPDOWN_CATEGORIES = {
 	{ category = 'veteran', text = Translate['Veteran'] },
@@ -54,19 +54,47 @@ local DROPDOWN_CATEGORY_RANKS = {
 };
 
 
-local function SetFilter(category, index)
-	local info = DROPDOWN_CATEGORY_RANKS[category][index];
+local function SetFilterText(self)
+	local SELECTED_ITEMLEVEL_CATEGORY = KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY;
+	local SELECTED_ITEMLEVEL_RANK = KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK;
+
+	local info = DROPDOWN_CATEGORY_RANKS[SELECTED_ITEMLEVEL_CATEGORY][SELECTED_ITEMLEVEL_RANK];
 
 	Addon.SELECTED_ITEMLEVEL = info.itemLevel;
 	Addon.SELECTED_ITEMLEVEL_BONUSID = info.bonusID;
 
-	SELECTED_ITEMLEVEL_CATEGORY = category;
-	SELECTED_ITEMLEVEL_RANK = index;
+	local text = info.text;
 
-	Addon.API.SetDropDownMenuText(info.text);
+	if (self == nil) then
+		Addon.API.SetDropDownMenuText(text);
+	else
+		self.Text:SetText(text);
+	end
+	
 end
 
-local function InitDropDownMenu()
+local function SetFilter(category, index)
+	KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY = category;
+	KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK = index;
+
+	SetFilterText();
+end
+
+local function InitFunction(self)
+	if (KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY == nil) then
+		KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY = DEFAULT_CATEGORY;
+	end
+
+	if (KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK == nil) then
+		KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK = DEFAULT_RANK;
+	end
+
+	SetFilterText(self);
+end
+
+local function ListFunction()
+	local SELECTED_ITEMLEVEL_CATEGORY = KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY;
+	local SELECTED_ITEMLEVEL_RANK = KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK;
 	local list = {};
 
 	local numMenuList = #DROPDOWN_CATEGORIES;
@@ -114,6 +142,5 @@ local function InitDropDownMenu()
 end
 
 
-local Filter = Addon.CreateFilterButton('itemLevel', InitDropDownMenu);
+local Filter = Addon.CreateFilterButton('itemLevel', ListFunction, InitFunction);
 Filter:SetPoint('TOP', 120, -35);
-Filter:SetText(DROPDOWN_CATEGORY_RANKS[SELECTED_ITEMLEVEL_CATEGORY][SELECTED_ITEMLEVEL_RANK].text);

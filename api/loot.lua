@@ -9,7 +9,7 @@ local function UpdateLoot()
 
 	Addon.API.UpdateCatalystLoot();
 
-	if (Addon.SELECTED_SLOT_ID == -1) then
+	if (KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID == -1) then
 		for _, InstanceFrame in next, Addon.GetInstanceFrames() do
 			local numLoot = 0;
 			local instanceFavorites = Addon.API.GetFavorites(InstanceFrame.mapID);
@@ -53,8 +53,8 @@ local function UpdateLoot()
 	EJ_SelectTier(mythicTierID);
 	EJ_SetDifficulty(DifficultyUtil.ID.DungeonChallenge);
 
-	EJ_SetLootFilter(Addon.SELECTED_CLASS_ID, Addon.SELECTED_SPEC_ID);
-	C_EncounterJournal.SetSlotFilter(Addon.SELECTED_SLOT_ID);
+	EJ_SetLootFilter(KEYSTONE_LOOT_CHAR_DB.SELECTED_CLASS_ID, KEYSTONE_LOOT_CHAR_DB.SELECTED_SPEC_ID);
+	C_EncounterJournal.SetSlotFilter(KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID);
 
 	for _, InstanceFrame in next, Addon.GetInstanceFrames() do
 		local instanceID = InstanceFrame.instanceID;

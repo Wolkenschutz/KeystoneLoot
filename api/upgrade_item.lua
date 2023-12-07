@@ -28,7 +28,7 @@ local ADD_SPECIAL_BONUSID = {
 };
 
 local function UpgradeItemTo(targetItemLink, targetItemLevel, targetBonusID)
-	if (Addon.SELECTED_SLOT_ID == Enum.ItemSlotFilterType.Other) then
+	if (KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID == Enum.ItemSlotFilterType.Other) then
 		return targetItemLink;
 	end
 
@@ -39,7 +39,7 @@ local function UpgradeItemTo(targetItemLink, targetItemLevel, targetBonusID)
 		return;
 	end
 
-	local specID = Addon.SELECTED_SPEC_ID;
+	local specID = KEYSTONE_LOOT_CHAR_DB.SELECTED_SPEC_ID;
 	local itemLink = 'item:'..itemID..'::::::::70:'..specID..'::16:5:1674';
 
 	local diffItemLevel = targetItemLevel - baseItemLevel;

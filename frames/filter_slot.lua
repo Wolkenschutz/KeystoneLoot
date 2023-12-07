@@ -1,7 +1,6 @@
 local AddonName, Addon = ...;
 
 
-Addon.SELECTED_SLOT_ID = -1;
 
 
 local SLOT_NAME = {
@@ -29,15 +28,37 @@ end
 table.sort(SortedFilterList);
 
 
-local function SetFilter(slotID)
-	Addon.SELECTED_SLOT_ID = slotID
-	Addon.API.UpdateLoot();
+local function SetFilterText(self)
+	local SELECTED_SLOT_ID = KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID;
 
-	Addon.API.SetDropDownMenuText(slotID == -1 and FAVORITES or SLOT_NAME[slotID]);
+	local text = SELECTED_SLOT_ID == -1 and FAVORITES or SLOT_NAME[SELECTED_SLOT_ID];
+
+	if (self == nil) then
+		Addon.API.SetDropDownMenuText(text);
+	else
+		self.Text:SetText(text);
+	end
+	
 end
 
-local function InitDropDownMenu()
-	local SELECTED_SLOT_ID = Addon.SELECTED_SLOT_ID;
+local function SetFilter(slotID)
+	KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID = slotID;
+
+	Addon.API.UpdateLoot();
+
+	SetFilterText();
+end
+
+local function InitFunction(self)
+	if (KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID == nil) then
+		KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID = -1;
+	end
+
+	SetFilterText(self);
+end
+
+local function ListFunction()
+	local SELECTED_SLOT_ID = KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID;
 	local list = {};
 
 	local info = {};
@@ -66,6 +87,5 @@ local function InitDropDownMenu()
 end
 
 
-local Filter = Addon.CreateFilterButton('slot', InitDropDownMenu);
+local Filter = Addon.CreateFilterButton('slot', ListFunction, InitFunction);
 Filter:SetPoint('TOP', 0, -35);
-Filter:SetText(FAVORITES);

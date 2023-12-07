@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.4.1
+* The last selection will now be saved.
+
 ## 1.4.0
 * "Dawn of the Infinite" is now displayed as 2 dungeons! Unfortunately, this requires resetting the favorites for this dungeon...
 

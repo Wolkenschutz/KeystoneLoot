@@ -44,7 +44,7 @@ local function FixFavDB()
 		return;
 	end
 
-	local classSlug = Addon.SELECTED_CLASS_ID..':'..Addon.SELECTED_SPEC_ID;
+	local classSlug = KEYSTONE_LOOT_CHAR_DB.SELECTED_CLASS_ID..':'..KEYSTONE_LOOT_CHAR_DB.SELECTED_SPEC_ID;
 
 	local tempDB = {};
 	tempDB.currSeasion = KEYSTONE_LOOT_CHAR_DB.currSeasion;
@@ -80,13 +80,6 @@ local function OnShow(self)
 	if (not onlyOnce) then
 		onlyOnce = true;
 
-		local _, _, classID = UnitClass('player');
-		local specID = (GetSpecializationInfo(GetSpecialization()));
-
-		Addon.SELECTED_CLASS_ID = classID;
-		Addon.SELECTED_SPEC_ID = specID;
-
-		Addon.SetClassFilter(classID, specID);
 		Addon.CreateInstanceFrames();
 
 		Addon.API.CleanUpDatabase();

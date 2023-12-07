@@ -14,7 +14,7 @@ local function OnEnter(self)
 	GameTooltip:Show();
 
 	local _, _, classID = UnitClass('player');
-	if (not self.isFavorite and (Addon.SELECTED_CLASS_ID == classID or Addon.SELECTED_SLOT_ID == -1)) then
+	if (not self.isFavorite and (KEYSTONE_LOOT_CHAR_DB.SELECTED_CLASS_ID == classID or KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID == -1)) then
 		local FavoriteStar = self.FavoriteStar;
 
 		FavoriteStar:SetDesaturated(true);
@@ -53,7 +53,7 @@ local function OnClick(self)
 
 	local _, _, classID = UnitClass('player');
 	local db = Addon.API.GetFavorite(mapID, itemID);
-	if (db == nil and (Addon.SELECTED_CLASS_ID == classID or Addon.SELECTED_SLOT_ID == -1)) then
+	if (db == nil and (KEYSTONE_LOOT_CHAR_DB.SELECTED_CLASS_ID == classID or KEYSTONE_LOOT_CHAR_DB.SELECTED_SLOT_ID == -1)) then
 		self.isFavorite = true;
 		self.FavoriteStar:SetDesaturated(false);
 
