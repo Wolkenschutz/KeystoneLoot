@@ -12,7 +12,6 @@ if (clientLocale == 'deDE') then
 		['Right click: Open settings'] = 'Rechtsklick: Einstellungen öffnen',
 		['Enable Minimap Button'] = 'Minimap-Button aktivieren',
 		['%s (%s Season %d)'] = '%s (%s Saison %d)',
-		['Made with LOVE in Germany'] = 'Mit LIEBE in Deutschland hergestellt',
 		['Veteran'] = 'Veteran',
 		['Champion'] = 'Champion',
 		['Hero'] = 'Held',
