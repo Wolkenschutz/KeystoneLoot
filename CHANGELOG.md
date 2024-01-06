@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.4.2
+* A bug has been fixed that caused items from "Rise" to appear in "Fall".
+
 ## 1.4.1
 * The last selection will now be saved.
 

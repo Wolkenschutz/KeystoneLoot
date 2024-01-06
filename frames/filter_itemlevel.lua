@@ -6,9 +6,6 @@ local Translate = Addon.API.Translate;
 local DEFAULT_CATEGORY = 'veteran';
 local DEFAULT_RANK = 1;
 
-Addon.SELECTED_ITEMLEVEL = 441;
-Addon.SELECTED_ITEMLEVEL_BONUSID = DEFAULT_CATEGORY..'-'..DEFAULT_RANK;
-
 local DROPDOWN_CATEGORIES = {
 	{ category = 'veteran', text = Translate['Veteran'] },
 	{ category = 'champion', text = Translate['Champion'] },
@@ -55,10 +52,19 @@ local DROPDOWN_CATEGORY_RANKS = {
 
 
 local function SetFilterText(self)
-	local SELECTED_ITEMLEVEL_CATEGORY = KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY;
-	local SELECTED_ITEMLEVEL_RANK = KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK;
+	local info = DROPDOWN_CATEGORY_RANKS[KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY];
+	if (info == nil) then
+		KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY = DEFAULT_CATEGORY;
+		SetFilterText(self);
+		return;
+	end
 
-	local info = DROPDOWN_CATEGORY_RANKS[SELECTED_ITEMLEVEL_CATEGORY][SELECTED_ITEMLEVEL_RANK];
+	info = info[KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK];
+	if (info == nil) then
+		KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK = DEFAULT_RANK;
+		SetFilterText(self);
+		return;
+	end
 
 	Addon.SELECTED_ITEMLEVEL = info.itemLevel;
 	Addon.SELECTED_ITEMLEVEL_BONUSID = info.bonusID;
