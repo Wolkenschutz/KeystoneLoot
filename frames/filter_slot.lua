@@ -89,3 +89,5 @@ end
 
 local Filter = Addon.CreateFilterButton('slot', ListFunction, InitFunction);
 Filter:SetPoint('TOP', 0, -35);
+
+Addon.Frames.FilterSlotButton = Filter;

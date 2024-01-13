@@ -72,7 +72,7 @@ local function UpdateLoot()
 			local itemSkip = false;
 
 			if (
-				(mapID == 463 and (encounterID == 2526 or encounterID == 2536 or encounterID == 2533 or encounterID == 2538)) or -- Fall brauch keine Items aus Rise
+				(mapID == 463 and (encounterID == 2526 or encounterID == 2536 or encounterID == 2533 or encounterID == 2534 or encounterID == 2538)) or -- Fall brauch keine Items aus Rise
 				(mapID == 464 and (encounterID == 2521 or encounterID == 2528 or encounterID == 2535 or encounterID == 2537)) -- Rise brauch keine Items aus Fall
 			) then
 				itemSkip = true;

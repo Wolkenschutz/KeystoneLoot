@@ -150,3 +150,5 @@ end
 
 local Filter = Addon.CreateFilterButton('itemLevel', ListFunction, InitFunction);
 Filter:SetPoint('TOP', 120, -35);
+
+Addon.Frames.FilterItemLevelButton = Filter;

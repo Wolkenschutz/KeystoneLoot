@@ -6,61 +6,6 @@ local Translate = Addon.API.Translate;
 local onlyOnce = false;
 
 
-local function FixMapIdDB()
-	if (KEYSTONE_LOOT_CHAR_DB.mapIdFix) then
-		return;
-	end
-
-	local tempDB = {};
-	tempDB.currSeasion = KEYSTONE_LOOT_CHAR_DB.currSeasion;
-	tempDB.catalyst = KEYSTONE_LOOT_CHAR_DB.catalyst;
-
-	for instanceID, data in next, KEYSTONE_LOOT_CHAR_DB do
-		if (instanceID == 556) then
-			tempDB[168] = data
-		elseif (instanceID == 762) then
-			tempDB[198] = data
-		elseif (instanceID == 740) then
-			tempDB[199] = data
-		elseif (instanceID == 968) then
-			tempDB[244] = data
-		elseif (instanceID == 1021) then
-			tempDB[248] = data
-		elseif (instanceID == 65) then
-			tempDB[456] = data
-		elseif (instanceID == 1209) then
-			-- reset :<
-		else
-			tempDB[instanceID] = data;
-		end
-	end
-
-	KEYSTONE_LOOT_CHAR_DB = tempDB;
-	KEYSTONE_LOOT_CHAR_DB.mapIdFix = true
-end
-
-local function FixFavDB()
-	if (KEYSTONE_LOOT_CHAR_DB.favFix) then
-		return;
-	end
-
-	local classSlug = KEYSTONE_LOOT_CHAR_DB.SELECTED_CLASS_ID..':'..KEYSTONE_LOOT_CHAR_DB.SELECTED_SPEC_ID;
-
-	local tempDB = {};
-	tempDB.currSeasion = KEYSTONE_LOOT_CHAR_DB.currSeasion;
-
-	for instanceID, data in next, KEYSTONE_LOOT_CHAR_DB do
-		if (type(instanceID) == 'number' or instanceID == 'catalyst') then
-			tempDB[instanceID] = tempDB[instanceID] or {};
-			tempDB[instanceID][classSlug] = tempDB[instanceID][classSlug] or {};
-			tempDB[instanceID][classSlug] = data
-		end
-	end
-
-	KEYSTONE_LOOT_CHAR_DB = tempDB;
-	KEYSTONE_LOOT_CHAR_DB.favFix = true
-end
-
 local function UpdateTitle(self)
 	local currentSeason = C_MythicPlus.GetCurrentUIDisplaySeason();
 	if (not currentSeason) then
@@ -83,10 +28,12 @@ local function OnShow(self)
 		Addon.CreateInstanceFrames();
 
 		Addon.API.CleanUpDatabase();
-		FixFavDB();
-		FixMapIdDB();
 
 		UpdateTitle(self);
+
+		Addon.Frames.FilterClassButton:InitFuntion();
+		Addon.Frames.FilterItemLevelButton:InitFuntion();
+		Addon.Frames.FilterSlotButton:InitFuntion();
 	end
 
 	Addon.API.UpdateLoot();

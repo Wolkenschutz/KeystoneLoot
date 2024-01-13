@@ -11,13 +11,6 @@ local function OnClick(self)
 	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 end
 
-local function OnShow(self)
-	self:InitFuntion();
-
-	self.InitFuntion = nil;
-	self:SetScript('OnShow', nil);
-end
-
 
 local function CreateFilterButton(filterType, ListFunction, InitFuntion)
 	local Button = CreateFrame('Button', nil, MainFrame, 'UIMenuButtonStretchTemplate');
@@ -28,7 +21,6 @@ local function CreateFilterButton(filterType, ListFunction, InitFuntion)
 	Button:SetSize(110, 24);
 	Button:SetPoint('TOP', -55, -35);
 	Button:SetScript('OnClick', OnClick);
-	Button:SetScript('OnShow', OnShow);
 
 	local Icon = Button:CreateTexture(nil, 'ARTWORK');
 	Button.Icon = Icon;

@@ -119,3 +119,5 @@ end
 
 local Filter = Addon.CreateFilterButton('class', ListFunction, InitFunction);
 Filter:SetPoint('TOP', -120, -35);
+
+Addon.Frames.FilterClassButton = Filter;

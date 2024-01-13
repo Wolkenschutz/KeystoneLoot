@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.3
+* Another bug has been fixed that caused items from "Rise" to appear in "Fall".
+* Fixed a minor issue when it was a new character.
+
 ## 1.4.2
 * A bug has been fixed that caused items from "Rise" to appear in "Fall".
 
