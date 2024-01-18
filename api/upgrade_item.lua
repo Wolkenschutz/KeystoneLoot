@@ -40,23 +40,29 @@ local function UpgradeItemTo(targetItemLink, targetItemLevel, targetBonusID)
 	end
 
 	local specID = KEYSTONE_LOOT_CHAR_DB.SELECTED_SPEC_ID;
-	local itemLink = 'item:'..itemID..'::::::::70:'..specID..'::16:5:1674';
+	local itemLink = '';
+	local numBonusIds = 1;
 
 	local diffItemLevel = targetItemLevel - baseItemLevel;
 	local bonusLevelID = ADD_ITEMLEVEL_BONUSID[diffItemLevel];
 	if (bonusLevelID ~= nil) then
 		itemLink = itemLink..':'..bonusLevelID;
+		numBonusIds = numBonusIds + 1;
 	end
 
 	local bonusTitleID = ADD_SUBTITLE_BONUSID[targetBonusID];
 	if (bonusTitleID ~= nil) then
 		itemLink = itemLink..':'..bonusTitleID;
+		numBonusIds = numBonusIds + 1;
 	end
 
 	local bonusSpecialID = ADD_SPECIAL_BONUSID[itemID];
 	if (bonusSpecialID ~= nil) then
 		itemLink = itemLink..':'..bonusSpecialID;
+		numBonusIds = numBonusIds + 1;
 	end
+
+	itemLink = 'item:'..itemID..'::::::::70:'..specID..'::8:'..numBonusIds..':1674'..itemLink;
 
 	return itemLink;
 end

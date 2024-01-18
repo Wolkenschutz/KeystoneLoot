@@ -12,7 +12,7 @@ Addon.API.GetMythicTierID = GetMythicTierID;
 
 local ALL_SEASON_DUNGEONS;
 local function GetSeasonDungeons()
-	if (ALL_SEASON_DUNGEONS ~= nil) then
+	if (ALL_SEASON_DUNGEONS ~= nil and #ALL_SEASON_DUNGEONS > 0) then
 		return ALL_SEASON_DUNGEONS;
 	end
 

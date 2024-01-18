@@ -25,8 +25,6 @@ local function OnShow(self)
 	if (not onlyOnce) then
 		onlyOnce = true;
 
-		Addon.CreateInstanceFrames();
-
 		Addon.API.CleanUpDatabase();
 
 		UpdateTitle(self);
@@ -34,6 +32,11 @@ local function OnShow(self)
 		Addon.Frames.FilterClassButton:InitFuntion();
 		Addon.Frames.FilterItemLevelButton:InitFuntion();
 		Addon.Frames.FilterSlotButton:InitFuntion();
+	end
+
+	-- FIXME: BUG? Ab und zu werden keine Instanzen angezeigt...
+	if (not Addon.Frames.NoSeason:IsShown() and #Addon.GetInstanceFrames() == 0) then
+		Addon.CreateInstanceFrames();
 	end
 
 	Addon.API.UpdateLoot();
