@@ -1,4 +1,4 @@
-﻿local AddonName, Addon = ...;
+local AddonName, Addon = ...;
 Addon.API = {};
 
 
@@ -82,12 +82,14 @@ elseif (clientLocale == 'ruRU') then
 		['Right click: Open settings'] = 'ПКМ: Открыть настройки',
 		['Enable Minimap Button'] = 'Включить кнопку миникарты',
 		['%s (%s Season %d)'] = '%s (%s сезон %d)',
-		['Made with LOVE in Germany'] = 'Сделано с ЛЮБОВЬЮ в Германии',
 		['Veteran'] = 'Ветеран',
 		['Champion'] = 'Защитник',
 		['Hero'] = 'Герой',
 		['Great Vault'] = RATED_PVP_WEEKLY_VAULT,
-		['Revival Catalyst'] = 'Катализатор возрождения'
+		['Revival Catalyst'] = 'Катализатор возрождения',
+		['Made with LOVE in Germany'] = 'Keystone Loot © 2024',
+		['Рассвет Бесконечности: падение Галакронда'] = 'Падение Галакронда',
+		['Рассвет Бесконечности: подъем Дорнозму'] = 'Подъем Дорнозму'
 	};
 elseif (clientLocale == 'koKR') then
 	translation = {
