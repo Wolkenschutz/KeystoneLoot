@@ -1,0 +1,21 @@
+if (GetLocale() ~= 'ptBR') then
+    return;
+end
+
+local AddonName, Addon = ...;
+local Translate = Addon.Translate;
+
+
+Translate['Left click: Open overview'] = 'Clique esquerdo: Abrir visão geral';
+Translate['Right click: Open settings'] = 'Clique direito: Abrir configurações';
+Translate['Enable Minimap Button'] = 'Ativar botão do minimapa';
+Translate['Enable Loot Reminder'] = 'Ativar Lembrete de Saque';
+Translate['%s (%s Season %d)'] = '%s (%s Série %d)';
+Translate['Veteran'] = 'Veterano';
+Translate['Champion'] = 'Campeão';
+Translate['Hero'] = 'Herói';
+Translate['Great Vault'] = RATED_PVP_WEEKLY_VAULT;
+Translate['Revival Catalyst'] = 'Catalisador de Revivescência';
+Translate['Despertar do Infinito: Ruína de Galakrond'] = 'Ruína de Galakrond';
+Translate['Despertar do Infinito: Ascensão de Murozond'] = 'Ascensão de Murozond';
+Translate['Correct loot specialization set?'] = 'Configurar a especialização de saque correta?';

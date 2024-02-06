@@ -1,35 +1,54 @@
 ## Interface: 100205
-## Title: |cff9d5db8Keystone Loot|r
+## Title: |cff9d5db8KeystoneLoot|r
 ## Notes: Shows the items from the mythic plus instances in a compact overview
 ## Notes-ruRU: Компактный аддон, который показывает уровни предметов из подземелий М+
 ## Author: Selina Ruesch
 ## X-Email: selina.ruesch@gmail.com
-## Version: 1.4.4
+## Version: 1.5.0
 ## IconTexture: Interface\Icons\INV_Relics_Hourglass_02
-## SavedVariables: KEYSTONE_LOOT_DB
-## SavedVariablesPerCharacter: KEYSTONE_LOOT_CHAR_DB
+## SavedVariables: KEYSTONELOOT_DB
+## SavedVariablesPerCharacter: KEYSTONELOOT_CHAR_DB
 
-api/locale.lua
-api/util.lua
-api/loot.lua
-api/favorite.lua
-api/upgrade_item.lua
-api/dropdown.lua
-api/catalyst.lua
+locale\_core.lua
+locale\deDE.lua
+locale\enUS.lua
+locale\esES.lua
+locale\frFR.lua
+locale\itIT.lua
+locale\koKR.lua
+locale\ptBR.lua
+locale\ruRU.lua
+locale\zhCN.lua
+locale\zhTW.lua
 
-frames/main.lua
-frames/instance.lua
-frames/filter.lua
-frames/filter_class.lua
-frames/filter_slot.lua
-frames/filter_itemlevel.lua
-frames/item.lua
-frames/minimap.lua
-frames/dropdown.lua
-frames/catalyst.lua
+api\util.lua
+api\database.lua
+api\gamedata.lua
+api\overview.lua
+api\upgrade_item.lua
+api\filter.lua
+api\dropdown.lua
+api\catalyst.lua
+api\dungeon.lua
+api\dungeon_item.lua
+api\loot_reminder.lua
+api\specialization.lua
 
-frames/settings/register.lua
-frames/settings/header.lua
-frames/settings/minimap.lua
+frames\overview.lua
+frames\minimap.lua
+frames\dropdown.lua
+frames\catalyst.lua
+frames\filter.lua
+frames\loot_reminder.lua
+frames\dungeon\main.lua
+frames\dungeon\filter_class.lua
+frames\dungeon\filter_slot.lua
+frames\dungeon\filter_itemlevel.lua
+frames\raid\main.lua
+
+frames\settings\register.lua
+frames\settings\header.lua
+frames\settings\minimap.lua
+frames\settings\loot_reminder.lua
 
 core.lua

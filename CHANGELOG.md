@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.0
+* New feature! You will now be notified that you could change your loot specialization because you have favorited items for a different specialization.
+* "All Specializations" has been removed due to the new feature.
+* The first steps for raids are done. (not finished yet)
+
 ## 1.4.4
 * An error with the 'PeriodicTable' library has been fixed.
 * TOC bump.

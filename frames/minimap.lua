@@ -1,10 +1,14 @@
 local AddonName, Addon = ...;
 
 
-local Translate = Addon.API.Translate;
+local MinimapButton = {};
+Addon.MinimapButton = MinimapButton;
+
+local Translate = Addon.Translate;
+
 
 -- https://wowwiki-archive.fandom.com/wiki/USERAPI_GetMinimapShape
-local MINIMAP_SHAPES = {
+local _minimapShapes = {
 	['ROUND'] = { true, true, true, true },
 	['SQUARE'] = { false, false, false, false },
 	['CORNER-TOPLEFT'] = { false, false, false, true },
@@ -42,7 +46,7 @@ local function GetPosition(position, radius)
 	local height = (Minimap:GetHeight() / 2) + radius;
 
 	local minimapShape = GetMinimapShape and GetMinimapShape() or 'ROUND';
-	if (MINIMAP_SHAPES[minimapShape][q]) then
+	if (_minimapShapes[minimapShape][q]) then
 		x = cos * width;
 		y = sin * height;
 	else
@@ -53,13 +57,11 @@ local function GetPosition(position, radius)
 	return 'CENTER', x, y;
 end
 
-local function UpdateMinimapButton()
+function MinimapButton:Update()
 	local Frame = Addon.Frames.MinimapButton;
-
-	Frame:SetShown(KEYSTONE_LOOT_DB.minimapButtonEnabled);
-	Frame:SetPoint(GetPosition(KEYSTONE_LOOT_DB.minimapButtonPosition, 5));
+	Frame:SetShown(Addon.Database:IsMinimapEnabled());
+	Frame:SetPoint(GetPosition(Addon.Database:GetMinimapPosition(), 5));
 end
-Addon.UpdateMinimapButton = UpdateMinimapButton;
 
 
 local function OnUpdate(self, elapsed)
@@ -72,14 +74,13 @@ local function OnUpdate(self, elapsed)
 
 	local position = math.deg(math.atan2(cursorY - minimapY, cursorX - minimapX)) % 360;
 
-	KEYSTONE_LOOT_DB.minimapButtonPosition = position;
-
+	Addon.Database:SetMinimapPosition(position);
 	self:SetPoint(GetPosition(position, 5));
 end
 
 local function OnEnter(self)
 	GameTooltip:SetOwner(self, 'ANCHOR_LEFT');
-	GameTooltip:SetText('Keystone Loot', 1, 1, 1);
+	GameTooltip:SetText('KeystoneLoot', 1, 1, 1);
 	GameTooltip:AddLine(Translate['Left click: Open overview']);
 	GameTooltip:AddLine(Translate['Right click: Open settings']);
 	GameTooltip:Show();
@@ -112,7 +113,7 @@ end
 
 local function OnClick(self, button)
 	if (button == 'RightButton') then
-		Settings.OpenToCategory(Addon.SETTINGS_ID);
+		Settings.OpenToCategory(Addon.Settings.ID);
 		return;
 	end
 
@@ -120,7 +121,7 @@ local function OnClick(self, button)
 end
 
 
-local Frame = CreateFrame('Button', AddonName..'MinimapButton', Minimap);
+local Frame = CreateFrame('Button', 'KeystoneLootMinimapButton', Minimap);
 Addon.Frames.MinimapButton = Frame;
 
 Frame:SetSize(31, 31);
@@ -160,7 +161,7 @@ IconBorder:SetTexture('Interface\\Minimap\\MiniMap-TrackingBorder');
 
 
 AddonCompartmentFrame:RegisterAddon({
-	text = 'Keystone Loot',
+	text = 'KeystoneLoot',
 	icon = 'Interface\\Icons\\INV_Relics_Hourglass_02',
 	notCheckable = true,
 	registerForAnyClick = true,
