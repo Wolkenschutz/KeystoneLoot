@@ -1,9 +1,10 @@
 local AddonName, Addon = ...;
 
 
-local Translate = Addon.Translate;
 local Dungeon = {};
 Addon.Dungeon = Dungeon;
+
+local Translate = Addon.Translate;
 
 local _dungeonFrames = {};
 local _rows = 1;

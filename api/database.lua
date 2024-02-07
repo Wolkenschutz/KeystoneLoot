@@ -1,5 +1,6 @@
 local AddonName, Addon = ...;
 
+
 local Database = {};
 Addon.Database = Database;
 
@@ -115,8 +116,16 @@ function Database:CheckDB()
 	if (dbVersion > KEYSTONELOOT_DB.dbVersion) then
 		if (KEYSTONELOOT_DB.dbVersion == 0) then
 			KEYSTONELOOT_DB.minimapButtonPosition = KEYSTONE_LOOT_DB and KEYSTONE_LOOT_DB.minimapButtonPosition;
-			KEYSTONELOOT_DB.minimapButtonEnabled = KEYSTONE_LOOT_DB and KEYSTONE_LOOT_DB.minimapButtonEnabled;
-			KEYSTONELOOT_DB.lootReminderEnabled = KEYSTONE_LOOT_DB and KEYSTONE_LOOT_DB.lootReminderEnabled;
+			if (KEYSTONE_LOOT_DB and KEYSTONE_LOOT_DB.minimapButtonEnabled ~= nil) then
+				KEYSTONELOOT_DB.minimapButtonEnabled = KEYSTONE_LOOT_DB.minimapButtonEnabled;
+			else
+				KEYSTONELOOT_DB.minimapButtonEnabled = true;
+			end
+			if (KEYSTONE_LOOT_DB and KEYSTONE_LOOT_DB.lootReminderEnabled ~= nil) then
+				KEYSTONELOOT_DB.lootReminderEnabled = KEYSTONE_LOOT_DB.lootReminderEnabled;
+			else
+				KEYSTONELOOT_DB.lootReminderEnabled = true;
+			end
 
 			KEYSTONE_LOOT_DB = nil;
 		end
