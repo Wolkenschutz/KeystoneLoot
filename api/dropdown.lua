@@ -1,33 +1,120 @@
 local AddonName, Addon = ...;
 
 
-local function ToggleDropDownMenu(parent, ListFunction)
-	local DropDownMenu = Addon.Frames.DropDownMenu;
+local DropDownMenu = {};
+Addon.DropDownMenu = DropDownMenu;
 
-	if (DropDownMenu:IsShown()) then
-		if (parent ~= Addon.SELECTED_FILTER_BUTTON) then
-			Addon.SELECTED_FILTER_BUTTON = parent;
+local _currentDropdownParent;
+local _buttons = {};
 
-			Addon.API.UpdateDropDownMenu();
+
+local function DropDownButton_OnEnter(self)
+	self.Background:Show();
+end
+
+local function DropDownButton_OnLeave(self)
+	self.Background:Hide();
+end
+
+local function DropDownButton_OnClick(self)
+	local info = self.info;
+
+	if (type(info.args) == 'table') then
+		info.func(unpack(info.args));
+	else
+		info.func(info.args);
+	end
+
+	if (not info.keepShownOnClick) then
+		DropDownMenu:Close();
+	else
+		DropDownMenu:Update();
+	end
+
+	PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
+end
+
+local function CreateDropDownButton(i)
+	local Button = CreateFrame('Button', nil, Addon.Frames.DropDownMenu);
+	Button:SetSize(180, 18);
+	Button:SetScript('OnEnter', DropDownButton_OnEnter);
+	Button:SetScript('OnLeave', DropDownButton_OnLeave);
+	Button:SetScript('OnClick', DropDownButton_OnClick);
+
+	if (i == 1) then
+		Button:SetPoint('TOPLEFT', 15, -10);
+		Button:SetPoint('TOPRIGHT', -15, -10);
+	else
+		Button:SetPoint('TOPLEFT', _buttons[i - 1], 'BOTTOMLEFT');
+		Button:SetPoint('TOPRIGHT', _buttons[i - 1], 'BOTTOMRIGHT');
+	end
+
+	local Background = Button:CreateTexture(nil, 'BACKGROUND');
+	Button.Background = Background;
+	Background:Hide();
+	Background:SetAllPoints();
+	Background:SetTexture('Interface\\QuestFrame\\UI-QuestLogTitleHighlight');
+	Background:SetBlendMode('ADD');
+	Background:SetVertexColor(0.8, 0.6, 0, 1);
+
+	local Check = Button:CreateTexture(nil, 'ARTWORK');
+	Button.Check = Check;
+	Check:SetSize(16, 16);
+	Check:SetPoint('LEFT');
+	Check:SetTexture('Interface\\Common\\UI-DropDownRadioChecks');
+	Check:SetTexCoord(0.5, 1, 0, 0.5);
+
+	local Divider = Button:CreateTexture(nil, 'BACKGROUND');
+	Button.Divider = Divider;
+	Divider:SetAllPoints();
+	Divider:SetTexture('Interface\\Common\\UI-TooltipDivider-Transparent');
+
+	local Text = Button:CreateFontString('ARTWORK', nil, 'GameFontHighlightSmallLeft');
+	Button.Text = Text;
+	Text:SetWordWrap(false);
+	Text:SetPoint('LEFT', Check, 'RIGHT', 4, -1);
+
+	table.insert(_buttons, Button);
+
+	return Button;
+end
+
+local function GetDropDownMenuButton(i)
+	return _buttons[i] or CreateDropDownButton(i);
+end
+
+local function GetDropDownMenuButtons()
+	return _buttons;
+end
+
+function DropDownMenu:Toggle(parent)
+	local DropDownMenuFrame = Addon.Frames.DropDownMenu;
+
+	if (DropDownMenuFrame:IsShown()) then
+		if (parent ~= _currentDropdownParent) then
+			_currentDropdownParent = parent;
+
+			self:Update();
 			return;
 		end
 
-		DropDownMenu:Hide();
+		DropDownMenuFrame:Hide();
 	else
-		Addon.SELECTED_FILTER_BUTTON = parent;
+		_currentDropdownParent = parent;
 
-		local shownButtons = 0;
+		local numButtons = 0;
 		local dropdownWidth = 0;
 		local dropdownHeight = 0;
 
-		for i, info in next, ListFunction() do
-			shownButtons = i;
-
+		for i, info in next, parent:List() do
 			if (info.disabled == nil) then
 				info.disabled = false;
 			end
+			if (info.hasGrayColor == nil) then
+				info.hasGrayColor = false;
+			end
 
-			local Button = Addon.GetDropDownButton(i);
+			local Button = GetDropDownMenuButton(i);
 			Button:Show();
 
 			local Check = Button.Check;
@@ -51,6 +138,12 @@ local function ToggleDropDownMenu(parent, ListFunction)
 				Text:SetText(info.text);
 
 				Button:SetEnabled(not info.disabled);
+
+				if (info.hasGrayColor) then
+					Button.Text:SetFontObject('GameFontDisableSmallLeft');
+				else
+					Button.Text:SetFontObject('GameFontHighlightSmallLeft');
+				end
 
 				if (info.checked) then
 					Check:SetTexCoord(0, 0.5, 0, 0.5);
@@ -77,37 +170,38 @@ local function ToggleDropDownMenu(parent, ListFunction)
 			Button.info = info;
 
 			dropdownWidth = math.max(dropdownWidth, Button.Text:GetWidth() + leftPadding);
+			numButtons = numButtons + 1;
 		end
 
-		local buttons = Addon.GetDropDownButtons();
-		for i=(shownButtons + 1), #buttons do
-			local Button = Addon.GetDropDownButton(i);
+		local buttons = GetDropDownMenuButtons();
+		for i=(numButtons + 1), #buttons do
+			local Button = GetDropDownMenuButton(i);
 			Button:Hide();
 		end
 
-		DropDownMenu:SetSize(dropdownWidth + 50, dropdownHeight + 20);
-		DropDownMenu:SetPoint('TOPLEFT', parent, 'BOTTOMLEFT', 5, 0);
-		DropDownMenu:Show();
+		DropDownMenuFrame:SetSize(dropdownWidth + 50, dropdownHeight + 20);
+		DropDownMenuFrame:SetPoint('TOPLEFT', parent, 'BOTTOMLEFT', 5, 0);
+		DropDownMenuFrame:Show();
 	end
 end
-Addon.API.ToggleDropDownMenu = ToggleDropDownMenu;
 
-local function CloseDropDownMenu()
+function DropDownMenu:Close()
 	Addon.Frames.DropDownMenu:Hide();
 end
-Addon.API.CloseDropDownMenu = CloseDropDownMenu;
 
-local function UpdateDropDownMenu()
-	CloseDropDownMenu();
+function DropDownMenu:Update()
+	self:Close();
 
-	local parent = Addon.SELECTED_FILTER_BUTTON;
+	local parent = _currentDropdownParent;
 	local ListFunction = parent.ListFunction;
 
-	ToggleDropDownMenu(parent, ListFunction);
+	self:Toggle(parent, ListFunction);
 end
-Addon.API.UpdateDropDownMenu = UpdateDropDownMenu;
 
-local function SetDropDownMenuText(text)
-	Addon.SELECTED_FILTER_BUTTON:SetText(text);
+function DropDownMenu:SetText(text)
+	_currentDropdownParent:SetText(text);
 end
-Addon.API.SetDropDownMenuText = SetDropDownMenuText;
+
+function DropDownMenu:SetCurrent(frame)
+	_currentDropdownParent = frame;
+end

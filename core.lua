@@ -1,36 +1,35 @@
 local AddonName, Addon = ...;
 
 
-local MainFrame = Addon.Frames.Main;
+local Overview = Addon.Frames.Overview;
 
 
 local function OnEvent(self, event, ...)
-	if (event == 'ADDON_LOADED' and (...) == AddonName) then
-		self:UnregisterEvent(event);
-		self:RegisterEvent('PLAYER_ENTERING_WORLD');
-
-		KEYSTONE_LOOT_DB = KEYSTONE_LOOT_DB or {
-			minimapButtonPosition = 195,
-			minimapButtonEnabled = true
-		};
-		KEYSTONE_LOOT_CHAR_DB = KEYSTONE_LOOT_CHAR_DB or {};
-	elseif (event == 'PLAYER_ENTERING_WORLD') then
+	if (event == 'PLAYER_ENTERING_WORLD') then
 		self:UnregisterEvent(event);
 
-		LoadAddOn('Blizzard_EncounterJournal');
+		self:RegisterEvent('CHALLENGE_MODE_MAPS_UPDATE');
+		self:RegisterEvent('CHALLENGE_MODE_START');
 
-		Addon.UpdateMinimapButton();
-	elseif (event == 'EJ_LOOT_DATA_RECIEVED') then
-		Addon.API.UpdateLoot();
+		C_AddOns.LoadAddOn('Blizzard_EncounterJournal');
+		C_MythicPlus.RequestMapInfo();
+	elseif (event == 'CHALLENGE_MODE_MAPS_UPDATE') then
+		self:UnregisterEvent(event);
+
+		Addon.Database:CheckDB();
+		Addon.Database:CheckCharacterDB();
+		Addon.MinimapButton:Update();
+	elseif (event == 'CHALLENGE_MODE_START' and Addon.Database:IsReminderEnabled()) then
+		Addon.LootReminder:Update();
 	end
 end
 
-MainFrame:RegisterEvent('ADDON_LOADED');
-MainFrame:SetScript('OnEvent', OnEvent);
+Overview:RegisterEvent('PLAYER_ENTERING_WORLD');
+Overview:SetScript('OnEvent', OnEvent);
 
 
 SlashCmdList.KEYSTONELOOT = function(msg)
-	MainFrame:SetShown(not MainFrame:IsShown());
+	Overview:SetShown(not Overview:IsShown());
 end;
 
 SLASH_KEYSTONELOOT1 = "/ksl";

@@ -5,9 +5,9 @@ local Translate = Addon.Translate;
 
 
 local ListElement = Addon.Settings:CreateListElement();
-ListElement:SetPoint('TOPLEFT', 10, -62);
-ListElement:SetPoint('TOPRIGHT', -20, -62);
-ListElement.Text:SetText(Translate['Enable Minimap Button']);
+ListElement:SetPoint('TOPLEFT', 10, -97);
+ListElement:SetPoint('TOPRIGHT', -20, -97);
+ListElement.Text:SetText(Translate['Enable Loot Reminder']);
 
 local function OnClick(self)
 	local isCheckBox = self:GetParent().CheckBox;
@@ -21,8 +21,7 @@ local function OnClick(self)
 
 	(isCheckBox or self):SetChecked(isChecked);
 
-	Addon.Database:SetMinimapEnabled(isChecked);
-	Addon.MinimapButton:Update();
+	Addon.Database:SetReminderEnabled(isChecked);
 
 	if (isChecked) then
 		PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
@@ -32,7 +31,7 @@ local function OnClick(self)
 end
 
 local function OnShow(self)
-	self:SetChecked(Addon.Database:IsMinimapEnabled());
+	self:SetChecked(Addon.Database:IsReminderEnabled());
 end
 
 local CheckBox = Addon.Settings:CreateCheckBox(ListElement, OnClick, OnShow);

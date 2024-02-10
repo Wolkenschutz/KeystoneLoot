@@ -1,14 +1,16 @@
 local AddonName, Addon = ...;
 Addon.Frames.Settings = {};
 
+local Setting = {};
+Addon.Settings = Setting;
 
 local Frame = CreateFrame('Frame');
 Addon.Frames.Settings.Main = Frame;
 
-local category = Settings.RegisterCanvasLayoutCategory(Frame, 'Keystone Loot');
+local category = Settings.RegisterCanvasLayoutCategory(Frame, 'KeystoneLoot');
 Settings.RegisterAddOnCategory(category);
 
-Addon.SETTINGS_ID = category:GetID();
+Addon.Settings.ID = category:GetID();
 
 
 local function OnEnter(self)
@@ -25,9 +27,8 @@ local function OnLeave(self)
 	parent.Background:Hide();
 end
 
-
-local function CreateSettingListElement(parent)
-	local ListElement = CreateFrame('Frame', nil, parent);
+function Setting:CreateListElement()
+	local ListElement = CreateFrame('Frame', nil, Frame);
 	ListElement:SetSize(1, 26);
 
 	local Trigger = CreateFrame('Button', nil, ListElement);
@@ -53,9 +54,8 @@ local function CreateSettingListElement(parent)
 
 	return ListElement;
 end
-Addon.CreateSettingListElement = CreateSettingListElement;
 
-local function CreateSettingCheckBox(listElement)
+function Setting:CreateCheckBox(listElement)
 	local CheckBox = CreateFrame('CheckButton', nil, listElement.Trigger);
 	listElement.CheckBox = CheckBox;
 	CheckBox:SetSize(30, 29);
@@ -71,4 +71,3 @@ local function CreateSettingCheckBox(listElement)
 
 	return CheckBox;
 end
-Addon.CreateSettingCheckBox = CreateSettingCheckBox;

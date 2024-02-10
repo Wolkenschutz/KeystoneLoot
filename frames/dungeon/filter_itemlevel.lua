@@ -1,19 +1,19 @@
 local AddonName, Addon = ...;
 
 
-local Translate = Addon.API.Translate;
+local Translate = Addon.Translate;
 
-local DEFAULT_CATEGORY = 'veteran';
-local DEFAULT_RANK = 1;
+local _defaultCategory = 'veteran';
+local _defaultRank = 1;
 
-local DROPDOWN_CATEGORIES = {
+local _categories = {
 	{ category = 'veteran', text = Translate['Veteran'] },
 	{ category = 'champion', text = Translate['Champion'] },
 	{ category = 'hero', text = Translate['Hero'] },
 	{ category = 'vault', text = Translate['Great Vault'] }
 };
 
-local DROPDOWN_CATEGORY_RANKS = {
+local _categoryRank = {
 	veteran = {
 		{ itemLevel = 441, bonusID = 'veteran-1', text = ITEM_POOR_COLOR_CODE..'441|r | +2' },
 		{ itemLevel = 444, bonusID = 'veteran-2', text = ITEM_POOR_COLOR_CODE..'444|r | +3 +4' },
@@ -51,66 +51,60 @@ local DROPDOWN_CATEGORY_RANKS = {
 };
 
 
-local function SetFilterText(self)
-	local info = DROPDOWN_CATEGORY_RANKS[KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY];
+local Filter = Addon.Filter:CreateButton(Addon.Overview:GetTab('Dungeon'), 'ItemLevel');
+Filter:SetPoint('TOP', 120, -35);
+
+local function SetFilterText()
+	local selectedCategory, selectedRank = Addon.Database:GetSelectedItemLevel();
+
+	local info = _categoryRank[selectedCategory];
 	if (info == nil) then
-		KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY = DEFAULT_CATEGORY;
-		SetFilterText(self);
+		Addon.Database:SetSelectedItemLevel(_defaultCategory, nil);
+		SetFilterText();
 		return;
 	end
 
-	info = info[KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK];
+	info = info[selectedRank];
 	if (info == nil) then
-		KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK = DEFAULT_RANK;
-		SetFilterText(self);
+		Addon.Database:SetSelectedItemLevel(nil, _defaultRank);
+		SetFilterText();
 		return;
 	end
 
-	Addon.SELECTED_ITEMLEVEL = info.itemLevel;
-	Addon.SELECTED_ITEMLEVEL_BONUSID = info.bonusID;
+	Addon.UpgradeItem:SetItemLevel(info.itemLevel);
+	Addon.UpgradeItem:SetUpgradeID(info.bonusID);
 
 	local text = info.text;
 
-	if (self == nil) then
-		Addon.API.SetDropDownMenuText(text);
-	else
-		self.Text:SetText(text);
-	end
-	
+	Addon.DropDownMenu:SetText(text);
 end
 
 local function SetFilter(category, index)
-	KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY = category;
-	KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK = index;
+	Addon.Database:SetSelectedItemLevel(category, index);
 
 	SetFilterText();
 end
 
-local function InitFunction(self)
-	if (KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY == nil) then
-		KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY = DEFAULT_CATEGORY;
-	end
-
-	if (KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK == nil) then
-		KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK = DEFAULT_RANK;
-	end
-
-	SetFilterText(self);
+function Filter:GetDefaultValue()
+	return _defaultCategory, _defaultRank;
 end
 
-local function ListFunction()
-	local SELECTED_ITEMLEVEL_CATEGORY = KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_CATEGORY;
-	local SELECTED_ITEMLEVEL_RANK = KEYSTONE_LOOT_CHAR_DB.SELECTED_ITEMLEVEL_RANK;
-	local list = {};
+function Filter:Init()
+	SetFilterText();
+end
 
-	local numMenuList = #DROPDOWN_CATEGORIES;
-	for index, entry in ipairs(DROPDOWN_CATEGORIES) do
-		local isSelectedCategory = SELECTED_ITEMLEVEL_CATEGORY == entry.category;
+function Filter:List()
+	local selectedCategory, selectedRank = Addon.Database:GetSelectedItemLevel();
+	local _list = {};
 
-		if (isSelectedCategory and index ~= 1) then
+	local numMenuList = #_categories;
+	for indexCategory, entry in ipairs(_categories) do
+		local isSelectedCategory = selectedCategory == entry.category;
+
+		if (isSelectedCategory and indexCategory ~= 1) then
 			local info = {};
 			info.divider = true;
-			table.insert(list, info);
+			table.insert(_list, info);
 		end
 
 		local info = {};
@@ -121,34 +115,28 @@ local function ListFunction()
 		info.args = { entry.category, 1 };
 		info.func = SetFilter;
 		info.keepShownOnClick = true;
-		table.insert(list, info);
+		table.insert(_list, info);
 
 		if (isSelectedCategory) then
-			for index, data in ipairs(DROPDOWN_CATEGORY_RANKS[entry.category]) do
+			for indexRank, data in ipairs(_categoryRank[entry.category]) do
 				local info = {};
 				info.leftPadding = 10;
 				info.text = data.text;
-				info.checked = isSelectedCategory and SELECTED_ITEMLEVEL_RANK == index;
+				info.checked = isSelectedCategory and selectedRank == indexRank;
 				info.disabled = info.checked;
-				info.args = { entry.category, index };
+				info.args = { entry.category, indexRank };
 				info.func = SetFilter;
-				table.insert(list, info);
+				table.insert(_list, info);
 			end
 
-			if (index ~= numMenuList) then
+			if (indexCategory ~= numMenuList) then
 				local info = {};
 				info.divider = true;
-				table.insert(list, info);
+				table.insert(_list, info);
 			end
 		end
 
 	end
 
-	return list;
+	return _list;
 end
-
-
-local Filter = Addon.CreateFilterButton('itemLevel', ListFunction, InitFunction);
-Filter:SetPoint('TOP', 120, -35);
-
-Addon.Frames.FilterItemLevelButton = Filter;
