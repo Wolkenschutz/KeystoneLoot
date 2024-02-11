@@ -41,7 +41,11 @@ function Database:RemoveFavorite(mapID, specID, itemID)
 end
 
 function Database:GetFavorites(mapID, specID)
-	return KEYSTONELOOT_CHAR_DB.favoriteLoot[mapID] and KEYSTONELOOT_CHAR_DB.favoriteLoot[mapID][specID];
+	if (KEYSTONELOOT_CHAR_DB == nil or KEYSTONELOOT_CHAR_DB.favoriteLoot[mapID] == nil) then
+		return;
+	end
+
+	return KEYSTONELOOT_CHAR_DB.favoriteLoot[mapID][specID];
 end
 
 -- TODO: Bei allem: Dungeon und Raid getrennt?

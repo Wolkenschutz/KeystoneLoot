@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.1
+* If no specialization name was present, there was a nil error.
+* Update ruRU. (Thanks Valdemar@Github)
+
 ## 1.5.0
 * New feature! You will now be notified that you could change your loot specialization because you have favorited items for a different specialization.
 * "All Specializations" has been removed due to the new feature.

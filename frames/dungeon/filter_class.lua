@@ -11,7 +11,12 @@ local function SetFilterText()
 	local classColorStr = RAID_CLASS_COLORS[classInfo.classFile].colorStr;
 	local specName = GetSpecializationNameForSpecID(selectedSpecID);
 
-	local text = HEIRLOOMS_CLASS_SPEC_FILTER_FORMAT:format(classColorStr, classInfo.className, specName);
+	local text;
+	if (specName == nil or specName =='') then
+		text = HEIRLOOMS_CLASS_FILTER_FORMAT:format(classColorStr, classInfo.className);
+	else
+		text = HEIRLOOMS_CLASS_SPEC_FILTER_FORMAT:format(classColorStr, classInfo.className, specName);
+	end
 
 	Addon.DropDownMenu:SetText(text);
 end
