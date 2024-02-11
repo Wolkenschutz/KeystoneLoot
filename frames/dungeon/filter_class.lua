@@ -6,6 +6,9 @@ Filter:SetPoint('TOP', -120, -35);
 
 local function SetFilterText()
 	local selectedClassID, selectedSpecID = Addon.Database:GetSelectedClass();
+	if (selectedSpecID == 0) then -- NOTE: Temp fix; Wenn man damals "Alle Spezialisierungen" ausgewählt hatte. Kann später wieder weg.
+		selectedSpecID = select(2, Filter:GetDefaultValue());
+	end
 
 	local classInfo = C_CreatureInfo.GetClassInfo(selectedClassID);
 	local classColorStr = RAID_CLASS_COLORS[classInfo.classFile].colorStr;
