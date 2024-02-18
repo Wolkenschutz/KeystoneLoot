@@ -4,7 +4,7 @@
 ## Notes-ruRU: Компактный аддон, который показывает уровни предметов из подземелий М+
 ## Author: Selina Ruesch
 ## X-Email: selina.ruesch@gmail.com
-## Version: 1.5.1
+## Version: @project-version@
 ## IconTexture: Interface\Icons\INV_Relics_Hourglass_02
 ## SavedVariables: KEYSTONELOOT_DB
 ## SavedVariablesPerCharacter: KEYSTONELOOT_CHAR_DB

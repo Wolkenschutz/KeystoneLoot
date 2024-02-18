@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Create changelog text
+        id: changelog
+        uses: loopwerk/tag-changelog@v1
+        with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            config_file: .github/actions-changelog-config.js
+
+      - name: Update release
+        uses: tubone24/update_release@v1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          body: ${{ steps.changelog.outputs.changes }}
+
+      - name: Update changelog
+        uses: thiagodnf/string-replacer@v1.0.2
+        with:
+          find: "<!-- NEW CHANGELOG CONTENT -->"
+          replace: ${{ steps.changelog.outputs.changelog }}
+          include: |
+            CHANGELOG.md
+
+      - name: Pack it up and upload it
+        uses: BigWigsMods/packager@v2
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+        with:
+          args: -p 879797 -w 26597 -n "{package-name}-{project-version}"

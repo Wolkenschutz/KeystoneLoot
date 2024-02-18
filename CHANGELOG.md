@@ -1,5 +1,5 @@
-# Changelog
-
+<!-- NEW CHANGELOG CONTENT -->
+# Archive
 ## 1.5.1
 * If no specialization name was present, there was a nil error.
 * Update ruRU. (Thanks Valdemar@Github)

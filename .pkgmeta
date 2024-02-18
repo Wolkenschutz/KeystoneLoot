@@ -1,0 +1,13 @@
+package-as: KeystoneLoot
+
+ignore:
+  - .gitignore
+  - .github
+  - .luacheckrc
+  - CHANGELOG.md
+  - LICENSE.md
+  - README.md
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
