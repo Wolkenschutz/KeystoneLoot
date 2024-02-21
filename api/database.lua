@@ -4,7 +4,7 @@ local AddonName, Addon = ...;
 local Database = {};
 Addon.Database = Database;
 
-local dbVersion = 1;
+local dbVersion = 2;
 local dbCharacterVersion = 1;
 
 
