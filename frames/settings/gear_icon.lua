@@ -100,5 +100,17 @@ function Button:List()
 	end;
 	table.insert(_list, info);
 
+	local info = {};
+	info.text = Translate['Favorites Show All Specializations'];
+	info.checked = Addon.Database:IsFavoritesShowAllSpecs();
+	info.keepShownOnClick = true;
+	info.args = not Addon.Database:IsFavoritesShowAllSpecs();
+	info.func = function (enable)
+		Addon.Database:SetFavoritesShowAllSpecs(enable);
+
+		Addon.Overview:GetCurrentTab():Update();
+	end;
+	table.insert(_list, info);
+
 	return _list;
 end

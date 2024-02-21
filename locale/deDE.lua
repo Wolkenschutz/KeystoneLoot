@@ -10,6 +10,7 @@ Translate['Left click: Open overview'] = 'Linksklick: Übersicht öffnen';
 Translate['Right click: Open settings'] = 'Rechtsklick: Einstellungen öffnen';
 Translate['Enable Minimap Button'] = 'Minimap-Button aktivieren';
 Translate['Enable Loot Reminder'] = 'Beute-Erinnerung aktivieren';
+Translate['Favorites Show All Specializations'] = 'Favoriten zeigen alle Spezialisierungen an';
 Translate['%s (%s Season %d)'] = '%s (%s Saison %d)';
 Translate['Veteran'] = 'Veteran';
 Translate['Champion'] = 'Champion';

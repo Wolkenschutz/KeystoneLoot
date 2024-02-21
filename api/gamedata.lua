@@ -125,8 +125,17 @@ function GameData:GetLootTable(mapID, slotID, classID, specID)
 	local _lootTable = {};
 
 	if (slotID == -1) then
-		for itemID, itemInfo in next, Addon.Database:GetFavorites(mapID, specID) or {} do
+		local _favoritesList;
+
+		if (Addon.Database:IsFavoritesShowAllSpecs()) then
+			_favoritesList = Addon.Database:GetFavoritesForMapID(mapID);
+		else
+			_favoritesList = Addon.Database:GetFavorites(mapID, specID);
+		end
+
+		for itemID, itemInfo in next, _favoritesList or {} do
 			table.insert(_lootTable, {
+				specID = itemInfo.specID,
 				itemID = itemID,
 				icon = itemInfo.icon
 			});

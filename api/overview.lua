@@ -3,6 +3,8 @@ local AddonName, Addon = ...;
 local Overview = {};
 Addon.Overview = Overview;
 
+local _currentTabID = 'Dungeon';
+
 
 local function Tab_OnClick(self)
 	local OverviewFrame = Addon.Frames.Overview;
@@ -14,6 +16,7 @@ local function Tab_OnClick(self)
 		Tabs[i].TabFrame:SetShown(i == tabID);
 	end
 
+	_currentTabID = self.TabFrame.ID;
 	PanelTemplates_SetTab(OverviewFrame, tabID);
 	Addon.DropDownMenu:Close();
 end
@@ -40,6 +43,10 @@ function Overview:RegisterTab(tabID, text)
 	PanelTemplates_SetTab(OverviewFrame, 1);
 
 	return TabFrame;
+end
+
+function Overview:GetCurrentTab()
+	return self:GetTab(_currentTabID);
 end
 
 function Overview:GetTab(tabID)

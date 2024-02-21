@@ -35,6 +35,9 @@ Frame:SetScript('OnShow', OnShow);
 Frame:SetScript('OnHide', OnHide);
 Frame:SetScript('OnEvent', OnEvent);
 
+function Frame:Update()
+end
+
 
 local NoSeasonText = Frame:CreateFontString('ARTWORK', nil, 'GameFontHighlightLarge');
 NoSeasonText:SetPoint('TOPLEFT', 20, -80);

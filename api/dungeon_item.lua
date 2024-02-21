@@ -64,6 +64,8 @@ local function OnClick(self)
 
 	if (self.isLootReminder) then
 		specID = self:GetParent().specID;
+	elseif (Addon.Database:IsFavoritesShowAllSpecs()) then
+		specID = self.specID;
 	end
 
 	local db = Addon.Database:GetFavorite(mapID, specID, itemID);
@@ -143,6 +145,7 @@ function DungeonItem:Update()
 			local Frame = self:GetFrame(index, dungeon);
 			local FavoriteStar = Frame.FavoriteStar;
 
+			local specID = itemInfo.specID or specID;
 			local itemID = itemInfo.itemID;
 			local isFavoriteItem = Addon.Database:GetFavorite(mapID, specID, itemID) ~= nil;
 
@@ -151,6 +154,7 @@ function DungeonItem:Update()
 
 			Frame.isFavorite = isFavoriteItem;
 			Frame.itemID = itemID;
+			Frame.specID = specID;
 			Frame.Icon:SetTexture(itemInfo.icon);
 			Frame:Show();
 		end

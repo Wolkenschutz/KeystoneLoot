@@ -48,6 +48,23 @@ function Database:GetFavorites(mapID, specID)
 	return KEYSTONELOOT_CHAR_DB.favoriteLoot[mapID][specID];
 end
 
+function Database:GetFavoritesForMapID(mapID)
+	if (KEYSTONELOOT_CHAR_DB == nil or KEYSTONELOOT_CHAR_DB.favoriteLoot[mapID] == nil) then
+		return;
+	end
+
+	local _loot = {};
+
+	for specID, specTable in next, KEYSTONELOOT_CHAR_DB.favoriteLoot[mapID] do
+		for itemID, itemData in next, specTable do
+			_loot[itemID] = itemData;
+			_loot[itemID].specID = specID;
+		end
+	end
+
+	return _loot;
+end
+
 -- TODO: Bei allem: Dungeon und Raid getrennt?
 -- Class und Slot kann eigentlich synct sein?
 -- Wie Itemlevel machen? Raid hat kein +X
@@ -109,6 +126,22 @@ function Database:SetReminderEnabled(isEnabled)
 	KEYSTONELOOT_DB.lootReminderEnabled = isEnabled;
 end
 
+function Database:IsFavoritesShowAllSpecs()
+	return KEYSTONELOOT_DB and KEYSTONELOOT_DB.favoritesShowAllSpecs;
+end
+
+function Database:SetFavoritesShowAllSpecs(isEnabled)
+	KEYSTONELOOT_DB.favoritesShowAllSpecs = isEnabled;
+end
+
+function Database:IsNewTextShown()
+	return KEYSTONELOOT_DB and KEYSTONELOOT_DB.showNewText;
+end
+
+function Database:SetNewTextShown(isEnabled)
+	KEYSTONELOOT_DB.showNewText = isEnabled;
+end
+
 
 function Database:CheckDB()
 	if (KEYSTONELOOT_DB == nil or KEYSTONELOOT_DB.dbVersion == nil) then
@@ -132,6 +165,9 @@ function Database:CheckDB()
 			end
 
 			KEYSTONE_LOOT_DB = nil;
+		elseif (KEYSTONELOOT_DB.dbVersion == 1) then
+			KEYSTONELOOT_DB.showNewText = true;
+			KEYSTONELOOT_DB.favoritesShowAllSpecs = false;
 		end
 
 		KEYSTONELOOT_DB.dbVersion = KEYSTONELOOT_DB.dbVersion + 1;
