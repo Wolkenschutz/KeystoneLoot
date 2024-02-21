@@ -112,12 +112,12 @@ local function OnDragStop(self)
 end
 
 local function OnClick(self, button)
-	if (button == 'RightButton') then
-		Settings.OpenToCategory(Addon.Settings.ID);
-		return;
-	end
-
 	SlashCmdList.KEYSTONELOOT();
+
+	if (button == 'RightButton' and Addon.Frames.Overview:IsShown()) then
+		local OptionButton = Addon.Frames.OptionButton;
+		OptionButton:GetScript('OnClick')(OptionButton);
+	end
 end
 
 

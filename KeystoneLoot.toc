@@ -46,9 +46,6 @@ frames\dungeon\filter_slot.lua
 frames\dungeon\filter_itemlevel.lua
 frames\raid\main.lua
 
-frames\settings\register.lua
-frames\settings\header.lua
-frames\settings\minimap.lua
-frames\settings\loot_reminder.lua
+frames\settings\gear_icon.lua
 
 core.lua
