@@ -204,6 +204,7 @@ function Catalyst:Update()
 		local Frame = GetItemFrame(numItems);
 		local FavoriteStar = Frame.FavoriteStar;
 
+		specID = itemInfo.specID or specID;
 		local isFavoriteItem = Addon.Database:GetFavorite(mapID, specID, itemID) ~= nil;
 
 		FavoriteStar:SetDesaturated(not isFavoriteItem);
@@ -211,6 +212,7 @@ function Catalyst:Update()
 
 		Frame.isFavorite = isFavoriteItem;
 		Frame.itemID = itemID;
+		Frame.specID = specID;
 		Frame.Icon:SetTexture(itemInfo.icon);
 		Frame:Show();
 	end
