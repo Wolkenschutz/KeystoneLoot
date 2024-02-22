@@ -188,7 +188,7 @@ function Catalyst:Update()
 		if (Addon.Database:IsFavoritesShowAllSpecs()) then
 			_itemList = Addon.Database:GetFavoritesForMapID(mapID);
 		else
-			_itemList = Addon.Database:GetFavorites(mapID, specID) or {};
+			_itemList = Addon.Database:GetFavorites(mapID, specID);
 		end
 	elseif (catalystItemList[slotID] ~= nil) then
 		local itemInfo = catalystItemList[slotID][classID];
@@ -198,7 +198,7 @@ function Catalyst:Update()
 		};
 	end
 
-	for itemID, itemInfo in next, _itemList do
+	for itemID, itemInfo in next, _itemList or {} do
 		numItems = numItems + 1;
 
 		local Frame = GetItemFrame(numItems);
