@@ -33,9 +33,9 @@ jobs:
         uses: thiagodnf/string-replacer@v1.0.2
         with:
           find: "<!-- NEW CHANGELOG CONTENT -->"
-          replace: ${{ steps.changelog.outputs.changelog }}
+          replace: ${{ steps.changelog.outputs.changes }}
           include: |
-            CHANGELOG.md
+            CHANGELOG_MANUAL.md
 
       - name: Pack it up and upload it
         uses: BigWigsMods/packager@v2

@@ -1,13 +1,15 @@
 package-as: KeystoneLoot
+wowi-archive-previous: no
 
 ignore:
   - .gitignore
   - .github
   - .luacheckrc
   - CHANGELOG.md
+  - CHANGELOG_MANUAL.md
   - LICENSE.md
   - README.md
 
 manual-changelog:
-  filename: CHANGELOG.md
+  filename: CHANGELOG_MANUAL.md
   markup-type: markdown
