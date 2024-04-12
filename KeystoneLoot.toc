@@ -1,4 +1,4 @@
-## Interface: 100205
+## Interface: 100206
 ## Title: |cff9d5db8KeystoneLoot|r
 ## Notes: Shows the items from the mythic plus instances in a compact overview
 ## Notes-ruRU: Компактный аддон, который показывает уровни предметов из подземелий М+
@@ -6,12 +6,12 @@
 ## X-Email: selina.ruesch@gmail.com
 ## Version: @project-version@
 ## IconTexture: Interface\Icons\INV_Relics_Hourglass_02
-## SavedVariables: KEYSTONELOOT_DB
-## SavedVariablesPerCharacter: KEYSTONELOOT_CHAR_DB
+## SavedVariables: KeystoneLootDB
+## SavedVariablesPerCharacter: KeystoneLootCharDB
 
-locale\_core.lua
-locale\deDE.lua
+locale\_controller.lua
 locale\enUS.lua
+locale\deDE.lua
 locale\esES.lua
 locale\frFR.lua
 locale\itIT.lua
@@ -21,31 +21,24 @@ locale\ruRU.lua
 locale\zhCN.lua
 locale\zhTW.lua
 
-api\util.lua
-api\database.lua
-api\gamedata.lua
-api\overview.lua
-api\upgrade_item.lua
-api\filter.lua
-api\dropdown.lua
-api\catalyst.lua
-api\dungeon.lua
-api\dungeon_item.lua
-api\loot_reminder.lua
-api\specialization.lua
+database\items.lua
+database\dungeons.lua
+database\catalyst.lua
 
-frames\overview.lua
-frames\minimap.lua
-frames\dropdown.lua
-frames\catalyst.lua
-frames\filter.lua
-frames\loot_reminder.lua
-frames\dungeon\main.lua
-frames\dungeon\filter_class.lua
-frames\dungeon\filter_slot.lua
-frames\dungeon\filter_itemlevel.lua
-frames\raid\main.lua
+xui\overview_frame.lua
+xui\minimap_button.lua
+xui\dropdown_menu.lua
+xui\options_button.lua
+xui\tab_button.lua
+xui\filter_button.lua
+xui\dungeon_frame.lua
+xui\item_button.lua
+xui\filter_button.lua
+xui\loot_reminder_frame.lua
+xui\catalyst_frame.lua
+xui\dungeons_tab.lua
+xui\raids_tab.lua
 
-frames\settings\gear_icon.lua
-
-core.lua
+upgrade_item.lua
+database.lua
+app.lua

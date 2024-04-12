@@ -1,22 +1,27 @@
-local AddonName, Addon = ...;
+local AddonName, KeystoneLoot = ...;
 
-
-local DropDownMenu = {};
-Addon.DropDownMenu = DropDownMenu;
-
-local _currentDropdownParent;
 local _buttons = {};
+local _lastParent;
 
 
-local function DropDownButton_OnEnter(self)
+local OverviewFrame = KeystoneLoot:GetOverview();
+
+local TooltipFrame = CreateFrame('Frame', nil, OverviewFrame, 'TooltipBackdropTemplate');
+OverviewFrame.TooltipFrame = TooltipFrame;
+TooltipFrame:Hide();
+TooltipFrame:SetToplevel(true);
+TooltipFrame:SetFrameStrata('FULLSCREEN_DIALOG');
+
+
+local function ListButton_OnEnter(self)
 	self.Background:Show();
 end
 
-local function DropDownButton_OnLeave(self)
+local function ListButton_OnLeave(self)
 	self.Background:Hide();
 end
 
-local function DropDownButton_OnClick(self)
+local function ListButton_OnClick(self)
 	local info = self.info;
 
 	if (type(info.args) == 'table') then
@@ -25,21 +30,22 @@ local function DropDownButton_OnClick(self)
 		info.func(info.args);
 	end
 
-	if (not info.keepShownOnClick) then
-		DropDownMenu:Close();
-	else
-		DropDownMenu:Update();
+	TooltipFrame:Hide();
+
+	if (info.keepShownOnClick) then
+		local _, parent = TooltipFrame:GetPoint();
+		KeystoneLoot:ToggleDropDown(parent);
 	end
 
 	PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
 end
 
-local function CreateDropDownButton(i)
-	local Button = CreateFrame('Button', nil, Addon.Frames.DropDownMenu);
+local function CreateListButton(i)
+	local Button = CreateFrame('Button', nil, TooltipFrame);
 	Button:SetSize(180, 18);
-	Button:SetScript('OnEnter', DropDownButton_OnEnter);
-	Button:SetScript('OnLeave', DropDownButton_OnLeave);
-	Button:SetScript('OnClick', DropDownButton_OnClick);
+	Button:SetScript('OnEnter', ListButton_OnEnter);
+	Button:SetScript('OnLeave', ListButton_OnLeave);
+	Button:SetScript('OnClick', ListButton_OnClick);
 
 	if (i == 1) then
 		Button:SetPoint('TOPLEFT', 15, -10);
@@ -79,34 +85,37 @@ local function CreateDropDownButton(i)
 	return Button;
 end
 
-local function GetDropDownMenuButton(i)
-	return _buttons[i] or CreateDropDownButton(i);
-end
 
-local function GetDropDownMenuButtons()
-	return _buttons;
-end
+function KeystoneLoot:ToggleDropDown(parent)
+	if (TooltipFrame:IsShown()) then
+		if (parent ~= _lastParent) then
+			_lastParent = parent;
 
-function DropDownMenu:Toggle(parent)
-	local DropDownMenuFrame = Addon.Frames.DropDownMenu;
-
-	if (DropDownMenuFrame:IsShown()) then
-		if (parent ~= _currentDropdownParent) then
-			_currentDropdownParent = parent;
-
-			self:Update();
+			TooltipFrame:Hide();
+			self:ToggleDropDown(parent);
 			return;
 		end
 
-		DropDownMenuFrame:Hide();
+		TooltipFrame:Hide();
 	else
-		_currentDropdownParent = parent;
+		_lastParent = parent;
 
 		local numButtons = 0;
 		local dropdownWidth = 0;
 		local dropdownHeight = 0;
+		local _list = parent:GetList() or {};
 
-		for i, info in next, parent:List() do
+		if (#_list == 0) then
+			_list = {{
+				text = EMPTY,
+				checked = false,
+				notCheckable = true,
+				hasGrayColor = true,
+				disabled = true
+			}};
+		end
+
+		for i, info in next, _list do
 			if (info.disabled == nil) then
 				info.disabled = false;
 			end
@@ -114,7 +123,7 @@ function DropDownMenu:Toggle(parent)
 				info.hasGrayColor = false;
 			end
 
-			local Button = GetDropDownMenuButton(i);
+			local Button = _buttons[i] or CreateListButton(i);
 			Button:Show();
 
 			local Check = Button.Check;
@@ -173,35 +182,13 @@ function DropDownMenu:Toggle(parent)
 			numButtons = numButtons + 1;
 		end
 
-		local buttons = GetDropDownMenuButtons();
-		for i=(numButtons + 1), #buttons do
-			local Button = GetDropDownMenuButton(i);
+		for i=(numButtons + 1), #_buttons do
+			local Button = _buttons[i];
 			Button:Hide();
 		end
 
-		DropDownMenuFrame:SetSize(dropdownWidth + 50, dropdownHeight + 20);
-		DropDownMenuFrame:SetPoint('TOPLEFT', parent, 'BOTTOMLEFT', 5, 0);
-		DropDownMenuFrame:Show();
+		TooltipFrame:SetSize(dropdownWidth + 50, dropdownHeight + 20);
+		TooltipFrame:SetPoint('TOPLEFT', parent, 'BOTTOMLEFT', 5, 0);
+		TooltipFrame:Show();
 	end
-end
-
-function DropDownMenu:Close()
-	Addon.Frames.DropDownMenu:Hide();
-end
-
-function DropDownMenu:Update()
-	self:Close();
-
-	local parent = _currentDropdownParent;
-	local ListFunction = parent.ListFunction;
-
-	self:Toggle(parent, ListFunction);
-end
-
-function DropDownMenu:SetText(text)
-	_currentDropdownParent:SetText(text);
-end
-
-function DropDownMenu:SetCurrent(frame)
-	_currentDropdownParent = frame;
 end

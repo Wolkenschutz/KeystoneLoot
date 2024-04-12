@@ -1,8 +1,6 @@
-local AddonName, Addon = ...;
-Addon.Frames = {};
+local AddonName, KeystoneLoot = ...;
 
-
-local Translate = Addon.Translate;
+local Translate = KeystoneLoot.Translate;
 
 
 local function UpdateTitle(self)
@@ -19,18 +17,19 @@ local function UpdateTitle(self)
 end
 
 local function OnShow(self)
-    UpdateTitle(self);
+	UpdateTitle(self);
 
-	self:SetAlpha(0);
-	UIFrameFadeIn(self, 0.2, 0, 1);
+	PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN);
 end
 
+local function OnHide(self)
+	self.TooltipFrame:Hide();
 
-local Frame = CreateFrame('Frame', nil, UIParent, 'PortraitFrameTexturedBaseTemplate');
-Addon.Frames.Overview = Frame;
-Frame.Tabs = {};
+	PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE);
+end
+
+local Frame = CreateFrame('Frame', AddonName..'Frame', UIParent, 'PortraitFrameTexturedBaseTemplate');
 Frame:Hide();
-Frame:SetFrameLevel(1);
 Frame:SetSize(476, 230);
 Frame:SetPoint('CENTER');
 
@@ -45,8 +44,12 @@ Frame:RegisterForDrag('LeftButton');
 Frame:SetScript('OnDragStart', Frame.StartMoving);
 Frame:SetScript('OnDragStop', Frame.StopMovingOrSizing);
 Frame:SetScript('OnShow', OnShow);
+Frame:SetScript('OnHide', OnHide);
 
 Frame:SetPortraitToAsset('Interface\\Icons\\INV_Relics_Hourglass_02');
+Frame:SetTitle('KeystoneLoot');
+
+table.insert(UISpecialFrames, Frame:GetName());
 
 
 local function CloseButton_OnClick(self)
@@ -60,4 +63,9 @@ CloseButton:SetScript('OnClick', CloseButton_OnClick);
 local AddonMarkerText = Frame:CreateFontString('ARTWORK', nil, 'GameFontDisableSmall');
 AddonMarkerText:SetPoint('BOTTOM', 0, 6);
 AddonMarkerText:SetShadowOffset(0, 0);
-AddonMarkerText:SetText(Translate['Made with LOVE in Germany']);
+AddonMarkerText:SetText('Made with LOVE in Germany');
+
+
+function KeystoneLoot:GetOverview()
+    return Frame;
+end

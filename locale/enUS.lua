@@ -2,8 +2,8 @@ if (GetLocale() ~= 'enUS' and GetLocale() ~= 'enGB') then
     return;
 end
 
-local AddonName, Addon = ...;
-local Translate = Addon.Translate;
+local AddonName, KeystoneLoot = ...;
+local Translate = KeystoneLoot.Translate;
 
 
 Translate['Dawn of the Infinite: Galakrond\'s Fall'] = 'Galakrond\'s Fall';

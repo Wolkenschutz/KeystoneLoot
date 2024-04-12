@@ -1,10 +1,6 @@
-local AddonName, Addon = ...;
+local AddonName, KeystoneLoot = ...;
 
-
-local Translate = Addon.Translate;
-local Database = Addon.Database;
-
-local Overview = Addon.Frames.Overview;
+local Translate = KeystoneLoot.Translate;
 
 
 local function OnEnter(self)
@@ -16,28 +12,30 @@ local function OnLeave(self)
 end
 
 local function OnClick(self)
-	Addon.DropDownMenu:Toggle(self);
+	KeystoneLoot:ToggleDropDown(self);
 
 	self.GlowArrow:Hide();
-	Database:SetNewTextShown(false);
+	KeystoneLootDB.showNewText = false;
 
 	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 end
 
 local function OnMouseDown(self)
-	self:SetPoint('TOPRIGHT', -27, -4);
+	self.GearTexture:SetPoint('CENTER', 1, -1);
 end
 
 local function OnMouseUp(self)
-	self:SetPoint('TOPRIGHT', -28, -3);
+	self.GearTexture:SetPoint('CENTER');
 end
 
 local function OnShow(self)
-	self.GlowArrow:SetShown(Database:IsNewTextShown());
+	self.GlowArrow:SetShown(KeystoneLootDB.showNewText);
 end
 
-local Button = CreateFrame('Button', nil, Overview);
-Addon.Frames.OptionButton = Button;
+local OverviewFrame = KeystoneLoot:GetOverview();
+
+local Button = CreateFrame('Button', nil, OverviewFrame);
+OverviewFrame.OptionsButton = Button;
 Button:SetAlpha(0.7);
 Button:SetSize(18, 18);
 Button:SetFrameLevel(510);
@@ -51,10 +49,12 @@ Button:SetScript('OnMouseDown', OnMouseDown);
 Button:SetScript('OnMouseUp', OnMouseUp);
 
 local GearTexture = Button:CreateTexture(nil, 'ARTWORK');
-GearTexture:SetAllPoints();
+Button.GearTexture = GearTexture;
+GearTexture:SetSize(18, 18);
+GearTexture:SetPoint('CENTER');
 GearTexture:SetTexture('Interface\\WorldMap\\GEAR_64GREY');
 
-local GlowArrow = CreateFrame('Frame', 'KeystoneLootGlowArrow', Overview, 'GlowBoxArrowTemplate');
+local GlowArrow = CreateFrame('Frame', 'KeystoneLootGlowArrow', OverviewFrame, 'GlowBoxArrowTemplate');
 Button.GlowArrow = GlowArrow;
 GlowArrow:SetFrameLevel(510);
 GlowArrow:SetPoint('TOP', Button,'BOTTOM', 7, -5);
@@ -62,14 +62,13 @@ GlowArrow.Arrow:SetSize(40, 16);
 GlowArrow.Arrow:SetRotation(math.rad(180));
 GlowArrow.Glow:Hide();
 
-local NewText  = GlowArrow:CreateFontString('ARTWORK', nil, 'GameFontNormal');
+local NewText = GlowArrow:CreateFontString('ARTWORK', nil, 'GameFontNormal');
 NewText:SetPoint('TOP', GlowArrow,'BOTTOM', -6, 0);
 NewText:SetSize(40, 10);
 NewText:SetJustifyH('CENTER');
 NewText:SetText(NEW:upper());
 
-
-function Button:List()
+function Button:GetList()
 	local _list = {};
 
 	local info = {};
@@ -81,34 +80,41 @@ function Button:List()
 
 	local info = {};
 	info.text = Translate['Enable Minimap Button'];
-	info.checked = Addon.Database:IsMinimapEnabled();
+	info.checked = KeystoneLootDB.minimapButtonEnabled;
 	info.keepShownOnClick = true;
-	info.args = not Addon.Database:IsMinimapEnabled();
+	info.args = not KeystoneLootDB.minimapButtonEnabled;
 	info.func = function (enable)
-		Database:SetMinimapEnabled(enable);
-		Addon.MinimapButton:Update();
-	end;
-	table.insert(_list, info);
-
-	local info = {};
-	info.text = Translate['Enable Loot Reminder'];
-	info.checked = Addon.Database:IsReminderEnabled();
-	info.keepShownOnClick = true;
-	info.args = not Addon.Database:IsReminderEnabled();
-	info.func = function (enable)
-		Addon.Database:SetReminderEnabled(enable);
+		KeystoneLootDB.minimapButtonEnabled = enable;
+		KeystoneLoot:UpdateMinimapButton();
 	end;
 	table.insert(_list, info);
 
 	local info = {};
 	info.text = Translate['Favorites Show All Specializations'];
-	info.checked = Addon.Database:IsFavoritesShowAllSpecs();
+	info.checked = KeystoneLootDB.favoritesShowAllSpecs;
 	info.keepShownOnClick = true;
-	info.args = not Addon.Database:IsFavoritesShowAllSpecs();
+	info.args = not KeystoneLootDB.favoritesShowAllSpecs;
 	info.func = function (enable)
-		Addon.Database:SetFavoritesShowAllSpecs(enable);
+		KeystoneLootDB.favoritesShowAllSpecs = enable;
 
-		Addon.Overview:GetCurrentTab():Update();
+		KeystoneLoot:GetCurrentTab():Update();
+	end;
+	table.insert(_list, info);
+
+	local info = {};
+	info.text = NORMAL_FONT_COLOR:WrapTextInColorCode(DUNGEONS);
+	info.checked = false;
+	info.notCheckable = true;
+	info.disabled = true;
+	table.insert(_list, info);
+
+	local info = {};
+	info.text = Translate['Enable Loot Reminder'];
+	info.checked = KeystoneLootDB.lootReminderEnabled;
+	info.keepShownOnClick = true;
+	info.args = not KeystoneLootDB.lootReminderEnabled;
+	info.func = function (enable)
+		KeystoneLootDB.lootReminderEnabled = enable;
 	end;
 	table.insert(_list, info);
 

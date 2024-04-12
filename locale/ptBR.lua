@@ -2,8 +2,8 @@ if (GetLocale() ~= 'ptBR') then
     return;
 end
 
-local AddonName, Addon = ...;
-local Translate = Addon.Translate;
+local AddonName, KeystoneLoot = ...;
+local Translate = KeystoneLoot.Translate;
 
 
 Translate['Left click: Open overview'] = 'Clique esquerdo: Abrir visão geral';

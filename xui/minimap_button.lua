@@ -1,10 +1,6 @@
-local AddonName, Addon = ...;
+local AddonName, KeystoneLoot = ...;
 
-
-local MinimapButton = {};
-Addon.MinimapButton = MinimapButton;
-
-local Translate = Addon.Translate;
+local Translate = KeystoneLoot.Translate;
 
 
 -- https://wowwiki-archive.fandom.com/wiki/USERAPI_GetMinimapShape
@@ -24,7 +20,6 @@ local _minimapShapes = {
 	['TRICORNER-BOTTOMLEFT'] = { true, true, false, true },
 	['TRICORNER-BOTTOMRIGHT'] = { true, true, true, false }
 }
-
 
 local function GetPosition(position, radius)
 	local angle = math.rad(position);
@@ -57,11 +52,7 @@ local function GetPosition(position, radius)
 	return 'CENTER', x, y;
 end
 
-function MinimapButton:Update()
-	local Frame = Addon.Frames.MinimapButton;
-	Frame:SetShown(Addon.Database:IsMinimapEnabled());
-	Frame:SetPoint(GetPosition(Addon.Database:GetMinimapPosition(), 5));
-end
+
 
 
 local function OnUpdate(self, elapsed)
@@ -74,7 +65,7 @@ local function OnUpdate(self, elapsed)
 
 	local position = math.deg(math.atan2(cursorY - minimapY, cursorX - minimapX)) % 360;
 
-	Addon.Database:SetMinimapPosition(position);
+	KeystoneLootDB.minimapButtonPosition = position;
 	self:SetPoint(GetPosition(position, 5));
 end
 
@@ -114,16 +105,13 @@ end
 local function OnClick(self, button)
 	SlashCmdList.KEYSTONELOOT();
 
-	if (button == 'RightButton' and Addon.Frames.Overview:IsShown()) then
-		local OptionButton = Addon.Frames.OptionButton;
-		OptionButton:GetScript('OnClick')(OptionButton);
+	local OverviewFrame = KeystoneLoot:GetOverview()
+	if (button == 'RightButton' and OverviewFrame:IsShown()) then
+		OverviewFrame.OptionsButton:Click();
 	end
 end
 
-
 local Frame = CreateFrame('Button', 'KeystoneLootMinimapButton', Minimap);
-Addon.Frames.MinimapButton = Frame;
-
 Frame:SetSize(31, 31);
 Frame:SetFrameStrata('MEDIUM');
 Frame:SetFrameLevel(8);
@@ -139,25 +127,28 @@ Frame:SetScript('OnDragStart', OnDragStart);
 Frame:SetScript('OnDragStop', OnDragStop);
 Frame:SetScript('OnClick', OnClick);
 
-local Background = Frame:CreateTexture();
-Background:SetDrawLayer('ARTWORK', 1);
+local Background = Frame:CreateTexture(nil, 'ARTWORK', nil, 1);
 Background:SetSize(22, 22);
 Background:SetPoint('TOPLEFT', 5, -5);
 Background:SetTexture('Interface\\Minimap\\UI-Minimap-Background');
 
-local Icon = Frame:CreateTexture();
+local Icon = Frame:CreateTexture(nil, 'ARTWORK', nil, 2);
 Frame.Icon = Icon;
-Icon:SetDrawLayer('ARTWORK', 2);
 Icon:SetSize(17, 17);
 Icon:SetPoint('CENTER');
 Icon:SetTexture('Interface\\Icons\\INV_Relics_Hourglass_02');
 Icon:SetTexCoord(0.08, 0.92, 0.08, 0.92);
 
-local IconBorder = Frame:CreateTexture();
-IconBorder:SetDrawLayer('ARTWORK', 3);
+local IconBorder = Frame:CreateTexture(nil, 'ARTWORK', nil, 3);
 IconBorder:SetSize(50, 50);
 IconBorder:SetPoint('TOPLEFT');
 IconBorder:SetTexture('Interface\\Minimap\\MiniMap-TrackingBorder');
+
+
+function KeystoneLoot:UpdateMinimapButton()
+	Frame:SetShown(KeystoneLootDB.minimapButtonEnabled);
+	Frame:SetPoint(GetPosition(KeystoneLootDB.minimapButtonPosition, 5));
+end
 
 
 AddonCompartmentFrame:RegisterAddon({

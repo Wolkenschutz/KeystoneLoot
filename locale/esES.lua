@@ -2,8 +2,8 @@ if (GetLocale() ~= 'esES' and GetLocale() ~= 'esMX') then
     return;
 end
 
-local AddonName, Addon = ...;
-local Translate = Addon.Translate;
+local AddonName, KeystoneLoot = ...;
+local Translate = KeystoneLoot.Translate;
 
 
 Translate['Left click: Open overview'] = 'Clic izquierdo: Abrir vista general';

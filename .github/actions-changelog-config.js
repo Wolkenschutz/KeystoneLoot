@@ -1,12 +1,12 @@
 module.exports = {
 	types: [
-		{ types: [ "feature", "new feature" ], label: "🎉 New Features" },
-		{ types: [ "bug", "fix" ], label: "🐛 Bugfixes" },
-		{ types: [ "improvement" ], label: "🔨 Improvements" },
-		{ types: [ "revert" ], label: "🔙 Reverts" },
-		{ types: [ "other" ], label: "🔨 Other Changes" }
+		{ types: [ "New Feature" ], label: "New Features" },
+		{ types: [ "Fix" ], label: "Bugfixes" },
+		{ types: [ "Improvement" ], label: "Improvements" },
+		{ types: [ "Revert" ], label: "Reverts" },
+		{ types: [ "Other" ], label: "Other Changes" }
 	],
-
+	
 	excludeTypes: [],
 
 	renderTypeSection: function (label, commits) {

@@ -2,8 +2,8 @@ if (GetLocale() ~= 'zhTW') then
     return;
 end
 
-local AddonName, Addon = ...;
-local Translate = Addon.Translate;
+local AddonName, KeystoneLoot = ...;
+local Translate = KeystoneLoot.Translate;
 
 
 Translate['Left click: Open overview'] = '左鍵點擊：開啟概覽';
