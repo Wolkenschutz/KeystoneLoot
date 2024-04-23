@@ -2,7 +2,7 @@ local AddonName, KeystoneLoot = ...;
 
 
 function KeystoneLoot:GetSeasonId()
-	return 11;
+	return 12;
 end
 
 
