@@ -2,7 +2,7 @@ local AddonName, KeystoneLoot = ...;
 
 
 function KeystoneLoot:GetSeasonId()
-	return 12;
+	return 12; -- 12 = Dragonflight Season 4
 end
 
 
