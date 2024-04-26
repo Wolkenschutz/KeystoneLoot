@@ -114,6 +114,7 @@ local _itemlevels = {
 	},
 	[12] = {
 		{ id = 'champion', text = 'Champion', entries = {
+			{ itemLevel = 493, bonusId = 10313, text = ITEM_GOOD_COLOR_CODE..'493|r | +0' },
 			{ itemLevel = 496, bonusId = 10314, text = ITEM_GOOD_COLOR_CODE..'496|r | +2' },
 			{ itemLevel = 499, bonusId = 10315, text = ITEM_GOOD_COLOR_CODE..'499|r | +3 +4' },
 			{ itemLevel = 502, bonusId = 10316, text = ITEM_GOOD_COLOR_CODE..'502|r | +5 +6' },
