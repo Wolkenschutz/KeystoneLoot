@@ -50,7 +50,8 @@ function KeystoneLoot:SetTooltipUpgradeId(upgradeLevelId)
 end
 
 function KeystoneLoot:GetUpgradeItemLink(itemId)
-	if (KeystoneLootCharDB.selectedSlotId == Enum.ItemSlotFilterType.Other) then
+	local itemInfo = self:GetItemInfo(itemId);
+	if (itemInfo and itemInfo.slotId == Enum.ItemSlotFilterType.Other) then
 		return 'item:'..itemId;
 	end
 
