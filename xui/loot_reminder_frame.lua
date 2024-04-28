@@ -222,6 +222,7 @@ local function CreateSpecializationFrame()
 				FavoriteStar:SetShown(isFavoriteItem);
 
 				ItemButton.Icon:SetTexture(itemInfo.icon);
+				ItemButton.OtherSpec:Hide();
 				ItemButton:Show();
 			else
 				ItemButton:Hide();

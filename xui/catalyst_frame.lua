@@ -76,6 +76,7 @@ local function SetItems(itemList)
 		FavoriteStar:SetShown(isFavoriteItem);
 
 		ItemButton.Icon:SetTexture(itemInfo.icon);
+		ItemButton:UpdateOtherSpecIcon();
 		ItemButton:Show();
 	end
 

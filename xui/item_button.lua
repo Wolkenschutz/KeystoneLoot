@@ -13,6 +13,13 @@ local function OnEnter(self)
 		GameTooltip:SetText(RETRIEVING_ITEM_INFO, RED_FONT_COLOR:GetRGB());
 	end
 
+	--
+	if (self.specNames) then
+		GameTooltip:AddLine(' ');
+		GameTooltip:AddLine(TOOLTIP_QUEST_ITEM_SPECIALIZATIONS);
+		GameTooltip:AddLine('- '..table.concat(self.specNames, '|n- '));
+	end
+
 	GameTooltip:Show();
 
 	local _, _, playerClassId = UnitClass('player');
@@ -72,7 +79,7 @@ local function OnClick(self)
 		self.isFavorite = true;
 		self.FavoriteStar:SetDesaturated(false);
 
-		local challengeModeId = self:GetParent().challengeModeId;
+		local challengeModeId = self:GetParent().challengeModeId or self:GetParent().bossId;
 		local icon = self.Icon:GetTexture();
 		KeystoneLoot:AddFavoriteItem(challengeModeId, specId, itemId, icon);
 	else
@@ -86,10 +93,39 @@ local function OnClick(self)
 	end
 end
 
+local function UpdateOtherSpecIcon(self)
+	local isFavoriteItem = self.FavoriteStar:IsShown();
+	if (not isFavoriteItem or not KeystoneLootDB.favoritesShowAllSpecs) then
+		self.specNames = nil;
+		self.OtherSpec:Hide();
+		return;
+	end
+
+	local specNames = {};
+	local showIcon = true;
+	local itemId = self.itemId;
+	local selectedSpecId = KeystoneLootCharDB.selectedSpecId;
+	local _, _, playerClassId = UnitClass('player');
+
+	local specList = KeystoneLoot:GetItemInfo(itemId).classes[playerClassId];
+	for index, specId in next, specList do
+		if (selectedSpecId == specId) then
+			showIcon = false;
+		else
+			local _, specName = GetSpecializationInfoByID(specId);
+			table.insert(specNames, specName);
+		end
+	end
+
+	self.specNames = specNames;
+	self.OtherSpec:SetShown(showIcon);
+end
+
 function KeystoneLoot:CreateItemButton(parent)
 	local Button = CreateFrame('Button', nil, parent);
 	Button:SetSize(32, 32);
 
+	Button.UpdateOtherSpecIcon = UpdateOtherSpecIcon;
 	Button.UpdateTooltip = OnEnter;
 	Button:SetScript('OnEnter', OnEnter);
 	Button:SetScript('OnLeave', OnLeave);
@@ -111,6 +147,13 @@ function KeystoneLoot:CreateItemButton(parent)
 	FavoriteStar:SetPoint('TOPRIGHT', 8, 8);
 	FavoriteStar:SetAtlas('PetJournal-FavoritesIcon');
 	FavoriteStar:Hide();
+
+	local OtherSpec = Button:CreateTexture(nil, 'ARTWORK', nil, 3);
+	Button.OtherSpec = OtherSpec;
+	OtherSpec:SetSize(18, 18);
+	OtherSpec:SetPoint('TOPLEFT', -6, 4);
+	OtherSpec:SetAtlas('quest-important-available');
+	OtherSpec:Hide();
 
 	return Button;
 end
