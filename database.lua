@@ -1,7 +1,7 @@
 local AddonName, KeystoneLoot = ...;
 
-local dbVersion = 1;
-local dbCharacterVersion = 1;
+local dbVersion = 2;
+local dbCharacterVersion = 2;
 
 
 local function RemoveOldSeason()
@@ -30,6 +30,8 @@ function KeystoneLoot:CheckDB()
 			KeystoneLootDB.lootReminderEnabled = true;
 			KeystoneLootDB.showNewText = false;
 			KeystoneLootDB.favoritesShowAllSpecs = false;
+		elseif (KeystoneLootDB.dbVersion == 1) then
+			KeystoneLootDB.showNewText = true;
 		end
 
 		KeystoneLootDB.dbVersion = KeystoneLootDB.dbVersion + 1;
@@ -52,6 +54,8 @@ function KeystoneLoot:CheckCharacterDB()
 			KeystoneLootCharDB.selectedSpecId = (GetSpecializationInfo(GetSpecialization() or 1)) or 0;
 			KeystoneLootCharDB.selectedDungeonItemLevel = 0;
 			KeystoneLootCharDB.favoriteLoot = {};
+		elseif (KeystoneLootCharDB.dbVersion == 1) then
+			KeystoneLootCharDB.selectedRaidItemLevel = 0;
 		end
 
 		KeystoneLootCharDB.dbVersion = KeystoneLootCharDB.dbVersion + 1;
@@ -62,9 +66,9 @@ function KeystoneLoot:CheckCharacterDB()
 	RemoveOldSeason();
 end
 
-function KeystoneLoot:GetFavoriteItemList(challengeModeId, overrideSpecId)
-	local specId = overrideSpecId or KeystoneLootCharDB.selectedSpecId;
+function KeystoneLoot:GetFavoriteItemList(challengeModeId)
 	local _, _, playerClassId = UnitClass('player');
+	local specId = KeystoneLootCharDB.selectedSpecId;
 	local classId = KeystoneLootCharDB.selectedClassId;
 	local favoriteLoot = KeystoneLootCharDB.favoriteLoot;
 	local _itemList = {};

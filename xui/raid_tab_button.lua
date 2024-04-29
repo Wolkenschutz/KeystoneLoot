@@ -3,6 +3,23 @@ local AddonName, KeystoneLoot = ...;
 local _tabs = {};
 
 
+local function UpdateSize()
+	local ChildrenFrame = KeystoneLoot:GetCurrentRaidTab();
+	local TabFrame = ChildrenFrame.Tab;
+
+	PanelTemplates_TabResize(TabFrame);
+
+	local numTabs = #_tabs;
+	local availableWidth = ChildrenFrame:GetWidth() - TabFrame:GetWidth() - 44;
+	local widthPerTab = availableWidth / (numTabs - 1);
+
+	for _, Tab in next, _tabs do
+		if (Tab.id ~= TabFrame.id) then
+			PanelTemplates_TabResize(Tab, 0, widthPerTab);
+		end
+	end
+end
+
 local function SetTab(id)
 	for index, Tab in next, _tabs do
 		if (Tab.id == id) then
@@ -16,25 +33,17 @@ local function SetTab(id)
 end
 
 local function UpdateTabs()
-	local OverviewFrame = KeystoneLoot:GetOverview();
+	local ChildrenFrame = KeystoneLoot:GetCurrentRaidTab();
 
 	table.sort(_tabs, function (a, b)
 		return a.order < b.order;
 	end);
 
-	local numTabs = #_tabs;
 	for index, Tab in next, _tabs do
 		if (index == 1) then
-			Tab:SetPoint('TOPLEFT', OverviewFrame, 'BOTTOMLEFT', 11, 2);
+			Tab:SetPoint('TOPLEFT', ChildrenFrame, 18, -70);
 		else
 			Tab:SetPoint('TOPLEFT', _tabs[index - 1], 'TOPRIGHT', 3, 0);
-		end
-
-		if (numTabs == 1) then
-			Tab:Hide();
-		else
-			PanelTemplates_TabResize(Tab);
-			Tab:Show();
 		end
 	end
 end
@@ -42,23 +51,28 @@ end
 local function OnClick(self, button)
 	SetTab(self.id);
 
+	KeystoneLoot:GetCurrentTab():Update();
 	KeystoneLoot:GetOverview().TooltipFrame:Hide();
+
+	UpdateSize();
 
 	PlaySound(SOUNDKIT.UI_TOYBOX_TABS);
 end
 
 local function CreateTab(id, order, name)
-	local OverviewFrame = KeystoneLoot:GetOverview();
+	local ChildrenFrame = KeystoneLoot:GetCurrentTab();
 
-	local Tab = CreateFrame('Button', nil, OverviewFrame, 'PanelTabButtonTemplate');
+	local Tab = CreateFrame('Button', nil, ChildrenFrame, 'PanelTopTabButtonTemplate');
 	Tab.id = id;
 	Tab.order = order;
 	Tab:SetScript('OnClick', OnClick);
 	Tab:SetText(name);
+	Tab:SetScript('OnShow', nil);
 
-	local Children = CreateFrame('Frame', nil, OverviewFrame);
+	local Children = CreateFrame('Frame', nil, ChildrenFrame);
 	Children.id = id;
 	Children.Tab = Tab;
+	Children.UpdateSize = UpdateSize;
 	Children:SetAllPoints();
 	Tab.Children = Children;
 
@@ -73,7 +87,7 @@ local function CreateTab(id, order, name)
 	return Children;
 end
 
-function KeystoneLoot:CreateTab(id, ...)
+function KeystoneLoot:CreateRaidTab(id, ...)
 	for index, Tab in next, _tabs do
 		if (Tab.id == id) then
 			return;
@@ -86,7 +100,7 @@ function KeystoneLoot:CreateTab(id, ...)
 	return Children;
 end
 
-function KeystoneLoot:GetCurrentTab()
+function KeystoneLoot:GetCurrentRaidTab()
 	for index, Tab in next, _tabs do
 		if (Tab.Children:IsShown()) then
 			return Tab.Children;

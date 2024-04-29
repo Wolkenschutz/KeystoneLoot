@@ -113,17 +113,11 @@ function KeystoneLoot:CreateDungeonFrame(parent)
 		for index, ItemButton in next, self.itemFrames do
 			local itemInfo = itemList[index];
 			if (itemInfo) then
-				local isFavoriteItem = KeystoneLoot:IsFavoriteItem(itemInfo.itemId, itemInfo.specId);
-
 				ItemButton.itemId = itemInfo.itemId;
-				ItemButton.isFavorite = isFavoriteItem;
 				ItemButton.specId = itemInfo.specId;
 
-				local FavoriteStar = ItemButton.FavoriteStar;
-				FavoriteStar:SetDesaturated(not isFavoriteItem);
-				FavoriteStar:SetShown(isFavoriteItem);
-
 				ItemButton.Icon:SetTexture(itemInfo.icon);
+				ItemButton:UpdateFavoriteStarIcon();
 				ItemButton:UpdateOtherSpecIcon();
 				ItemButton:Show();
 			else

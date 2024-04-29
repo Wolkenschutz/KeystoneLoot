@@ -13,11 +13,18 @@ local function OnEnter(self)
 		GameTooltip:SetText(RETRIEVING_ITEM_INFO, RED_FONT_COLOR:GetRGB());
 	end
 
-	--
-	if (self.specNames) then
+	if (self.OtherSpec:IsShown()) then
+		local specNames = self.specNames;
+		local numSpecs = #specNames;
+
 		GameTooltip:AddLine(' ');
-		GameTooltip:AddLine(TOOLTIP_QUEST_ITEM_SPECIALIZATIONS);
-		GameTooltip:AddLine('- '..table.concat(self.specNames, '|n- '));
+		if (numSpecs == 2) then
+			GameTooltip:AddLine('|A:quest-important-available:16:16:0:0|a '..FOR_OR_SPECIALIZATIONS:format(specNames[1], specNames[2]));
+		elseif (numSpecs == 1) then
+				GameTooltip:AddLine('|A:quest-important-available:16:16:0:0|a '..FOR_SPECIALIZATION:format(specNames[1]));
+		else
+			GameTooltip:AddLine('|A:quest-important-available:16:16:0:0|a '..FOR_SPECIALIZATION:format(table.concat(self.specNames, '/')));
+		end
 	end
 
 	GameTooltip:Show();
@@ -93,21 +100,40 @@ local function OnClick(self)
 	end
 end
 
+local function UpdateFavoriteStarIcon(self)
+	local itemId = self.itemId;
+	local specId = self.specId;
+
+	local isFavoriteItem = KeystoneLoot:IsFavoriteItem(itemId, specId);
+	self.isFavorite = isFavoriteItem;
+
+	local FavoriteStar = self.FavoriteStar;
+	FavoriteStar:SetDesaturated(not isFavoriteItem);
+	FavoriteStar:SetShown(isFavoriteItem);
+end
+
 local function UpdateOtherSpecIcon(self)
-	local isFavoriteItem = self.FavoriteStar:IsShown();
-	if (not isFavoriteItem or not KeystoneLootDB.favoritesShowAllSpecs) then
-		self.specNames = nil;
-		self.OtherSpec:Hide();
+	self.specNames = nil;
+	local OtherSpec = self.OtherSpec;
+
+	if (not self.isFavorite or not KeystoneLootDB.favoritesShowAllSpecs) then
+		OtherSpec:Hide();
+		return;
+	end
+
+	local itemId = self.itemId;
+	local itemInfo = KeystoneLoot:GetItemInfo(itemId);
+	if (itemInfo == nil) then
+		OtherSpec:Hide();
 		return;
 	end
 
 	local specNames = {};
 	local showIcon = true;
-	local itemId = self.itemId;
 	local selectedSpecId = KeystoneLootCharDB.selectedSpecId;
 	local _, _, playerClassId = UnitClass('player');
 
-	local specList = KeystoneLoot:GetItemInfo(itemId).classes[playerClassId];
+	local specList = itemInfo.classes[playerClassId];
 	for index, specId in next, specList do
 		if (selectedSpecId == specId) then
 			showIcon = false;
@@ -118,13 +144,14 @@ local function UpdateOtherSpecIcon(self)
 	end
 
 	self.specNames = specNames;
-	self.OtherSpec:SetShown(showIcon);
+	OtherSpec:SetShown(showIcon);
 end
 
 function KeystoneLoot:CreateItemButton(parent)
 	local Button = CreateFrame('Button', nil, parent);
 	Button:SetSize(32, 32);
 
+	Button.UpdateFavoriteStarIcon = UpdateFavoriteStarIcon;
 	Button.UpdateOtherSpecIcon = UpdateOtherSpecIcon;
 	Button.UpdateTooltip = OnEnter;
 	Button:SetScript('OnEnter', OnEnter);
