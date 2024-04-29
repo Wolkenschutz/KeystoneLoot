@@ -22,9 +22,18 @@ local _specialBonusId = {
 	[207994] = 9522
 };
 
+local _blacklistedItems = {
+	[217327] = true, [217335] = true, [217319] = true, [217323] = true, [217331] = true,
+	[217330] = true, [217322] = true, [217318] = true, [217334] = true, [217326] = true,
+	[217329] = true, [217321] = true, [217317] = true, [217333] = true, [217325] = true,
+	[217324] = true, [217332] = true, [217316] = true, [217328] = true, [217320] = true,
+	[204177] = true, [206448] = true
+}
+
 function KeystoneLoot:UpdateUpgradeTooltip()
-	local selectedCategoryId, selectedCategoryRank = ('-'):split(KeystoneLootCharDB.selectedDungeonItemLevel);
-	local _itemLevels = self:GetDungeonItemLevels();
+	local currentTab = KeystoneLoot:GetCurrentTab();
+	local selectedCategoryId, selectedCategoryRank = ('-'):split(KeystoneLootCharDB[currentTab.id == 'raids' and 'selectedRaidItemLevel' or 'selectedDungeonItemLevel']);
+	local _itemLevels = currentTab.id == 'raids' and self:GetRaidItemLevels() or self:GetDungeonItemLevels();
 
 	if (#_itemLevels > 0 and selectedCategoryId == '0') then
 		selectedCategoryId, selectedCategoryRank = _itemLevels[1].id, 1;
@@ -34,23 +43,16 @@ function KeystoneLoot:UpdateUpgradeTooltip()
 		local entry = category.entries[tonumber(selectedCategoryRank)];
 
 		if (category.id == selectedCategoryId and entry) then
-			self:SetTooltipItemLevel(entry.itemLevel);
-			self:SetTooltipUpgradeId(entry.bonusId);
-			break;
+			targetItemLevel = entry.itemLevel;
+			targetUpgradeLevelId = entry.bonusId;
+			return entry.text;
 		end
 	end
 end
 
-function KeystoneLoot:SetTooltipItemLevel(itemLevel)
-	targetItemLevel = itemLevel;
-end
-
-function KeystoneLoot:SetTooltipUpgradeId(upgradeLevelId)
-	targetUpgradeLevelId = upgradeLevelId;
-end
-
 function KeystoneLoot:GetUpgradeItemLink(itemId)
-	if (KeystoneLootCharDB.selectedSlotId == Enum.ItemSlotFilterType.Other) then
+	local itemInfo = self:GetItemInfo(itemId);
+	if (_blacklistedItems[itemId] or (itemInfo and itemInfo.slotId == Enum.ItemSlotFilterType.Other)) then
 		return 'item:'..itemId;
 	end
 

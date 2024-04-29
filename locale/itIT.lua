@@ -15,7 +15,6 @@ Translate['%s (%s Season %d)'] = '%s (%s Stagione %d)';
 Translate['Veteran'] = 'Veterano';
 Translate['Champion'] = 'Campione';
 Translate['Hero'] = 'Eroe';
-Translate['Great Vault'] = RATED_PVP_WEEKLY_VAULT;
 Translate['Revival Catalyst'] = 'Catalizzatore del Ripristino';
 Translate['Alba degli Infiniti: Caduta di Galakrond'] = 'Caduta di Galakrond';
 Translate['Alba degli Infiniti: Ascesa di Murozond'] = 'Ascesa di Murozond';

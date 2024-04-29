@@ -29,7 +29,7 @@ local function OnMouseUp(self)
 end
 
 local function OnShow(self)
-	self.GlowArrow:SetShown(KeystoneLootDB.showNewText);
+	--self.GlowArrow:SetShown(KeystoneLootDB.showNewText);
 end
 
 local OverviewFrame = KeystoneLoot:GetOverview();
@@ -61,6 +61,7 @@ GlowArrow:SetPoint('TOP', Button,'BOTTOM', 7, -5);
 GlowArrow.Arrow:SetSize(40, 16);
 GlowArrow.Arrow:SetRotation(math.rad(180));
 GlowArrow.Glow:Hide();
+GlowArrow:Hide();
 
 local NewText = GlowArrow:CreateFontString('ARTWORK', nil, 'GameFontNormal');
 NewText:SetPoint('TOP', GlowArrow,'BOTTOM', -6, 0);
@@ -116,6 +117,21 @@ function Button:GetList()
 	info.func = function (enable)
 		KeystoneLootDB.lootReminderEnabled = enable;
 	end;
+	table.insert(_list, info);
+
+	local info = {};
+	info.text = NORMAL_FONT_COLOR:WrapTextInColorCode(RAIDS);
+	info.checked = false;
+	info.notCheckable = true;
+	info.disabled = true;
+	table.insert(_list, info);
+
+	local info = {};
+	info.text = Translate['Enable Loot Reminder'];
+	info.checked = false;
+	info.keepShownOnClick = true;
+	info.disabled = true;
+	info.hasGrayColor = true;
 	table.insert(_list, info);
 
 	return _list;

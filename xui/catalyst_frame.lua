@@ -65,17 +65,13 @@ local function SetItems(itemList)
 	for index=1, numItems do
 		local ItemButton = _itemButtons[index] or CreateItemButton();
 		local itemInfo = itemList[index];
-		local isFavoriteItem = KeystoneLoot:IsFavoriteItem(itemInfo.itemId, itemInfo.specId);
 
 		ItemButton.itemId = itemInfo.itemId;
-		ItemButton.isFavorite = isFavoriteItem;
 		ItemButton.specId = itemInfo.specId;
 
-		local FavoriteStar = ItemButton.FavoriteStar;
-		FavoriteStar:SetDesaturated(not isFavoriteItem);
-		FavoriteStar:SetShown(isFavoriteItem);
-
 		ItemButton.Icon:SetTexture(itemInfo.icon);
+		ItemButton:UpdateFavoriteStarIcon();
+		ItemButton:UpdateOtherSpecIcon();
 		ItemButton:Show();
 	end
 
@@ -90,15 +86,13 @@ end
 
 function KeystoneLoot:UpdateCatalyst()
 	local slotId = KeystoneLootCharDB.selectedSlotId;
-	local classId = KeystoneLootCharDB.selectedClassId;
-	local specId = KeystoneLootCharDB.selectedSpecId;
 	local challengeModeId = Frame.challengeModeId;
 
 	local itemList;
 	if (slotId == -1) then
-		itemList = KeystoneLoot:GetFavoriteItemList(challengeModeId, specId);
+		itemList = KeystoneLoot:GetFavoriteItemList(challengeModeId);
 	else
-		itemList = KeystoneLoot:GetCatalystItemList(classId, slotId);
+		itemList = KeystoneLoot:GetCatalystItemList();
 	end
 
 	SetItems(itemList);

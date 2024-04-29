@@ -13,6 +13,20 @@ local function OnEnter(self)
 		GameTooltip:SetText(RETRIEVING_ITEM_INFO, RED_FONT_COLOR:GetRGB());
 	end
 
+	if (self.OtherSpec:IsShown()) then
+		local specNames = self.specNames;
+		local numSpecs = #specNames;
+
+		GameTooltip:AddLine(' ');
+		if (numSpecs == 2) then
+			GameTooltip:AddLine('|A:quest-important-available:16:16:0:0|a '..FOR_OR_SPECIALIZATIONS:format(specNames[1], specNames[2]));
+		elseif (numSpecs == 1) then
+				GameTooltip:AddLine('|A:quest-important-available:16:16:0:0|a '..FOR_SPECIALIZATION:format(specNames[1]));
+		else
+			GameTooltip:AddLine('|A:quest-important-available:16:16:0:0|a '..FOR_SPECIALIZATION:format(table.concat(self.specNames, '/')));
+		end
+	end
+
 	GameTooltip:Show();
 
 	local _, _, playerClassId = UnitClass('player');
@@ -72,7 +86,7 @@ local function OnClick(self)
 		self.isFavorite = true;
 		self.FavoriteStar:SetDesaturated(false);
 
-		local challengeModeId = self:GetParent().challengeModeId;
+		local challengeModeId = self:GetParent().challengeModeId or self:GetParent().bossId;
 		local icon = self.Icon:GetTexture();
 		KeystoneLoot:AddFavoriteItem(challengeModeId, specId, itemId, icon);
 	else
@@ -86,10 +100,59 @@ local function OnClick(self)
 	end
 end
 
+local function UpdateFavoriteStarIcon(self)
+	local itemId = self.itemId;
+	local specId = self.specId;
+
+	local isFavoriteItem = KeystoneLoot:IsFavoriteItem(itemId, specId);
+	self.isFavorite = isFavoriteItem;
+
+	local FavoriteStar = self.FavoriteStar;
+	FavoriteStar:SetDesaturated(not isFavoriteItem);
+	FavoriteStar:SetShown(isFavoriteItem);
+end
+
+local function UpdateOtherSpecIcon(self)
+	self.specNames = nil;
+	local OtherSpec = self.OtherSpec;
+
+	if (not self.isFavorite or not KeystoneLootDB.favoritesShowAllSpecs) then
+		OtherSpec:Hide();
+		return;
+	end
+
+	local itemId = self.itemId;
+	local itemInfo = KeystoneLoot:GetItemInfo(itemId);
+	if (itemInfo == nil) then
+		OtherSpec:Hide();
+		return;
+	end
+
+	local specNames = {};
+	local showIcon = true;
+	local selectedSpecId = KeystoneLootCharDB.selectedSpecId;
+	local _, _, playerClassId = UnitClass('player');
+
+	local specList = itemInfo.classes[playerClassId];
+	for index, specId in next, specList do
+		if (selectedSpecId == specId) then
+			showIcon = false;
+		else
+			local _, specName = GetSpecializationInfoByID(specId);
+			table.insert(specNames, specName);
+		end
+	end
+
+	self.specNames = specNames;
+	OtherSpec:SetShown(showIcon);
+end
+
 function KeystoneLoot:CreateItemButton(parent)
 	local Button = CreateFrame('Button', nil, parent);
 	Button:SetSize(32, 32);
 
+	Button.UpdateFavoriteStarIcon = UpdateFavoriteStarIcon;
+	Button.UpdateOtherSpecIcon = UpdateOtherSpecIcon;
 	Button.UpdateTooltip = OnEnter;
 	Button:SetScript('OnEnter', OnEnter);
 	Button:SetScript('OnLeave', OnLeave);
@@ -111,6 +174,13 @@ function KeystoneLoot:CreateItemButton(parent)
 	FavoriteStar:SetPoint('TOPRIGHT', 8, 8);
 	FavoriteStar:SetAtlas('PetJournal-FavoritesIcon');
 	FavoriteStar:Hide();
+
+	local OtherSpec = Button:CreateTexture(nil, 'ARTWORK', nil, 3);
+	Button.OtherSpec = OtherSpec;
+	OtherSpec:SetSize(18, 18);
+	OtherSpec:SetPoint('TOPLEFT', -6, 4);
+	OtherSpec:SetAtlas('quest-important-available');
+	OtherSpec:Hide();
 
 	return Button;
 end

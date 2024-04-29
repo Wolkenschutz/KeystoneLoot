@@ -24,6 +24,7 @@ locale\zhTW.lua
 database\items.lua
 database\dungeons.lua
 database\catalyst.lua
+database\raids.lua
 
 xui\overview_frame.lua
 xui\minimap_button.lua
@@ -37,6 +38,8 @@ xui\filter_button.lua
 xui\loot_reminder_frame.lua
 xui\catalyst_frame.lua
 xui\dungeons_tab.lua
+xui\raid_frame.lua
+xui\raid_tab_button.lua
 xui\raids_tab.lua
 
 upgrade_item.lua

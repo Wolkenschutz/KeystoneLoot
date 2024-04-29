@@ -10,8 +10,6 @@ local TabFrame = KeystoneLoot:CreateTab('dungeons', 1, DUNGEONS);
 
 function TabFrame:Update()
 	local slotId = KeystoneLootCharDB.selectedSlotId;
-	local classId = KeystoneLootCharDB.selectedClassId;
-	local specId = KeystoneLootCharDB.selectedSpecId;
 
 	KeystoneLoot:UpdateCatalyst();
 
@@ -19,21 +17,15 @@ function TabFrame:Update()
 		local challengeModeId = DungeonFrame.challengeModeId;
 		local itemList;
 		if (slotId == -1) then
-			itemList = KeystoneLoot:GetFavoriteItemList(challengeModeId, specId);
+			itemList = KeystoneLoot:GetFavoriteItemList(challengeModeId);
 		else
-			itemList = KeystoneLoot:GetDungeonItemList(challengeModeId, classId, specId, slotId);
+			itemList = KeystoneLoot:GetDungeonItemList(challengeModeId);
 		end
 
 		DungeonFrame:SetItems(itemList);
 		DungeonFrame:UpdateTeleport();
 	end
 end
-
-local NoSeasonText = TabFrame:CreateFontString('ARTWORK', nil, 'GameFontHighlightLarge');
-NoSeasonText:Hide();
-NoSeasonText:SetPoint('TOPLEFT', 20, -80);
-NoSeasonText:SetPoint('BOTTOMRIGHT', -20, 26);
-NoSeasonText:SetText(MYTHIC_PLUS_TAB_DISABLE_TEXT);
 
 local FilterBg = TabFrame:CreateTexture(nil, 'BACKGROUND');
 FilterBg:SetSize(340, 34);
@@ -151,8 +143,6 @@ end
 
 function SlotDropdownButton:GetList()
 	local selectedSlotId = KeystoneLootCharDB.selectedSlotId;
-	local selectedClassId = KeystoneLootCharDB.selectedClassId;
-	local selectedSpecId = KeystoneLootCharDB.selectedSpecId;
 	local _list = {};
 
 	local info = {};
@@ -170,7 +160,7 @@ function SlotDropdownButton:GetList()
 	for slotId, slotName in next, KeystoneLoot:GetSlotList() do
 		local id = slotId - 1;
 
-		local hasSlotItems = KeystoneLoot:HasDungeonSlotItems(id, selectedClassId, selectedSpecId);
+		local hasSlotItems = KeystoneLoot:HasDungeonSlotItems(id);
 		local info = {};
 		info.text = slotName;
 		info.hasGrayColor = not hasSlotItems;
@@ -195,27 +185,7 @@ local function SetItemLevel(categoryId, categoryRank)
 end
 
 function ItemLevelDropdownButton:UpdateText()
-	local selectedCategoryId, selectedCategoryRank = ('-'):split(KeystoneLootCharDB.selectedDungeonItemLevel);
-	local _itemLevels = KeystoneLoot:GetDungeonItemLevels();
-
-	if (#_itemLevels > 0 and selectedCategoryId == '0') then
-		selectedCategoryId, selectedCategoryRank = _itemLevels[1].id, 1;
-	end
-
-	local text = EMPTY;
-	for index, category in next, _itemLevels do
-		local entry = category.entries[tonumber(selectedCategoryRank)];
-
-		if (category.id == selectedCategoryId and entry) then
-			text = entry.text
-
-			KeystoneLoot:SetTooltipItemLevel(entry.itemLevel);
-			KeystoneLoot:SetTooltipUpgradeId(entry.bonusId);
-			break;
-		end
-	end
-
-	self.Text:SetText(text);
+	self.Text:SetText(KeystoneLoot:UpdateUpgradeTooltip() or EMPTY);
 end
 
 function ItemLevelDropdownButton:GetList()
@@ -275,7 +245,6 @@ end
 local function CreateDungeonFrames()
 	local dungeonList = KeystoneLoot:GetDungeonList();
 	if (dungeonList == nil) then
-		NoSeasonText:Show();
 		return;
 	end
 
@@ -322,10 +291,4 @@ do
 	end
 
 	TabFrame:SetScript('OnShow', OnShow);
-
-	local function OnHide(self)
-		KeystoneLoot:GetOverview().CatalystFrame:Hide();
-	end
-
-	TabFrame:SetScript('OnHide', OnHide);
 end
