@@ -109,6 +109,14 @@ local function LootSpec_OnClick(self)
 	PlaySound(SOUNDKIT.UI_CLASS_TALENT_SPEC_ACTIVATE);
 end
 
+local function IsOnItemList(specItemList, itemId)
+	for index, item in next, specItemList do
+		if (item.itemId == itemId) then
+			return true;
+		end
+	end
+end
+
 local function GetLootReminderItemList(challengeModeId)
 	local favoriteLoot = KeystoneLootCharDB.favoriteLoot;
 	local _itemList = {};
@@ -132,11 +140,13 @@ local function GetLootReminderItemList(challengeModeId)
 						_itemList[specId] = {};
 					end
 
-					table.insert(_itemList[specId], {
-						itemId = itemId,
-						specId = specId,
-						icon = itemInfo.icon
-					});
+					if (not IsOnItemList(_itemList[specId], itemId)) then
+						table.insert(_itemList[specId], {
+							itemId = itemId,
+							specId = specId,
+							icon = itemInfo.icon
+						});
+					end
 				end
 			end
 		end
@@ -195,6 +205,7 @@ local function CreateSpecializationFrame()
 	SpecFrame.itemFrames = {};
 	for index=1, 8 do
 		local ItemButton = KeystoneLoot:CreateItemButton(SpecFrame);
+		ItemButton.lootReminder = true;
 
 		if (index == 1) then
 			ItemButton:SetPoint('TOPLEFT', 11, -10);
@@ -213,6 +224,7 @@ local function CreateSpecializationFrame()
 			if (itemInfo) then
 				ItemButton.itemId = itemInfo.itemId;
 				ItemButton.specId = itemInfo.specId;
+				ItemButton.reminderBlocked = not KeystoneLoot:IsFavoriteItem(itemInfo.itemId, itemInfo.specId);
 
 				ItemButton.Icon:SetTexture(itemInfo.icon);
 				ItemButton:UpdateFavoriteStarIcon();
@@ -230,12 +242,7 @@ local function CreateSpecializationFrame()
 	return SpecFrame;
 end
 
-function KeystoneLoot:UpdateLootReminder()
-	if (not KeystoneLootDB.lootReminderEnabled) then
-		return;
-	end
-
-	local challengeModeId = C_ChallengeMode.GetActiveChallengeMapID();
+function KeystoneLoot:UpdateLootReminder(challengeModeId)
 	local numSpec = 0;
 	for specId, itemList in next, GetLootReminderItemList(challengeModeId) do
 		numSpec = numSpec + 1;

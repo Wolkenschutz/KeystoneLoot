@@ -23,11 +23,6 @@ SLASH_KEYSTONELOOT3 = "/keystoneloot";
 
 
 local function OnEvent(self, event, ...)
-	if (event == 'CHALLENGE_MODE_START') then
-		KeystoneLoot:UpdateLootReminder();
-		return;
-	end
-
 	self:UnregisterEvent(event);
 
 	KeystoneLoot:CheckDB();
@@ -39,5 +34,4 @@ end
 
 local handler = CreateFrame('Frame');
 handler:RegisterEvent('PLAYER_ENTERING_WORLD');
-handler:RegisterEvent('CHALLENGE_MODE_START');
 handler:SetScript('OnEvent', OnEvent);

@@ -289,6 +289,16 @@ do
 		self:Update();
 		self:SetSize(476, 100 + (_rows * 130));
 	end
-
 	TabFrame:SetScript('OnShow', OnShow);
+
+	local function OnEvent(self, event, ...)
+		if (not KeystoneLootDB.lootReminderEnabled) then
+			return;
+		end
+
+		local challengeModeId = C_ChallengeMode.GetActiveChallengeMapID();
+		KeystoneLoot:UpdateLootReminder(challengeModeId);
+	end
+	TabFrame:RegisterEvent('CHALLENGE_MODE_START');
+	TabFrame:SetScript('OnEvent', OnEvent);
 end

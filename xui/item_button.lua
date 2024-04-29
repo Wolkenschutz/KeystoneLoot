@@ -33,7 +33,7 @@ local function OnEnter(self)
 	local classId = KeystoneLootCharDB.selectedClassId;
 	local slotId = KeystoneLootCharDB.selectedSlotId;
 
-	if (not self.isFavorite and (classId == playerClassId or slotId == -1)) then
+	if (not self.isFavorite and (classId == playerClassId or slotId == -1) and not self.reminderBlocked) then
 		local FavoriteStar = self.FavoriteStar;
 
 		FavoriteStar:SetDesaturated(true);
@@ -72,12 +72,12 @@ local function OnClick(self)
 	local classId = KeystoneLootCharDB.selectedClassId;
 	local slotId = KeystoneLootCharDB.selectedSlotId;
 
-	if (classId ~= playerClassId and slotId ~= -1) then
+	if (classId ~= playerClassId and slotId ~= -1 or self.reminderBlocked) then
 		return;
 	end
 
 	local specId = KeystoneLootCharDB.selectedSpecId;
-	if (slotId == -1 and KeystoneLootDB.favoritesShowAllSpecs) then
+	if ((slotId == -1 and KeystoneLootDB.favoritesShowAllSpecs) or self.lootReminder) then
 		specId = self.specId;
 	end
 
