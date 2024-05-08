@@ -4,10 +4,11 @@ module.exports = {
 		{ types: [ "Fix" ], label: "Bugfixes" },
 		{ types: [ "Improvement" ], label: "Improvements" },
 		{ types: [ "Revert" ], label: "Reverts" },
-		{ types: [ "Other" ], label: "Other Changes" }
+		{ types: [ "Other", "other" ], label: "Other Changes" },
+		{ types: [ "Skip" ], label: "Skip" }
 	],
 	
-	excludeTypes: [],
+	excludeTypes: [ "Skip" ],
 
 	renderTypeSection: function (label, commits) {
 		let text = `\n## ${label}\n`;
