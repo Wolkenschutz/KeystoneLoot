@@ -109,12 +109,78 @@ local function LootSpec_OnClick(self)
 	PlaySound(SOUNDKIT.UI_CLASS_TALENT_SPEC_ACTIVATE);
 end
 
+-- https://gist.github.com/sapphyrus/fd9aeb871e3ce966cc4b0b969f62f539
+local function deep_equals(o1, o2, ignore_mt)
+    if (o1 == o2) then
+		return true;
+	end
+
+    local o1Type = type(o1);
+    local o2Type = type(o2);
+
+    if (o1Type ~= o2Type) then
+		return false;
+	end
+
+    if (o1Type ~= 'table') then
+		return false;
+	end
+
+    if (not ignore_mt) then
+        local mt1 = getmetatable(o1);
+        if (mt1 and mt1.__eq) then
+            return o1 == o2;
+        end
+    end
+
+    for key1, value1 in next, o1 do
+        local value2 = o2[key1];
+        if (value2 == nil or deep_equals(value1, value2, ignore_mt) == false) then
+            return false;
+        end
+    end
+
+    for key2 in next, o2 do
+        if (o1[key2] == nil) then
+			return false;
+		end
+    end
+
+    return true;
+end
+
 local function IsOnItemList(specItemList, itemId)
 	for index, item in next, specItemList do
 		if (item.itemId == itemId) then
 			return true;
 		end
 	end
+end
+
+local function IsEverythingTheSame(itemList)
+	local _tmp = {};
+	for specId, items in next, itemList do
+		_tmp[specId] = {};
+
+		for _, item in next, items do
+			table.insert(_tmp[specId], item.itemId);
+		end
+
+		table.sort(_tmp[specId], function(a, b)
+			return a < b;
+		end);
+	end
+
+    local firstSubtable;
+    for _, subtable in next, _tmp do
+        if (not firstSubtable) then
+            firstSubtable = subtable
+        elseif (not deep_equals(firstSubtable, subtable)) then
+            return false
+        end
+    end
+
+    return true
 end
 
 local function GetLootReminderItemList(challengeModeId)
@@ -162,7 +228,7 @@ local function GetLootReminderItemList(challengeModeId)
 		countSpecs = countSpecs + 1;
 	end
 
-	if (countSpecs == 1 and _itemList[lootSpecId]) then
+	if ((countSpecs == 1 and _itemList[lootSpecId]) or (countSpecs > 1 and _itemList[lootSpecId] and IsEverythingTheSame(_itemList))) then
 		return {};
 	end
 
