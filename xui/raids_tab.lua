@@ -3,6 +3,12 @@ local AddonName, KeystoneLoot = ...;
 local Translate = KeystoneLoot.Translate;
 
 local _raidTabInfos = {};
+local difficultyIds = {
+	[DifficultyUtil.ID.PrimaryRaidLFR] = true,
+	[DifficultyUtil.ID.PrimaryRaidNormal] = true,
+	[DifficultyUtil.ID.PrimaryRaidHeroic] = true,
+	[DifficultyUtil.ID.PrimaryRaidMythic] = true,
+};
 
 
 local TabFrame = KeystoneLoot:CreateTab('raids', 2, RAIDS);
@@ -33,23 +39,6 @@ function TabFrame:Update()
 	end
 
 	self:SetSize(36 + (raidTabInfos.column * 290), 146 + (raidTabInfos.row * 90));
-end
-
-
-do -- TODO: Später wieder entfernen.
-	local GlowArrow = CreateFrame('Frame', 'KeystoneLootRaidGlowArrow', TabFrame.Tab, 'GlowBoxArrowTemplate');
-	TabFrame.Tab.GlowArrow = GlowArrow;
-	GlowArrow:SetFrameLevel(510);
-	GlowArrow:SetPoint('TOP', TabFrame.Tab, 'BOTTOM', 7, -5);
-	GlowArrow.Arrow:SetSize(40, 16);
-	GlowArrow.Arrow:SetRotation(math.rad(180));
-	GlowArrow.Glow:Hide();
-
-	local NewText = GlowArrow:CreateFontString('ARTWORK', nil, 'GameFontNormal');
-	NewText:SetPoint('TOP', GlowArrow, 'BOTTOM', -6, 0);
-	NewText:SetSize(40, 10);
-	NewText:SetJustifyH('CENTER');
-	NewText:SetText(NEW:upper());
 end
 
 
@@ -310,7 +299,9 @@ local function CreateBossFrames(parent, bossList)
 
 		local name = EJ_GetEncounterInfo(bossInfo.bossId);
 		RaidBossFrame.Title:SetText(Translate[name]);
-		SetPortraitTextureFromCreatureDisplayID(RaidBossFrame.BossIcon, bossInfo.bossTexture);
+
+		local _, _, _, bossTexture = EJ_GetCreatureInfo(1, bossInfo.bossId);
+		SetPortraitTextureFromCreatureDisplayID(RaidBossFrame.BossIcon, bossTexture);
 
 		table.insert(raidTabInfos.frames, RaidBossFrame);
 	end
@@ -349,17 +340,31 @@ do
 
 		self:Update();
 		KeystoneLoot:GetCurrentRaidTab():UpdateSize();
-
-		-- TODO: Später wieder entfernen.
-		self.Tab.GlowArrow:Hide();
-		KeystoneLootDB.showNewText = false;
 	end
-
 	TabFrame:SetScript('OnShow', OnShow);
 
-	-- TODO: Später wieder entfernen.
-	TabFrame.Tab:SetScript('OnShow', function(self)
-		self.GlowArrow:SetShown(KeystoneLootDB.showNewText);
-		self:SetScript('OnShow', nil);
-	end);
+	local blacklistedNpc = {};
+	local function OnEvent(self, event, ...)
+		if (not KeystoneLootDB.raidLootReminderEnabled) then
+			return;
+		end
+
+		local guid = UnitGUID('target') or '';
+		local _, type, difficultyId = GetInstanceInfo();
+		local unitType, _, _, _, _, npcId = ('-'):split(guid);
+		if (InCombatLockdown() or unitType ~= 'Creature' or type ~= 'raid' or (npcId and blacklistedNpc[npcId]) or not difficultyIds[difficultyId] or UnitIsDead('target')) then
+			return;
+		end
+
+		local bossId = KeystoneLoot:GetRaidBossId(tonumber(npcId));
+		if (bossId == 0) then
+			return;
+		end
+
+		KeystoneLoot:UpdateLootReminder(bossId);
+
+		blacklistedNpc[npcId] = true;
+	end
+	TabFrame:RegisterEvent('PLAYER_TARGET_CHANGED');
+	TabFrame:SetScript('OnEvent', OnEvent);
 end

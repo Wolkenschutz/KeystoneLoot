@@ -29,7 +29,7 @@ local function OnMouseUp(self)
 end
 
 local function OnShow(self)
-	--self.GlowArrow:SetShown(KeystoneLootDB.showNewText);
+	self.GlowArrow:SetShown(KeystoneLootDB.showNewText);
 end
 
 local OverviewFrame = KeystoneLoot:GetOverview();
@@ -127,11 +127,13 @@ function Button:GetList()
 	table.insert(_list, info);
 
 	local info = {};
-	info.text = Translate['Enable Loot Reminder'];
-	info.checked = false;
+	info.text = YELLOW_FONT_COLOR:WrapTextInColorCode(NEW:upper())..' '..Translate['Enable Loot Reminder']; -- TODO: -NEU- Später wieder entfernen.
+	info.checked = KeystoneLootDB.raidLootReminderEnabled;
 	info.keepShownOnClick = true;
-	info.disabled = true;
-	info.hasGrayColor = true;
+	info.args = not KeystoneLootDB.raidLootReminderEnabled;
+	info.func = function (enable)
+		KeystoneLootDB.raidLootReminderEnabled = enable;
+	end;
 	table.insert(_list, info);
 
 	return _list;
