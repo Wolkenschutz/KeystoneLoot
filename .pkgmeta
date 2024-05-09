@@ -6,10 +6,9 @@ ignore:
   - .github
   - .luacheckrc
   - CHANGELOG.md
-  - CHANGELOG_MANUAL.md
   - LICENSE.md
   - README.md
 
 manual-changelog:
-  filename: CHANGELOG_MANUAL.md
+  filename: CHANGELOG_LATEST.md
   markup-type: markdown

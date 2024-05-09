@@ -1,4 +1,60 @@
-# Old Changelog (No longer used)
+# Changelog
+
+## 1.7.1
+### Bugfixes
+- Fixed missing texture for Glimmeron.
+- Fixed a bug in loot reminder where the same item was shown multiple times.
+- Fixed a bug that displayed the loot reminder when it wasn't necessary.
+### Improvements
+- Loot reminder enabled for raids.
+### Other Changes
+- TOC version updated.
+
+## 1.7.0
+### New Feature
+- KeystoneLoot now includes raids. \o/
+### Bugfixes
+- Items from 'Miscellaneous' now have the correct tooltip.
+### Improvements
+- M+0 has been added to the item levels for Champion for completeness.
+- Now, a small exclamation mark appears on the item icons in the favorites when it drops for a different specialization.
+### Other Changes
+- English is now always loaded as the default language and can be overridden by other languages.
+
+## 1.6.1
+### Improvements
+- Added Dragonflight Season 4 Catalyst items
+### Other Changes
+- Season 4 activated
+
+## 1.6.0
+### New Features
+- Dungeon teleports added. A small button next to the title.
+- The window now closes with the ESC key.
+### Bugfixes
+- The season is no longer automatically detected. There were too many errors.
+- The minimap button is now displayed correctly.
+### Improvements
+- Some parts of the code have been completely reworked.
+### Other Changes
+- Season 4 information added.
+- All settings have been reset due to the rework.
+- TOC version updated.
+
+
+## 1.5.3
+### Other Changes
+- Update ruRU by Hollicsh
+
+## 1.5.2
+### Improvements
+  - Renew Options, now directly in KeystoneLoot
+  - New Option, Favorites across all specializations
+### Bugfixes
+  - Bump DB Version
+  - Fixed Catalyst items for new favorites option
+  - Fixed Catalyst items for people who had never favorited a Catalyst item (Thanks Kuuhaku@WoW)
+
 ## 1.5.1
 * If no specialization name was present, there was a nil error.
 * Update ruRU. (Thanks Valdemar@Github)
