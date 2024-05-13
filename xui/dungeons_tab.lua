@@ -267,9 +267,6 @@ local function CreateDungeonFrames()
 		DungeonFrame.Title:SetText(Translate[name]);
 		DungeonFrame.Bg:SetTexture(dungeonInfo.bgTexture);
 
-		local _, _, icon = GetSpellInfo(dungeonInfo.teleportSpellId);
-		DungeonFrame.TeleportButton.Icon:SetTexture(icon);
-
 		table.insert(_dungeonFrames, DungeonFrame);
 	end
 end

@@ -18,31 +18,23 @@ local function Teleport_OnLeave(self)
 	GameTooltip:Hide();
 end
 
-function KeystoneLoot:CreateDungeonFrame(parent)
-	local Frame = CreateFrame('Frame', nil, parent, 'InsetFrameTemplate');
-	Frame:SetSize(180, 90);
+local function Teleport_PreCast(self, key, isDown)
+	if (isDown and InCombatLockdown()) then
+		print(RED_FONT_COLOR:WrapTextInColorCode(ERR_NOT_IN_COMBAT));
+	end
+end
 
-	local FrameBg = Frame.Bg;
-	FrameBg:SetHorizTile(false);
-	FrameBg:SetVertTile(false);
-	FrameBg:SetTexCoord(5/256, 169/256, 5/128, 91/128);
-
-	local Title = Frame:CreateFontString('ARTWORK', nil, 'GameFontDisableLarge');
-	Frame.Title = Title;
-	Title:SetMaxLines(1);
-	Title:SetWidth(160);
-	Title:SetJustifyH('LEFT');
-	Title:SetPoint('BOTTOMLEFT', Frame, 'TOPLEFT', 0, 5);
-
-	local TeleportButton = CreateFrame('Button', nil, Frame, 'InsecureActionButtonTemplate');
-	Frame.TeleportButton = TeleportButton;
+local function CreateTeleportButton(parent)
+	local TeleportButton = CreateFrame('Button', nil, parent, 'InsecureActionButtonTemplate');
+	parent.TeleportButton = TeleportButton;
 	TeleportButton:Hide();
 	TeleportButton:RegisterForClicks('AnyUp', 'AnyDown');
 	TeleportButton:SetSize(19, 19);
-	TeleportButton:SetPoint('BOTTOMRIGHT', Frame, 'TOPRIGHT', 0, 3);
+	TeleportButton:SetPoint('BOTTOMRIGHT', parent, 'TOPRIGHT', 0, 3);
 	TeleportButton.UpdateTooltip = Teleport_OnEnter;
 	TeleportButton:SetScript('OnEnter', Teleport_OnEnter);
 	TeleportButton:SetScript('OnLeave', Teleport_OnLeave);
+	TeleportButton:SetScript('PreClick', Teleport_PreCast);
 	TeleportButton:SetPushedTexture('Interface\\Buttons\\UI-Quickslot-Depress');
 	TeleportButton:SetHighlightTexture('Interface\\Buttons\\ButtonHilight-Square', 'ADD');
 
@@ -66,6 +58,25 @@ function KeystoneLoot:CreateDungeonFrame(parent)
 	NoTeleportTexture:SetPoint('CENTER');
 	NoTeleportTexture:SetTexture('Interface\\Buttons\\UI-GroupLoot-Pass-Up');
 
+	return TeleportButton;
+end
+
+function KeystoneLoot:CreateDungeonFrame(parent)
+	local Frame = CreateFrame('Frame', nil, parent, 'InsetFrameTemplate');
+	Frame:SetSize(180, 90);
+
+	local FrameBg = Frame.Bg;
+	FrameBg:SetHorizTile(false);
+	FrameBg:SetVertTile(false);
+	FrameBg:SetTexCoord(5/256, 169/256, 5/128, 91/128);
+
+	local Title = Frame:CreateFontString('ARTWORK', nil, 'GameFontDisableLarge');
+	Frame.Title = Title;
+	Title:SetMaxLines(1);
+	Title:SetWidth(160);
+	Title:SetJustifyH('LEFT');
+	Title:SetPoint('BOTTOMLEFT', Frame, 'TOPLEFT', 0, 5);
+
 	Frame.itemFrames = {};
 	for index=1, 8 do
 		local ItemButton = self:CreateItemButton(Frame);
@@ -88,10 +99,17 @@ function KeystoneLoot:CreateDungeonFrame(parent)
 	end
 
 	function Frame:UpdateTeleport()
-		local TeleportButton = self.TeleportButton;
+		if (InCombatLockdown()) then
+			return;
+		end
+
+		local TeleportButton = self.TeleportButton or CreateTeleportButton(self);
 		local teleportSpellId = self.teleportSpellId;
 
-		if (not InCombatLockdown() and not self.initTeleport) then
+		if (not self.initTeleport) then
+			local _, _, icon = GetSpellInfo(teleportSpellId);
+			TeleportButton.Icon:SetTexture(icon);
+
 			TeleportButton:SetAttribute('type', 'spell');
 			TeleportButton:SetAttribute('spell', teleportSpellId);
 			TeleportButton:Show();
