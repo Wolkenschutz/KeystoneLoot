@@ -34,7 +34,7 @@ function KeystoneLoot:CreateDungeonFrame(parent)
 	Title:SetJustifyH('LEFT');
 	Title:SetPoint('BOTTOMLEFT', Frame, 'TOPLEFT', 0, 5);
 
-	local TeleportButton = CreateFrame('Button', nil, Frame, 'SecureActionButtonTemplate');
+	local TeleportButton = CreateFrame('Button', nil, Frame, 'InsecureActionButtonTemplate');
 	Frame.TeleportButton = TeleportButton;
 	TeleportButton:Hide();
 	TeleportButton:RegisterForClicks('AnyUp', 'AnyDown');
