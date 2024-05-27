@@ -8,7 +8,7 @@
 
 ## 1.7.2 - 2024-05-13
 
-## Bugfixes
+### Bugfixes
 
 - Fixed an error that caused a Taint error "CastSpellById".
 - Allow the frame to be opened and closed while in combat.
