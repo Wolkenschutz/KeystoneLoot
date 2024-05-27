@@ -1,6 +1,6 @@
 module.exports = {
 	types: [
-		{ types: [ "New Feature" ], label: "New Features" },
+		{ types: [ "Feature" ], label: "New Features" },
 		{ types: [ "Fix" ], label: "Bugfixes" },
 		{ types: [ "Improvement" ], label: "Improvements" },
 		{ types: [ "Revert" ], label: "Reverts" },
