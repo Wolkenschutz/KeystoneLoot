@@ -15,7 +15,7 @@
 
 ## 1.7.1
 
-### Bugfixes
+## Bugfixes
 
 - Fixed missing texture for Glimmeron.
 - Fixed a bug in loot reminder where the same item was shown multiple times.
