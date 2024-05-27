@@ -19,42 +19,35 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Create Changelog Content
-        id: changelog
-        uses: loopwerk/tag-changelog@v1.3.0
-        with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            config_file: .github/actions-changelog-config.js   
+#      - name: Create Changelog Content
+#        id: changelog
+#        uses: loopwerk/tag-changelog@v1.3.0
+#        with:
+#            token: ${{ secrets.GITHUB_TOKEN }}
+#            config_file: .github/actions-changelog-config.js   
             
-#      - name: Update Release
+#     - name: Update Release
 #        uses: mini-bomba/create-github-release@v1.1.3
 #        with:
 #          token: ${{ secrets.GITHUB_TOKEN }}
 #          tag: ${{ github.event.release.tag_name }}
 #          body: ${{ steps.changelog.outputs.changes }}
           
-      - name: Update release
-        uses: tubone24/update_release@v1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          body: ${{ steps.changelog.outputs.changes }}
-          
-      - name: Update Changelog
-        uses: stefanzweifel/changelog-updater-action@v1
-        with:
-          latest-version: ${{ github.event.release.tag_name }}
-          release-notes: ${{ steps.changelog.outputs.changes }}
+#      - name: Update Changelog
+#        uses: stefanzweifel/changelog-updater-action@v1
+#        with:
+#          latest-version: ${{ github.event.release.tag_name }}
+#          release-notes: ${{ steps.changelog.outputs.changes }}
 
-      - name: Commit New Changelog
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          branch: ${{ github.event.release.target_commitish }}
-          commit_message: "Skip: Added last Changes"
-          file_pattern: CHANGELOG.md
+#      - name: Commit New Changelog
+#        uses: stefanzweifel/git-auto-commit-action@v5
+#        with:
+#          branch: ${{ github.event.release.target_commitish }}
+#          commit_message: "Skip: Added last Changes"
+#          file_pattern: CHANGELOG.md
           
-      - name: Create Latest Changelog    
-        run: echo "${{ steps.changelog.outputs.changes }}" >> CHANGELOG_LATEST.md
+#      - name: Create Latest Changelog    
+#        run: echo "${{ steps.changelog.outputs.changes }}" >> CHANGELOG_LATEST.md
 
       - name: Pack it up and upload it
         uses: BigWigsMods/packager@v2
