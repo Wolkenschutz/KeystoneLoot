@@ -26,13 +26,20 @@ jobs:
             token: ${{ secrets.GITHUB_TOKEN }}
             config_file: .github/actions-changelog-config.js   
             
-      - name: Update Release
-        uses: mini-bomba/create-github-release@v1.1.3
+#      - name: Update Release
+#        uses: mini-bomba/create-github-release@v1.1.3
+#        with:
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          tag: ${{ github.event.release.tag_name }}
+#          body: ${{ steps.changelog.outputs.changes }}
+          
+      - name: Update release
+        uses: tubone24/update_release@v1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.event.release.tag_name }}
           body: ${{ steps.changelog.outputs.changes }}
-                        
+          
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@v1
         with:
