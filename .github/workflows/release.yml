@@ -19,12 +19,12 @@ jobs:
         with:
           fetch-depth: 0
 
-#      - name: Create Changelog Content
-#        id: changelog
-#        uses: loopwerk/tag-changelog@v1.3.0
-#        with:
-#            token: ${{ secrets.GITHUB_TOKEN }}
-#            config_file: .github/actions-changelog-config.js   
+      - name: Create Changelog Content
+        id: changelog
+        uses: loopwerk/tag-changelog@v1.3.0
+        with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            config_file: .github/actions-changelog-config.js   
             
 #     - name: Update Release
 #        uses: mini-bomba/create-github-release@v1.1.3
