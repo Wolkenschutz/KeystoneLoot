@@ -2,9 +2,9 @@
 
 ## 1.8.0 - 2024-05-27
 
-### Other Changes
+### New Features
 
-- New Feature: Show item level in keystone tooltip
+- Show item level in keystone tooltip
 
 ## 1.7.2 - 2024-05-13
 
