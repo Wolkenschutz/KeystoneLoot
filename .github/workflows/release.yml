@@ -38,6 +38,14 @@ jobs:
         with:
           latest-version: ${{ github.event.release.tag_name }}
           release-notes: ${{ steps.changelog.outputs.changes }}
+          
+      - name: Create Latest Changelog    
+        run: echo "${{ steps.changelog.outputs.changes }}" >> CHANGELOG_LATEST.md
+
+      - name: Pack it up and upload it
+        uses: BigWigsMods/packager@v2
+        with:
+          args: -p 879797 -w 26597 -n "{package-name}-{project-version}" -d
 
       - name: Commit New Changelog
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -45,11 +53,3 @@ jobs:
           branch: ${{ github.event.release.target_commitish }}
           commit_message: "Skip: Added last Changes"
           file_pattern: CHANGELOG.md
-          
-#      - name: Create Latest Changelog    
-#        run: echo "${{ steps.changelog.outputs.changes }}" >> CHANGELOG_LATEST.md
-
-      - name: Pack it up and upload it
-        uses: BigWigsMods/packager@v2
-        with:
-          args: -p 879797 -w 26597 -n "{package-name}-{project-version}" -d
