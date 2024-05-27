@@ -33,11 +33,11 @@ jobs:
           tag: ${{ github.event.release.tag_name }}
           body: ${{ steps.changelog.outputs.changes }}
           
-#      - name: Update Changelog
-#        uses: stefanzweifel/changelog-updater-action@v1
-#        with:
-#          latest-version: ${{ github.event.release.tag_name }}
-#          release-notes: ${{ steps.changelog.outputs.changes }}
+      - name: Update Changelog
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ github.event.release.tag_name }}
+          release-notes: ${{ steps.changelog.outputs.changes }}
 
 #      - name: Commit New Changelog
 #        uses: stefanzweifel/git-auto-commit-action@v5
