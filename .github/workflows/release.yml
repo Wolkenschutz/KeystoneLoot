@@ -39,12 +39,12 @@ jobs:
           latest-version: ${{ github.event.release.tag_name }}
           release-notes: ${{ steps.changelog.outputs.changes }}
 
-#      - name: Commit New Changelog
-#        uses: stefanzweifel/git-auto-commit-action@v5
-#        with:
-#          branch: ${{ github.event.release.target_commitish }}
-#          commit_message: "Skip: Added last Changes"
-#          file_pattern: CHANGELOG.md
+      - name: Commit New Changelog
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: ${{ github.event.release.target_commitish }}
+          commit_message: "Skip: Added last Changes"
+          file_pattern: CHANGELOG.md
           
 #      - name: Create Latest Changelog    
 #        run: echo "${{ steps.changelog.outputs.changes }}" >> CHANGELOG_LATEST.md
