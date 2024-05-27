@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.8.0h - 2024-05-27
+
+### Other Changes
+
+- New Feature: Show item level in keystone tooltip
+
 ## 1.8.0g - 2024-05-27
 
 ### Other Changes
