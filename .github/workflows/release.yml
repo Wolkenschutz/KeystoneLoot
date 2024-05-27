@@ -52,4 +52,4 @@ jobs:
       - name: Pack it up and upload it
         uses: BigWigsMods/packager@v2
         with:
-          args: -p 879797 -w 26597 -n "{package-name}-{project-version}"
+          args: -p 879797 -w 26597 -n "{package-name}-{project-version}" -d
