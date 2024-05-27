@@ -15,5 +15,7 @@ Translate['%s (%s Season %d)'] = '%s（%s 第 %d 赛季）';
 Translate['Veteran'] = '老兵';
 Translate['Champion'] = '勇士';
 Translate['Hero'] = '英雄';
+Translate['Myth'] = '神话';
 Translate['Revival Catalyst'] = '复苏化生台';
 Translate['Correct loot specialization set?'] = '设置正确的战利品专精吗？';
+--Translate['Show Item Level On Keystone'] = '';

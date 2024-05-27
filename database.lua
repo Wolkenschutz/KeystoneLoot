@@ -1,6 +1,6 @@
 local AddonName, KeystoneLoot = ...;
 
-local dbVersion = 3;
+local dbVersion = 4;
 local dbCharacterVersion = 2;
 
 
@@ -35,6 +35,9 @@ function KeystoneLoot:CheckDB()
 		elseif (KeystoneLootDB.dbVersion == 2) then
 			KeystoneLootDB.showNewText = true;
 			KeystoneLootDB.raidLootReminderEnabled = true;
+		elseif (KeystoneLootDB.dbVersion == 3) then
+			KeystoneLootDB.showNewText = true;
+			KeystoneLootDB.keystoneItemLevelEnabled = true;
 		end
 
 		KeystoneLootDB.dbVersion = KeystoneLootDB.dbVersion + 1;

@@ -43,4 +43,5 @@ xui\raids_tab.lua
 
 upgrade_item.lua
 database.lua
+keystone_tooltip.lua
 app.lua

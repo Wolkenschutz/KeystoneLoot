@@ -103,6 +103,16 @@ function Button:GetList()
 	table.insert(_list, info);
 
 	local info = {};
+	info.text = YELLOW_FONT_COLOR:WrapTextInColorCode(NEW:upper())..' '..Translate['Show Item Level In Keystone Tooltip']; -- TODO: -NEU- Später wieder entfernen.
+	info.checked = KeystoneLootDB.keystoneItemLevelEnabled;
+	info.keepShownOnClick = true;
+	info.args = not KeystoneLootDB.keystoneItemLevelEnabled;
+	info.func = function (enable)
+		KeystoneLootDB.keystoneItemLevelEnabled = enable;
+	end;
+	table.insert(_list, info);
+
+	local info = {};
 	info.text = NORMAL_FONT_COLOR:WrapTextInColorCode(DUNGEONS);
 	info.checked = false;
 	info.notCheckable = true;
@@ -127,7 +137,7 @@ function Button:GetList()
 	table.insert(_list, info);
 
 	local info = {};
-	info.text = YELLOW_FONT_COLOR:WrapTextInColorCode(NEW:upper())..' '..Translate['Enable Loot Reminder']; -- TODO: -NEU- Später wieder entfernen.
+	info.text = Translate['Enable Loot Reminder'];
 	info.checked = KeystoneLootDB.raidLootReminderEnabled;
 	info.keepShownOnClick = true;
 	info.args = not KeystoneLootDB.raidLootReminderEnabled;

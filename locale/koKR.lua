@@ -15,5 +15,7 @@ Translate['%s (%s Season %d)'] = '%s (%s 시즌 %d)';
 Translate['Veteran'] = '노련가';
 Translate['Champion'] = '챔피언';
 Translate['Hero'] = '영웅';
+Translate['Myth'] = '신화';
 Translate['Revival Catalyst'] = '소생의 촉매';
 Translate['Correct loot specialization set?'] = '올바른 전리품 전문화 설정?';
+--Translate['Show Item Level On Keystone'] = '';
