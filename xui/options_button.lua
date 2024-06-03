@@ -3,11 +3,11 @@ local AddonName, KeystoneLoot = ...;
 local Translate = KeystoneLoot.Translate;
 
 
-local function OnEnter(self)
+local function OnEnter(self) -- Kann weg mit TWW
 	self:SetAlpha(1);
 end
 
-local function OnLeave(self)
+local function OnLeave(self) -- Kann weg mit TWW
 	self:SetAlpha(0.7);
 end
 
@@ -22,10 +22,12 @@ end
 
 local function OnMouseDown(self)
 	self.GearTexture:SetPoint('CENTER', 1, -1);
+	--self.HighlightTexture:SetPoint('CENTER', 1, -1);
 end
 
 local function OnMouseUp(self)
 	self.GearTexture:SetPoint('CENTER');
+	--self.HighlightTexture:SetPoint('CENTER');
 end
 
 local function OnShow(self)
@@ -36,14 +38,14 @@ local OverviewFrame = KeystoneLoot:GetOverview();
 
 local Button = CreateFrame('Button', nil, OverviewFrame);
 OverviewFrame.OptionsButton = Button;
-Button:SetAlpha(0.7);
+Button:SetAlpha(0.7); -- Kann weg mit TWW
 Button:SetSize(18, 18);
 Button:SetFrameLevel(510);
 Button:RegisterForClicks('LeftButtonUp', 'RightButtonUp');
 Button:SetPoint('TOPRIGHT', -28, -3);
 Button:SetScript('OnShow', OnShow);
-Button:SetScript('OnEnter', OnEnter);
-Button:SetScript('OnLeave', OnLeave);
+Button:SetScript('OnEnter', OnEnter); -- Kann weg mit TWW
+Button:SetScript('OnLeave', OnLeave); -- Kann weg mit TWW
 Button:SetScript('OnClick', OnClick);
 Button:SetScript('OnMouseDown', OnMouseDown);
 Button:SetScript('OnMouseUp', OnMouseUp);
@@ -53,6 +55,18 @@ Button.GearTexture = GearTexture;
 GearTexture:SetSize(18, 18);
 GearTexture:SetPoint('CENTER');
 GearTexture:SetTexture('Interface\\WorldMap\\GEAR_64GREY');
+
+-- local GearTexture = Button:CreateTexture(nil, 'ARTWORK');
+-- Button.GearTexture = GearTexture;
+-- GearTexture:SetPoint('CENTER');
+-- GearTexture:SetAtlas('questlog-icon-setting', true);
+
+-- local HighlightTexture = Button:CreateTexture(nil, 'HIGHLIGHT');
+-- Button.HighlightTexture = HighlightTexture;
+-- HighlightTexture:SetPoint('CENTER');
+-- HighlightTexture:SetAtlas('questlog-icon-setting', true);
+-- HighlightTexture:SetBlendMode('ADD');
+-- HighlightTexture:SetAlpha(0.4);
 
 local GlowArrow = CreateFrame('Frame', 'KeystoneLootGlowArrow', OverviewFrame, 'GlowBoxArrowTemplate');
 Button.GlowArrow = GlowArrow;
