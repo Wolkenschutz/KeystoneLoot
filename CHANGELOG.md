@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.8.1 - 2024-06-05
+
+### Improvements
+
+- The dropdown menu now has the new design from TWW.
+- The options icon has the new design from TWW.
+
 ## 1.8.0 - 2024-05-27
 
 ### New Features
