@@ -20,4 +20,4 @@ Translate['Revival Catalyst'] = 'Катализатор возрождения';
 Translate['Рассвет Бесконечности: падение Галакронда'] = 'Падение Галакронда';
 Translate['Рассвет Бесконечности: подъем Дорнозму'] = 'Подъем Дорнозму';
 Translate['Correct loot specialization set?'] = 'Правильная установка специализации для добычи?';
-Translate['Show Item Level In Keystone Tooltip'] = 'Показать уровень предмета в подсказке Keystone';
+Translate['Show Item Level In Keystone Tooltip'] = 'Показать уровень предмета во всплывающей подсказке ключа';
