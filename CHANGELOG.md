@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.8.2 - 2024-06-11
+
+### Bugfixes
+
+- Catalyst items for Monk and Evoker now display the correct tooltip. #22
+
+### Other Changes
+
+- Update ruRU.lua
+- Update ruRU.lua
+- Merge pull request [#21](https://github.com/Wolkenschutz/KeystoneLoot/pull/21) by [Hollicsh](https://github.com/Hollicsh) from Hollicsh/patch-4
+
 ## 1.8.1 - 2024-06-05
 
 ### Improvements
