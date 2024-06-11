@@ -9,8 +9,6 @@
 ### Other Changes
 
 - Update ruRU.lua
-- Update ruRU.lua
-- Merge pull request [#21](https://github.com/Wolkenschutz/KeystoneLoot/pull/21) by [Hollicsh](https://github.com/Hollicsh) from Hollicsh/patch-4
 
 ## 1.8.1 - 2024-06-05
 
