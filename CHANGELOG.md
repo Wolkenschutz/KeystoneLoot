@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.8.3 - 2024-06-28
+
+### Other Changes
+
+- Update zhTW.lua
+- Update zhCN.lua
+- Update zhTW.lua
+- Update zhTW/zhCN from EKE00372
+
 ## 1.8.2 - 2024-06-11
 
 ### Bugfixes
