@@ -18,4 +18,4 @@ Translate['Hero'] = '英雄';
 Translate['Myth'] = '史詩';
 Translate['Revival Catalyst'] = '重生育籃';
 Translate['Correct loot specialization set?'] = '戰利品專精的設定是否正確？';
-Translate['Show Item Level On Keystone'] = '在傳奇鑰石顯示物品等級';
+Translate['Show Item Level On Keystone'] = '在傳奇鑰石顯示對應等級';
