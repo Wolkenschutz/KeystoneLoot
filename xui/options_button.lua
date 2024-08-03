@@ -116,7 +116,7 @@ function Button:GetList()
 	table.insert(_list, info);
 
 	local info = {};
-	info.text = YELLOW_FONT_COLOR:WrapTextInColorCode(NEW:upper())..' '..Translate['Show Item Level In Keystone Tooltip']; -- TODO: -NEU- Später wieder entfernen.
+	info.text = Translate['Show Item Level In Keystone Tooltip'];
 	info.checked = KeystoneLootDB.keystoneItemLevelEnabled;
 	info.keepShownOnClick = true;
 	info.args = not KeystoneLootDB.keystoneItemLevelEnabled;
