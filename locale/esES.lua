@@ -20,4 +20,4 @@ Translate['Revival Catalyst'] = 'Catalizador de reanimación';
 Translate['El Alba del Infinito: Caída de Galakrond'] = 'Caída de Galakrond';
 Translate['El Alba del Infinito: El Ascenso de Murozond'] = 'Ascenso de Murozond';
 Translate['Correct loot specialization set?'] = '¿Establecer especialización de botín correcta?';
---Translate['Show Item Level On Keystone'] = '';
+--Translate['Show Item Level In Keystone Tooltip'] = '';

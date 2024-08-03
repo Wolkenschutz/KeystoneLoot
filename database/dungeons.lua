@@ -96,42 +96,6 @@ end
 
 
 local _itemlevels = {
-	-- [11] = {
-	-- 	{ id = 'veteran', text = 'Veteran', entries = {
-	-- 		{ itemLevel = 441, bonusId = 9552, text = ITEM_POOR_COLOR_CODE..'441|r | +2' },
-	-- 		{ itemLevel = 444, bonusId = 9553, text = ITEM_POOR_COLOR_CODE..'444|r | +3 +4' },
-	-- 		{ itemLevel = 447, bonusId = 9554, text = ITEM_POOR_COLOR_CODE..'447|r | +5 +6' },
-	-- 		{ itemLevel = 450, bonusId = 9555, text = ITEM_POOR_COLOR_CODE..'450|r | +7 +8' },
-	-- 		{ itemLevel = 454, bonusId = 9556, text = ITEM_GOOD_COLOR_CODE..'454|r | '..ITEM_UPGRADE },
-	-- 		{ itemLevel = 457, bonusId = 9557, text = ITEM_GOOD_COLOR_CODE..'457|r | '..ITEM_UPGRADE },
-	-- 		{ itemLevel = 460, bonusId = 9558, text = ITEM_GOOD_COLOR_CODE..'460|r | '..ITEM_UPGRADE },
-	-- 		{ itemLevel = 463, bonusId = 9559, text = ITEM_GOOD_COLOR_CODE..'463|r | '..ITEM_UPGRADE }
-	-- 	} },
-	-- 	{ id = 'champion', text = 'Champion', entries = {
-	-- 		{ itemLevel = 454, bonusId = 9560, text = ITEM_GOOD_COLOR_CODE..'454|r | +9 +10' },
-	-- 		{ itemLevel = 457, bonusId = 9561, text = ITEM_GOOD_COLOR_CODE..'457|r | +11 +12' },
-	-- 		{ itemLevel = 460, bonusId = 9562, text = ITEM_GOOD_COLOR_CODE..'460|r | +13 +14' },
-	-- 		{ itemLevel = 463, bonusId = 9563, text = ITEM_GOOD_COLOR_CODE..'463|r | +15 +16' },
-	-- 		{ itemLevel = 467, bonusId = 9564, text = ITEM_SUPERIOR_COLOR_CODE..'467|r | '..ITEM_UPGRADE },
-	-- 		{ itemLevel = 470, bonusId = 9565, text = ITEM_SUPERIOR_COLOR_CODE..'470|r | '..ITEM_UPGRADE },
-	-- 		{ itemLevel = 473, bonusId = 9566, text = ITEM_SUPERIOR_COLOR_CODE..'473|r | '..ITEM_UPGRADE },
-	-- 		{ itemLevel = 476, bonusId = 9567, text = ITEM_SUPERIOR_COLOR_CODE..'476|r | '..ITEM_UPGRADE }
-	-- 	} },
-	-- 	{ id = 'hero', text = 'Hero', entries = {
-	-- 		{ itemLevel = 467, bonusId = 9568, text = ITEM_SUPERIOR_COLOR_CODE..'467|r | +17 +18' },
-	-- 		{ itemLevel = 470, bonusId = 9569, text = ITEM_SUPERIOR_COLOR_CODE..'470|r | +19 +20' },
-	-- 		{ itemLevel = 473, bonusId = 9570, text = ITEM_SUPERIOR_COLOR_CODE..'473|r | '..ITEM_UPGRADE },
-	-- 		{ itemLevel = 476, bonusId = 9571, text = ITEM_SUPERIOR_COLOR_CODE..'476|r | '..ITEM_UPGRADE },
-	-- 		{ itemLevel = 480, bonusId = 9572, text = ITEM_EPIC_COLOR_CODE..'480|r | '..ITEM_UPGRADE },
-	-- 		{ itemLevel = 483, bonusId = 9581, text = ITEM_EPIC_COLOR_CODE..'483|r | '..ITEM_UPGRADE }
-	-- 	} },
-	-- 	{ id = 'myth', text = 'Great Vault', entries = {
-	-- 		{ itemLevel = 480, bonusId = 9573, text = ITEM_EPIC_COLOR_CODE..'480|r | +18 +19' },
-	-- 		{ itemLevel = 483, bonusId = 9574, text = ITEM_EPIC_COLOR_CODE..'483|r | +20' },
-	-- 		{ itemLevel = 486, bonusId = 9575, text = ITEM_LEGENDARY_COLOR_CODE..'486|r | '..ITEM_UPGRADE },
-	-- 		{ itemLevel = 489, bonusId = 9576, text = ITEM_LEGENDARY_COLOR_CODE..'489|r | '..ITEM_UPGRADE }
-	-- 	} }
-	-- },
 	[12] = {
 		{ id = 'champion', text = 'Champion', entries = {
 			{ itemLevel = 493, bonusId = 10313, text = ITEM_GOOD_COLOR_CODE..'493|r | +0' },
