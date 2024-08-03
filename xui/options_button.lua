@@ -41,31 +41,15 @@ Button:SetScript('OnMouseUp', OnMouseUp);
 
 local GearTexture = Button:CreateTexture(nil, 'ARTWORK');
 Button.GearTexture = GearTexture;
-GearTexture:SetSize(15, 16);
 GearTexture:SetPoint('CENTER');
-GearTexture:SetTexture('Interface\\AddOns\\'..AddonName..'\\assets\\QuestlogFrame2x');
-GearTexture:SetTexCoord(0.932617, 0.961914, 0.0322266, 0.0634766);
+GearTexture:SetAtlas('questlog-icon-setting', true);
 
 local HighlightTexture = Button:CreateTexture(nil, 'HIGHLIGHT');
 Button.HighlightTexture = HighlightTexture;
-HighlightTexture:SetSize(15, 16);
 HighlightTexture:SetPoint('CENTER');
-HighlightTexture:SetTexture('Interface\\AddOns\\'..AddonName..'\\assets\\QuestlogFrame2x');
-HighlightTexture:SetTexCoord(0.932617, 0.961914, 0.0322266, 0.0634766);
+HighlightTexture:SetAtlas('questlog-icon-setting', true);
 HighlightTexture:SetBlendMode('ADD');
 HighlightTexture:SetAlpha(0.4);
-
--- local GearTexture = Button:CreateTexture(nil, 'ARTWORK');
--- Button.GearTexture = GearTexture;
--- GearTexture:SetPoint('CENTER');
--- GearTexture:SetAtlas('questlog-icon-setting', true);
-
--- local HighlightTexture = Button:CreateTexture(nil, 'HIGHLIGHT');
--- Button.HighlightTexture = HighlightTexture;
--- HighlightTexture:SetPoint('CENTER');
--- HighlightTexture:SetAtlas('questlog-icon-setting', true);
--- HighlightTexture:SetBlendMode('ADD');
--- HighlightTexture:SetAlpha(0.4);
 
 local GlowArrow = CreateFrame('Frame', 'KeystoneLootGlowArrow', OverviewFrame, 'GlowBoxArrowTemplate');
 Button.GlowArrow = GlowArrow;
