@@ -107,8 +107,8 @@ function KeystoneLoot:CreateDungeonFrame(parent)
 		local teleportSpellId = self.teleportSpellId;
 
 		if (not self.initTeleport) then
-			local _, _, icon = GetSpellInfo(teleportSpellId);
-			TeleportButton.Icon:SetTexture(icon);
+			local spellInfo = C_Spell.GetSpellInfo(teleportSpellId);
+			TeleportButton.Icon:SetTexture(spellInfo.iconID);
 
 			TeleportButton:SetAttribute('type', 'spell');
 			TeleportButton:SetAttribute('spell', teleportSpellId);
@@ -122,8 +122,10 @@ function KeystoneLoot:CreateDungeonFrame(parent)
 		TeleportButton:SetAlpha(isTeleportKnown and 1 or 0.7);
 
 		if (isTeleportKnown) then
-			local start, duration, enabled = GetSpellCooldown(teleportSpellId);
-			TeleportButton.Cooldown:SetCooldown(start, duration);
+			local spellCooldownInfo = C_Spell.GetSpellCooldown(teleportSpellId) or {startTime = 0, duration = 0, isEnabled = false, modRate = 0};
+			local start, duration, enable, modRate = spellCooldownInfo.startTime, spellCooldownInfo.duration, spellCooldownInfo.isEnabled, spellCooldownInfo.modRate;
+
+			TeleportButton.Cooldown:SetCooldown(start, duration, modRate);
 		end
 	end
 
