@@ -27,6 +27,12 @@ function TabFrame:Update()
 	end
 end
 
+local NoSeasonText = TabFrame:CreateFontString('ARTWORK', nil, 'GameFontHighlightLarge');
+NoSeasonText:Hide();
+NoSeasonText:SetPoint('TOPLEFT', 20, -80);
+NoSeasonText:SetPoint('BOTTOMRIGHT', -20, 26);
+NoSeasonText:SetText(MYTHIC_PLUS_TAB_DISABLE_TEXT);
+
 local FilterBg = TabFrame:CreateTexture(nil, 'BACKGROUND');
 FilterBg:SetSize(340, 34);
 FilterBg:SetPoint('TOP', 0, -30);
@@ -244,7 +250,8 @@ end
 
 local function CreateDungeonFrames()
 	local dungeonList = KeystoneLoot:GetDungeonList();
-	if (dungeonList == nil) then
+	if (#dungeonList == 0) then
+		NoSeasonText:Show();
 		return;
 	end
 

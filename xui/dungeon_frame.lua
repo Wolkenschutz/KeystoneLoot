@@ -122,7 +122,7 @@ function KeystoneLoot:CreateDungeonFrame(parent)
 		TeleportButton:SetAlpha(isTeleportKnown and 1 or 0.7);
 
 		if (isTeleportKnown) then
-			local spellCooldownInfo = C_Spell.GetSpellCooldown(teleportSpellId) or {startTime = 0, duration = 0, isEnabled = false, modRate = 0};
+			local spellCooldownInfo = C_Spell.GetSpellCooldown(teleportSpellId) or { startTime = 0, duration = 0, isEnabled = false, modRate = 0 };
 			local start, duration, enable, modRate = spellCooldownInfo.startTime, spellCooldownInfo.duration, spellCooldownInfo.isEnabled, spellCooldownInfo.modRate;
 
 			TeleportButton.Cooldown:SetCooldown(start, duration, modRate);

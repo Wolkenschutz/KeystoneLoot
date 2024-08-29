@@ -1,24 +1,7 @@
 local AddonName, KeystoneLoot = ...;
 
-local Translate = KeystoneLoot.Translate;
-
-
-local function UpdateTitle(self)
-	local currentSeason = C_MythicPlus.GetCurrentUIDisplaySeason();
-	if (not currentSeason) then
-		self:SetTitle('KeystoneLoot');
-		return;
-	end
-
-	local expansionName = _G['EXPANSION_NAME'..GetExpansionLevel()] or UNKNOWN;
-	local title = (Translate['%s (%s Season %d)']):format('KeystoneLoot', expansionName, currentSeason);
-
-	self:SetTitle(title);
-end
 
 local function OnShow(self)
-	UpdateTitle(self);
-
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN);
 end
 
@@ -32,6 +15,7 @@ local Frame = CreateFrame('Frame', AddonName..'Frame', UIParent, 'PortraitFrameT
 Frame:Hide();
 Frame:SetSize(476, 230);
 Frame:SetPoint('CENTER');
+Frame:SetTitle('KeystoneLoot');
 
 Frame:SetToplevel(true);
 Frame:SetMovable(true);

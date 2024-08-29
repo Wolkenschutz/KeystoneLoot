@@ -123,11 +123,7 @@ local _items = {
 };
 
 local function GetCatalystItems()
-	local seasonItems = _items[KeystoneLoot:GetSeasonId()];
-
-	if (seasonItems) then
-		return seasonItems;
-	end
+	return _items[KeystoneLoot:GetSeasonId()] or {};
 end
 
 function KeystoneLoot:GetCatalystItemList()
@@ -135,7 +131,7 @@ function KeystoneLoot:GetCatalystItemList()
 	local slotId = KeystoneLootCharDB.selectedSlotId;
 	local _itemList = {};
 
-	for itemId, itemInfo in next, GetCatalystItems() or {} do
+	for itemId, itemInfo in next, GetCatalystItems() do
 		if (itemInfo.classId == classId and itemInfo.slotId == slotId) then
 			table.insert(_itemList, {
 				itemId = itemId,

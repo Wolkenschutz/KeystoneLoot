@@ -308,12 +308,7 @@ local function CreateBossFrames(parent, bossList)
 end
 
 local function CreateRaidFrames()
-	local raidList = KeystoneLoot:GetRaidList();
-	if (raidList == nil) then
-		return;
-	end
-
-	for index, raidInfo in next, raidList do
+	for index, raidInfo in next, KeystoneLoot:GetRaidList() do
 		local name = EJ_GetInstanceInfo(raidInfo.journalInstanceId);
 		local modifiedInstanceInfo = C_ModifiedInstance.GetModifiedInstanceInfoFromMapID(raidInfo.instanceId);
 		if (modifiedInstanceInfo) then
@@ -339,7 +334,11 @@ do
 		ItemLevelDropdownButton:UpdateText();
 
 		self:Update();
-		KeystoneLoot:GetCurrentRaidTab():UpdateSize();
+
+		local currentTab = KeystoneLoot:GetCurrentRaidTab();
+		if (currentTab) then
+			currentTab:UpdateSize();
+		end
 	end
 	TabFrame:SetScript('OnShow', OnShow);
 

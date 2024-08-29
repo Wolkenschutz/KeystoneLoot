@@ -14,11 +14,7 @@ local _dungeonList = {
 };
 
 function KeystoneLoot:GetDungeonList()
-	local dungeonList = _dungeonList[self:GetSeasonId()];
-
-	if (dungeonList) then
-		return dungeonList;
-	end
+	return _dungeonList[self:GetSeasonId()] or {};
 end
 
 function KeystoneLoot:GetDungeonItemList(challengeModeId)
@@ -27,7 +23,7 @@ function KeystoneLoot:GetDungeonItemList(challengeModeId)
 	local specId = KeystoneLootCharDB.selectedSpecId;
 	local _itemList = {};
 
-	for _, dungeonInfo in next, self:GetDungeonList() or {} do
+	for _, dungeonInfo in next, self:GetDungeonList() do
 		if (dungeonInfo.challengeModeId == challengeModeId) then
 			for _, itemId in next, dungeonInfo.lootTable do
 				local itemInfo = self:GetItemInfo(itemId);
@@ -54,7 +50,7 @@ function KeystoneLoot:HasDungeonSlotItems(slotId)
 	local classId = KeystoneLootCharDB.selectedClassId;
 	local specId = KeystoneLootCharDB.selectedSpecId;
 
-	for _, dungeonInfo in next, self:GetDungeonList() or {} do
+	for _, dungeonInfo in next, self:GetDungeonList() do
 		for _, itemId in next, dungeonInfo.lootTable do
 			local itemInfo = self:GetItemInfo(itemId);
 			if (itemInfo and itemInfo.classes[classId] and itemInfo.slotId == slotId) then
@@ -72,16 +68,16 @@ end
 
 
 local _keystoneItemLevel = {
-	[12] = {
-		[2] = { endOfRun = { level = 496, text = 'Champion' }, greatVault = { level = 509, text = 'Hero' } },
-		[3] = { endOfRun = { level = 499, text = 'Champion' }, greatVault = { level = 509, text = 'Hero' } },
-		[4] = { endOfRun = { level = 499, text = 'Champion' }, greatVault = { level = 512, text = 'Hero' } },
-		[5] = { endOfRun = { level = 502, text = 'Champion' }, greatVault = { level = 512, text = 'Hero' } },
-		[6] = { endOfRun = { level = 502, text = 'Champion' }, greatVault = { level = 515, text = 'Hero' } },
-		[7] = { endOfRun = { level = 506, text = 'Hero' }, greatVault = { level = 515, text = 'Hero' } },
-		[8] = { endOfRun = { level = 506, text = 'Hero' }, greatVault = { level = 519, text = 'Myth' } },
-		[9] = { endOfRun = { level = 509, text = 'Hero' }, greatVault = { level = 519, text = 'Myth' } },
-		[10] = { endOfRun = { level = 509, text = 'Hero' }, greatVault = { level = 522, text = 'Myth' } }
+	[13] = {
+		[2] = { endOfRun = { level = 597, text = 'Champion' }, greatVault = { level = 606, text = 'Champion' } },
+		[3] = { endOfRun = { level = 597, text = 'Champion' }, greatVault = { level = 610, text = 'Hero' } },
+		[4] = { endOfRun = { level = 600, text = 'Champion' }, greatVault = { level = 610, text = 'Hero' } },
+		[5] = { endOfRun = { level = 603, text = 'Champion' }, greatVault = { level = 613, text = 'Hero' } },
+		[6] = { endOfRun = { level = 606, text = 'Champion' }, greatVault = { level = 613, text = 'Hero' } },
+		[7] = { endOfRun = { level = 610, text = 'Hero' }, greatVault = { level = 616, text = 'Hero' } },
+		[8] = { endOfRun = { level = 610, text = 'Hero' }, greatVault = { level = 619, text = 'Hero' } },
+		[9] = { endOfRun = { level = 613, text = 'Hero' }, greatVault = { level = 619, text = 'Hero' } },
+		[10] = { endOfRun = { level = 613, text = 'Hero' }, greatVault = { level = 623, text = 'Myth' } }
 	}
 };
 
@@ -96,30 +92,32 @@ end
 
 
 local _itemlevels = {
-	[12] = {
+	[13] = {
 		{ id = 'champion', text = 'Champion', entries = {
-			{ itemLevel = 493, bonusId = 10313, text = ITEM_GOOD_COLOR_CODE..'493|r | +0' },
-			{ itemLevel = 496, bonusId = 10314, text = ITEM_GOOD_COLOR_CODE..'496|r | +2' },
-			{ itemLevel = 499, bonusId = 10315, text = ITEM_GOOD_COLOR_CODE..'499|r | +3 +4' },
-			{ itemLevel = 502, bonusId = 10316, text = ITEM_GOOD_COLOR_CODE..'502|r | +5 +6' },
-			{ itemLevel = 506, bonusId = 10317, text = ITEM_SUPERIOR_COLOR_CODE..'506|r | '..ITEM_UPGRADE },
-			{ itemLevel = 509, bonusId = 10318, text = ITEM_SUPERIOR_COLOR_CODE..'509|r | '..ITEM_UPGRADE },
-			{ itemLevel = 512, bonusId = 10319, text = ITEM_SUPERIOR_COLOR_CODE..'512|r | '..ITEM_UPGRADE },
-			{ itemLevel = 515, bonusId = 10320, text = ITEM_SUPERIOR_COLOR_CODE..'515|r | '..ITEM_UPGRADE }
+			{ itemLevel = 597, bonusId = 10313, text = ITEM_GOOD_COLOR_CODE..'597|r | +2 +3' },
+			{ itemLevel = 600, bonusId = 10314, text = ITEM_GOOD_COLOR_CODE..'600|r | +4' },
+			{ itemLevel = 603, bonusId = 10315, text = ITEM_GOOD_COLOR_CODE..'603|r | +5' },
+			{ itemLevel = 606, bonusId = 10316, text = ITEM_GOOD_COLOR_CODE..'606|r | +6' },
+			{ itemLevel = 610, bonusId = 10317, text = ITEM_SUPERIOR_COLOR_CODE..'610|r | '..ITEM_UPGRADE },
+			{ itemLevel = 613, bonusId = 10318, text = ITEM_SUPERIOR_COLOR_CODE..'613|r | '..ITEM_UPGRADE },
+			{ itemLevel = 616, bonusId = 10319, text = ITEM_SUPERIOR_COLOR_CODE..'616|r | '..ITEM_UPGRADE },
+			{ itemLevel = 619, bonusId = 10320, text = ITEM_SUPERIOR_COLOR_CODE..'619|r | '..ITEM_UPGRADE }
 		} },
 		{ id = 'hero', text = 'Hero', entries = {
-			{ itemLevel = 506, bonusId = 10329, text = ITEM_SUPERIOR_COLOR_CODE..'506|r | +7 +8' },
-			{ itemLevel = 509, bonusId = 10330, text = ITEM_SUPERIOR_COLOR_CODE..'509|r | +9 +10' },
-			{ itemLevel = 512, bonusId = 10331, text = ITEM_SUPERIOR_COLOR_CODE..'512|r | '..ITEM_UPGRADE },
-			{ itemLevel = 515, bonusId = 10332, text = ITEM_SUPERIOR_COLOR_CODE..'515|r | '..ITEM_UPGRADE },
-			{ itemLevel = 519, bonusId = 10333, text = ITEM_EPIC_COLOR_CODE..'519|r | '..ITEM_UPGRADE },
-			{ itemLevel = 522, bonusId = 10334, text = ITEM_EPIC_COLOR_CODE..'522|r | '..ITEM_UPGRADE }
+			{ itemLevel = 610, bonusId = 10329, text = ITEM_SUPERIOR_COLOR_CODE..'610|r | +7 +8' },
+			{ itemLevel = 613, bonusId = 10330, text = ITEM_SUPERIOR_COLOR_CODE..'613|r | +9 +10' },
+			{ itemLevel = 616, bonusId = 10331, text = ITEM_SUPERIOR_COLOR_CODE..'616|r | '..ITEM_UPGRADE },
+			{ itemLevel = 619, bonusId = 10332, text = ITEM_SUPERIOR_COLOR_CODE..'619|r | '..ITEM_UPGRADE },
+			{ itemLevel = 623, bonusId = 10333, text = ITEM_EPIC_COLOR_CODE..'623|r | '..ITEM_UPGRADE },
+			{ itemLevel = 626, bonusId = 10334, text = ITEM_EPIC_COLOR_CODE..'626|r | '..ITEM_UPGRADE }
 		} },
 		{ id = 'myth', text = 'Great Vault', entries = {
-			{ itemLevel = 519, bonusId = 10335, text = ITEM_EPIC_COLOR_CODE..'519|r | +8 +9' },
-			{ itemLevel = 522, bonusId = 10336, text = ITEM_EPIC_COLOR_CODE..'522|r | +10' },
-			{ itemLevel = 525, bonusId = 10337, text = ITEM_LEGENDARY_COLOR_CODE..'525|r | '..ITEM_UPGRADE },
-			{ itemLevel = 528, bonusId = 10338, text = ITEM_LEGENDARY_COLOR_CODE..'528|r | '..ITEM_UPGRADE }
+			{ itemLevel = 623, bonusId = 10335, text = ITEM_EPIC_COLOR_CODE..'623|r | +10' },
+			{ itemLevel = 626, bonusId = 10336, text = ITEM_EPIC_COLOR_CODE..'626|r | '..ITEM_UPGRADE },
+			{ itemLevel = 629, bonusId = 10337, text = ITEM_EPIC_COLOR_CODE..'629|r | '..ITEM_UPGRADE },
+			{ itemLevel = 632, bonusId = 10338, text = ITEM_EPIC_COLOR_CODE..'632|r | '..ITEM_UPGRADE },
+			{ itemLevel = 636, bonusId = 10339, text = ITEM_LEGENDARY_COLOR_CODE..'636|r | '..ITEM_UPGRADE },
+			{ itemLevel = 639, bonusId = 10340, text = ITEM_LEGENDARY_COLOR_CODE..'639|r | '..ITEM_UPGRADE }
 		} }
 	}
 };
