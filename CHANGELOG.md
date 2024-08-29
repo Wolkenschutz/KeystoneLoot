@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.8.6 - 2024-08-29
+
+### Other Changes
+
+- Raid update for TWW Season 1 (M+ dungeons coming later)
+
 ## 1.8.5 - 2024-08-14
 
 ### Bugfixes
