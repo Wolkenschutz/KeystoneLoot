@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.8.7 - 2024-09-04
+
+### Other Changes
+
+- M+ dungeon update for TWW Season 1
+
 ## 1.8.6 - 2024-08-29
 
 ### Other Changes
