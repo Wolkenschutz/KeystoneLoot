@@ -1,5 +1,7 @@
 local AddonName, KeystoneLoot = ...;
 
+local Translate = KeystoneLoot.Translate;
+
 
 local function OnShow(self)
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN);
@@ -15,7 +17,6 @@ local Frame = CreateFrame('Frame', AddonName..'Frame', UIParent, 'PortraitFrameT
 Frame:Hide();
 Frame:SetSize(476, 230);
 Frame:SetPoint('CENTER');
-Frame:SetTitle('KeystoneLoot');
 
 Frame:SetToplevel(true);
 Frame:SetMovable(true);
@@ -31,7 +32,7 @@ Frame:SetScript('OnShow', OnShow);
 Frame:SetScript('OnHide', OnHide);
 
 Frame:SetPortraitToAsset('Interface\\Icons\\INV_Relics_Hourglass_02');
-Frame:SetTitle('KeystoneLoot');
+Frame:SetTitle((Translate['%s (%s Season %d)']):format('KeystoneLoot', EXPANSION_NAME10, 1));
 
 table.insert(UISpecialFrames, Frame:GetName());
 
