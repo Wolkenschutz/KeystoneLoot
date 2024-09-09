@@ -21,3 +21,5 @@ Translate['Alba degli Infiniti: Caduta di Galakrond'] = 'Caduta di Galakrond';
 Translate['Alba degli Infiniti: Ascesa di Murozond'] = 'Ascesa di Murozond';
 Translate['Correct loot specialization set?'] = 'Impostare la specializzazione del bottino corretta?';
 --Translate['Show Item Level In Keystone Tooltip'] = '';
+Translate['Highlighting'] = 'Evidenzia';
+--Translate['No Stats'] = '';

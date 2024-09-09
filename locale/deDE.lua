@@ -22,3 +22,5 @@ Translate['Dämmerung des Ewigen: Galakronds Sturz'] = 'Galakronds Sturz';
 Translate['Dämmerung des Ewigen: Murozonds Erhebung'] = 'Murozonds Erhebung';
 Translate['Correct loot specialization set?'] = 'Richtige Beutespezialisierung festgelegt?';
 Translate['Show Item Level In Keystone Tooltip'] = 'Zeige Gegenstandsstufe im Schlüsselstein-Tooltip';
+Translate['Highlighting'] = 'Hervorhebung';
+Translate['No Stats'] = 'Keine Werte';

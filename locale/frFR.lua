@@ -21,3 +21,5 @@ Translate['Aube de l’Infini : Repos de Galakrond'] = 'Repos de Galakrond';
 Translate['Aube de l’Infini : cime de Murozond'] = 'cime de Murozond';
 Translate['Correct loot specialization set?'] = 'Ensemble de spécialisation de butin correct ?';
 --Translate['Show Item Level In Keystone Tooltip'] = '';
+Translate['Highlighting'] = 'Surlignage';
+--Translate['No Stats'] = '';

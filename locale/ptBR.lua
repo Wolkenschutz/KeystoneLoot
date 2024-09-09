@@ -21,3 +21,5 @@ Translate['Despertar do Infinito: Ruína de Galakrond'] = 'Ruína de Galakrond';
 Translate['Despertar do Infinito: Ascensão de Murozond'] = 'Ascensão de Murozond';
 Translate['Correct loot specialization set?'] = 'Configurar a especialização de saque correta?';
 --Translate['Show Item Level In Keystone Tooltip'] = '';
+Translate['Highlighting'] = 'Destaques';
+--Translate['No Stats'] = '';
