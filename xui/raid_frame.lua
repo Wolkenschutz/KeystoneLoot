@@ -22,6 +22,7 @@ function KeystoneLoot:CreateRaidFrame(parent)
 	Title:SetWidth(230);
 	Title:SetJustifyH('LEFT');
 	Title:SetPoint('BOTTOMLEFT', Frame, 'TOPLEFT', 48, -2);
+	Title = Mixin(Title, AutoScalingFontStringMixin);
 
 	Frame.itemFrames = {};
 	for index=1, 5 do
