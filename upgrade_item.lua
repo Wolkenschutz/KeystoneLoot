@@ -17,7 +17,7 @@ local _itemLevelBonusId = {
 };
 
 local _specialBonusId = {
-	--[207817] = 9525
+	[178708] = 6917
 };
 
 local _blacklistedItems = {
