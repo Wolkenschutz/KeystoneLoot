@@ -143,5 +143,72 @@ function Button:GetList()
 	end;
 	table.insert(_list, info);
 
+	local info = {};
+	info.text = YELLOW_FONT_COLOR:WrapTextInColorCode(NEW:upper())..' '..NORMAL_FONT_COLOR:WrapTextInColorCode(Translate['Highlighting']); -- TODO: -NEU- Später wieder entfernen.
+	info.checked = false;
+	info.notCheckable = true;
+	info.disabled = true;
+	table.insert(_list, info);
+
+	local info = {};
+	info.text = ITEM_MOD_CRIT_RATING_SHORT;
+	info.checked = KeystoneLootCharDB.statHighlightingCritEnabled;
+	info.keepShownOnClick = true;
+	info.args = not KeystoneLootCharDB.statHighlightingCritEnabled;
+	info.func = function (enable)
+		KeystoneLootCharDB.statHighlightingCritEnabled = enable;
+
+		KeystoneLoot:GetCurrentTab():Update();
+	end;
+	table.insert(_list, info);
+
+	local info = {};
+	info.text = ITEM_MOD_HASTE_RATING_SHORT;
+	info.checked = KeystoneLootCharDB.statHighlightingHasteEnabled;
+	info.keepShownOnClick = true;
+	info.args = not KeystoneLootCharDB.statHighlightingHasteEnabled;
+	info.func = function (enable)
+		KeystoneLootCharDB.statHighlightingHasteEnabled = enable;
+
+		KeystoneLoot:GetCurrentTab():Update();
+	end;
+	table.insert(_list, info);
+
+	local info = {};
+	info.text = ITEM_MOD_MASTERY_RATING_SHORT;
+	info.checked = KeystoneLootCharDB.statHighlightingMasteryEnabled;
+	info.keepShownOnClick = true;
+	info.args = not KeystoneLootCharDB.statHighlightingMasteryEnabled;
+	info.func = function (enable)
+		KeystoneLootCharDB.statHighlightingMasteryEnabled = enable;
+
+		KeystoneLoot:GetCurrentTab():Update();
+	end;
+	table.insert(_list, info);
+
+	local info = {};
+	info.text = ITEM_MOD_VERSATILITY;
+	info.checked = KeystoneLootCharDB.statHighlightingVersatilityEnabled;
+	info.keepShownOnClick = true;
+	info.args = not KeystoneLootCharDB.statHighlightingVersatilityEnabled;
+	info.func = function (enable)
+		KeystoneLootCharDB.statHighlightingVersatilityEnabled = enable;
+
+		KeystoneLoot:GetCurrentTab():Update();
+	end;
+	table.insert(_list, info);
+
+	local info = {};
+	info.text = Translate['No Stats'];
+	info.checked = KeystoneLootCharDB.statHighlightingNoStatsEnabled;
+	info.keepShownOnClick = true;
+	info.args = not KeystoneLootCharDB.statHighlightingNoStatsEnabled;
+	info.func = function (enable)
+		KeystoneLootCharDB.statHighlightingNoStatsEnabled = enable;
+
+		KeystoneLoot:GetCurrentTab():Update();
+	end;
+	table.insert(_list, info);
+
 	return _list;
 end

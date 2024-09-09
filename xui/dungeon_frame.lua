@@ -140,6 +140,7 @@ function KeystoneLoot:CreateDungeonFrame(parent)
 				ItemButton.Icon:SetTexture(itemInfo.icon);
 				ItemButton:UpdateFavoriteStarIcon();
 				ItemButton:UpdateOtherSpecIcon();
+				ItemButton:UpdateStatVisibility();
 				ItemButton:Show();
 			else
 				ItemButton:Hide();

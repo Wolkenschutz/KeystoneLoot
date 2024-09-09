@@ -1,7 +1,7 @@
 local AddonName, KeystoneLoot = ...;
 
-local dbVersion = 4;
-local dbCharacterVersion = 2;
+local dbVersion = 5;
+local dbCharacterVersion = 3;
 
 
 local function RemoveOldSeason()
@@ -38,6 +38,8 @@ function KeystoneLoot:CheckDB()
 		elseif (KeystoneLootDB.dbVersion == 3) then
 			KeystoneLootDB.showNewText = true;
 			KeystoneLootDB.keystoneItemLevelEnabled = true;
+		elseif (KeystoneLootDB.dbVersion == 4) then
+			KeystoneLootDB.showNewText = true;
 		end
 
 		KeystoneLootDB.dbVersion = KeystoneLootDB.dbVersion + 1;
@@ -62,6 +64,12 @@ function KeystoneLoot:CheckCharacterDB()
 			KeystoneLootCharDB.favoriteLoot = {};
 		elseif (KeystoneLootCharDB.dbVersion == 1) then
 			KeystoneLootCharDB.selectedRaidItemLevel = 0;
+		elseif (KeystoneLootCharDB.dbVersion == 2) then
+			KeystoneLootCharDB.statHighlightingCritEnabled = true;
+			KeystoneLootCharDB.statHighlightingHasteEnabled = true;
+			KeystoneLootCharDB.statHighlightingMasteryEnabled = true;
+			KeystoneLootCharDB.statHighlightingVersatilityEnabled = true;
+			KeystoneLootCharDB.statHighlightingNoStatsEnabled = true;
 		end
 
 		KeystoneLootCharDB.dbVersion = KeystoneLootCharDB.dbVersion + 1;

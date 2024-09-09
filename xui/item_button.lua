@@ -147,12 +147,49 @@ local function UpdateOtherSpecIcon(self)
 	OtherSpec:SetShown(showIcon);
 end
 
+local function UpdateStatVisibility(self)
+	local itemId = self.itemId;
+	local itemInfo = KeystoneLoot:GetItemInfo(itemId);
+	if (itemInfo == nil) then
+		return;
+	end
+
+	local hasItemStat;
+    if (not itemInfo.stats) then
+        hasItemStat = KeystoneLootCharDB.statHighlightingNoStatsEnabled;
+    end
+
+	if (hasItemStat == nil) then
+		local critEnabled = KeystoneLootCharDB.statHighlightingCritEnabled;
+		local hasteEnabled = KeystoneLootCharDB.statHighlightingHasteEnabled;
+		local masteryEnabled = KeystoneLootCharDB.statHighlightingMasteryEnabled;
+		local versatilityEnabled = KeystoneLootCharDB.statHighlightingVersatilityEnabled;
+
+		for _, stat in next, itemInfo.stats do
+			if (
+				(stat == 0 and critEnabled) or
+				(stat == 1 and hasteEnabled) or
+				(stat == 2 and masteryEnabled) or
+				(stat == 3 and versatilityEnabled)
+			) then
+				hasItemStat = true;
+				break;
+			end
+		end
+	end
+
+	self.OtherSpec:SetDesaturated(not hasItemStat);
+	self.Icon:SetDesaturated(not hasItemStat);
+	self:SetAlpha(hasItemStat and 1 or 0.6);
+end
+
 function KeystoneLoot:CreateItemButton(parent)
 	local Button = CreateFrame('Button', nil, parent);
 	Button:SetSize(32, 32);
 
 	Button.UpdateFavoriteStarIcon = UpdateFavoriteStarIcon;
 	Button.UpdateOtherSpecIcon = UpdateOtherSpecIcon;
+	Button.UpdateStatVisibility = UpdateStatVisibility;
 	Button.UpdateTooltip = OnEnter;
 	Button:SetScript('OnEnter', OnEnter);
 	Button:SetScript('OnLeave', OnLeave);
@@ -164,6 +201,7 @@ function KeystoneLoot:CreateItemButton(parent)
 	Icon:SetTexCoord(0.08, 0.92, 0.08, 0.92);
 
 	local IconBorder = Button:CreateTexture(nil, 'ARTWORK', nil, 2);
+	Button.IconBorder = IconBorder;
 	IconBorder:SetSize(58, 58);
 	IconBorder:SetPoint('CENTER', Icon);
 	IconBorder:SetTexture('Interface\\Buttons\\UI-Quickslot2');
