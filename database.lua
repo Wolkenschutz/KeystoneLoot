@@ -96,11 +96,13 @@ function KeystoneLoot:GetFavoriteItemList(challengeModeId)
 
 		for specId, specList in next, favoriteLoot[challengeModeId] do
 			for itemId, itemInfo in next, specList do
-				_tmp[itemId] = {
-					itemId = itemId,
-					specId = specId,
-					icon = itemInfo.icon
-				};
+				if (KeystoneLoot:GetItemInfo(itemId)) then
+					_tmp[itemId] = {
+						itemId = itemId,
+						specId = specId,
+						icon = itemInfo.icon
+					};
+				end
 			end
 		end
 
@@ -109,10 +111,12 @@ function KeystoneLoot:GetFavoriteItemList(challengeModeId)
 		end
 	elseif (favoriteLoot[challengeModeId][specId]) then
 		for itemId, itemInfo in next, favoriteLoot[challengeModeId][specId] do
-			table.insert(_itemList, {
-				itemId = itemId,
-				icon = itemInfo.icon
-			});
+			if (KeystoneLoot:GetItemInfo(itemId)) then
+				table.insert(_itemList, {
+					itemId = itemId,
+					icon = itemInfo.icon
+				});
+			end
 		end
 	end
 
