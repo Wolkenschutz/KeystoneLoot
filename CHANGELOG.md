@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.2 - 2024-09-16
+
+### Bugfixes
+
+- Fixed incorrect raid NPC IDs
+
 ## 1.9.1 - 2024-09-11
 
 ### Bugfixes
