@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.3 - 2024-09-19
+
+### Improvements
+
+- TWW Season 1 Catalyst non-set items added.
+
 ## 1.9.2 - 2024-09-16
 
 ### Bugfixes
