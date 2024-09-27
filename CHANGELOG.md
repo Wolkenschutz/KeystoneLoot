@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.9.4 - 2024-09-27
+
+### Bugfixes
+
+- Favorite Catalyst items will appear again.
+- Tooltip for Veteran, Champion and Heroic items has been fixed
+
 ## 1.9.3 - 2024-09-19
 
 ### Improvements
