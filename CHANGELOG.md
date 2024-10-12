@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.5 - 2024-10-12
+
+### Bugfixes
+
+- Item 'Mistcaller Ocarina' now shows the use effect.
+
 ## 1.9.4 - 2024-09-27
 
 ### Bugfixes
