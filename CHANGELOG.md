@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.6 - 2024-10-27
+
+### Other Changes
+
+- TOC interface version updated.
+
 ## 1.9.5 - 2024-10-12
 
 ### Bugfixes
