@@ -6,6 +6,7 @@
 ## X-Email: selina.ruesch@gmail.com
 ## Version: @project-version@
 ## IconTexture: Interface\Icons\INV_Relics_Hourglass_02
+## OptionalDeps: LibStub
 ## SavedVariables: KeystoneLootDB
 ## SavedVariablesPerCharacter: KeystoneLootCharDB
 
