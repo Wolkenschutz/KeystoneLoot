@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.7 - 2024-12-15
+
+### Improvements
+
+- Minimap button is now a DataBroker if the requirements are right
+
 ## 1.9.6 - 2024-10-27
 
 ### Other Changes
