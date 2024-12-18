@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.9.8 - 2024-12-18
+
+### Other Changes
+
+- Update KeystoneLoot.toc
+- Merge pull request [#33](https://github.com/Wolkenschutz/KeystoneLoot/pull/33) by [rustynail1984](https://github.com/rustynail1984) from rustynail1984/main
+
 ## 1.9.7 - 2024-12-15
 
 ### Improvements
