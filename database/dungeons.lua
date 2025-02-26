@@ -1,15 +1,15 @@
 local AddonName, KeystoneLoot = ...;
 
 local _dungeonList = {
-	[13] = {
-		{ --[[name = "Ara-Kara, Stadt der Echos",]] challengeModeId = 503, teleportSpellId = 445417, bgTexture = 5912546, lootTable = { 221152, 221156, 221160, 221164, 219316, 221153, 221157, 221161, 221165, 219317, 221150, 221154, 221158, 221162, 219314, 221151, 221155, 221159, 221163 } },
-		{ --[[name = "Das Steingewölbe,]] challengeModeId = 501, teleportSpellId = 445269, bgTexture = 5912554, lootTable = { 221090, 221094, 219300, 221075, 221079, 221083, 221087, 221091, 221095, 219301, 226683, 221076, 221080, 221084, 221088, 221092, 219302, 221073, 221077, 221081, 221085, 221089, 219303, 221074, 221078, 219315, 221086, 221082 } },
-		{ --[[name = "Die Morgenbringer",]] challengeModeId = 505, teleportSpellId = 445414, bgTexture = 5912552, lootTable = { 221133, 221137, 221141, 221145, 221149, 221134, 221138, 221142, 221146, 221135, 221139, 221143, 221147, 219313, 221140, 219311, 221132, 221136, 221202, 221144, 221148, 219312 } },
-		{ --[[name = "Stadt der Fäden",]] challengeModeId = 502, teleportSpellId = 445416, bgTexture = 5912548, lootTable = { 221183, 221187, 221168, 221172, 221176, 219320, 221184, 221188, 221169, 221173, 221177, 219321, 221185, 221189, 219319, 221166, 221170, 221174, 219318, 221182, 221186, 221180, 221181, 221167, 221171, 221175, 221179, 221178 } },
-		{ --[[name = "Die Nebel von Tirna Scithe",]] challengeModeId = 375, teleportSpellId = 354464, bgTexture = 3759909, lootTable = { 178692, 178700, 178708, 182142, 183473, 178693, 178701, 178709, 183253, 181844, 182206, 182384, 178694, 178702, 178710, 183491, 183514, 183485, 183229, 183199, 178695, 178703, 178711, 181466, 182129, 182767, 182964, 181775, 178696, 178704, 178712, 182754, 181734, 183266, 182335, 181539, 178697, 178705, 178713, 182143, 182347, 183336, 182651, 181462, 178698, 183494, 182305, 183132, 180935, 183463, 178714, 178691, 178699, 178707, 178715, 178706, 182448, 182582, 182686 } },
-		{ --[[name = "Die Nekrotische Schneise",]] challengeModeId = 376, teleportSpellId = 354462, bgTexture = 3759910, lootTable = { 182646, 182385, 183481, 181641, 182622, 183512, 178732, 183402, 181709, 181843, 183471, 178772, 178780, 183387, 178733, 178741, 178749, 183482, 181600, 181759, 178781, 181700, 178734, 178742, 178750, 182772, 182750, 183373, 178782, 182633, 178735, 178743, 181712, 182960, 183492, 181383, 178783, 183278, 178736, 178744, 181738, 182136, 182111, 183505, 178748, 182201, 178737, 178745, 182295, 181974, 181982, 178777, 178740, 178730, 178738, 182778, 182345, 182321, 178779, 178778, 182440, 178731, 178739, 178751 } },
-		{ --[[name = "Die Belagerung von Boralus",]] challengeModeId = 353, teleportSpellId = (UnitFactionGroup("player") == "Alliance" and 445418 or 464256), bgTexture = 2178272, lootTable = { 159973, 231825, 159320, 162541, 159651, 231818, 231826, 231827, 159322, 159968, 159622, 159386, 159969, 159237, 159434, 159379, 159427, 231822, 231830, 159428, 159251, 159650, 159372, 159649, 159972, 159623, 159250, 159429, 231824, 159256, 159309, 159965, 159461 } },
-		{ --[[name = "Grim Batol",]] challengeModeId = 507, teleportSpellId = 445424, bgTexture = 522354, lootTable = { 133298, 133302, 133306, 157614, 133283, 133287, 133291, 133295, 133299, 133303, 133354, 157615, 133284, 133288, 133292, 133296, 133300, 133304, 157612, 133374, 133285, 133289, 133293, 133297, 133301, 133305, 157613, 133282, 133286, 133290, 133294, 133363 } },
+	[14] = {
+		{ --[[name = "Operation: Schleuse",]] challengeModeId = 525, teleportSpellId = 1216786, bgTexture = 6422412, lootTable = {  } },
+		{ --[[name = "Metbrauerei Glutbräu",]] challengeModeId = 506, teleportSpellId = 445440, bgTexture = 5912547, lootTable = {  } },
+		{ --[[name = "Die Brutstätte",]] challengeModeId = 500, teleportSpellId = 445443, bgTexture = 5912553, lootTable = {  } },
+		{ --[[name = "Dunkelflammenspalt",]] challengeModeId = 504, teleportSpellId = 445441, bgTexture = 5912549, lootTable = {  } },
+		{ --[[name = "Priorat der Heiligen Flamme",]] challengeModeId = 499, teleportSpellId = 445444, bgTexture = 5912551, lootTable = {  } },
+		{ --[[name = "Das RIESENFLÖZ!!",]] challengeModeId = 247, teleportSpellId = (UnitFactionGroup("player") == "Alliance" and 467553 or 467555), bgTexture = 2178274, lootTable = {  } },
+		{ --[[name = "Mechagon - Werkstatt,]] challengeModeId = 370, teleportSpellId = 373274, bgTexture = 3025325, lootTable = {  } },
+		{ --[[name = "Theater der Schmerzen",]] challengeModeId = 382, teleportSpellId = 354467, bgTexture = 3759914, lootTable = {  } },
 	}
 };
 
@@ -68,16 +68,16 @@ end
 
 
 local _keystoneItemLevel = {
-	[13] = {
-		[2] = { endOfRun = { level = 597, text = 'Champion' }, greatVault = { level = 606, text = 'Champion' } },
-		[3] = { endOfRun = { level = 597, text = 'Champion' }, greatVault = { level = 610, text = 'Hero' } },
-		[4] = { endOfRun = { level = 600, text = 'Champion' }, greatVault = { level = 610, text = 'Hero' } },
-		[5] = { endOfRun = { level = 603, text = 'Champion' }, greatVault = { level = 613, text = 'Hero' } },
-		[6] = { endOfRun = { level = 606, text = 'Champion' }, greatVault = { level = 613, text = 'Hero' } },
-		[7] = { endOfRun = { level = 610, text = 'Hero' }, greatVault = { level = 616, text = 'Hero' } },
-		[8] = { endOfRun = { level = 610, text = 'Hero' }, greatVault = { level = 619, text = 'Hero' } },
-		[9] = { endOfRun = { level = 613, text = 'Hero' }, greatVault = { level = 619, text = 'Hero' } },
-		[10] = { endOfRun = { level = 613, text = 'Hero' }, greatVault = { level = 623, text = 'Myth' } }
+	[14] = {
+		[2] = { endOfRun = { level = 639, text = 'Champion' }, greatVault = { level = 649, text = 'Hero' } },
+		[3] = { endOfRun = { level = 639, text = 'Champion' }, greatVault = { level = 649, text = 'Hero' } },
+		[4] = { endOfRun = { level = 642, text = 'Champion' }, greatVault = { level = 652, text = 'Hero' } },
+		[5] = { endOfRun = { level = 645, text = 'Champion' }, greatVault = { level = 652, text = 'Hero' } },
+		[6] = { endOfRun = { level = 649, text = 'Hero' }, greatVault = { level = 655, text = 'Hero' } },
+		[7] = { endOfRun = { level = 649, text = 'Hero' }, greatVault = { level = 658, text = 'Hero' } },
+		[8] = { endOfRun = { level = 652, text = 'Hero' }, greatVault = { level = 658, text = 'Hero' } },
+		[9] = { endOfRun = { level = 652, text = 'Hero' }, greatVault = { level = 658, text = 'Hero' } },
+		[10] = { endOfRun = { level = 655, text = 'Hero' }, greatVault = { level = 662, text = 'Myth' } }
 	}
 };
 
