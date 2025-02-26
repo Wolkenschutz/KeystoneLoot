@@ -79,42 +79,42 @@ end
 
 
 local _itemlevels = {
-	[13] = {
+	[14] = {
 		{ id = 'veteran', text = 'Raid Finder', difficultyId = DifficultyUtil.ID.PrimaryRaidLFR, entries = {
-			{ itemLevel = 584, bonusId = 10281, text = ITEM_POOR_COLOR_CODE..'584|r | '..BOSS..' 1-2' },
-			{ itemLevel = 587, bonusId = 10280, text = ITEM_POOR_COLOR_CODE..'587|r | '..BOSS..' 3-4' },
-			{ itemLevel = 590, bonusId = 10279, text = ITEM_POOR_COLOR_CODE..'590|r | '..BOSS..' 5-6' },
-			{ itemLevel = 593, bonusId = 10278, text = ITEM_POOR_COLOR_CODE..'593|r | '..BOSS..' 7-8' },
-			{ itemLevel = 597, bonusId = 10277, text = ITEM_GOOD_COLOR_CODE..'597|r | '..ITEM_UPGRADE },
-			{ itemLevel = 600, bonusId = 10276, text = ITEM_GOOD_COLOR_CODE..'600|r | '..ITEM_UPGRADE },
-			{ itemLevel = 603, bonusId = 10275, text = ITEM_GOOD_COLOR_CODE..'603|r | '..ITEM_UPGRADE },
-			{ itemLevel = 606, bonusId = 10274, text = ITEM_GOOD_COLOR_CODE..'606|r | '..ITEM_UPGRADE }
+			{ itemLevel = 623, bonusId = 11969, text = ITEM_POOR_COLOR_CODE..'623|r | '..BOSS..' 1-2' },
+			{ itemLevel = 626, bonusId = 11970, text = ITEM_POOR_COLOR_CODE..'587|r | '..BOSS..' 3-4' },
+			{ itemLevel = 629, bonusId = 11971, text = ITEM_POOR_COLOR_CODE..'629|r | '..BOSS..' 5-6' },
+			{ itemLevel = 632, bonusId = 11972, text = ITEM_POOR_COLOR_CODE..'632|r | '..BOSS..' 7-8' },
+			{ itemLevel = 636, bonusId = 11973, text = ITEM_GOOD_COLOR_CODE..'636|r | '..ITEM_UPGRADE },
+			{ itemLevel = 639, bonusId = 11974, text = ITEM_GOOD_COLOR_CODE..'639|r | '..ITEM_UPGRADE },
+			{ itemLevel = 642, bonusId = 11975, text = ITEM_GOOD_COLOR_CODE..'642|r | '..ITEM_UPGRADE },
+			{ itemLevel = 645, bonusId = 11976, text = ITEM_GOOD_COLOR_CODE..'645|r | '..ITEM_UPGRADE }
 		} },
 		{ id = 'champion', text = 'Normal', difficultyId = DifficultyUtil.ID.PrimaryRaidNormal, entries = {
-			{ itemLevel = 597, bonusId = 10273, text = ITEM_GOOD_COLOR_CODE..'597|r | '..BOSS..' 1-2' },
-			{ itemLevel = 600, bonusId = 10272, text = ITEM_GOOD_COLOR_CODE..'600|r | '..BOSS..' 3-4' },
-			{ itemLevel = 603, bonusId = 10271, text = ITEM_GOOD_COLOR_CODE..'603|r | '..BOSS..' 5-6' },
-			{ itemLevel = 606, bonusId = 10270, text = ITEM_GOOD_COLOR_CODE..'606|r | '..BOSS..' 7-8' },
-			{ itemLevel = 610, bonusId = 10269, text = ITEM_SUPERIOR_COLOR_CODE..'610|r | '..ITEM_UPGRADE },
-			{ itemLevel = 613, bonusId = 10268, text = ITEM_SUPERIOR_COLOR_CODE..'613|r | '..ITEM_UPGRADE },
-			{ itemLevel = 616, bonusId = 10267, text = ITEM_SUPERIOR_COLOR_CODE..'616|r | '..ITEM_UPGRADE },
-			{ itemLevel = 619, bonusId = 10266, text = ITEM_SUPERIOR_COLOR_CODE..'619|r | '..ITEM_UPGRADE }
+			{ itemLevel = 636, bonusId = 11977, text = ITEM_GOOD_COLOR_CODE..'636|r | '..BOSS..' 1-2' },
+			{ itemLevel = 639, bonusId = 11978, text = ITEM_GOOD_COLOR_CODE..'639|r | '..BOSS..' 3-4' },
+			{ itemLevel = 642, bonusId = 11979, text = ITEM_GOOD_COLOR_CODE..'642|r | '..BOSS..' 5-6' },
+			{ itemLevel = 645, bonusId = 11980, text = ITEM_GOOD_COLOR_CODE..'645|r | '..BOSS..' 7-8' },
+			{ itemLevel = 649, bonusId = 11981, text = ITEM_SUPERIOR_COLOR_CODE..'649|r | '..ITEM_UPGRADE },
+			{ itemLevel = 652, bonusId = 11982, text = ITEM_SUPERIOR_COLOR_CODE..'652|r | '..ITEM_UPGRADE },
+			{ itemLevel = 655, bonusId = 11983, text = ITEM_SUPERIOR_COLOR_CODE..'655|r | '..ITEM_UPGRADE },
+			{ itemLevel = 658, bonusId = 11984, text = ITEM_SUPERIOR_COLOR_CODE..'658|r | '..ITEM_UPGRADE }
 		} },
 		{ id = 'hero', text = 'Heroic', difficultyId = DifficultyUtil.ID.PrimaryRaidHeroic, entries = {
-			{ itemLevel = 610, bonusId = 10265, text = ITEM_SUPERIOR_COLOR_CODE..'610|r | '..BOSS..' 1-2' },
-			{ itemLevel = 613, bonusId = 10264, text = ITEM_SUPERIOR_COLOR_CODE..'613|r | '..BOSS..' 3-4' },
-			{ itemLevel = 616, bonusId = 10263, text = ITEM_SUPERIOR_COLOR_CODE..'616|r | '..BOSS..' 5-6' },
-			{ itemLevel = 619, bonusId = 10262, text = ITEM_SUPERIOR_COLOR_CODE..'619|r | '..BOSS..' 7-8' },
-			{ itemLevel = 623, bonusId = 10261, text = ITEM_EPIC_COLOR_CODE..'623|r | '..ITEM_UPGRADE },
-			{ itemLevel = 626, bonusId = 10256, text = ITEM_EPIC_COLOR_CODE..'626|r | '..ITEM_UPGRADE }
+			{ itemLevel = 649, bonusId = 11985, text = ITEM_SUPERIOR_COLOR_CODE..'649|r | '..BOSS..' 1-2' },
+			{ itemLevel = 652, bonusId = 11986, text = ITEM_SUPERIOR_COLOR_CODE..'652|r | '..BOSS..' 3-4' },
+			{ itemLevel = 655, bonusId = 11987, text = ITEM_SUPERIOR_COLOR_CODE..'655|r | '..BOSS..' 5-6' },
+			{ itemLevel = 658, bonusId = 11988, text = ITEM_SUPERIOR_COLOR_CODE..'658|r | '..BOSS..' 7-8' },
+			{ itemLevel = 662, bonusId = 11989, text = ITEM_EPIC_COLOR_CODE..'662|r | '..ITEM_UPGRADE },
+			{ itemLevel = 665, bonusId = 11990, text = ITEM_EPIC_COLOR_CODE..'665|r | '..ITEM_UPGRADE }
 		} },
 		{ id = 'myth', text = 'Mythic', difficultyId = DifficultyUtil.ID.PrimaryRaidMythic, entries = {
-			{ itemLevel = 623, bonusId = 10260, text = ITEM_EPIC_COLOR_CODE..'623|r | '..BOSS..' 1-2' },
-			{ itemLevel = 626, bonusId = 10259, text = ITEM_EPIC_COLOR_CODE..'626|r | '..BOSS..' 3-4' },
-			{ itemLevel = 629, bonusId = 10258, text = ITEM_EPIC_COLOR_CODE..'629|r | '..BOSS..' 5-6' },
-			{ itemLevel = 632, bonusId = 10257, text = ITEM_EPIC_COLOR_CODE..'632|r | '..BOSS..' 7-8' },
-			{ itemLevel = 636, bonusId = 10298, text = ITEM_LEGENDARY_COLOR_CODE..'636|r | '..ITEM_UPGRADE },
-			{ itemLevel = 639, bonusId = 10299, text = ITEM_LEGENDARY_COLOR_CODE..'639|r | '..ITEM_UPGRADE }
+			{ itemLevel = 662, bonusId = 11991, text = ITEM_EPIC_COLOR_CODE..'662|r | '..BOSS..' 1-2' },
+			{ itemLevel = 665, bonusId = 11992, text = ITEM_EPIC_COLOR_CODE..'665|r | '..BOSS..' 3-4' },
+			{ itemLevel = 668, bonusId = 11993, text = ITEM_EPIC_COLOR_CODE..'668|r | '..BOSS..' 5-6' },
+			{ itemLevel = 672, bonusId = 11994, text = ITEM_EPIC_COLOR_CODE..'672|r | '..BOSS..' 7-8' },
+			{ itemLevel = 675, bonusId = 11995, text = ITEM_LEGENDARY_COLOR_CODE..'675|r | '..ITEM_UPGRADE },
+			{ itemLevel = 678, bonusId = 11996, text = ITEM_LEGENDARY_COLOR_CODE..'678|r | '..ITEM_UPGRADE }
 		} }
 	}
 };
