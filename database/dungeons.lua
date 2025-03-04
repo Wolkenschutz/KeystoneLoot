@@ -2,14 +2,14 @@ local AddonName, KeystoneLoot = ...;
 
 local _dungeonList = {
 	[14] = {
-		{ --[[name = "Operation: Schleuse",]] challengeModeId = 525, teleportSpellId = 1216786, bgTexture = 6422412, lootTable = {  } },
-		{ --[[name = "Metbrauerei Glutbräu",]] challengeModeId = 506, teleportSpellId = 445440, bgTexture = 5912547, lootTable = {  } },
-		{ --[[name = "Die Brutstätte",]] challengeModeId = 500, teleportSpellId = 445443, bgTexture = 5912553, lootTable = {  } },
-		{ --[[name = "Dunkelflammenspalt",]] challengeModeId = 504, teleportSpellId = 445441, bgTexture = 5912549, lootTable = {  } },
-		{ --[[name = "Priorat der Heiligen Flamme",]] challengeModeId = 499, teleportSpellId = 445444, bgTexture = 5912551, lootTable = {  } },
-		{ --[[name = "Das RIESENFLÖZ!!",]] challengeModeId = 247, teleportSpellId = (UnitFactionGroup("player") == "Alliance" and 467553 or 467555), bgTexture = 2178274, lootTable = {  } },
-		{ --[[name = "Mechagon - Werkstatt,]] challengeModeId = 370, teleportSpellId = 373274, bgTexture = 3025325, lootTable = {  } },
-		{ --[[name = "Theater der Schmerzen",]] challengeModeId = 382, teleportSpellId = 354467, bgTexture = 3759914, lootTable = {  } },
+		{ --[[name = "Operation: Schleuse",]] challengeModeId = 525, teleportSpellId = 1216786, bgTexture = 6422412, lootTable = { 234490, 234494, 234498, 234502, 234506, 234491, 232542, 234499, 234503, 234507, 234492, 232543, 234500, 234504, 232545, 234496, 234495, 234493, 234497, 234501, 236768, 232541, 234505 } },
+		{ --[[name = "Metbrauerei Glutbräu",]] challengeModeId = 506, teleportSpellId = 445440, bgTexture = 5912547, lootTable = { 221059, 221063, 221067, 221071, 221052, 221056, 221060, 219297, 221068, 221072, 221053, 221057, 221061, 221065, 221069, 221201, 221054, 221058, 221062, 219299, 221070, 221198, 221064, 221051, 221055, 219298 } },
+		{ --[[name = "Die Brutstätte",]] challengeModeId = 500, teleportSpellId = 445443, bgTexture = 5912553, lootTable = { 219296, 221036, 221040, 221044, 221048, 221033, 221037, 221041, 221045, 221049, 219294, 221034, 221038, 221197, 221046, 221050, 219295, 221035, 221039, 221043, 221047, 221032, 221042 } },
+		{ --[[name = "Dunkelflammenspalt",]] challengeModeId = 504, teleportSpellId = 445441, bgTexture = 5912549, lootTable = { 221098, 219304, 221106, 221110, 221114, 221099, 221103, 221107, 221111, 225548, 221096, 221100, 219306, 221108, 221112, 221102, 221104, 221115, 221097, 221101, 221105, 221109, 221113, 219307, 219305 } },
+		{ --[[name = "Priorat der Heiligen Flamme",]] challengeModeId = 499, teleportSpellId = 445444, bgTexture = 5912551, lootTable = { 221121, 221125, 221129, 219308, 221203, 221118, 221122, 221126, 221130, 221200, 221119, 221123, 221127, 221131, 219310, 221116, 221120, 221124, 221128, 221117, 219309 } },
+		{ --[[name = "Das RIESENFLÖZ!!",]] challengeModeId = 247, teleportSpellId = (UnitFactionGroup("player") == "Alliance" and 467553 or 467555), bgTexture = 2178274, lootTable = { 159611, 158359, 235416, 159462, 159226, 159612, 159305, 235417, 155864, 159361, 235418, 235419, 159638, 159725, 161135, 235420, 159639, 159663, 235460, 159679, 159451, 158341, 159357, 158357, 159641, 159287, 158350, 159240, 235415, 159235, 159231, 159336, 158353 } },
+		{ --[[name = "Mechagon - Werkstatt,]] challengeModeId = 370, teleportSpellId = 373274, bgTexture = 3025325, lootTable = { 168982, 168967, 168975, 168983, 235811, 168976, 169378, 235812, 168985, 235222, 168962, 168978, 168986, 235223, 168955, 168971, 232546, 235224, 168964, 168972, 168980, 199921, 168969, 168988, 235809, 168957, 168965, 168973, 169608, 168989, 168966, 168968, 235226, 168958, 169344, 168974, 235810 } },
+		{ --[[name = "Theater der Schmerzen",]] challengeModeId = 382, teleportSpellId = 354467, bgTexture = 3759914, lootTable = { 178806, 178872, 178868, 178801, 178795, 178799, 178865, 178869, 178811, 178804, 178803, 178792, 178796, 178800, 178866, 178808, 178864, 178805, 178789, 178793, 178797, 178863, 178867, 178809, 178810, 178871, 178807, 178794, 178798, 178802, 178870 } },
 	}
 };
 
