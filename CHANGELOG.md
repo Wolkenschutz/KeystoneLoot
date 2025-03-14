@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.9.10 - 2025-03-14
+
+### Bugfixes
+
+- Gallywix's NPC ID fixed
+- Fixed incorrect item level in raid dropdown
+
+### Other Changes
+
+- Merge branch 'main' of https://github.com/Wolkenschutz/KeystoneLoot
+
 ## 1.9.9 - 2025-03-04
 
 ### Bugfixes
