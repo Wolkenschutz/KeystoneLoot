@@ -82,7 +82,7 @@ local _itemlevels = {
 	[14] = {
 		{ id = 'veteran', text = 'Raid Finder', difficultyId = DifficultyUtil.ID.PrimaryRaidLFR, entries = {
 			{ itemLevel = 623, bonusId = 11969, text = ITEM_POOR_COLOR_CODE..'623|r | '..BOSS..' 1-2' },
-			{ itemLevel = 626, bonusId = 11970, text = ITEM_POOR_COLOR_CODE..'587|r | '..BOSS..' 3-4' },
+			{ itemLevel = 626, bonusId = 11970, text = ITEM_POOR_COLOR_CODE..'626|r | '..BOSS..' 3-4' },
 			{ itemLevel = 629, bonusId = 11971, text = ITEM_POOR_COLOR_CODE..'629|r | '..BOSS..' 5-6' },
 			{ itemLevel = 632, bonusId = 11972, text = ITEM_POOR_COLOR_CODE..'632|r | '..BOSS..' 7-8' },
 			{ itemLevel = 636, bonusId = 11973, text = ITEM_GOOD_COLOR_CODE..'636|r | '..ITEM_UPGRADE },
