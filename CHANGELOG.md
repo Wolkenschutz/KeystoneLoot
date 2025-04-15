@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.11 - 2025-04-15
+
+### Improvements
+
+- Optimize Loot Reminder logic
+
 ## 1.9.10 - 2025-03-14
 
 ### Bugfixes
