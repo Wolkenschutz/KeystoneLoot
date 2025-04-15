@@ -35,3 +35,8 @@ end
 local handler = CreateFrame('Frame');
 handler:RegisterEvent('PLAYER_ENTERING_WORLD');
 handler:SetScript('OnEvent', OnEvent);
+
+SlashCmdList.KSLRELOAD = ReloadUI;
+SLASH_KSLRELOAD1 = "/rl";
+SLASH_KSLRELOAD2 = "/reload";
+SLASH_KSLRELOAD3 = "/reloadui";
