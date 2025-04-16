@@ -8,12 +8,15 @@ local function OnShow(self)
 end
 
 local function OnHide(self)
+	StaticPopup_Hide('KEYSTONELOOT_EXPORT_DIALOG');
+	StaticPopup_Hide('KEYSTONELOOT_IMPORT_DIALOG');
+
 	self.TooltipFrame:Hide();
 
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE);
 end
 
-local Frame = CreateFrame('Frame', AddonName..'Frame', UIParent, 'PortraitFrameTexturedBaseTemplate');
+local Frame = CreateFrame('Frame', AddonName .. 'Frame', UIParent, 'PortraitFrameTexturedBaseTemplate');
 Frame:Hide();
 Frame:SetSize(476, 230);
 Frame:SetPoint('CENTER');
@@ -52,5 +55,5 @@ AddonMarkerText:SetText('Made with LOVE in Germany');
 
 
 function KeystoneLoot:GetOverview()
-    return Frame;
+	return Frame;
 end
