@@ -109,7 +109,9 @@ local _itemlevels = {
 			{ itemLevel = 655, bonusId = 11987, text = ITEM_SUPERIOR_COLOR_CODE..'655|r | +10' },
 			{ itemLevel = 658, bonusId = 11988, text = ITEM_SUPERIOR_COLOR_CODE..'658|r | '..ITEM_UPGRADE },
 			{ itemLevel = 662, bonusId = 11989, text = ITEM_EPIC_COLOR_CODE..'662|r | '..ITEM_UPGRADE },
-			{ itemLevel = 665, bonusId = 11990, text = ITEM_EPIC_COLOR_CODE..'665|r | '..ITEM_UPGRADE }
+			{ itemLevel = 665, bonusId = 11990, text = ITEM_EPIC_COLOR_CODE..'665|r | '..ITEM_UPGRADE },
+			{ itemLevel = 668, bonusId = 12371, text = ITEM_EPIC_COLOR_CODE..'668|r | '..ITEM_UPGRADE },
+			{ itemLevel = 671, bonusId = 12372, text = ITEM_EPIC_COLOR_CODE..'671|r | '..ITEM_UPGRADE }
 		} },
 		{ id = 'myth', text = 'Great Vault', entries = {
 			{ itemLevel = 662, bonusId = 11991, text = ITEM_EPIC_COLOR_CODE..'662|r | +10' },
@@ -117,7 +119,9 @@ local _itemlevels = {
 			{ itemLevel = 668, bonusId = 11993, text = ITEM_EPIC_COLOR_CODE..'668|r | '..ITEM_UPGRADE },
 			{ itemLevel = 672, bonusId = 11994, text = ITEM_EPIC_COLOR_CODE..'672|r | '..ITEM_UPGRADE },
 			{ itemLevel = 675, bonusId = 11995, text = ITEM_LEGENDARY_COLOR_CODE..'675|r | '..ITEM_UPGRADE },
-			{ itemLevel = 678, bonusId = 11996, text = ITEM_LEGENDARY_COLOR_CODE..'678|r | '..ITEM_UPGRADE }
+			{ itemLevel = 678, bonusId = 11996, text = ITEM_LEGENDARY_COLOR_CODE..'678|r | '..ITEM_UPGRADE },
+			{ itemLevel = 681, bonusId = 12375, text = ITEM_LEGENDARY_COLOR_CODE..'681|r | '..ITEM_UPGRADE },
+			{ itemLevel = 684, bonusId = 12376, text = ITEM_LEGENDARY_COLOR_CODE..'684|r | '..ITEM_UPGRADE }
 		} }
 	}
 };
