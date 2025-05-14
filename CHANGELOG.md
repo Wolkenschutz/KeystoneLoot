@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.10.1 - 2025-05-14
+
+### Other Changes
+
+- New item levels added to the item level dropdown.
+
 ## 1.10.0 - 2025-05-03
 
 ### New Features
