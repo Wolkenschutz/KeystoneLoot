@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.10.2 - 2025-06-28
+
+### Other Changes
+
+- Update KeystoneLoot.toc
+- Merge pull request [#36](https://github.com/Wolkenschutz/KeystoneLoot/pull/36) by [rustynail1984](https://github.com/rustynail1984) from rustynail1984/main
+
 ## 1.10.1 - 2025-05-14
 
 ### Other Changes
