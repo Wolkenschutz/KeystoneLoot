@@ -100,32 +100,30 @@ end
 local _itemlevels = {
 	[15] = {
 		{ id = 'champion', text = 'Champion', entries = {
-			{ itemLevel = 681, bonusId = 11977, text = ITEM_GOOD_COLOR_CODE..'681|r | +0' },
-			{ itemLevel = 684, bonusId = 11978, text = ITEM_GOOD_COLOR_CODE..'684|r | +2 +3' },
-			{ itemLevel = 688, bonusId = 11979, text = ITEM_GOOD_COLOR_CODE..'688|r | +4' },
-			{ itemLevel = 691, bonusId = 11980, text = ITEM_GOOD_COLOR_CODE..'691|r | +5' },
-			{ itemLevel = 694, bonusId = 11981, text = ITEM_SUPERIOR_COLOR_CODE..'694|r | '..ITEM_UPGRADE },
-			{ itemLevel = 697, bonusId = 11982, text = ITEM_SUPERIOR_COLOR_CODE..'697|r | '..ITEM_UPGRADE },
-			{ itemLevel = 701, bonusId = 11983, text = ITEM_SUPERIOR_COLOR_CODE..'701|r | '..ITEM_UPGRADE },
-			{ itemLevel = 704, bonusId = 11984, text = ITEM_SUPERIOR_COLOR_CODE..'704|r | '..ITEM_UPGRADE }
+			{ itemLevel = 681, bonusId = 12290, text = ITEM_GOOD_COLOR_CODE..'681|r | +0' },
+			{ itemLevel = 684, bonusId = 12291, text = ITEM_GOOD_COLOR_CODE..'684|r | +2 +3' },
+			{ itemLevel = 688, bonusId = 12292, text = ITEM_GOOD_COLOR_CODE..'688|r | +4' },
+			{ itemLevel = 691, bonusId = 12293, text = ITEM_GOOD_COLOR_CODE..'691|r | +5' },
+			{ itemLevel = 694, bonusId = 12294, text = ITEM_SUPERIOR_COLOR_CODE..'694|r | '..ITEM_UPGRADE },
+			{ itemLevel = 697, bonusId = 12295, text = ITEM_SUPERIOR_COLOR_CODE..'697|r | '..ITEM_UPGRADE },
+			{ itemLevel = 701, bonusId = 12296, text = ITEM_SUPERIOR_COLOR_CODE..'701|r | '..ITEM_UPGRADE },
+			{ itemLevel = 704, bonusId = 12297, text = ITEM_SUPERIOR_COLOR_CODE..'704|r | '..ITEM_UPGRADE }
 		} },
 		{ id = 'hero', text = 'Hero', entries = {
-			{ itemLevel = 694, bonusId = 11985, text = ITEM_SUPERIOR_COLOR_CODE..'694|r | +6 +7' },
-			{ itemLevel = 697, bonusId = 11986, text = ITEM_SUPERIOR_COLOR_CODE..'697|r | +8 +9' },
-			{ itemLevel = 701, bonusId = 11987, text = ITEM_SUPERIOR_COLOR_CODE..'701|r | +10' },
-			{ itemLevel = 704, bonusId = 11988, text = ITEM_SUPERIOR_COLOR_CODE..'704|r | '..ITEM_UPGRADE },
-			{ itemLevel = 707, bonusId = 11989, text = ITEM_EPIC_COLOR_CODE..'707|r | '..ITEM_UPGRADE },
-			{ itemLevel = 710, bonusId = 11990, text = ITEM_EPIC_COLOR_CODE..'710|r | '..ITEM_UPGRADE },
-			{ itemLevel = 714, bonusId = 12371, text = ITEM_EPIC_COLOR_CODE..'714|r | '..ITEM_UPGRADE },
-			{ itemLevel = 717, bonusId = 12372, text = ITEM_EPIC_COLOR_CODE..'717|r | '..ITEM_UPGRADE }
+			{ itemLevel = 694, bonusId = 12350, text = ITEM_SUPERIOR_COLOR_CODE..'694|r | +6 +7' },
+			{ itemLevel = 697, bonusId = 12351, text = ITEM_SUPERIOR_COLOR_CODE..'697|r | +8 +9' },
+			{ itemLevel = 701, bonusId = 12352, text = ITEM_SUPERIOR_COLOR_CODE..'701|r | +10' },
+			{ itemLevel = 704, bonusId = 12353, text = ITEM_SUPERIOR_COLOR_CODE..'704|r | '..ITEM_UPGRADE },
+			{ itemLevel = 707, bonusId = 12354, text = ITEM_EPIC_COLOR_CODE..'707|r | '..ITEM_UPGRADE },
+			{ itemLevel = 710, bonusId = 12355, text = ITEM_EPIC_COLOR_CODE..'710|r | '..ITEM_UPGRADE }
 		} },
 		{ id = 'myth', text = 'Great Vault', entries = {
-			{ itemLevel = 707, bonusId = 11991, text = ITEM_EPIC_COLOR_CODE..'707|r | +10' },
-			{ itemLevel = 710, bonusId = 11992, text = ITEM_EPIC_COLOR_CODE..'710|r | '..ITEM_UPGRADE },
-			{ itemLevel = 714, bonusId = 11993, text = ITEM_EPIC_COLOR_CODE..'714|r | '..ITEM_UPGRADE },
-			{ itemLevel = 717, bonusId = 11994, text = ITEM_EPIC_COLOR_CODE..'717|r | '..ITEM_UPGRADE },
-			{ itemLevel = 720, bonusId = 11995, text = ITEM_LEGENDARY_COLOR_CODE..'720|r | '..ITEM_UPGRADE },
-			{ itemLevel = 723, bonusId = 11996, text = ITEM_LEGENDARY_COLOR_CODE..'723|r | '..ITEM_UPGRADE }
+			{ itemLevel = 707, bonusId = 12356, text = ITEM_EPIC_COLOR_CODE..'707|r | +10' },
+			{ itemLevel = 710, bonusId = 12357, text = ITEM_EPIC_COLOR_CODE..'710|r | '..ITEM_UPGRADE },
+			{ itemLevel = 714, bonusId = 12358, text = ITEM_EPIC_COLOR_CODE..'714|r | '..ITEM_UPGRADE },
+			{ itemLevel = 717, bonusId = 12359, text = ITEM_EPIC_COLOR_CODE..'717|r | '..ITEM_UPGRADE },
+			{ itemLevel = 720, bonusId = 12360, text = ITEM_LEGENDARY_COLOR_CODE..'720|r | '..ITEM_UPGRADE },
+			{ itemLevel = 723, bonusId = 12361, text = ITEM_LEGENDARY_COLOR_CODE..'723|r | '..ITEM_UPGRADE }
 		} }
 	}
 };
