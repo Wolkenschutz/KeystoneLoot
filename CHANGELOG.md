@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.10.4 - 2025-08-06
+
+### Bugfixes
+
+- Season 3 dungeon data
+
 ## 1.10.3 - 2025-08-06
 
 ### Bugfixes
