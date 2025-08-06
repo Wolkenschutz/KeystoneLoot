@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.10.3 - 2025-08-06
+
+### Bugfixes
+
+- Dialogue temporarily fixed
+- Season 3 bonus ids
+
+### Other Changes
+
+- Dump toc version
+- Update for season 3
+
 ## 1.10.2 - 2025-06-28
 
 ### Other Changes
