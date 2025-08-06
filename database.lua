@@ -229,7 +229,8 @@ end
 
 function KeystoneLoot:ImportFavorites(importStr, overwrite)
 	if (not importStr:match('^KeystoneLoot:v1')) then
-		return RED_FONT_COLOR:WrapTextInColorCode(Translate['Invalid import string.']);
+		print(RED_FONT_COLOR:WrapTextInColorCode(Translate['Invalid import string.']));
+		return;
 	end
 
 	local dataStr = importStr:gsub('%s+', ''):gsub('^KeystoneLoot:v1,', '');
@@ -276,11 +277,10 @@ function KeystoneLoot:ImportFavorites(importStr, overwrite)
 
 		if (totalImported > 0) then
 			self:GetCurrentTab():Update();
-			return (YELLOW_FONT_COLOR:WrapTextInColorCode(Translate['Successfully imported %d |4item:items;.'])):format(totalImported);
+			print((YELLOW_FONT_COLOR:WrapTextInColorCode(Translate['Successfully imported %d |4item:items;.'])):format(totalImported));
+			return;
 		end
-
-		return RED_FONT_COLOR:WrapTextInColorCode(Translate['Invalid import string.']);
 	end
 
-	return RED_FONT_COLOR:WrapTextInColorCode(Translate['Invalid import string.']);
+	print(RED_FONT_COLOR:WrapTextInColorCode(Translate['Invalid import string.']));
 end

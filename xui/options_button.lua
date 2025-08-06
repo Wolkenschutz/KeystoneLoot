@@ -227,7 +227,7 @@ function Button:GetList()
 	table.insert(_list, info);
 
 	local info = {};
-	info.text = YELLOW_FONT_COLOR:WrapTextInColorCode(NEW:upper())..' '..NORMAL_FONT_COLOR:WrapTextInColorCode(FAVORITES); -- TODO: -NEU- Später wieder entfernen.
+	info.text = NORMAL_FONT_COLOR:WrapTextInColorCode(FAVORITES);
 	info.checked = false;
 	info.notCheckable = true;
 	info.disabled = true;

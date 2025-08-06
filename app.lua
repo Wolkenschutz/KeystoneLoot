@@ -4,7 +4,7 @@ local Translate = KeystoneLoot.Translate;
 
 
 function KeystoneLoot:GetSeasonId()
-	return 14; -- 14 = TWW Season 2
+	return 15; -- 15 = TWW Season 3
 end
 
 local _slotList = { INVTYPE_HEAD, INVTYPE_NECK, INVTYPE_SHOULDER, INVTYPE_CLOAK, INVTYPE_CHEST, INVTYPE_WRIST, INVTYPE_HAND, INVTYPE_WAIST, INVTYPE_LEGS, INVTYPE_FEET, INVTYPE_WEAPONMAINHAND, INVTYPE_WEAPONOFFHAND, INVTYPE_FINGER, INVTYPE_TRINKET, EJ_LOOT_SLOT_FILTER_OTHER }
@@ -71,10 +71,10 @@ function KeystoneLoot:ShowImportDialog()
 				ChatEdit_FocusActiveWindow();
 			end,
 			OnAccept = function(self)
-				print(KeystoneLoot:ImportFavorites(self.editBox:GetText(), false));
+				KeystoneLoot:ImportFavorites(self.editBox:GetText(), false);
 			end,
 			OnCancel = function(self)
-				print(KeystoneLoot:ImportFavorites(self.editBox:GetText(), true));
+				KeystoneLoot:ImportFavorites(self.editBox:GetText(), true);
 			end,
 			OnAlt = function(self) end,
 			EditBoxOnEnterPressed = function(self)
