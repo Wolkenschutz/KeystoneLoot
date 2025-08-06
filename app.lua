@@ -22,10 +22,12 @@ function KeystoneLoot:ShowExportDialog()
 			OnAccept = function(self) end,
 			OnShow = function(self)
 				self.popupElapsed = 1;
+				if (self.editBox == nil) then
+					self.editBox = _G[self:GetName().."EditBox"];
+				end
 			end,
 			OnHide = function(self)
 				ChatEdit_FocusActiveWindow();
-				self.editBox:SetText('');
 				self.popupElapsed = nil;
 			end,
 			OnUpdate = function(self, elapsed)
@@ -60,9 +62,13 @@ function KeystoneLoot:ShowImportDialog()
 			button3 = CANCEL,
 			hasEditBox = 1,
 			editBoxWidth = 350,
+			OnShow = function(self)
+				if (self.editBox == nil) then
+					self.editBox = _G[self:GetName().."EditBox"];
+				end
+			end,
 			OnHide = function(self)
 				ChatEdit_FocusActiveWindow();
-				self.editBox:SetText("");
 			end,
 			OnAccept = function(self)
 				print(KeystoneLoot:ImportFavorites(self.editBox:GetText(), false));
