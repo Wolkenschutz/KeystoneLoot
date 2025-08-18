@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.10.5 - 2025-08-10
+
+### Bugfixes
+
+- Raid boss order
+- TWW season 3 catalyst non-set items
+- Raid boss npc ids
+
 ## 1.10.4 - 2025-08-06
 
 ### Bugfixes
