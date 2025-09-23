@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.10.7 - 2025-09-23
+
+### Bugfixes
+
+- Add new special bonus ID for item 243308
+
+### Other Changes
+
+- Update zhCN.lua
+- Update zhCN.lua
+- Merge pull request [#40](https://github.com/Wolkenschutz/KeystoneLoot/pull/40) by [nanjuekaien1](https://github.com/nanjuekaien1) from nanjuekaien1/patch-1
+
 ## 1.10.6 - 2025-08-18
 
 ### Other Changes
