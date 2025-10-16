@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.10.9 - 2025-10-16
+
+### Bugfixes
+
+- Turboboost item levels added to the dropdown #44
+
 ## 1.10.8 - 2025-10-12
 
 ### Other Changes
