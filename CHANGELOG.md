@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.10.10 - 2025-12-03
+
+### Other Changes
+
+- Bump TOC Version
+
 ## 1.10.9 - 2025-10-16
 
 ### Bugfixes
