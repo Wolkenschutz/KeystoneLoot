@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.10.11 - 2026-01-21
+
+### Other Changes
+
+- Update interface version to 120000
+
 ## 1.10.10 - 2025-12-03
 
 ### Other Changes
