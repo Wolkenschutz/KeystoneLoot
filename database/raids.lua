@@ -186,22 +186,3 @@ function KeystoneLoot:GetRaidDifficultyId()
 
 	return 0;
 end
-
-function KeystoneLoot:GetRaidBossId(npcId)
-	for _, raidInfo in next, self:GetRaidList() do
-		for _, bossInfo in next, raidInfo.bossList do
-			local npcIds = bossInfo.npcId;
-			if (type(npcIds) ~= 'table') then
-				npcIds = { npcIds };
-			end
-
-			for _, id in next, npcIds do
-				if (id == npcId) then
-					return bossInfo.bossId;
-				end
-			end
-		end
-	end
-
-	return 0;
-end

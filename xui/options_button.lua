@@ -143,23 +143,6 @@ function Button:GetList()
 	table.insert(_list, info);
 
 	local info = {};
-	info.text = NORMAL_FONT_COLOR:WrapTextInColorCode(RAIDS);
-	info.checked = false;
-	info.notCheckable = true;
-	info.disabled = true;
-	table.insert(_list, info);
-
-	local info = {};
-	info.text = Translate['Enable Loot Reminder'];
-	info.checked = KeystoneLootDB.raidLootReminderEnabled;
-	info.keepShownOnClick = true;
-	info.args = not KeystoneLootDB.raidLootReminderEnabled;
-	info.func = function(enable)
-		KeystoneLootDB.raidLootReminderEnabled = enable;
-	end;
-	table.insert(_list, info);
-
-	local info = {};
 	info.text = NORMAL_FONT_COLOR:WrapTextInColorCode(Translate['Highlighting']);
 	info.checked = false;
 	info.notCheckable = true;

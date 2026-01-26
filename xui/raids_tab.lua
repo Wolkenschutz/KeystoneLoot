@@ -341,29 +341,4 @@ do
 		end
 	end
 	TabFrame:SetScript('OnShow', OnShow);
-
-	local blacklistedNpc = {};
-	local function OnEvent(self, event, ...)
-		if (not KeystoneLootDB.raidLootReminderEnabled) then
-			return;
-		end
-
-		local guid = UnitGUID('target') or '';
-		local _, type, difficultyId = GetInstanceInfo();
-		local unitType, _, _, _, _, npcId = ('-'):split(guid);
-		if (InCombatLockdown() or unitType ~= 'Creature' or type ~= 'raid' or (npcId and blacklistedNpc[npcId]) or not difficultyIds[difficultyId] or UnitIsDead('target')) then
-			return;
-		end
-
-		local bossId = KeystoneLoot:GetRaidBossId(tonumber(npcId));
-		if (bossId == 0) then
-			return;
-		end
-
-		KeystoneLoot:UpdateLootReminder(bossId);
-
-		blacklistedNpc[npcId] = true;
-	end
-	TabFrame:RegisterEvent('PLAYER_TARGET_CHANGED');
-	TabFrame:SetScript('OnEvent', OnEvent);
 end
