@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.10.13 - 2026-02-11
+
+### Other Changes
+
+- Bump TOC version
+
 ## 1.10.12 - 2026-01-26
 
 ### Other Changes
