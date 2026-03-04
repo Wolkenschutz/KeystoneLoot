@@ -1,0 +1,49 @@
+local AddonName, KeystoneLoot = ...;
+
+if (GetLocale() ~= "itIT") then
+    return;
+end
+
+local L = KeystoneLoot.L;
+
+-- keystoneloot_frame.lua
+L["%s (%s Season %d)"] = "%s (%s Stagione %d)";
+
+-- itemlevel_dropdown.lua
+L["Veteran"] = "Veterano";
+L["Champion"] = "Campione";
+L["Hero"] = "Eroe";
+
+-- catalyst_frame.lua
+L["The Catalyst"] = "Catalizzatore";
+
+-- settings_dropdown.lua
+L["Minimap button"] = "Pulsante minimappa";
+L["Item level in keystone tooltip"] = "Livello oggetto nel tooltip della chiave";
+L["Loot reminder (dungeons)"] = "Promemoria bottino (sotterranei)";
+L["Highlighting"] = "Evidenzia";
+L["No stats"] = "Nessuna statistica";
+L["Export..."] = "Esporta...";
+L["Import..."] = "Importa...";
+L["Export favorites of %s"] = "Esporta preferiti di %s";
+L["Import favorites for %s\nPaste import string here:"] = "Importa preferiti di %s\nIncolla qui la stringa di importazione:";
+L["Merge"] = "Unisci";
+L["Overwrite"] = "Sovrascrivi";
+L["%d |4favorite:favorites; imported%s."] = "%d |4preferito:preferiti; importato%s.";
+L[" (overwritten)"] = " (sovrascritto)";
+L["Import failed - %s"] = "Importazione fallita - %s";
+L["Some specs were skipped - import string belongs to a different class."] = "Alcune specializzazioni sono state saltate - la stringa di importazione appartiene a una classe diversa.";
+
+-- favorites.lua
+L["No favorites found"] = "Nessun preferito trovato";
+L["Invalid import string."] = "Stringa di importazione non valida.";
+L["No character selected."] = "Nessun personaggio selezionato.";
+L["No valid items found."] = "Nessun oggetto valido trovato.";
+
+-- loot_reminder_frame.lua
+L["Correct loot specialization set?"] = "Specializzazione bottino corretta?";
+L["+1 item dropping for all specs."] = "+1 oggetto che cade per tutte le specializzazioni.";
+L["+%d items dropping for all specs."] = "+%d oggetti che cadono per tutte le specializzazioni.";
+
+-- minimap_button.lua
+L["Left click: Open overview"] = "Clic sinistro: Apri panoramica";
