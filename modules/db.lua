@@ -18,7 +18,7 @@ end
 
 function DB:InitGlobalDB()
     -- TODO: Will be removed in the next version
-    if (KeystoneLootDB.minimapButtonEnabled ~= nil) then
+    if (KeystoneLootDB and KeystoneLootDB.minimapButtonEnabled ~= nil) then
         KeystoneLootDB = {};
     end
 
@@ -41,7 +41,7 @@ end
 
 function DB:InitCharDB()
     -- TODO: Will be removed in the next version
-    if (KeystoneLootCharDB.favoriteLoot ~= nil) then
+    if (KeystoneLootDB and KeystoneLootCharDB.favoriteLoot ~= nil) then
         KeystoneLootCharDB = {};
     end
 

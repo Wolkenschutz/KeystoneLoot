@@ -97,7 +97,7 @@ function KeystoneLootSettingsDropdownMixin:Init()
         local LDBIcon = LibStub and LibStub('LibDBIcon-1.0', true);
         if (LDBIcon) then
             rootDescription:CreateCheckbox(
-                L["Minimap button2"],
+                L["Minimap button"],
                 function() return not DB:Get("settings.minimap.hide"); end,
                 function()
                     DB:Set("settings.minimap.hide", not DB:Get("settings.minimap.hide"));
