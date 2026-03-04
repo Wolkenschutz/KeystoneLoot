@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.1 - 2026-03-04
+
+### Bugfixes
+
+- Message: Interface/AddOns/KeystoneLoot/modules/db.lua:21: attempt to index global 'KeystoneLootDB' (a nil value)
+
+### Other Changes
+
+- Merge branch 'main' of https://github.com/Wolkenschutz/KeystoneLoot
+
 ## 2.0.0 - 2026-03-04
 
 ### New Features
