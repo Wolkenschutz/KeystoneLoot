@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.0.0 - 2026-03-04
+
+### New Features
+
+- KeystoneLoot V2
+
+* Midnight Season 1 ready
+* "All Specializations" in class filter
+* "All Slots" in slot filter
+* Multi-character favorites support
+* Brand new design
+  Thank you all for your continued support!
+
 ## 1.10.13 - 2026-02-11
 
 ### Other Changes
