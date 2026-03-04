@@ -41,7 +41,7 @@ end
 
 function DB:InitCharDB()
     -- TODO: Will be removed in the next version
-    if (KeystoneLootDB and KeystoneLootCharDB.favoriteLoot ~= nil) then
+    if (KeystoneLootCharDB and KeystoneLootCharDB.favoriteLoot ~= nil) then
         KeystoneLootCharDB = {};
     end
 
