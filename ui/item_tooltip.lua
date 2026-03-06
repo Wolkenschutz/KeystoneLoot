@@ -95,7 +95,7 @@ local function OnTooltipSetItem(tooltip)
 
     if (not inCorrectInstance) then
         local specs = Favorites:GetItemSpecs(itemId, true);
-        local _, _, classId = UnitClass("player");
+        local classId = Character:GetCurrentClassId();
         local totalSpecs = C_SpecializationInfo.GetNumSpecializationsForClassID(classId);
         local specText, sourceName;
 
