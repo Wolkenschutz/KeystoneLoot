@@ -8,6 +8,8 @@ ignore:
   - CHANGELOG.md
   - LICENSE.md
   - README.md
+  - README_CurseForge.md
+  - README_WoWInterface.txt
 
 manual-changelog:
   filename: CHANGELOG_LATEST.md

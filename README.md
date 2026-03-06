@@ -1,13 +1,44 @@
 # KeystoneLoot
-KeystoneLoot is a super handy addon for World of Warcraft that helps you keep track of the loot in Mythic instances. With a compact design, it allows you to quickly find the loot you're looking for.
 
-Main features:
-* Mythic Instance Overview: Get a concise overview of all Mythic instances and the loot they drop.
-* Customize Your Loot: Personalize your loot by setting specific filters. You can choose your class, specialization, desired item slot, and item level. The addon will then show you the loot based on your selection.
-* Wonderful Item Overview: Loot is displayed with icons associated with each item. Simply hover over the icon with your mouse, and the item tooltip will be shown. This helps you quickly determine if a particular item is of interest to you.
-* Favorite Items: You can mark items as favorites to easily find them later. Simply mark the pieces you want to keep an eye on, and they will be readily available to you.
-* Loot Reminder: You will be notified that you can change your loot specialization as you have loot for a different specialization.
- 
-With KeystoneLoot, navigating Mythic instances and finding the right loot becomes a breeze. Save time and maximize your efficiency by using the addon to find the items that will give your character the crucial power boost.
+**KeystoneLoot** is a World of Warcraft addon that gives you a compact, filterable overview of loot from Mythic+ dungeons, raids, and the Revival Catalyst, all in one place.
 
-Get KeystoneLoot today and dive into the next level of loot overview for Mythic instances in World of Warcraft!
+---
+
+## Features
+
+### Dungeons & Raids Overview
+Browse loot from all current Mythic+ dungeons and raids in a clean, icon-based layout. Switch between content tabs at a glance without cluttering your screen.
+
+### Smart Loot Filtering
+Filter displayed items by class, specialization, item slot, and item level. Filters automatically sync when you switch characters via the character dropdown, so you always see what's relevant to your current alt.
+
+### Revival Catalyst
+View all Catalyst-convertible items for your class and spec directly within the addon, no need to look them up externally.
+
+### Favorites System
+Mark items as favorites on a per-character, per-spec basis. The system supports:
+- Favoriting for a single spec or all specs at once
+- Viewing another character's wishlist via the character dropdown
+- **Export & Import** of favorites using a compact string format (`KeystoneLoot:v1,...`), great for sharing wishlists or migrating between accounts
+
+### Loot Reminder
+When you enter a Mythic+ dungeon, KeystoneLoot checks whether your active loot specialization matches your favorited items. If there's a mismatch, a reminder frame pops up so you don't miss out on loot.
+
+### Keystone Tooltip
+Hovering over a keystone in your bags shows additional dungeon info directly in the tooltip.
+
+### Teleport Buttons
+Quick-teleport buttons on dungeon entries let you jump straight to a dungeon entrance without leaving the addon.
+
+### Minimap Button
+Toggle the main window from a minimap button. Fully draggable and position-persistent.
+
+---
+
+## Installation
+Install via [CurseForge](https://www.curseforge.com/wow/addons/keystoneloot)
+
+---
+
+## Localization
+KeystoneLoot ships with support for: `enUS`, `deDE`, `esES`, `frFR`, `itIT`, `koKR`, `ptBR`, `ruRU`, `zhCN`, `zhTW`
