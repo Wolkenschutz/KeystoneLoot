@@ -2,7 +2,6 @@ local AddonName, KeystoneLoot  = ...;
 
 local DB                       = KeystoneLoot.DB;
 local Query                    = KeystoneLoot.Query;
-local Favorites                = KeystoneLoot.Favorites;
 
 local ICON_SIZE                = 34;
 local ICON_SPACING             = 8;

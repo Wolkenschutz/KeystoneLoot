@@ -17,7 +17,7 @@ KeystoneLoot.UpgradeTrackOrder = {
 KeystoneLoot.UpgradeTracks = {
     dungeon = {
         champion = {
-            CreateTrackEntry(246, 12785, Enum.ItemQuality.Uncommon, "+0"),
+            CreateTrackEntry(246, 12785, Enum.ItemQuality.Uncommon, "+1"),
             CreateTrackEntry(250, 12786, Enum.ItemQuality.Uncommon, "+2 +3"),
             CreateTrackEntry(253, 12787, Enum.ItemQuality.Uncommon, "+4"),
             CreateTrackEntry(256, 12788, Enum.ItemQuality.Uncommon, "+5"),
