@@ -20,6 +20,7 @@ L["The Catalyst"] = "化生台";
 -- settings_dropdown.lua
 L["Minimap button"] = "小地图按钮";
 L["Item level in keystone tooltip"] = "在史诗钥匙显示对应等级";
+L["Favorite in item tooltip"] = "在物品提示中显示收藏";
 L["Loot reminder (dungeons)"] = "拾取专精提醒（地下城）";
 L["Highlighting"] = "高亮显示";
 L["No stats"] = "无属性";

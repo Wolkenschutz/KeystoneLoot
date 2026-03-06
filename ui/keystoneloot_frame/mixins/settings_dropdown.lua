@@ -26,15 +26,15 @@ end
 
 local function HandleImportResult(success, result, skippedSpecs, overwrite)
     if (skippedSpecs) then
-        print(L["Some specs were skipped - import string belongs to a different class."]);
+        print(RED_FONT_COLOR:WrapTextInColorCode(L["Some specs were skipped - import string belongs to a different class."]));
     end
 
     if (success) then
         local suffix = overwrite and L[" (overwritten)"] or "";
-        print(string.format(L["%d |4favorite:favorites; imported%s."], result, suffix));
+        print(YELLOW_FONT_COLOR:WrapTextInColorCode(string.format(L["%d |4favorite:favorites; imported%s."], result, suffix)));
         DB:Set("filters.slotId", -1);
     else
-        print(string.format(L["Import failed - %s"], tostring(result)));
+        print(YELLOW_FONT_COLOR:WrapTextInColorCode(string.format(L["Import failed - %s"], tostring(result))));
     end
 end
 
@@ -121,6 +121,11 @@ function KeystoneLootSettingsDropdownMixin:Init()
             L["Item level in keystone tooltip"],
             function() return DB:Get("settings.keystoneTooltip"); end,
             function() DB:Set("settings.keystoneTooltip", not DB:Get("settings.keystoneTooltip")); end
+        );
+        rootDescription:CreateCheckbox(
+            L["Favorite in item tooltip"],
+            function() return DB:Get("settings.favoriteTooltip"); end,
+            function() DB:Set("settings.favoriteTooltip", not DB:Get("settings.favoriteTooltip")); end
         );
 
         -- Notifications

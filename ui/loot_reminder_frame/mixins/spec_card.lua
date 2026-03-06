@@ -1,5 +1,7 @@
 local AddonName, KeystoneLoot = ...;
 
+local Character = KeystoneLoot.Character;
+
 -- Blizzard_PlayerSpells\ClassSpecializations\Blizzard_ClassSpecializationsFrame.lua
 local SPEC_THUMBNAILS         = {
     [62] = "mage-arcane",
@@ -60,7 +62,7 @@ end
 function KeystoneLootReminderSpecMixin:Init(specId, items, lootSpecId, allSpecItems)
     self.specId = specId;
 
-    local _, specName = GetSpecializationInfoByID(specId);
+    local specName = Character:GetSpecName(specId);
     self.Title:SetText(specName);
 
     self.Bg:SetHorizTile(false);

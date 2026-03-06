@@ -20,10 +20,16 @@ function KeystoneLootReminderIconMixin:OnEnter()
         GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT");
     end
 
+    GameTooltip.KeystoneLootOwned = true;
     GameTooltip:SetHyperlink(Upgrade:BuildItemLink(self.itemId));
     GameTooltip:Show();
+
+    self.UpdateTooltip = self.OnEnter;
 end
 
 function KeystoneLootReminderIconMixin:OnLeave()
+    GameTooltip.KeystoneLootOwned = nil;
     GameTooltip:Hide();
+
+    self.UpdateTooltip = nil;
 end

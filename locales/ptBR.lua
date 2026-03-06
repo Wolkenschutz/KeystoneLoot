@@ -20,6 +20,7 @@ L["The Catalyst"] = "O Catalisador";
 -- settings_dropdown.lua
 L["Minimap button"] = "Botão do minimapa";
 L["Item level in keystone tooltip"] = "Nível do item na dica da chave";
+L["Favorite in item tooltip"] = "Favorito na dica do item";
 L["Loot reminder (dungeons)"] = "Lembrete de saque (masmorras)";
 L["Highlighting"] = "Destaques";
 L["No stats"] = "Sem atributos";

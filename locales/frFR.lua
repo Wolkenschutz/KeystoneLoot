@@ -20,6 +20,7 @@ L["The Catalyst"] = "Le catalyseur";
 -- settings_dropdown.lua
 L["Minimap button"] = "Bouton de la mini-carte";
 L["Item level in keystone tooltip"] = "Niveau d'objet dans l'infobulle de la clé";
+L["Favorite in item tooltip"] = "Favori dans l'infobulle de l'objet";
 L["Loot reminder (dungeons)"] = "Rappel de butin (donjons)";
 L["Highlighting"] = "Surlignage";
 L["No stats"] = "Aucune statistique";

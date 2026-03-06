@@ -23,6 +23,7 @@ L["The Catalyst"] = "Der Katalysator";
 -- settings_dropdown.lua
 L["Minimap button"] = "Minimap-Button";
 L["Item level in keystone tooltip"] = "Gegenstandsstufe im Schlüsselstein-Tooltip";
+L["Favorite in item tooltip"] = "Favorit im Gegenstand-Tooltip";
 L["Loot reminder (dungeons)"] = "Beute-Erinnerung (Dungeons)";
 L["Highlighting"] = "Hervorhebungen";
 L["No stats"] = "Keine Stats";

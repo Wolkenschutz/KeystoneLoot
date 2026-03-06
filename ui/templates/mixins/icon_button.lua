@@ -73,8 +73,8 @@ local function AddSpecLinesToTooltip(itemId)
 
     local specNames = {};
     for _, specId in ipairs(item.classes[info.classId]) do
-        local _, name = GetSpecializationInfoByID(specId);
-        if (name) then
+        local name = Character:GetSpecName(specId);
+        if (name ~= "") then
             table.insert(specNames, WHITE_FONT_COLOR:WrapTextInColorCode(name));
         end
     end
@@ -167,6 +167,7 @@ function KeystoneLootLootIconButtonMixin:OnEnter()
         GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", 0, 12);
     end
 
+    GameTooltip.KeystoneLootOwned = true;
     GameTooltip:SetHyperlink(Upgrade:BuildItemLink(self.itemId));
     AddSpecLinesToTooltip(self.itemId);
     GameTooltip:Show();
@@ -187,7 +188,7 @@ function KeystoneLootLootIconButtonMixin:OnLeave()
         return;
     end
 
-
+    GameTooltip.KeystoneLootOwned = nil;
     GameTooltip:Hide();
     ResetCursor();
 
@@ -201,12 +202,12 @@ function KeystoneLootLootIconButtonMixin:OnClick()
         return;
     end
 
-	if (IsModifierKeyDown()) then
+    if (IsModifierKeyDown()) then
         -- Cannot link modified links, so we convert the link to an link from the GetItemInfo API which can be linked.
         local _, itemLink = C_Item.GetItemInfo(Upgrade:BuildItemLink(self.itemId));
-		HandleModifiedItemClick(itemLink);
-		return;
-	end
+        HandleModifiedItemClick(itemLink);
+        return;
+    end
 
     local slotId = DB:Get("filters.slotId");
     local isFavoritesSlot = slotId == -1;

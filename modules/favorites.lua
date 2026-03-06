@@ -8,6 +8,8 @@ local DB = KeystoneLoot.DB;
 local Query = KeystoneLoot.Query;
 local L = KeystoneLoot.L;
 
+local SHARE_PREFIX = "KeystoneLoot:v1";
+
 function Favorites:Init()
     local characterKey = Character:GetKey();
     local favorites = DB:Get("favorites") or {};
@@ -163,12 +165,12 @@ function Favorites:IsFavorite(itemId, specId)
     return false;
 end
 
-function Favorites:IsAnyFavorite(itemId)
+function Favorites:IsAnyFavorite(itemId, useCurrentChar)
     if (not itemId) then
         return false;
     end
 
-    local characterKey = Character:GetSelectedKey();
+    local characterKey = useCurrentChar and Character:GetKey() or Character:GetSelectedKey();
     local favorites = DB:Get("favorites");
 
     if (not favorites or not favorites[characterKey]) then
@@ -186,8 +188,8 @@ function Favorites:IsAnyFavorite(itemId)
     return false;
 end
 
-function Favorites:GetItemSpecs(itemId)
-    local characterKey = Character:GetSelectedKey();
+function Favorites:GetItemSpecs(itemId, useCurrentChar)
+    local characterKey = useCurrentChar and Character:GetKey() or Character:GetSelectedKey();
     local favorites = DB:Get("favorites");
 
     if (not favorites or not favorites[characterKey]) then
@@ -260,7 +262,7 @@ function Favorites:Export()
     end
 
     local exportTable = {};
-    local exportStr = "KeystoneLoot:v1";
+    local exportStr = SHARE_PREFIX;
 
     for _, sourceData in pairs(favorites[characterKey]) do
         for specId, specData in pairs(sourceData) do
@@ -289,7 +291,7 @@ function Favorites:Export()
         end
     end
 
-    if (exportStr == "KeystoneLoot:v1") then
+    if (exportStr == SHARE_PREFIX) then
         return L["No favorites found"];
     end
 
@@ -302,7 +304,7 @@ function Favorites:Import(importStr, overwrite)
     end
 
     local dataStr = importStr:gsub("%s+", "");
-    if (not dataStr:match("^KeystoneLoot:v1")) then
+    if (not dataStr:match("^" .. SHARE_PREFIX)) then
         return false, L["Invalid import string."], false;
     end
 
@@ -314,7 +316,7 @@ function Favorites:Import(importStr, overwrite)
         return false, L["No character selected."], false;
     end
 
-    dataStr = dataStr:gsub("^KeystoneLoot:v1,", "");
+    dataStr = dataStr:gsub("^" .. SHARE_PREFIX .. ",", "");
     local importedItems = {};
     local totalImported = 0;
 

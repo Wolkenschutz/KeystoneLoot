@@ -20,6 +20,7 @@ L["The Catalyst"] = "Катализатор";
 -- settings_dropdown.lua
 L["Minimap button"] = "Включить кнопку на миникарте";
 L["Item level in keystone tooltip"] = "Показать уровень предметов во всплывающей подсказке ключа";
+L["Favorite in item tooltip"] = "Избранное в подсказке предмета";
 L["Loot reminder (dungeons)"] = "Включить напоминание о добыче";
 L["Highlighting"] = "Подсветка";
 L["No stats"] = "Характеристика отсутствует";
