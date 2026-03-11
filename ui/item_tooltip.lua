@@ -86,6 +86,31 @@ local function OnTooltipSetItem(tooltip)
         return;
     end
 
+    -- Get specs for item
+    local specs = Favorites:GetItemSpecs(itemId, true);
+    local classId = Character:GetCurrentClassId();
+    local totalSpecs = C_SpecializationInfo.GetNumSpecializationsForClassID(classId);
+    local specText, sourceName;
+
+    if (#specs >= totalSpecs) then
+        specText = ALL_SPECS;
+    else
+        local specNames = {};
+        for _, specId in ipairs(specs) do
+            local name = Character:GetSpecName(specId);
+            if (name ~= "") then
+                table.insert(specNames, name);
+            end
+        end
+        specText = table.concat(specNames, " / ");
+    end
+
+    if (sourceInfo.type == "dungeon") then
+        sourceName = "|A:questlog-questtypeicon-dungeon:16:16:0:0|a " .. sourceInfo.name;
+    elseif (sourceInfo.type == "raid") then
+        sourceName = "|A:questlog-questtypeicon-raid:16:16:0:0|a " .. string.format("%s - %s", sourceInfo.name, sourceInfo.bossName);
+    end
+
     -- Check if player is currently in the correct instance
     local _, _, _, _, _, _, _, currentInstanceId = GetInstanceInfo();
     local inCorrectInstance = currentInstanceId == sourceInfo.instanceId;
@@ -94,30 +119,6 @@ local function OnTooltipSetItem(tooltip)
     tooltip:AddLine("|cff9d5db8KeystoneLoot|r");
 
     if (not inCorrectInstance) then
-        local specs = Favorites:GetItemSpecs(itemId, true);
-        local classId = Character:GetCurrentClassId();
-        local totalSpecs = C_SpecializationInfo.GetNumSpecializationsForClassID(classId);
-        local specText, sourceName;
-
-        if (#specs >= totalSpecs) then
-            specText = ALL_SPECS;
-        else
-            local specNames = {};
-            for _, specId in ipairs(specs) do
-                local name = Character:GetSpecName(specId);
-                if (name ~= "") then
-                    table.insert(specNames, name);
-                end
-            end
-            specText = table.concat(specNames, " / ");
-        end
-
-        if (sourceInfo.type == "dungeon") then
-            sourceName = "|A:questlog-questtypeicon-dungeon:16:16:0:0|a " .. sourceInfo.name;
-        elseif (sourceInfo.type == "raid") then
-            sourceName = "|A:questlog-questtypeicon-raid:16:16:0:0|a " .. string.format("%s - %s", sourceInfo.name, sourceInfo.bossName);
-        end
-
         tooltip:AddLine(string.format("|A:CampCollection-icon-star:16:16:0:0|a %s (%s)", PROFESSIONS_FAVORITE, specText));
         tooltip:AddLine(sourceName);
     else
