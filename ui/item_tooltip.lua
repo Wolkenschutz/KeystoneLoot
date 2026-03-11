@@ -117,12 +117,10 @@ local function OnTooltipSetItem(tooltip)
 
     tooltip:AddLine(" ");
     tooltip:AddLine("|cff9d5db8KeystoneLoot|r");
+    tooltip:AddLine(string.format("|A:CampCollection-icon-star:16:16:0:0|a %s (%s)", PROFESSIONS_FAVORITE, specText));
 
     if (not inCorrectInstance) then
-        tooltip:AddLine(string.format("|A:CampCollection-icon-star:16:16:0:0|a %s (%s)", PROFESSIONS_FAVORITE, specText));
         tooltip:AddLine(sourceName);
-    else
-        tooltip:AddLine(string.format("|A:CampCollection-icon-star:16:16:0:0|a %s (%s)", PROFESSIONS_FAVORITE, specText));
     end
 
     tooltip:Show();
