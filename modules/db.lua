@@ -6,7 +6,7 @@ local DB = KeystoneLoot.DB;
 
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 
-local DB_VERSION = 1;
+local DB_VERSION = 2;
 local CHAR_DB_VERSION = 1;
 
 local observers = {};
@@ -81,6 +81,10 @@ function DB:MigrateGlobalDB(fromVersion)
         };
 
         KeystoneLootDB.favorites = {};
+    end
+
+    if (fromVersion == 1) then
+        KeystoneLootDB.settings.favoriteTooltip = true;
     end
 end
 
