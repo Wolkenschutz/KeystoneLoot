@@ -1,5 +1,25 @@
 # Changelog
 
+## 2.1.0 - 2026-03-13
+
+### New Features
+
+- Show favorite status and source in item tooltips
+
+### Bugfixes
+
+- Update observer for specId in KeystoneLootCatalystFrameMixin
+- Update item upgrade values in UpgradeTracks and remove unused Favorites variable
+- item_tooltip.lua:124: bad argument [#3](https://github.com/Wolkenschutz/KeystoneLoot/pull/3) by [Hollicsh](https://github.com/Hollicsh) to 'format' (string expected, got nil)
+
+### Other Changes
+
+- Merge branch 'main' of https://github.com/Wolkenschutz/KeystoneLoot
+- Update README files
+- Retrieve current class ID using Character module in tooltip logic
+- Reduce code
+- Please ask before modifying this addon
+
 ## 2.0.2 - 2026-03-04
 
 ### Bugfixes
