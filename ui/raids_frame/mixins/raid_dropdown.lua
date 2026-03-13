@@ -1,10 +1,12 @@
 local AddonName, KeystoneLoot = ...;
 
 local DB = KeystoneLoot.DB;
+local Query = KeystoneLoot.Query;
 
 KeystoneLootRaidDropdownMixin = {};
 
-function KeystoneLootRaidDropdownMixin:Init(raids)
+function KeystoneLootRaidDropdownMixin:Init()
+    local raids = Query:GetRaids();
     self.selectedIndex = 1;
 
     -- Set raid name

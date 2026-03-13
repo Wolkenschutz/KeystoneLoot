@@ -20,8 +20,7 @@ function KeystoneLootRaidsFrameMixin:RefreshSize()
 end
 
 function KeystoneLootRaidsFrameMixin:Init()
-    local raids = Query:GetRaids();
-    self.DropdownButton:Init(raids);
+    self.DropdownButton:Init();
 
     local function OnChanged()
         if (not self:IsShown()) then
@@ -38,7 +37,7 @@ function KeystoneLootRaidsFrameMixin:Init()
     DB:AddObserver("ui.selectedTab", OnChanged);
     DB:AddObserver("settings.highlighting.*", OnChanged);
 
-    self:SetRaid(raids[1]);
+    self:SetRaid(Query:GetRaids()[1]);
 end
 
 function KeystoneLootRaidsFrameMixin:SetRaid(raid)
