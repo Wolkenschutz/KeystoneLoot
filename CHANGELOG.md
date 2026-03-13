@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.1 - 2026-03-13
+
+### Other Changes
+
+- Bump DB version and migrate favoriteTooltip setting
+- Merge branch 'main' of https://github.com/Wolkenschutz/KeystoneLoot
+
 ## 2.1.0 - 2026-03-13
 
 ### New Features
