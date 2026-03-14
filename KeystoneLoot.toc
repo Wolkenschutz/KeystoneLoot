@@ -66,6 +66,7 @@ ui/templates/templates.xml
 ui/dungeons_frame/mixins/dungeons_frame.lua
 ui/dungeons_frame/dungeons_frame.xml
 
+ui/raids_frame/mixins/block_frame.lua
 ui/raids_frame/mixins/raids_frame.lua
 ui/raids_frame/mixins/raid_dropdown.lua
 ui/raids_frame/raids_frame.xml

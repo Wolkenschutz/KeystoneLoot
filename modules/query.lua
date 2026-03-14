@@ -6,6 +6,41 @@ local Query = KeystoneLoot.Query;
 local DB = KeystoneLoot.DB;
 local Character = KeystoneLoot.Character;
 
+local DIFFICULTY_MAP = {
+    lfr = DifficultyUtil.ID.PrimaryRaidLFR,
+    normal = DifficultyUtil.ID.PrimaryRaidNormal,
+    heroic = DifficultyUtil.ID.PrimaryRaidHeroic,
+    mythic = DifficultyUtil.ID.PrimaryRaidMythic
+};
+
+local function CheckRaid(raid, slotId)
+    local difficultyId = Query:GetRaidDifficultyId();
+    local classId = DB:Get("filters.classId");
+    local specId = DB:Get("filters.specId");
+
+    for _, boss in ipairs(raid.bossList) do
+        local loot = boss.lootTable[difficultyId] or {};
+
+        for _, itemId in ipairs(loot) do
+            local item = Query:GetItemInfo(itemId);
+
+            if (item and item.slotId == slotId and item.classes[classId]) then
+                if (specId == 0) then
+                    return true;
+                else
+                    for _, itemSpecId in ipairs(item.classes[classId]) do
+                        if (itemSpecId == specId) then
+                            return true;
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    return false;
+end
+
 local function GetFavoritesListSpecId()
     local info = Character:ParseKey(Character:GetSelectedKey());
 
@@ -139,34 +174,19 @@ function Query:HasRaidSlotItems(slotId)
         return true;
     end
 
-    local difficultyId = self:GetRaidDifficultyId();
-    local journalInstanceId = DB:Get("ui.selectedRaidTab");
-    local classId = DB:Get("filters.classId");
-    local specId = DB:Get("filters.specId");
-
-    for _, raid in ipairs(KeystoneLoot.RaidDatabase) do
-        if (raid.journalInstanceId == journalInstanceId) then
-            for _, boss in ipairs(raid.bossList) do
-                local loot = boss.lootTable[difficultyId] or {};
-
-                for _, itemId in ipairs(loot) do
-                    local item = self:GetItemInfo(itemId);
-
-                    if (item and item.slotId == slotId and item.classes[classId]) then
-                        if (specId == 0) then
-                            return true;
-                        else
-                            for _, itemSpecId in ipairs(item.classes[classId]) do
-                                if (itemSpecId == specId) then
-                                    return true;
-                                end
-                            end
-                        end
-                    end
-                end
+    if (self:GetTotalRaidBosses() <= 10) then
+        for _, raid in ipairs(self:GetRaids()) do
+            if (CheckRaid(raid, slotId)) then
+                return true;
             end
+        end
+    else
+        local journalInstanceId = DB:Get("ui.selectedRaidTab");
 
-            break;
+        for _, raid in ipairs(self:GetRaids()) do
+            if (raid.journalInstanceId == journalInstanceId) then
+                return CheckRaid(raid, slotId);
+            end
         end
     end
 
@@ -174,16 +194,17 @@ function Query:HasRaidSlotItems(slotId)
 end
 
 function Query:GetRaidDifficultyId()
-    local selectedDifficulty = DB:Get("filters.raid.difficulty");
+    return DIFFICULTY_MAP[DB:Get("filters.raid.difficulty")] or DIFFICULTY_MAP.lfr;
+end
 
-    local difficultyMap = {
-        lfr = DifficultyUtil.ID.PrimaryRaidLFR,
-        normal = DifficultyUtil.ID.PrimaryRaidNormal,
-        heroic = DifficultyUtil.ID.PrimaryRaidHeroic,
-        mythic = DifficultyUtil.ID.PrimaryRaidMythic
-    };
+function Query:GetTotalRaidBosses()
+    local totalRaidBosses = 0;
 
-    return difficultyMap[selectedDifficulty] or DifficultyUtil.ID.PrimaryRaidLFR;
+    for _, raid in ipairs(self:GetRaids()) do
+        totalRaidBosses = totalRaidBosses + #raid.bossList;
+    end
+
+    return totalRaidBosses;
 end
 
 function Query:GetCatalystItems()

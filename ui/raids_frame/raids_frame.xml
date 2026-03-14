@@ -6,7 +6,7 @@
                 <Texture parentKey="RaidIcon" atlas="Raid">
                     <Size x="20" y="20"/>
                     <Anchors>
-                        <Anchor point="LEFT" x="1" y="1"/>
+                        <Anchor point="LEFT" x="1"/>
                     </Anchors>
                 </Texture>
                 <FontString parentKey="Text" inherits="GameFontHighlight" JustifyH="LEFT" JustifyV="MIDDLE">
@@ -14,14 +14,6 @@
                         <Anchor point="LEFT" relativeKey="$parent.RaidIcon" relativePoint="RIGHT" x="1" y="-1"/>
                     </Anchors>
                 </FontString>
-                <Texture parentKey="Divider" atlas="delves-companion-divider" alpha="0.8">
-                    <Size x="260" y="3"/>
-                    <Anchors>
-                        <Anchor point="BOTTOMLEFT" relativeKey="$parent.RaidIcon" relativePoint="TOPLEFT" x="-4" y="-1"/>
-                    </Anchors>
-                    <TexCoords left="0.5" right="1" top="0" bottom="1"/>
-                    <Color color="NORMAL_FONT_COLOR"/>
-                </Texture>
             </Layer>
         </Layers>
         <NormalTexture parentKey="NormalTexture" atlas="common-dropdown-c-button-hover-arrow">
@@ -42,7 +34,7 @@
         </Scripts>
     </DropdownButton>
 
-    <Frame name="KeystoneLootRaidsFrameTemplate" mixin="KeystoneLootRaidsFrameMixin" hidden="true" virtual="true">
+    <Frame name="KeystoneLootRaidBlockTemplate" mixin="KeystoneLootRaidBlockMixin" hidden="true" virtual="true">
         <Size x="500" y="92"/>
         <Anchors>
             <Anchor point="TOPLEFT"/>
@@ -56,7 +48,7 @@
                     <KeyValue key="rightPadding" value="4" type="number"/>
                 </KeyValues>
                 <Anchors>
-                    <Anchor point="TOPRIGHT" x="-4" y="-84"/>
+                    <Anchor point="TOPRIGHT" x="-4" y="-4"/>
                     <Anchor point="BOTTOMLEFT" x="4" y="24"/>
                 </Anchors>
             </Frame>
@@ -72,9 +64,45 @@
                     <Anchor point="BOTTOMRIGHT" relativeKey="$parent.Inset"/>
                 </Anchors>
             </Frame>
+        </Frames>
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture parentKey="RaidIcon" atlas="Raid">
+                    <Size x="20" y="20"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeKey="$parent.Container" relativePoint="TOPLEFT" x="1"/>
+                    </Anchors>
+                </Texture>
+                <FontString parentKey="TitleText" inherits="GameFontHighlight" JustifyH="LEFT" JustifyV="MIDDLE">
+                    <Size x="0" y="20"/>
+                    <Anchors>
+                        <Anchor point="LEFT" relativeKey="$parent.RaidIcon" relativePoint="RIGHT" x="1"/>
+                    </Anchors>
+                </FontString>
+                <Texture parentKey="Divider" atlas="delves-companion-divider" alpha="0.8">
+                    <Size x="260" y="3"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeKey="$parent.RaidIcon" relativePoint="TOPLEFT" x="-3" y="-1"/>
+                    </Anchors>
+                    <TexCoords left="0.5" right="1" top="0" bottom="1"/>
+                    <Color color="NORMAL_FONT_COLOR"/>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad method="OnLoad"/>
+        </Scripts>
+    </Frame>
+
+    <Frame name="KeystoneLootRaidsFrameTemplate" mixin="KeystoneLootRaidsFrameMixin" hidden="true" virtual="true">
+        <Size x="500" y="92"/>
+        <Anchors>
+            <Anchor point="TOPLEFT"/>
+        </Anchors>
+        <Frames>
             <DropdownButton parentKey="DropdownButton" inherits="KeystoneLootRaidDropdownTemplate">
                 <Anchors>
-                    <Anchor point="BOTTOMLEFT" relativeKey="$parent.Container" relativePoint="TOPLEFT"/>
+                    <Anchor point="TOPLEFT" x="4" y="-63"/>
                 </Anchors>
             </DropdownButton>
         </Frames>
