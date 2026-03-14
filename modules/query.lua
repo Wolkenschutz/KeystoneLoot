@@ -13,6 +13,26 @@ local DIFFICULTY_MAP = {
     mythic = DifficultyUtil.ID.PrimaryRaidMythic
 };
 
+local function SortResult(a, b)
+    local aFav = KeystoneLoot.Favorites:IsFavorite(a.itemId);
+    local bFav = KeystoneLoot.Favorites:IsFavorite(b.itemId);
+
+    if (aFav ~= bFav) then
+        return aFav;
+    end
+
+    local aItem = Query:GetItemInfo(a.itemId);
+    local bItem = Query:GetItemInfo(b.itemId);
+    local aSlot = aItem and aItem.slotId or 0;
+    local bSlot = bItem and bItem.slotId or 0;
+
+    if (aSlot ~= bSlot) then
+        return aSlot < bSlot;
+    end
+
+    return a.itemId < b.itemId;
+end
+
 local function CheckRaid(raid, slotId)
     local difficultyId = Query:GetRaidDifficultyId();
     local classId = DB:Get("filters.classId");
@@ -67,7 +87,7 @@ function Query:GetDungeonItems(challengeModeId)
     local classId = DB:Get("filters.classId");
     local results = {};
 
-    for _, dungeon in ipairs(KeystoneLoot.DungeonDatabase) do
+    for _, dungeon in ipairs(self:GetDungeons()) do
         if (dungeon.challengeModeId == challengeModeId) then
             for _, itemId in ipairs(dungeon.lootTable) do
                 local item = self:GetItemInfo(itemId);
@@ -90,6 +110,7 @@ function Query:GetDungeonItems(challengeModeId)
         end
     end
 
+    table.sort(results, SortResult);
     return results;
 end
 
@@ -101,7 +122,7 @@ function Query:HasDungeonSlotItems(slotId)
     local specId = DB:Get("filters.specId");
     local classId = DB:Get("filters.classId");
 
-    for _, dungeon in ipairs(KeystoneLoot.DungeonDatabase) do
+    for _, dungeon in ipairs(self:GetDungeons()) do
         for _, itemId in ipairs(dungeon.lootTable) do
             local item = self:GetItemInfo(itemId);
 
@@ -139,7 +160,7 @@ function Query:GetRaidItems(bossId)
     local classId = DB:Get("filters.classId");
     local results = {};
 
-    for _, raid in ipairs(KeystoneLoot.RaidDatabase) do
+    for _, raid in ipairs(self:GetRaids()) do
         for _, boss in ipairs(raid.bossList) do
             if (boss.bossId == bossId) then
                 local loot = boss.lootTable[difficultyId] or {};
@@ -161,11 +182,12 @@ function Query:GetRaidItems(bossId)
                     end
                 end
 
-                return results;
+                break;
             end
         end
     end
 
+    table.sort(results, SortResult);
     return results;
 end
 
@@ -227,6 +249,7 @@ function Query:GetCatalystItems()
         end
     end
 
+    table.sort(results, SortResult);
     return results;
 end
 
@@ -246,7 +269,7 @@ function Query:GetItemSource(itemId)
     end
 
     -- Check dungeons
-    for _, dungeon in ipairs(KeystoneLoot.DungeonDatabase) do
+    for _, dungeon in ipairs(self:GetDungeons()) do
         for _, lootItemId in ipairs(dungeon.lootTable) do
             if (lootItemId == itemId) then
                 return dungeon.challengeModeId;
@@ -255,7 +278,7 @@ function Query:GetItemSource(itemId)
     end
 
     -- Check raids
-    for _, raid in ipairs(KeystoneLoot.RaidDatabase) do
+    for _, raid in ipairs(self:GetRaids()) do
         for _, boss in ipairs(raid.bossList) do
             for _, lootTable in pairs(boss.lootTable) do
                 for _, lootItemId in ipairs(lootTable) do
