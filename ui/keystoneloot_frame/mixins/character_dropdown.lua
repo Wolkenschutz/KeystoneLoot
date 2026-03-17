@@ -14,6 +14,11 @@ function KeystoneLootCharacterDropdownMixin:Init()
     self:SetupMenu(function(dropdown, rootDescription)
         rootDescription:SetTag("MENU_KEYSTONELOOT_CHARACTER_DROPDOWN");
 
+        local extent = 20;
+        local maxCharacters = 18;
+        local maxScrollExtent = extent * maxCharacters;
+        rootDescription:SetScrollMode(maxScrollExtent);
+
         local function IsSelected(data)
             return data.key == Character:GetSelectedKey();
         end
@@ -31,7 +36,7 @@ function KeystoneLootCharacterDropdownMixin:Init()
         for _, data in ipairs(Character:GetAllCharacters()) do
             local classColor = C_ClassColor.GetClassColor(data.classFile);
 
-            local radio = rootDescription:CreateRadio(
+            rootDescription:CreateRadio(
                 string.format(LFG_LIST_TOOLTIP_CLASS_ROLE, classColor:WrapTextInColorCode(data.name), data.realm),
                 IsSelected, SetSelected, data
             );
