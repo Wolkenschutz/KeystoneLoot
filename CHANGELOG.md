@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.3 - 2026-03-17
+
+### Other Changes
+
+- Enhance character dropdown setup with scroll mode configuration
+- Merge branch 'main' of https://github.com/Wolkenschutz/KeystoneLoot
+
 ## 2.1.2 - 2026-03-15
 
 ### Other Changes
