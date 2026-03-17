@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.2 - 2026-03-15
+
+### Other Changes
+
+- Show all raids stacked when total bosses <= 10
+- Sort item by favorite, slot, id
+
 ## 2.1.1 - 2026-03-13
 
 ### Other Changes
