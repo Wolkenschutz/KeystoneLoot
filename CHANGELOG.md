@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.4 - 2026-03-20
+
+### Bugfixes
+
+- Update loot data with latest wow patch
+
+### Other Changes
+
+- Merge branch 'main' of https://github.com/Wolkenschutz/KeystoneLoot
+
 ## 2.1.3 - 2026-03-17
 
 ### Other Changes
