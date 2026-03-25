@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.1.6 - 2026-03-25
+
+### Bugfixes
+
+- Update teleport SpellID for Skyreach
+- Change Keystone tooltip to old format with rank
+
+### Other Changes
+
+- Merge branch 'main' of https://github.com/Wolkenschutz/KeystoneLoot
+
 ## 2.1.5 - 2026-03-25
 
 ### Bugfixes
