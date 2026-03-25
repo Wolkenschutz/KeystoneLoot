@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.5 - 2026-03-25
+
+### Bugfixes
+
+- Removed duplicate item level from Keystone tooltip
+
 ## 2.1.4 - 2026-03-20
 
 ### Bugfixes
