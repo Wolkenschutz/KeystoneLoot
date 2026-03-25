@@ -45,13 +45,13 @@ local function OnTooltipSetItem(tooltip)
     tooltip:AddLine("|cff9d5db8KeystoneLoot|r");
     tooltip:AddDoubleLine(
         LOOT,
-        rewards.endOfRun.text,
+        rewards.endOfRun.level .. " (" .. rewards.endOfRun.rank .. ")",
         1, 1, 1,
         1, 1, 1
     );
     tooltip:AddDoubleLine(
         L["Great Vault"],
-        rewards.greatVault.text,
+        rewards.greatVault.level .. " (" .. rewards.greatVault.rank .. ")",
         1, 1, 1,
         1, 1, 1
     );

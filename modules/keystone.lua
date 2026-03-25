@@ -170,11 +170,13 @@ function Keystone:GetRewards(keystoneLevel)
                 return {
                     endOfRun = {
                         level = endTrack.ilvl,
-                        text = endTrack.label
+                        text = endTrack.label,
+                        rank = endTrack.rank
                     },
                     greatVault = {
                         level = vaultTrack.ilvl,
-                        text = vaultTrack.label
+                        text = vaultTrack.label,
+                        rank = vaultTrack.rank
                     }
                 };
             end

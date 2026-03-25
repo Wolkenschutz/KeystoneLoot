@@ -14,6 +14,9 @@ L["Veteran"] = "노련가";
 L["Champion"] = "챔피언";
 L["Hero"] = "영웅";
 
+-- upgrade_tracks.lua
+L["Myth"] = "신화";
+
 -- catalyst_frame.lua
 L["The Catalyst"] = "촉매";
 

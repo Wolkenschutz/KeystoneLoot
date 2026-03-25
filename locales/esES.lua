@@ -14,6 +14,9 @@ L["Veteran"] = "Veterano";
 L["Champion"] = "Campeón";
 L["Hero"] = "Héroe";
 
+-- upgrade_tracks.lua
+L["Myth"] = "Mito";
+
 -- catalyst_frame.lua
 L["The Catalyst"] = "El catalizador";
 

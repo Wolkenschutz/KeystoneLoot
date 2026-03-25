@@ -14,6 +14,9 @@ L["Veteran"] = "Veteran";
 L["Champion"] = "Champion";
 L["Hero"] = "Held";
 
+-- upgrade_tracks.lua
+L["Myth"] = "Mythos";
+
 -- itemlevel_dropdown.lua / keystone_tooltip.lua
 L["Great Vault"] = "Große Schatzkammer";
 
