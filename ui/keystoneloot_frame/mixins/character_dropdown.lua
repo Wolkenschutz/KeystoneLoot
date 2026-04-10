@@ -2,14 +2,12 @@ local AddonName, KeystoneLoot = ...;
 
 local DB = KeystoneLoot.DB;
 local Character = KeystoneLoot.Character;
+local L = KeystoneLoot.L;
 
 KeystoneLootCharacterDropdownMixin = {};
 
 function KeystoneLootCharacterDropdownMixin:Init()
     self:Refresh();
-
-    local name = UnitName("player");
-    local realm = GetRealmName();
 
     self:SetupMenu(function(dropdown, rootDescription)
         rootDescription:SetTag("MENU_KEYSTONELOOT_CHARACTER_DROPDOWN");
@@ -34,12 +32,26 @@ function KeystoneLootCharacterDropdownMixin:Init()
         end
 
         for _, data in ipairs(Character:GetAllCharacters()) do
-            local classColor = C_ClassColor.GetClassColor(data.classFile);
+            local name = data.name;
 
-            rootDescription:CreateRadio(
-                string.format(LFG_LIST_TOOLTIP_CLASS_ROLE, classColor:WrapTextInColorCode(data.name), data.realm),
-                IsSelected, SetSelected, data
-            );
+            if (not data.isHidden) then
+                local classColor = C_ClassColor.GetClassColor(data.classFile);
+                name = classColor:WrapTextInColorCode(data.name);
+            end
+
+            local label = string.format(LFG_LIST_TOOLTIP_CLASS_ROLE, name, data.realm);
+
+            if (data.isHidden) then
+                label = DISABLED_FONT_COLOR:WrapTextInColorCode(label);
+            end
+
+            local radio = rootDescription:CreateRadio(label, IsSelected, SetSelected, data);
+
+            if (data.isHidden) then
+                radio:SetTooltip(function(tooltip, elementDescription)
+                    tooltip:SetText(L["This character is hidden."]);
+                end);
+            end
         end
     end);
 

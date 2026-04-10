@@ -24,6 +24,11 @@ local function GetColoredCharacterName()
     return classColor:WrapTextInColorCode(info.name);
 end
 
+local function GetColoredCharacterLabel(data)
+    local classColor = C_ClassColor.GetClassColor(data.classFile);
+    return classColor:WrapTextInColorCode(data.name);
+end
+
 local function HandleImportResult(success, result, skippedSpecs, overwrite)
     if (skippedSpecs) then
         print(RED_FONT_COLOR:WrapTextInColorCode(L["Some specs were skipped - import string belongs to a different class."]));
@@ -37,6 +42,31 @@ local function HandleImportResult(success, result, skippedSpecs, overwrite)
         print(YELLOW_FONT_COLOR:WrapTextInColorCode(string.format(L["Import failed - %s"], tostring(result))));
     end
 end
+
+StaticPopupDialogs.KEYSTONELOOT_DELETE_CHARACTER = {
+    text = L["Delete all data for %s?"],
+    button1 = DELETE,
+    button2 = CANCEL,
+    OnAccept = function(self, data)
+        local wasSelected = data.key == Character:GetSelectedKey();
+
+        if (Character:Delete(data.key) and wasSelected) then
+            local key = Character:GetKey();
+            DB:Set("ui.selectedCharacterKey", key);
+
+            local info = Character:ParseKey(key);
+            if (info) then
+                DB:Set("filters.classId", info.classId);
+                DB:Set("filters.specId", 0);
+            end
+        end
+    end,
+    timeout = 0,
+    exclusive = true,
+    whileDead = true,
+    hideOnEscape = true
+};
+
 
 StaticPopupDialogs.KEYSTONELOOT_EXPORT = {
     text = L["Export favorites of %s"],
@@ -127,6 +157,43 @@ function KeystoneLootSettingsDropdownMixin:Init()
             function() return DB:Get("settings.favoriteTooltip"); end,
             function() DB:Set("settings.favoriteTooltip", not DB:Get("settings.favoriteTooltip")); end
         );
+
+
+        local manageButton = rootDescription:CreateButton(L["Manage characters"]);
+        local extent = 20;
+        local maxCharacters = 18;
+        local maxScrollExtent = extent * maxCharacters;
+        manageButton:SetScrollMode(maxScrollExtent);
+
+        for _, data in ipairs(Character:GetAllCharacters(true)) do
+            local isLoggedInChar = data.key == Character:GetKey();
+            local charLabel = string.format(LFG_LIST_TOOLTIP_CLASS_ROLE, GetColoredCharacterLabel(data), data.realm);
+            local charSubmenu = manageButton:CreateButton(charLabel);
+
+            charSubmenu:CreateCheckbox(
+                L["Hidden"],
+                function() return Character:IsHidden(data.key); end,
+                function()
+                    local nowHidden = not Character:IsHidden(data.key);
+                    Character:SetHidden(data.key, nowHidden);
+
+                    if (nowHidden and data.key == Character:GetSelectedKey()) then
+                        DB:Set("ui.selectedCharacterKey", Character:GetKey());
+                    end
+                end
+            );
+
+            local deleteButton = charSubmenu:CreateButton(L["Delete..."], function()
+                StaticPopup_Show("KEYSTONELOOT_DELETE_CHARACTER", GetColoredCharacterLabel(data), nil, data);
+            end);
+
+            if (isLoggedInChar) then
+                deleteButton:SetEnabled(false);
+                deleteButton:SetTooltip(function(tooltip, elementDescription)
+                    tooltip:SetText(L["Cannot delete the currently logged in character."]);
+                end);
+            end
+        end
 
         -- Notifications
         rootDescription:CreateTitle(COMMUNITIES_NOTIFICATION_SETTINGS);

@@ -37,6 +37,12 @@ L["%d |4favorite:favorites; imported%s."] = "즐겨찾기 %d개 가져옴%s.";
 L[" (overwritten)"] = " (덮어씀)";
 L["Import failed - %s"] = "가져오기 실패 - %s";
 L["Some specs were skipped - import string belongs to a different class."] = "일부 전문화를 건너뜀 - 가져오기 문자열이 다른 직업에 속함.";
+L["Manage characters"] = "캐릭터 관리";
+L["Hidden"] = "숨김";
+L["Delete..."] = "삭제...";
+L["Delete all data for %s?"] = "%s의 모든 데이터를 삭제하시겠습니까?";
+L["Cannot delete the currently logged in character."] = "현재 로그인한 캐릭터는 삭제할 수 없습니다.";
+L["This character is hidden."] = "이 캐릭터는 숨겨져 있습니다.";
 
 -- favorites.lua
 L["No favorites found"] = "즐겨찾기 없음";

@@ -37,6 +37,12 @@ L["%d |4favorite:favorites; imported%s."] = "成功导入 %d 件物品%s。";
 L[" (overwritten)"] = "（已覆盖）";
 L["Import failed - %s"] = "导入失败 - %s";
 L["Some specs were skipped - import string belongs to a different class."] = "部分专精已跳过 - 导入字符串属于其他职业。";
+L["Manage characters"] = "管理角色";
+L["Hidden"] = "已隐藏";
+L["Delete..."] = "删除...";
+L["Delete all data for %s?"] = "删除 %s 的所有数据？";
+L["Cannot delete the currently logged in character."] = "无法删除当前登录的角色。";
+L["This character is hidden."] = "该角色已被隐藏。";
 
 -- favorites.lua
 L["No favorites found"] = "未找到收藏";

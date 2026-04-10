@@ -76,21 +76,37 @@ function Character:GetAllSpecs(classId)
     return specs;
 end
 
-function Character:GetAllCharacters()
+function Character:IsHidden(characterKey)
+    return DB:Get("settings.hiddenCharacters")[characterKey] == true;
+end
+
+function Character:SetHidden(characterKey, hidden)
+    local hiddenChars = DB:Get("settings.hiddenCharacters");
+    hiddenChars[characterKey] = hidden and true or nil;
+    DB:Set("settings.hiddenCharacters", hiddenChars);
+end
+
+function Character:GetAllCharacters(includeHidden)
     local characters = {};
     local favorites = DB:Get("favorites") or {};
+    local currentKey = self:GetKey();
 
     for characterKey in pairs(favorites) do
-        local info = self:ParseKey(characterKey);
-        if (info) then
-            table.insert(characters, {
-                key = characterKey,
-                name = info.name,
-                realm = info.realm,
-                classId = info.classId,
-                className = self:GetClassName(info.classId),
-                classFile = self:GetClassFile(info.classId)
-            });
+        local isHidden = self:IsHidden(characterKey);
+
+        if (includeHidden or not isHidden or characterKey == currentKey) then
+            local info = self:ParseKey(characterKey);
+            if (info) then
+                table.insert(characters, {
+                    key = characterKey,
+                    name = info.name,
+                    realm = info.realm,
+                    classId = info.classId,
+                    className = self:GetClassName(info.classId),
+                    classFile = self:GetClassFile(info.classId),
+                    isHidden = isHidden
+                });
+            end
         end
     end
 

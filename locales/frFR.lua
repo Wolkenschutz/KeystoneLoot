@@ -37,6 +37,12 @@ L["%d |4favorite:favorites; imported%s."] = "%d |4favori:favoris; importé%s.";
 L[" (overwritten)"] = " (écrasé)";
 L["Import failed - %s"] = "Échec de l'importation - %s";
 L["Some specs were skipped - import string belongs to a different class."] = "Certaines spécialisations ont été ignorées - la chaîne d'importation appartient à une autre classe.";
+L["Manage characters"] = "Gérer les personnages";
+L["Hidden"] = "Masqué";
+L["Delete..."] = "Supprimer...";
+L["Delete all data for %s?"] = "Supprimer toutes les données de %s ?";
+L["Cannot delete the currently logged in character."] = "Impossible de supprimer le personnage actuellement connecté.";
+L["This character is hidden."] = "Ce personnage est masqué.";
 
 -- favorites.lua
 L["No favorites found"] = "Aucun favori trouvé";
