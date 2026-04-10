@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.2.0 - 2026-04-10
+
+### New Features
+
+- manage characters (hide/delete) from settings dropdown
+
+### Improvements
+
+- trigger loot reminder on entering dungeon
+
 ## 2.1.6 - 2026-03-25
 
 ### Bugfixes
