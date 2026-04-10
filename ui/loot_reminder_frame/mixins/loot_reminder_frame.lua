@@ -1,20 +1,23 @@
-local AddonName, KeystoneLoot  = ...;
+local AddonName, KeystoneLoot    = ...;
 
-local Keystone                 = KeystoneLoot.Keystone;
-local L                        = KeystoneLoot.L;
+local Keystone                   = KeystoneLoot.Keystone;
+local Query                      = KeystoneLoot.Query;
+local L                          = KeystoneLoot.L;
 
-local SPEC_FRAME_WIDTH         = 180;
-local SPEC_FRAME_HEIGHT        = 90;
-local SPEC_FRAME_SPACING       = 20;
-local FRAME_PADDING            = 20;
-local FRAME_HEADER_HEIGHT      = 80;
-local SPEC_TITLE_HEIGHT        = 24;
-local SPEC_BUTTON_HEIGHT       = 30;
+local SPEC_FRAME_WIDTH           = 180;
+local SPEC_FRAME_HEIGHT          = 90;
+local SPEC_FRAME_SPACING         = 20;
+local FRAME_PADDING              = 20;
+local FRAME_HEADER_HEIGHT        = 80;
+local SPEC_TITLE_HEIGHT          = 24;
+local SPEC_BUTTON_HEIGHT         = 30;
 
-KeystoneLootReminderFrameMixin = {};
+local instanceIdToChallengeMapId = {};
+
+KeystoneLootReminderFrameMixin   = {};
 
 function KeystoneLootReminderFrameMixin:OnLoad()
-    self:RegisterEvent("CHALLENGE_MODE_START");
+    self:RegisterEvent("PLAYER_ENTERING_WORLD");
     self:RegisterForDrag("LeftButton");
 
     self.Inset:Hide();
@@ -24,6 +27,10 @@ function KeystoneLootReminderFrameMixin:OnLoad()
     self.Title:SetText(L["Correct loot specialization set?"]);
 
     self.specPool = CreateFramePool("Frame", self.Container, "KeystoneLootReminderSpecTemplate");
+
+    for _, dungeon in ipairs(Query:GetDungeons()) do
+        instanceIdToChallengeMapId[dungeon.instanceId] = dungeon.challengeModeId;
+    end
 end
 
 function KeystoneLootReminderFrameMixin:OnShow()
@@ -44,7 +51,27 @@ function KeystoneLootReminderFrameMixin:OnDragStop()
 end
 
 function KeystoneLootReminderFrameMixin:OnEvent()
-    self:Open(C_ChallengeMode.GetActiveChallengeMapID());
+    self:Hide();
+
+    local _, instanceType, difficultyId, _, _, _, _, instanceId = GetInstanceInfo();
+    if (instanceType ~= "party") then
+        return;
+    end
+
+    if (difficultyId == 0) then
+        difficultyId = GetDungeonDifficultyID();
+    end
+
+    if (difficultyId ~= DifficultyUtil.ID.DungeonMythic) then
+        return;
+    end
+
+    local challengeMapId = instanceIdToChallengeMapId[instanceId];
+    if (not challengeMapId) then
+        return;
+    end
+
+    self:Open(challengeMapId);
 end
 
 function KeystoneLootReminderFrameMixin:Open(challengeModeId)

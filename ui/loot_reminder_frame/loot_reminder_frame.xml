@@ -57,10 +57,10 @@
         </Scripts>
     </Frame>
 
-    <Frame name="KeystoneLootReminderFrame" parent="UIParent" mixin="KeystoneLootReminderFrameMixin" inherits="SimplePanelTemplate" toplevel="true" movable="true" enableMouse="true" clampedToScreen="true" hidden="true">
+    <Frame name="KeystoneLootReminderFrame" parent="UIParent" mixin="KeystoneLootReminderFrameMixin" inherits="SimplePanelTemplate" frameStrata="DIALOG" toplevel="true" movable="true" enableMouse="true" clampedToScreen="true" hidden="true">
         <Size x="400" y="217"/>
         <Anchors>
-            <Anchor point="CENTER" y="217"/>
+            <Anchor point="CENTER" y="150"/>
         </Anchors>
         <Layers>
             <Layer level="BACKGROUND">
