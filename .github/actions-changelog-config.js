@@ -1,11 +1,11 @@
 module.exports = {
 	types: [
-		{ types: [ "Feature" ], label: "New Features" },
-		{ types: [ "Fix" ], label: "Bugfixes" },
-		{ types: [ "Improvement" ], label: "Improvements" },
-		{ types: [ "Revert" ], label: "Reverts" },
+		{ types: [ "Feature", "feature", "feat" ], label: "New Features" },
+		{ types: [ "Fix", "fix" ], label: "Bugfixes" },
+		{ types: [ "Improvement", "improvement" ], label: "Improvements" },
+		{ types: [ "Revert", "revert" ], label: "Reverts" },
 		{ types: [ "Other", "other" ], label: "Other Changes" },
-		{ types: [ "Skip" ], label: "Skip" }
+		{ types: [ "Skip", "skip" ], label: "Skip" }
 	],
 	
 	excludeTypes: [ "Skip" ],
