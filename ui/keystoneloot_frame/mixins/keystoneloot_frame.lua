@@ -2,12 +2,14 @@ local AddonName, KeystoneLoot = ...;
 
 local DB = KeystoneLoot.DB;
 local Favorites = KeystoneLoot.Favorites;
+local Character = KeystoneLoot.Character;
 local L = KeystoneLoot.L;
 
 KeystoneLootFrameMixin = {};
 
 function KeystoneLootFrameMixin:OnLoad()
     self:RegisterEvent("PLAYER_ENTERING_WORLD");
+    self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
     self:RegisterForDrag("LeftButton");
 
     CallbackRegistryMixin.OnLoad(self);
@@ -33,11 +35,18 @@ function KeystoneLootFrameMixin:InitializeTabSystem()
     self:SetTab(self.dungeonsTabId);
 end
 
-function KeystoneLootFrameMixin:OnEvent()
-    self:UnregisterAllEvents();
+function KeystoneLootFrameMixin:OnEvent(event)
+    if (event == "ACTIVE_TALENT_GROUP_CHANGED") then
+        self:SyncSpecFilter();
+        return;
+    end
+
+    self:UnregisterEvent("PLAYER_ENTERING_WORLD");
 
     DB:Init();
     Favorites:Init();
+
+    self:SyncSpecFilter();
 
     self:InitializeTabSystem();
 
@@ -48,6 +57,16 @@ function KeystoneLootFrameMixin:OnEvent()
     self.SettingsDropdown:Init();
     self.CatalystFrame:Init();
     KeystoneLootMinimapButton:Init();
+end
+
+function KeystoneLootFrameMixin:SyncSpecFilter()
+    local currentClassId = Character:GetCurrentClassId();
+    local currentSpecId = Character:GetCurrentSpecId();
+
+    if (DB:Get("filters.classId") == currentClassId) then
+        DB:Set("filters.classId", currentClassId);
+        DB:Set("filters.specId", currentSpecId);
+    end
 end
 
 function KeystoneLootFrameMixin:SetTab(tabId)
