@@ -280,7 +280,7 @@ function KeystoneLootLootIconButtonMixin:OnClick()
 
         if (currentTier > 0) then
             rootDescription:CreateDivider();
-            rootDescription:CreateButton(L["Remove"], function()
+            rootDescription:CreateButton(REMOVE, function()
                 Favorites:Remove(itemId, specId);
                 self:UpdateFavoriteIcon();
             end);
