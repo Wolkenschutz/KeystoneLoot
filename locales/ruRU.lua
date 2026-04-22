@@ -51,9 +51,10 @@ L["No character selected."] = "Персонаж не выбран.";
 L["No valid items found."] = "Допустимые предметы не найдены.";
 
 -- icon_button.lua / favorites.lua
-L["Set Favorite"] = "Установить избранное";
+L["Set Favorite"] = "Добавить в избранное";
 L["Nice to have"] = "Желательно";
 L["Must have"] = "Обязательно";
+L["Best in Slot"] = "БиС";
 
 -- loot_reminder_frame.lua
 L["Correct loot specialization set?"] = "Правильная установка специализации для добычи?";
