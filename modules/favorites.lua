@@ -28,9 +28,16 @@ function Favorites:Add(sourceId, specId, itemId, icon)
         return false;
     end
 
+    local characterKey = Character:GetSelectedKey();
+
     -- Resolve specId = 0 to all valid specs for this item/class
     if (specId == 0) then
-        local classId = DB:Get("filters.classId");
+        local info = Character:ParseKey(characterKey);
+        local classId = info and info.classId;
+
+        if (not classId) then
+            return false;
+        end
 
         if (KeystoneLoot.CatalystDatabase[itemId]) then
             -- Catalyst: add for all specs of the class
@@ -55,7 +62,6 @@ function Favorites:Add(sourceId, specId, itemId, icon)
         return false;
     end
 
-    local characterKey = Character:GetSelectedKey();
     local favorites = DB:Get("favorites") or {};
 
     -- Initialize structure if needed
