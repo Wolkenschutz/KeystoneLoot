@@ -80,7 +80,9 @@ function Query:GetDungeonItems(challengeModeId)
 
     -- Favorites slot
     if (slotId == -1) then
-        return KeystoneLoot.Favorites:GetList(challengeModeId, GetFavoritesListSpecId());
+        local results = KeystoneLoot.Favorites:GetList(challengeModeId, GetFavoritesListSpecId());
+        table.sort(results, SortResult);
+        return results;
     end
 
     local specId = DB:Get("filters.specId");
@@ -152,7 +154,9 @@ function Query:GetRaidItems(bossId)
 
     -- Favorites slot
     if (slotId == -1) then
-        return KeystoneLoot.Favorites:GetList(bossId, GetFavoritesListSpecId());
+        local results = KeystoneLoot.Favorites:GetList(bossId, GetFavoritesListSpecId());
+        table.sort(results, SortResult);
+        return results;
     end
 
     local specId = DB:Get("filters.specId");
@@ -235,7 +239,9 @@ function Query:GetCatalystItems()
 
     -- Favorites slot
     if (slotId == -1) then
-        return KeystoneLoot.Favorites:GetList("catalyst", GetFavoritesListSpecId());
+        local results = KeystoneLoot.Favorites:GetList("catalyst", GetFavoritesListSpecId());
+        table.sort(results, SortResult);
+        return results;
     end
 
     local results = {};
