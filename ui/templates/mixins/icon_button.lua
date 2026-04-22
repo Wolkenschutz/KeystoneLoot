@@ -5,6 +5,7 @@ local Upgrade = KeystoneLoot.Upgrade;
 local Favorites = KeystoneLoot.Favorites;
 local Character = KeystoneLoot.Character;
 local Query = KeystoneLoot.Query;
+local L = KeystoneLoot.L;
 
 local STAT_HIGHLIGHT_KEYS = {
     [0] = "crit",
@@ -19,8 +20,6 @@ function KeystoneLootLootIconButtonMixin:Init(item)
     self:SetEnabled(item.itemId ~= 0);
 
     self.itemId = item.itemId;
-    self.lastRemovedSpecs = nil;
-    self.lastRemovedSourceId = nil;
     self.isHovered = false;
 
     self.Content.Icon:SetTexture(item.icon);
@@ -141,18 +140,20 @@ function KeystoneLootLootIconButtonMixin:UpdateFavoriteIcon()
     local info = Character:ParseKey(Character:GetSelectedKey());
     local classesMatch = info and DB:Get("filters.classId") == info.classId;
 
-    local isFavorite;
+    local tier;
     if (isFavoritesSlot and not classesMatch) then
-        isFavorite = Favorites:IsAnyFavorite(self.itemId);
+        tier = Favorites:GetAnyTier(self.itemId);
     else
         local specId = isFavoritesSlot and GetFavoritesSpecId() or DB:Get("filters.specId");
-        isFavorite = Favorites:IsFavorite(self.itemId, specId);
+        tier = Favorites:GetTier(self.itemId, specId);
     end
 
-    if (isFavorite) then
+    if (tier > 0) then
+        self.Content.FavoriteIcon:SetTexture(Favorites.TIER_TEXTURE[tier]);
         self.Content.FavoriteIcon:SetDesaturated(false);
         self.Content.FavoriteIcon:Show();
     elseif (self.isHovered and (isFavoritesSlot or classesMatch)) then
+        self.Content.FavoriteIcon:SetTexture(Favorites.TIER_TEXTURE[Favorites.TIER_MUST]);
         self.Content.FavoriteIcon:SetDesaturated(true);
         self.Content.FavoriteIcon:Show();
     else
@@ -233,30 +234,56 @@ function KeystoneLootLootIconButtonMixin:OnClick()
     local info = Character:ParseKey(Character:GetSelectedKey());
     local classesMatch = info and DB:Get("filters.classId") == info.classId;
 
-    local isFavorite;
+    local currentTier;
     if (isFavoritesSlot and not classesMatch) then
-        isFavorite = Favorites:IsAnyFavorite(self.itemId);
+        currentTier = Favorites:GetAnyTier(self.itemId);
     else
-        isFavorite = Favorites:IsFavorite(self.itemId, specId);
+        currentTier = Favorites:GetTier(self.itemId, specId);
     end
+    local itemId = self.itemId;
 
-    if (isFavorite) then
-        self.lastRemovedSpecs = Favorites:GetItemSpecs(self.itemId);
-        self.lastRemovedSourceId = sourceId;
+    MenuUtil.CreateContextMenu(self, function(ownerRegion, rootDescription)
+        rootDescription:CreateTitle(L["Set Priority"]);
 
-        Favorites:Remove(self.itemId, specId);
-    else
-        if (self.lastRemovedSpecs) then
-            for _, savedSpecId in ipairs(self.lastRemovedSpecs) do
-                Favorites:Add(self.lastRemovedSourceId, savedSpecId, self.itemId, icon);
+        rootDescription:CreateRadio(Favorites.TIER_NAME[Favorites.TIER_NICE], function()
+            return currentTier == Favorites.TIER_NICE;
+        end, function()
+            if (currentTier > 0) then
+                Favorites:SetTier(itemId, Favorites.TIER_NICE);
+            else
+                Favorites:Add(sourceId, specId, itemId, icon, Favorites.TIER_NICE);
             end
+            self:UpdateFavoriteIcon();
+        end);
 
-            self.lastRemovedSpecs = nil;
-            self.lastRemovedSourceId = nil;
-        else
-            Favorites:Add(sourceId, specId, self.itemId, icon);
+        rootDescription:CreateRadio(Favorites.TIER_NAME[Favorites.TIER_MUST], function()
+            return currentTier == Favorites.TIER_MUST;
+        end, function()
+            if (currentTier > 0) then
+                Favorites:SetTier(itemId, Favorites.TIER_MUST);
+            else
+                Favorites:Add(sourceId, specId, itemId, icon, Favorites.TIER_MUST);
+            end
+            self:UpdateFavoriteIcon();
+        end);
+
+        rootDescription:CreateRadio(Favorites.TIER_NAME[Favorites.TIER_BIS], function()
+            return currentTier == Favorites.TIER_BIS;
+        end, function()
+            if (currentTier > 0) then
+                Favorites:SetTier(itemId, Favorites.TIER_BIS);
+            else
+                Favorites:Add(sourceId, specId, itemId, icon, Favorites.TIER_BIS);
+            end
+            self:UpdateFavoriteIcon();
+        end);
+
+        if (currentTier > 0) then
+            rootDescription:CreateDivider();
+            rootDescription:CreateButton(L["Remove"], function()
+                Favorites:Remove(itemId, specId);
+                self:UpdateFavoriteIcon();
+            end);
         end
-    end
-
-    self:UpdateFavoriteIcon();
+    end);
 end

@@ -50,6 +50,11 @@ L["Invalid import string."] = "Cadena de importación no válida.";
 L["No character selected."] = "Ningún personaje seleccionado.";
 L["No valid items found."] = "No se encontraron objetos válidos.";
 
+-- icon_button.lua / favorites.lua
+L["Set Priority"] = "Establecer prioridad";
+L["Nice to have"] = "Estaría bien tenerlo";
+L["Must have"] = "Imprescindible";
+
 -- loot_reminder_frame.lua
 L["Correct loot specialization set?"] = "¿Especialización de botín correcta?";
 L["+1 item dropping for all specs."] = "+1 objeto que cae para todas las especializaciones.";

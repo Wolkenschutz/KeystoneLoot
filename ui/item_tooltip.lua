@@ -77,7 +77,8 @@ local function OnTooltipSetItem(tooltip)
         return;
     end
 
-    if (not Favorites:IsAnyFavorite(itemId, true)) then
+    local tier = Favorites:GetAnyTier(itemId, true);
+    if (tier == 0) then
         return;
     end
 
@@ -117,7 +118,7 @@ local function OnTooltipSetItem(tooltip)
 
     tooltip:AddLine(" ");
     tooltip:AddLine("|cff9d5db8KeystoneLoot|r");
-    tooltip:AddLine(string.format("|A:CampCollection-icon-star:16:16:0:0|a %s (%s)", PROFESSIONS_FAVORITE, specText));
+    tooltip:AddLine(string.format("|A:CampCollection-icon-star:16:16:0:0|a %s (%s)", Favorites.TIER_NAME[tier], specText));
 
     if (not inCorrectInstance) then
         tooltip:AddLine(sourceName);

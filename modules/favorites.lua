@@ -1,14 +1,30 @@
 local AddonName, KeystoneLoot = ...;
 
-KeystoneLoot.Favorites = {};
+KeystoneLoot.Favorites        = {};
 
-local Favorites = KeystoneLoot.Favorites;
-local Character = KeystoneLoot.Character;
-local DB = KeystoneLoot.DB;
-local Query = KeystoneLoot.Query;
-local L = KeystoneLoot.L;
+local Favorites               = KeystoneLoot.Favorites;
+local Character               = KeystoneLoot.Character;
+local DB                      = KeystoneLoot.DB;
+local Query                   = KeystoneLoot.Query;
+local L                       = KeystoneLoot.L;
 
-local SHARE_PREFIX = "KeystoneLoot:v1";
+local SHARE_PREFIX            = "KeystoneLoot:v1";
+
+Favorites.TIER_NICE           = 1;
+Favorites.TIER_MUST           = 2;
+Favorites.TIER_BIS            = 3;
+
+Favorites.TIER_TEXTURE        = {
+    [1] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_nice",
+    [2] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_must",
+    [3] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_bis",
+};
+
+Favorites.TIER_NAME           = {
+    [1] = L["Nice to have"],
+    [2] = L["Must have"],
+    [3] = L["Best in Slot"],
+};
 
 function Favorites:Init()
     local characterKey = Character:GetKey();
@@ -23,7 +39,7 @@ function Favorites:Init()
     DB:Set("ui.selectedCharacterKey", characterKey);
 end
 
-function Favorites:Add(sourceId, specId, itemId, icon)
+function Favorites:Add(sourceId, specId, itemId, icon, tier)
     if (not sourceId or specId == nil or not itemId) then
         return false;
     end
@@ -43,7 +59,7 @@ function Favorites:Add(sourceId, specId, itemId, icon)
             -- Catalyst: add for all specs of the class
             for index = 1, C_SpecializationInfo.GetNumSpecializationsForClassID(classId) do
                 local resolvedSpecId = GetSpecializationInfoForClassID(classId, index);
-                self:Add(sourceId, resolvedSpecId, itemId, icon);
+                self:Add(sourceId, resolvedSpecId, itemId, icon, tier);
             end
 
             return true;
@@ -53,7 +69,7 @@ function Favorites:Add(sourceId, specId, itemId, icon)
         if (item and item.classes[classId]) then
             -- Regular item: add only for specs that can use it
             for _, resolvedSpecId in ipairs(item.classes[classId]) do
-                self:Add(sourceId, resolvedSpecId, itemId, icon);
+                self:Add(sourceId, resolvedSpecId, itemId, icon, tier);
             end
 
             return true;
@@ -79,7 +95,8 @@ function Favorites:Add(sourceId, specId, itemId, icon)
 
     -- Add item
     favorites[characterKey][sourceId][specId][itemId] = {
-        icon = icon
+        icon = icon,
+        tier = tier or self.TIER_MUST,
     };
 
     -- Save to DB
@@ -131,7 +148,76 @@ function Favorites:Remove(itemId, specId)
     return removed;
 end
 
-function Favorites:IsFavorite(itemId, specId)
+function Favorites:GetTier(itemId, specId)
+    if (not itemId) then
+        return 0;
+    end
+
+    local characterKey = Character:GetSelectedKey();
+    local favorites = DB:Get("favorites");
+
+    if (not favorites or not favorites[characterKey]) then
+        return 0;
+    end
+
+    specId = specId or DB:Get("filters.specId");
+
+    if (specId == 0) then
+        local info = Character:ParseKey(characterKey);
+        if (not info or DB:Get("filters.classId") ~= info.classId) then
+            return 0;
+        end
+
+        local maxTier = 0;
+        for _, sourceData in pairs(favorites[characterKey]) do
+            for _, specData in pairs(sourceData) do
+                if (specData[itemId]) then
+                    local tier = specData[itemId].tier or self.TIER_MUST;
+                    if (tier > maxTier) then
+                        maxTier = tier;
+                    end
+                end
+            end
+        end
+        return maxTier;
+    end
+
+    for _, sourceData in pairs(favorites[characterKey]) do
+        if (sourceData[specId] and sourceData[specId][itemId]) then
+            return sourceData[specId][itemId].tier or self.TIER_MUST;
+        end
+    end
+
+    return 0;
+end
+
+function Favorites:GetAnyTier(itemId, useCurrentChar)
+    if (not itemId) then
+        return 0;
+    end
+
+    local characterKey = useCurrentChar and Character:GetKey() or Character:GetSelectedKey();
+    local favorites = DB:Get("favorites");
+
+    if (not favorites or not favorites[characterKey]) then
+        return 0;
+    end
+
+    local maxTier = 0;
+    for _, sourceData in pairs(favorites[characterKey]) do
+        for _, specData in pairs(sourceData) do
+            if (specData[itemId]) then
+                local tier = specData[itemId].tier or self.TIER_MUST;
+                if (tier > maxTier) then
+                    maxTier = tier;
+                end
+            end
+        end
+    end
+    return maxTier;
+end
+
+function Favorites:SetTier(itemId, tier)
     if (not itemId) then
         return false;
     end
@@ -143,32 +229,26 @@ function Favorites:IsFavorite(itemId, specId)
         return false;
     end
 
-    specId = specId or DB:Get("filters.specId");
-
-    if (specId == 0) then
-        local info = Character:ParseKey(characterKey);
-        if (not info or DB:Get("filters.classId") ~= info.classId) then
-            return false;
-        end
-
-        for _, sourceData in pairs(favorites[characterKey]) do
-            for _, specData in pairs(sourceData) do
-                if (specData[itemId]) then
-                    return true;
-                end
-            end
-        end
-
-        return false;
-    end
+    local updated = false;
 
     for _, sourceData in pairs(favorites[characterKey]) do
-        if (sourceData[specId] and sourceData[specId][itemId]) then
-            return true;
+        for _, specData in pairs(sourceData) do
+            if (specData[itemId]) then
+                specData[itemId].tier = tier;
+                updated = true;
+            end
         end
     end
 
-    return false;
+    if (updated) then
+        DB:Set("favorites", favorites);
+    end
+
+    return updated;
+end
+
+function Favorites:IsFavorite(itemId, specId)
+    return self:GetTier(itemId, specId) > 0;
 end
 
 function Favorites:IsAnyFavorite(itemId, useCurrentChar)

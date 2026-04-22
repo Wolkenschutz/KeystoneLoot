@@ -27,10 +27,10 @@
                         </Texture>
                     </Layer>
                     <Layer level="ARTWORK" textureSubLevel="4">
-                        <Texture parentKey="FavoriteIcon" atlas="CampCollection-icon-star">
-                            <Size x="18" y="17"/>
+                        <Texture parentKey="FavoriteIcon">
+                            <Size x="18" y="18"/>
                             <Anchors>
-                                <Anchor point="TOPRIGHT" relativeKey="$parent.Icon" x="4" y="5"/>
+                                <Anchor point="TOPRIGHT" relativeKey="$parent.Icon" x="5" y="6"/>
                             </Anchors>
                         </Texture>
                     </Layer>

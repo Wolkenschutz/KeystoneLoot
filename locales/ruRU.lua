@@ -50,6 +50,11 @@ L["Invalid import string."] = "Неверная строка импорта.";
 L["No character selected."] = "Персонаж не выбран.";
 L["No valid items found."] = "Допустимые предметы не найдены.";
 
+-- icon_button.lua / favorites.lua
+L["Set Priority"] = "Установить приоритет";
+L["Nice to have"] = "Желательно";
+L["Must have"] = "Обязательно";
+
 -- loot_reminder_frame.lua
 L["Correct loot specialization set?"] = "Правильная установка специализации для добычи?";
 L["+1 item dropping for all specs."] = "+1 предмет выпадает для всех специализаций.";

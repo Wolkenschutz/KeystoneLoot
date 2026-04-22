@@ -14,11 +14,31 @@ local DIFFICULTY_MAP = {
 };
 
 local function SortResult(a, b)
-    local aFav = KeystoneLoot.Favorites:IsFavorite(a.itemId);
-    local bFav = KeystoneLoot.Favorites:IsFavorite(b.itemId);
+    local aTier = KeystoneLoot.Favorites:GetTier(a.itemId);
+    local bTier = KeystoneLoot.Favorites:GetTier(b.itemId);
 
-    if (aFav ~= bFav) then
-        return aFav;
+    if (aTier ~= bTier) then
+        return aTier > bTier;
+    end
+
+    local aItem = Query:GetItemInfo(a.itemId);
+    local bItem = Query:GetItemInfo(b.itemId);
+    local aSlot = aItem and aItem.slotId or 0;
+    local bSlot = bItem and bItem.slotId or 0;
+
+    if (aSlot ~= bSlot) then
+        return aSlot < bSlot;
+    end
+
+    return a.itemId < b.itemId;
+end
+
+local function SortResultFavorites(a, b)
+    local aTier = KeystoneLoot.Favorites:GetAnyTier(a.itemId);
+    local bTier = KeystoneLoot.Favorites:GetAnyTier(b.itemId);
+
+    if (aTier ~= bTier) then
+        return aTier > bTier;
     end
 
     local aItem = Query:GetItemInfo(a.itemId);
@@ -81,7 +101,7 @@ function Query:GetDungeonItems(challengeModeId)
     -- Favorites slot
     if (slotId == -1) then
         local results = KeystoneLoot.Favorites:GetList(challengeModeId, GetFavoritesListSpecId());
-        table.sort(results, SortResult);
+        table.sort(results, SortResultFavorites);
         return results;
     end
 
@@ -155,7 +175,7 @@ function Query:GetRaidItems(bossId)
     -- Favorites slot
     if (slotId == -1) then
         local results = KeystoneLoot.Favorites:GetList(bossId, GetFavoritesListSpecId());
-        table.sort(results, SortResult);
+        table.sort(results, SortResultFavorites);
         return results;
     end
 
@@ -240,7 +260,7 @@ function Query:GetCatalystItems()
     -- Favorites slot
     if (slotId == -1) then
         local results = KeystoneLoot.Favorites:GetList("catalyst", GetFavoritesListSpecId());
-        table.sort(results, SortResult);
+        table.sort(results, SortResultFavorites);
         return results;
     end
 

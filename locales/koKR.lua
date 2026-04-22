@@ -50,6 +50,12 @@ L["Invalid import string."] = "유효하지 않은 가져오기 문자열.";
 L["No character selected."] = "캐릭터가 선택되지 않았습니다.";
 L["No valid items found."] = "유효한 아이템을 찾을 수 없습니다.";
 
+-- icon_button.lua / favorites.lua
+L["Set Priority"] = "우선순위 설정";
+L["Nice to have"] = "있으면 좋음";
+L["Must have"] = "필수";
+L["Best in Slot"] = "최고 장비";
+
 -- loot_reminder_frame.lua
 L["Correct loot specialization set?"] = "올바른 전리품 전문화 설정?";
 L["+1 item dropping for all specs."] = "+1 모든 전문화에 드롭되는 아이템.";

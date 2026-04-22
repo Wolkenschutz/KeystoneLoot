@@ -50,6 +50,12 @@ L["Invalid import string."] = "导入字符串无效。";
 L["No character selected."] = "未选择角色。";
 L["No valid items found."] = "未找到有效物品。";
 
+-- icon_button.lua / favorites.lua
+L["Set Priority"] = "设置优先级";
+L["Nice to have"] = "锦上添花";
+L["Must have"] = "必须获取";
+L["Best in Slot"] = "最佳装备";
+
 -- loot_reminder_frame.lua
 L["Correct loot specialization set?"] = "拾取专精是否正确？";
 L["+1 item dropping for all specs."] = "+1 件物品对所有专精掉落。";
