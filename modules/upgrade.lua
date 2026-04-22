@@ -8,7 +8,9 @@ local DB = KeystoneLoot.DB;
 local SPECIAL_BONUS_IDS = {
     [178708] = 6917, -- Unbändiger Wechselbalg
     [178715] = 6923, -- Okarina der Nebelruferin
-    [243308] = 13503 -- Kettenstiefel des Eindringlings
+    [243308] = 13503,-- Kettenstiefel des Eindringlings
+    [250247] = 13534,-- Amulett der abyssischen Hymne
+    [249920] = 13534,-- Auge der Mitternacht
 };
 
 local ITEM_LEVEL_BONUS_IDS = {
