@@ -62,7 +62,11 @@ local function AddSpecLinesToTooltip(itemId)
         return;
     end
 
-    if (DB:Get("filters.classId") == info.classId and DB:Get("filters.specId") ~= 0) then
+    if (DB:Get("filters.classId") ~= info.classId) then
+        return;
+    end
+
+    if (DB:Get("filters.specId") ~= 0) then
         return;
     end
 
