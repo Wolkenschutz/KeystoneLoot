@@ -243,7 +243,7 @@ function KeystoneLootLootIconButtonMixin:OnClick()
     local itemId = self.itemId;
 
     MenuUtil.CreateContextMenu(self, function(ownerRegion, rootDescription)
-        rootDescription:CreateTitle(L["Set Priority"]);
+        rootDescription:CreateTitle(L["Set Favorite"]);
 
         rootDescription:CreateRadio(Favorites.TIER_NAME[Favorites.TIER_NICE], function()
             return currentTier == Favorites.TIER_NICE;

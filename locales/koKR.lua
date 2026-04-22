@@ -51,7 +51,7 @@ L["No character selected."] = "캐릭터가 선택되지 않았습니다.";
 L["No valid items found."] = "유효한 아이템을 찾을 수 없습니다.";
 
 -- icon_button.lua / favorites.lua
-L["Set Priority"] = "우선순위 설정";
+L["Set Favorite"] = "즐겨찾기 설정";
 L["Nice to have"] = "있으면 좋음";
 L["Must have"] = "필수";
 L["Best in Slot"] = "최고 장비";

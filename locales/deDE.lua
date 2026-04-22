@@ -54,7 +54,7 @@ L["No character selected."] = "Kein Charakter ausgewählt.";
 L["No valid items found."] = "Keine gültigen Gegenstände gefunden.";
 
 -- icon_button.lua / favorites.lua
-L["Set Priority"] = "Priorität festlegen";
+L["Set Favorite"] = "Favorit festlegen";
 L["Nice to have"] = "Wäre schön";
 L["Must have"] = "Muss haben";
 

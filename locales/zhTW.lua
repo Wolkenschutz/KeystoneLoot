@@ -51,7 +51,7 @@ L["No character selected."] = "未選擇角色。";
 L["No valid items found."] = "未找到有效物品。";
 
 -- icon_button.lua / favorites.lua
-L["Set Priority"] = "設定優先順序";
+L["Set Favorite"] = "設定最愛";
 L["Nice to have"] = "有更好";
 L["Must have"] = "必須取得";
 L["Best in Slot"] = "最佳裝備";
