@@ -118,7 +118,7 @@ local function OnTooltipSetItem(tooltip)
 
     tooltip:AddLine(" ");
     tooltip:AddLine("|cff9d5db8KeystoneLoot|r");
-    tooltip:AddLine(string.format("|A:CampCollection-icon-star:16:16:0:0|a %s (%s)", Favorites.TIER_NAME[tier], specText));
+    tooltip:AddLine(string.format("|T%s:16:16|t %s (%s)", Favorites.TIER_TEXTURE[tier], Favorites.TIER_NAME[tier], specText));
 
     if (not inCorrectInstance) then
         tooltip:AddLine(sourceName);
