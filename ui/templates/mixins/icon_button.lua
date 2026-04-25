@@ -249,7 +249,7 @@ function KeystoneLootLootIconButtonMixin:OnClick()
             return currentTier == Favorites.TIER_NICE;
         end, function()
             if (currentTier > 0) then
-                Favorites:SetTier(itemId, Favorites.TIER_NICE);
+                Favorites:SetTier(itemId, specId, Favorites.TIER_NICE);
             else
                 Favorites:Add(sourceId, specId, itemId, icon, Favorites.TIER_NICE);
             end
@@ -260,7 +260,7 @@ function KeystoneLootLootIconButtonMixin:OnClick()
             return currentTier == Favorites.TIER_MUST;
         end, function()
             if (currentTier > 0) then
-                Favorites:SetTier(itemId, Favorites.TIER_MUST);
+                Favorites:SetTier(itemId, specId, Favorites.TIER_MUST);
             else
                 Favorites:Add(sourceId, specId, itemId, icon, Favorites.TIER_MUST);
             end
@@ -271,7 +271,7 @@ function KeystoneLootLootIconButtonMixin:OnClick()
             return currentTier == Favorites.TIER_BIS;
         end, function()
             if (currentTier > 0) then
-                Favorites:SetTier(itemId, Favorites.TIER_BIS);
+                Favorites:SetTier(itemId, specId, Favorites.TIER_BIS);
             else
                 Favorites:Add(sourceId, specId, itemId, icon, Favorites.TIER_BIS);
             end

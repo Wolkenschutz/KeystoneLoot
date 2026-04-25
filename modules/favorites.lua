@@ -217,7 +217,7 @@ function Favorites:GetAnyTier(itemId, useCurrentChar)
     return maxTier;
 end
 
-function Favorites:SetTier(itemId, tier)
+function Favorites:SetTier(itemId, specId, tier)
     if (not itemId) then
         return false;
     end
@@ -232,11 +232,16 @@ function Favorites:SetTier(itemId, tier)
     local updated = false;
 
     for _, sourceData in pairs(favorites[characterKey]) do
-        for _, specData in pairs(sourceData) do
-            if (specData[itemId]) then
-                specData[itemId].tier = tier;
-                updated = true;
+        if (specId == 0) then
+            for _, specData in pairs(sourceData) do
+                if (specData[itemId]) then
+                    specData[itemId].tier = tier;
+                    updated = true;
+                end
             end
+        elseif (sourceData[specId] and sourceData[specId][itemId]) then
+            sourceData[specId][itemId].tier = tier;
+            updated = true;
         end
     end
 
