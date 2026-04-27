@@ -59,6 +59,7 @@ L["Must have"] = "Essencial";
 L["Correct loot specialization set?"] = "Especialização de saque correta configurada?";
 L["+1 item dropping for all specs."] = "+1 item caindo para todas as especializações.";
 L["+%d items dropping for all specs."] = "+%d itens caindo para todas as especializações.";
+L["%s has a smaller loot pool than %s"] = "%s tem um pool de saque menor que %s";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "Clique esquerdo: Abrir visão geral";

@@ -74,6 +74,7 @@ ui/raids_frame/raids_frame.xml
 ui/loot_reminder_frame/mixins/loot_reminder_frame.lua
 ui/loot_reminder_frame/mixins/icon_button.lua
 ui/loot_reminder_frame/mixins/spec_card.lua
+ui/loot_reminder_frame/mixins/efficiency_icon.lua
 ui/loot_reminder_frame/loot_reminder_frame.xml
 
 ui/catalyst_frame/mixins/catalyst_frame.lua

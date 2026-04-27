@@ -59,6 +59,7 @@ L["Must have"] = "Indispensabile";
 L["Correct loot specialization set?"] = "Specializzazione bottino corretta?";
 L["+1 item dropping for all specs."] = "+1 oggetto che cade per tutte le specializzazioni.";
 L["+%d items dropping for all specs."] = "+%d oggetti che cadono per tutte le specializzazioni.";
+L["%s has a smaller loot pool than %s"] = "%s ha un pool di bottino più piccolo di %s";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "Clic sinistro: Apri panoramica";

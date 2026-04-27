@@ -1,6 +1,7 @@
 local AddonName, KeystoneLoot = ...;
 
-local Character = KeystoneLoot.Character;
+local Character               = KeystoneLoot.Character;
+local L                       = KeystoneLoot.L;
 
 -- Blizzard_PlayerSpells\ClassSpecializations\Blizzard_ClassSpecializationsFrame.lua
 local SPEC_THUMBNAILS         = {
@@ -50,8 +51,8 @@ local MAX_ICONS_PER_SPEC      = 8;
 local ICONS_PER_ROW           = 4;
 local ICON_SPACING_X          = 10;
 local ICON_SPACING_Y          = 8;
-local ICON_PADDING_X            = 11;
-local ICON_PADDING_Y            = 10;
+local ICON_PADDING_X          = 11;
+local ICON_PADDING_Y          = 10;
 
 KeystoneLootReminderSpecMixin = {};
 
@@ -59,15 +60,24 @@ function KeystoneLootReminderSpecMixin:OnLoad()
     self.iconPool = CreateFramePool("Button", self, "KeystoneLootReminderIconTemplate");
 end
 
-function KeystoneLootReminderSpecMixin:Init(specId, items, lootSpecId, allSpecItems)
-    self.specId = specId;
+function KeystoneLootReminderSpecMixin:Init(displaySpecId, favoSpecId, items, lootSpecId, allSpecItems)
+    self.specId = displaySpecId;
 
-    local specName = Character:GetSpecName(specId);
+    local specName = Character:GetSpecName(displaySpecId);
     self.Title:SetText(specName);
 
     self.Bg:SetHorizTile(false);
     self.Bg:SetVertTile(false);
-    self.Bg:SetAtlas(string.format("spec-thumbnail-%s", SPEC_THUMBNAILS[specId] or "mage-arcane"));
+    self.Bg:SetAtlas(string.format("spec-thumbnail-%s", SPEC_THUMBNAILS[displaySpecId] or "mage-arcane"));
+
+    if (displaySpecId ~= favoSpecId) then
+        local displayName = Character:GetSpecName(displaySpecId);
+        local favoName = Character:GetSpecName(favoSpecId);
+        self.LootSpecButton.EfficiencyIcon.tooltipText = string.format(L["%s has a smaller loot pool than %s"], HIGHLIGHT_FONT_COLOR:WrapTextInColorCode(displayName), HIGHLIGHT_FONT_COLOR:WrapTextInColorCode(favoName));
+        self.LootSpecButton.EfficiencyIcon:Show();
+    else
+        self.LootSpecButton.EfficiencyIcon:Hide();
+    end
 
     self:UpdateLootSpec(lootSpecId);
     self:SetIcons(items, allSpecItems);

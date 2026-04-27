@@ -21,7 +21,7 @@ See all Catalyst-eligible items for your class and spec right inside the addon.
 Found an item you need? Star it. Favorites are saved per character and per spec, so your Warrior wishlist won't interfere with your Druid's. Use the character dropdown to switch between your alts and manage each one's wishlist independently. You can also export and import favorites as a short string, handy for sharing with your guild or syncing between characters.
 
 [B]Loot Spec Reminder[/B]
-As soon as you zone into a Mythic+ dungeon, KeystoneLoot checks if your active loot specialization matches your favorited items. If not, it gives you a heads-up before the run starts.
+As soon as you zone into a Mythic+ dungeon, KeystoneLoot checks if your loot spec matches your favorited items. It also compares loot pool sizes across specs, so if another spec has fewer items overall but can still drop what you're after, it'll suggest switching for better odds.
 
 [B]Keystone Tooltip[/B]
 Hover a keystone in your bags to get dungeon information right in the tooltip.

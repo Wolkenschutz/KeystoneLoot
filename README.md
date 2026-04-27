@@ -21,8 +21,8 @@ Mark items as favorites on a per-character, per-spec basis. The system supports:
 - Viewing another character's wishlist via the character dropdown
 - **Export & Import** of favorites using a compact string format (`KeystoneLoot:v1,...`), great for sharing wishlists or migrating between accounts
 
-### Loot Reminder
-When you enter a Mythic+ dungeon, KeystoneLoot checks whether your active loot specialization matches your favorited items. If there's a mismatch, a reminder frame pops up so you don't miss out on loot.
+### Loot Spec Reminder
+When you enter a Mythic+ dungeon, KeystoneLoot checks whether your active loot specialization matches your favorited items. It also compares loot pool sizes across specs, so if a different spec has a smaller pool but can still drop what you want, it recommends that one instead for better odds.
 
 ### Keystone Tooltip
 Hovering over a keystone in your bags shows additional dungeon info directly in the tooltip.

@@ -60,6 +60,7 @@ L["Best in Slot"] = "最佳装备";
 L["Correct loot specialization set?"] = "拾取专精是否正确？";
 L["+1 item dropping for all specs."] = "+1 件物品对所有专精掉落。";
 L["+%d items dropping for all specs."] = "+%d 件物品对所有专精掉落。";
+L["%s has a smaller loot pool than %s"] = "%s的战利品池比%s更小。";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "左键点击：打开概览";

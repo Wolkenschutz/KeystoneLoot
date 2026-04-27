@@ -88,15 +88,16 @@ function KeystoneLootReminderFrameMixin:Open(challengeModeId)
         lootSpecId = GetSpecializationInfo(GetSpecialization());
     end
 
-    -- Sort specs for deterministic ordering
+    -- Sort by favo spec id for deterministic ordering
     local sortedSpecs = {};
-    for specId in pairs(itemList) do
-        table.insert(sortedSpecs, specId);
+    for favoSpecId in pairs(itemList) do
+        table.insert(sortedSpecs, favoSpecId);
     end
     table.sort(sortedSpecs);
 
     local PrevFrame = nil;
-    for _, specId in ipairs(sortedSpecs) do
+    for _, favoSpecId in ipairs(sortedSpecs) do
+        local entry = itemList[favoSpecId];
         local SpecFrame = self.specPool:Acquire();
         SpecFrame:ClearAllPoints();
 
@@ -106,7 +107,7 @@ function KeystoneLootReminderFrameMixin:Open(challengeModeId)
             SpecFrame:SetPoint("TOPLEFT", self.Container, "TOPLEFT", 0, 0);
         end
 
-        SpecFrame:Init(specId, itemList[specId], lootSpecId, allSpecItems);
+        SpecFrame:Init(entry.displaySpecId, entry.favoSpecId, entry.items, lootSpecId, allSpecItems);
         SpecFrame:Show();
         PrevFrame = SpecFrame;
     end

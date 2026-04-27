@@ -62,6 +62,7 @@ L["Must have"] = "Muss haben";
 L["Correct loot specialization set?"] = "Richtige Beutespezialisierung eingestellt?";
 L["+1 item dropping for all specs."] = "+1 weiterer Gegenstand, der bei allen Spezialisierungen droppt.";
 L["+%d items dropping for all specs."] = "+%d weitere Gegenstände, die bei allen Spezialisierungen droppen.";
+L["%s has a smaller loot pool than %s"] = "%s hat eine kleinere Beutetabelle als %s";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "Linksklick: Übersicht öffnen";

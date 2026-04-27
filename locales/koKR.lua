@@ -60,6 +60,7 @@ L["Best in Slot"] = "최고 장비";
 L["Correct loot specialization set?"] = "올바른 전리품 전문화 설정?";
 L["+1 item dropping for all specs."] = "+1 모든 전문화에 드롭되는 아이템.";
 L["+%d items dropping for all specs."] = "+%d 모든 전문화에 드롭되는 아이템.";
+L["%s has a smaller loot pool than %s"] = "%s은(는) %s보다 전리품 풀이 더 작습니다.";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "왼쪽 클릭: 개요 열기";

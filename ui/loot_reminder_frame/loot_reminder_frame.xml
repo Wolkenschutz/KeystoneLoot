@@ -34,7 +34,7 @@
                     <Anchors>
                         <Anchor point="TOP" relativePoint="BOTTOM" y="-12"/>
                     </Anchors>
-					<Color r="0" g="1" b="0" a="1"/>
+                    <Color r="0" g="1" b="0" a="1"/>
                 </FontString>
             </Layer>
         </Layers>
@@ -50,6 +50,23 @@
                         PlaySound(SOUNDKIT.UI_CLASS_TALENT_SPEC_ACTIVATE);
                     </OnClick>
                 </Scripts>
+                <Frames>
+                    <Frame parentKey="EfficiencyIcon" mixin="KeystoneLootReminderEfficiencyIconMixin" enableMouse="true" hidden="true">
+                        <Size x="17" y="21"/>
+                        <Anchors>
+                            <Anchor point="RIGHT" relativePoint="LEFT" x="-6" y="0"/>
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <Texture atlas="house-reward-green-arrow-up" setAllPoints="true"/>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnEnter method="OnEnter"/>
+                            <OnLeave method="OnLeave"/>
+                        </Scripts>
+                    </Frame>
+                </Frames>
             </Button>
         </Frames>
         <Scripts>
