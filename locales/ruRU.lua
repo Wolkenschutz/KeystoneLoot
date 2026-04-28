@@ -60,7 +60,7 @@ L["Best in Slot"] = "БиС";
 L["Correct loot specialization set?"] = "Правильная установка специализации для добычи?";
 L["+1 item dropping for all specs."] = "+1 предмет выпадает для всех специализаций.";
 L["+%d items dropping for all specs."] = "+%d предметов выпадает для всех специализаций.";
-L["%s has a smaller loot pool than %s"] = "%s имеет меньший пул добычи, чем %s";
+L["%s has a smaller loot pool than %s"] = "%s имеет меньший набор добычи, чем %s";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "ЛКМ: Открыть окно KeystoneLoot";
