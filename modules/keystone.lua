@@ -12,7 +12,6 @@ local function GetSpecPoolSize(lootTable, specId, classId)
 
     for _, itemId in ipairs(lootTable) do
         local item = Query:GetItemInfo(itemId);
-    
         if (item and item.classes[classId]) then
             for _, s in ipairs(item.classes[classId]) do
                 if (s == specId) then
@@ -26,7 +25,7 @@ local function GetSpecPoolSize(lootTable, specId, classId)
     return count;
 end
 
-local function GetBestSpecForItems(items, classId, lootTable, lootSpecId)
+local function GetBestSpecForItems(items, classId, lootTable, lootSpecId, favoSpecId)
     local eligibleSpecs = nil;
 
     for _, item in ipairs(items) do
@@ -60,14 +59,24 @@ local function GetBestSpecForItems(items, classId, lootTable, lootSpecId)
     local lootSpecPoolSize = eligibleSpecs[lootSpecId] and GetSpecPoolSize(lootTable, lootSpecId, classId) or math.huge;
     local bestSpec = nil;
     local bestPoolSize = lootSpecPoolSize;
+
     for specId in pairs(eligibleSpecs) do
         if (specId ~= lootSpecId) then
             local poolSize = GetSpecPoolSize(lootTable, specId, classId);
+
             if (poolSize < bestPoolSize) then
                 bestPoolSize = poolSize;
                 bestSpec = specId;
+            elseif (poolSize == bestPoolSize and bestSpec and specId == favoSpecId) then
+                -- Prefer favoSpecId as tiebreaker so no arrow shows unnecessarily
+                bestSpec = favoSpecId;
             end
         end
+    end
+
+    -- If best spec found equals the favoSpecId, no switch needed
+    if (bestSpec == favoSpecId) then
+        return nil;
     end
 
     return bestSpec;
@@ -239,14 +248,16 @@ function Keystone:GetLootReminderItemList(challengeModeId)
 
     for favoSpecId, items in pairs(rawItemList) do
         local displaySpecId = favoSpecId;
+
         if (dungeonLootTable) then
-            local bestSpec = GetBestSpecForItems(items, classId, dungeonLootTable, lootSpecId);
+            local bestSpec = GetBestSpecForItems(items, classId, dungeonLootTable, lootSpecId, favoSpecId);
             if (bestSpec) then
                 displaySpecId = bestSpec;
             else
                 displaySpecId = lootSpecId;
             end
         end
+
         itemList[favoSpecId] = {
             items         = items,
             displaySpecId = displaySpecId,
