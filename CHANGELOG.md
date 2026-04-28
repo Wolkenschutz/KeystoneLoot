@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.4 - 2026-04-28
+
+### Improvements
+
+- Loot spec reminder now also recommends the spec with the highest drop chance based on loot pool size
+
 ## 2.2.3 - 2026-04-25
 
 ### Bugfixes
