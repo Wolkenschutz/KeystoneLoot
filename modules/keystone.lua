@@ -12,7 +12,7 @@ local function GetSpecPoolSize(lootTable, specId, classId)
 
     for _, itemId in ipairs(lootTable) do
         local item = Query:GetItemInfo(itemId);
-
+    
         if (item and item.classes[classId]) then
             for _, s in ipairs(item.classes[classId]) do
                 if (s == specId) then
@@ -26,7 +26,7 @@ local function GetSpecPoolSize(lootTable, specId, classId)
     return count;
 end
 
-local function GetBestSpecForItems(items, classId, lootTable)
+local function GetBestSpecForItems(items, classId, lootTable, lootSpecId)
     local eligibleSpecs = nil;
 
     for _, item in ipairs(items) do
@@ -57,17 +57,16 @@ local function GetBestSpecForItems(items, classId, lootTable)
         return nil;
     end
 
+    local lootSpecPoolSize = eligibleSpecs[lootSpecId] and GetSpecPoolSize(lootTable, lootSpecId, classId) or math.huge;
     local bestSpec = nil;
-    local bestPoolSize = math.huge;
-
+    local bestPoolSize = lootSpecPoolSize;
     for specId in pairs(eligibleSpecs) do
-        local poolSize = GetSpecPoolSize(lootTable, specId, classId);
-
-        if (poolSize < bestPoolSize) then
-            bestPoolSize = poolSize;
-            bestSpec = specId;
-        elseif (poolSize == bestPoolSize and bestSpec and specId < bestSpec) then
-            bestSpec = specId;
+        if (specId ~= lootSpecId) then
+            local poolSize = GetSpecPoolSize(lootTable, specId, classId);
+            if (poolSize < bestPoolSize) then
+                bestPoolSize = poolSize;
+                bestSpec = specId;
+            end
         end
     end
 
@@ -200,22 +199,23 @@ function Keystone:GetLootReminderItemList(challengeModeId)
             return {}, allSpecItems;
         end
 
+        local lootSpecPoolSize = GetSpecPoolSize(dungeonLootTable, lootSpecId, classId);
         local bestSpec = nil;
-        local bestPoolSize = math.huge;
+        local bestPoolSize = lootSpecPoolSize;
 
         for i = 1, numSpecs do
             local specId = GetSpecializationInfo(i);
-            local poolSize = GetSpecPoolSize(dungeonLootTable, specId, classId);
 
-            if (poolSize < bestPoolSize) then
-                bestPoolSize = poolSize;
-                bestSpec = specId;
-            elseif (poolSize == bestPoolSize and bestSpec and specId < bestSpec) then
-                bestSpec = specId;
+            if (specId ~= lootSpecId) then
+                local poolSize = GetSpecPoolSize(dungeonLootTable, specId, classId);
+                if (poolSize < bestPoolSize) then
+                    bestPoolSize = poolSize;
+                    bestSpec = specId;
+                end
             end
         end
 
-        if (not bestSpec or bestSpec == lootSpecId) then
+        if (not bestSpec) then
             return {}, allSpecItems;
         end
 
@@ -239,14 +239,14 @@ function Keystone:GetLootReminderItemList(challengeModeId)
 
     for favoSpecId, items in pairs(rawItemList) do
         local displaySpecId = favoSpecId;
-
         if (dungeonLootTable) then
-            local bestSpec = GetBestSpecForItems(items, classId, dungeonLootTable);
+            local bestSpec = GetBestSpecForItems(items, classId, dungeonLootTable, lootSpecId);
             if (bestSpec) then
                 displaySpecId = bestSpec;
+            else
+                displaySpecId = lootSpecId;
             end
         end
-
         itemList[favoSpecId] = {
             items         = items,
             displaySpecId = displaySpecId,
