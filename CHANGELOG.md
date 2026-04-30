@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.3.0 - 2026-04-30
+
+### New Features
+
+- Wide mode setting (12 item slots instead of 6)
+
+### Bugfixes
+
+- Loot spec reminder no longer shows efficiency arrow when loot pools are equal
+
+### Improvements
+
+- Enhance tooltip display for teleport button during combat lockdown
+
 ## 2.2.5 - 2026-04-28
 
 ### Bugfixes
