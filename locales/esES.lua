@@ -43,6 +43,7 @@ L["Delete..."] = "Eliminar...";
 L["Delete all data for %s?"] = "¿Eliminar todos los datos de %s?";
 L["Cannot delete the currently logged in character."] = "No se puede eliminar el personaje con sesión iniciada actualmente.";
 L["This character is hidden."] = "Este personaje está oculto.";
+L["Wide mode"] = "Modo amplio";
 
 -- favorites.lua
 L["No favorites found"] = "No se encontraron favoritos";

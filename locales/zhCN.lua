@@ -43,6 +43,7 @@ L["Delete..."] = "删除...";
 L["Delete all data for %s?"] = "删除 %s 的所有数据？";
 L["Cannot delete the currently logged in character."] = "无法删除当前登录的角色。";
 L["This character is hidden."] = "该角色已被隐藏。";
+L["Wide mode"] = "宽屏模式";
 
 -- favorites.lua
 L["No favorites found"] = "未找到收藏";

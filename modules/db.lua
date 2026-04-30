@@ -6,7 +6,7 @@ local DB = KeystoneLoot.DB;
 
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 
-local DB_VERSION = 3;
+local DB_VERSION = 4;
 local CHAR_DB_VERSION = 1;
 
 local observers = {};
@@ -89,6 +89,10 @@ function DB:MigrateGlobalDB(fromVersion)
 
     if (fromVersion == 2) then
         KeystoneLootDB.settings.hiddenCharacters = {};
+    end
+
+    if (fromVersion == 3) then
+        KeystoneLootDB.settings.wideMode = false;
     end
 end
 

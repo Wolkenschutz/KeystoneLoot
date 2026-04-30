@@ -1,3 +1,7 @@
+local AddonName, KeystoneLoot = ...;
+
+local DB = KeystoneLoot.DB;
+
 KeystoneLootEntryFrameMixin = {};
 
 function KeystoneLootEntryFrameMixin:OnLoad()
@@ -58,9 +62,17 @@ function KeystoneLootEntryFrameMixin:Init(index, instance, lootTable, isLastEntr
         self.DungeonBG:SetDesaturated(false);
     end
 
-    -- Adds fake entries to always have 6 slots
+    -- Resize for wide mode (12 slots) or normal mode (6 slots)
+    local wideMode = DB:Get("settings.wideMode");
+    local numSlots = wideMode and 12 or 6;
+
+    self:SetWidth(wideMode and 714 or 486);
+    self.IconScrollBox:SetWidth(wideMode and 458 or 230);
+    self.Divider:SetWidth(wideMode and 688 or 460);
+
+    -- Adds fake entries to always fill all slots
     local dataProvider = CreateDataProvider();
-    for i = #lootTable, 5 do
+    for i = #lootTable, numSlots - 1 do
         table.insert(lootTable, { itemId = 0 });
     end
 

@@ -43,6 +43,7 @@ L["Delete..."] = "삭제...";
 L["Delete all data for %s?"] = "%s의 모든 데이터를 삭제하시겠습니까?";
 L["Cannot delete the currently logged in character."] = "현재 로그인한 캐릭터는 삭제할 수 없습니다.";
 L["This character is hidden."] = "이 캐릭터는 숨겨져 있습니다.";
+L["Wide mode"] = "넓은 모드";
 
 -- favorites.lua
 L["No favorites found"] = "즐겨찾기 없음";

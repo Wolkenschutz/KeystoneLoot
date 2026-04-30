@@ -157,6 +157,11 @@ function KeystoneLootSettingsDropdownMixin:Init()
             function() return DB:Get("settings.favoriteTooltip"); end,
             function() DB:Set("settings.favoriteTooltip", not DB:Get("settings.favoriteTooltip")); end
         );
+        rootDescription:CreateCheckbox(
+            L["Wide mode"],
+            function() return DB:Get("settings.wideMode"); end,
+            function() DB:Set("settings.wideMode", not DB:Get("settings.wideMode")); end
+        );
 
 
         local manageButton = rootDescription:CreateButton(L["Manage characters"]);

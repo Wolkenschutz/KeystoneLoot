@@ -1,5 +1,6 @@
 local AddonName, KeystoneLoot = ...;
 
+local DB = KeystoneLoot.DB;
 local Query = KeystoneLoot.Query;
 
 KeystoneLootRaidBlockMixin = {};
@@ -17,6 +18,8 @@ end
 
 function KeystoneLootRaidBlockMixin:SetRaid(raid)
     self.entryPool:ReleaseAll();
+
+    self:SetWidth(DB:Get("settings.wideMode") and 728 or 500);
 
     local numBosses = #raid.bossList;
 

@@ -20,6 +20,8 @@ function KeystoneLootRaidsFrameMixin:SetRaid(raid)
     self.currentRaid = raid;
     self.blockPool:ReleaseAll();
 
+    self:SetWidth(DB:Get("settings.wideMode") and 728 or 500);
+
     local Block = self.blockPool:Acquire();
     Block.RaidIcon:Hide();
     Block:ClearAllPoints();
@@ -33,6 +35,8 @@ end
 
 function KeystoneLootRaidsFrameMixin:SetAllRaids(raids)
     self.blockPool:ReleaseAll();
+
+    self:SetWidth(DB:Get("settings.wideMode") and 728 or 500);
 
     local totalHeight = 80; -- space above first block
     local PrevBlock = nil;
@@ -84,6 +88,7 @@ function KeystoneLootRaidsFrameMixin:Init()
     DB:AddObserver("ui.selectedCharacterKey", OnChanged);
     DB:AddObserver("ui.selectedTab", OnChanged);
     DB:AddObserver("settings.highlighting.*", OnChanged);
+    DB:AddObserver("settings.wideMode", OnChanged);
 
     if (stackedMode) then
         self.DropdownButton:Hide();
