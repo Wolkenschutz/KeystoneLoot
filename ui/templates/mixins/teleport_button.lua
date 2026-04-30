@@ -45,6 +45,9 @@ function KeystoneLootTeleportButtonMixin:OnEnter()
     if (not IsSpellKnown(teleportSpellId)) then
         GameTooltip:AddLine(" ");
         GameTooltip:AddLine(UNAVAILABLE, RED_FONT_COLOR:GetRGB());
+    elseif (InCombatLockdown()) then
+        GameTooltip:AddLine(" ");
+        GameTooltip:AddLine(ERR_NOT_IN_COMBAT, RED_FONT_COLOR:GetRGB());
     end
 
     GameTooltip:Show();
