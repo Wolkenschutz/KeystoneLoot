@@ -56,6 +56,7 @@ L["Set Favorite"] = "Добавить в избранное";
 L["Nice to have"] = "Желательно";
 L["Must have"] = "Обязательно";
 L["Best in Slot"] = "БиС";
+L["Voidcore used"] = "Использован сердечник Бездны";
 
 -- loot_reminder_frame.lua
 L["Correct loot specialization set?"] = "Правильная установка специализации для добычи?";
