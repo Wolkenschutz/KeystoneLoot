@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.4.2 - 2026-05-05
+
+### Bugfixes
+
+- Loot spec reminder correctly handles loot spec ineligible for favorited items
+- Remove redundant call to UpdateVoidcoreIcon in OnClick function
+
+### Other Changes
+
+- Merge branch 'main' of https://github.com/Wolkenschutz/KeystoneLoot
+
 ## 2.4.1 - 2026-05-01
 
 ### Bugfixes
