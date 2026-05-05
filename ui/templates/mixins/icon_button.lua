@@ -309,7 +309,6 @@ function KeystoneLootLootIconButtonMixin:OnClick()
                 function() return Voidcore:IsUsed(itemId); end,
                 function()
                     Voidcore:SetUsed(itemId, not Voidcore:IsUsed(itemId));
-                    self:UpdateVoidcoreIcon();
                 end
             );
         end
