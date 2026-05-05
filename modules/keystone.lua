@@ -74,8 +74,8 @@ local function GetBestSpecForItems(items, classId, lootTable, lootSpecId, favoSp
         end
     end
 
-    -- If best spec found equals the favoSpecId, no switch needed
-    if (bestSpec == favoSpecId) then
+    -- If best spec equals favoSpec and lootSpec is eligible, no switch needed
+    if (bestSpec == favoSpecId and eligibleSpecs[lootSpecId]) then
         return nil;
     end
 
