@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.3 - 2026-05-07
+
+### Improvements
+
+- Preserve All Specs filter on login
+
 ## 2.4.2 - 2026-05-05
 
 ### Bugfixes
