@@ -63,7 +63,7 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
     DB:Init();
     Favorites:Init();
 
-    self:SyncSpecFilter();
+    self:InitSpecFilter();
 
     self:InitializeTabSystem();
 
@@ -78,10 +78,21 @@ end
 
 function KeystoneLootFrameMixin:SyncSpecFilter()
     local currentClassId = Character:GetCurrentClassId();
-    local currentSpecId = Character:GetCurrentSpecId();
 
     if (DB:Get("filters.classId") == currentClassId) then
         DB:Set("filters.classId", currentClassId);
+        DB:Set("filters.specId", Character:GetCurrentSpecId());
+    end
+end
+
+function KeystoneLootFrameMixin:InitSpecFilter()
+    local currentClassId = Character:GetCurrentClassId();
+    local currentSpecId = Character:GetCurrentSpecId();
+
+    if (DB:Get("filters.classId") ~= currentClassId) then
+        DB:Set("filters.classId", currentClassId);
+        DB:Set("filters.specId", currentSpecId);
+    elseif (DB:Get("filters.specId") ~= 0) then
         DB:Set("filters.specId", currentSpecId);
     end
 end
