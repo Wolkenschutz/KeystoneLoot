@@ -2,6 +2,7 @@ local AddonName, KeystoneLoot    = ...;
 
 local Keystone                   = KeystoneLoot.Keystone;
 local Query                      = KeystoneLoot.Query;
+local DB                         = KeystoneLoot.DB;
 local L                          = KeystoneLoot.L;
 
 local SPEC_FRAME_WIDTH           = 180;
@@ -52,6 +53,10 @@ end
 
 function KeystoneLootReminderFrameMixin:OnEvent()
     self:Hide();
+
+    if (not DB:Get("settings.lootReminder.dungeons")) then
+        return;
+    end
 
     local _, instanceType, difficultyId, _, _, _, _, instanceId = GetInstanceInfo();
     if (instanceType ~= "party") then
