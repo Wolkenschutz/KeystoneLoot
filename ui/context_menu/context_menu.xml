@@ -1,0 +1,226 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\..\..\..\WoW\Data\Interface\AddOns\Blizzard_SharedXML\UI.xsd">
+    <Frame name="KeystoneLootContextMenu" parent="UIParent" mixin="KeystoneLootContextMenuMixin" hidden="true" frameStrata="FULLSCREEN_DIALOG">
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="Background" atlas="common-dropdown-bg" useAtlasSize="false">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="-10" y="3"/>
+                        <Anchor point="BOTTOMRIGHT" x="10" y="-3"/>
+                    </Anchors>
+                    <Color r="1" g="1" b="1" a="0.925"/>
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Title" inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE">
+                    <Size y="20"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="8" y="-8"/>
+                        <Anchor point="RIGHT" x="-8" y="0"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Button parentKey="TierNice">
+                <Size y="24"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Title" relativePoint="BOTTOMLEFT"/>
+                    <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture parentKey="Highlight" alphaMode="ADD" file="Interface\QuestFrame\UI-QuestTitleHighlight" setAllPoints="true" hidden="true"/>
+                    </Layer>
+                    <Layer level="ARTWORK">
+                        <Texture parentKey="RadioBg" atlas="common-dropdown-tickradial" useAtlasSize="true">
+                            <Anchors>
+                                <Anchor point="LEFT" x="-3" y="0"/>
+                            </Anchors>
+                        </Texture>
+                        <Texture parentKey="RadioTick" atlas="common-dropdown-icon-radialtick-yellow" useAtlasSize="true" hidden="true">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeKey="$parent.RadioBg" relativePoint="TOPLEFT"/>
+                            </Anchors>
+                        </Texture>
+                        <FontString parentKey="Label" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE">
+                            <Size y="20"/>
+                            <Anchors>
+                                <Anchor point="LEFT" relativeKey="$parent.RadioBg" relativePoint="RIGHT" x="1" y="0"/>
+                                <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" x="-8" y="0"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Button>
+
+            <Button parentKey="TierMust">
+                <Size y="24"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.TierNice" relativePoint="BOTTOMLEFT"/>
+                    <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture parentKey="Highlight" alphaMode="ADD" file="Interface\QuestFrame\UI-QuestTitleHighlight" setAllPoints="true" hidden="true"/>
+                    </Layer>
+                    <Layer level="ARTWORK">
+                        <Texture parentKey="RadioBg" atlas="common-dropdown-tickradial" useAtlasSize="true">
+                            <Anchors>
+                                <Anchor point="LEFT" x="-3" y="0"/>
+                            </Anchors>
+                        </Texture>
+                        <Texture parentKey="RadioTick" atlas="common-dropdown-icon-radialtick-yellow" useAtlasSize="true" hidden="true">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeKey="$parent.RadioBg" relativePoint="TOPLEFT"/>
+                            </Anchors>
+                        </Texture>
+                        <FontString parentKey="Label" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE">
+                            <Size y="20"/>
+                            <Anchors>
+                                <Anchor point="LEFT" relativeKey="$parent.RadioBg" relativePoint="RIGHT" x="1" y="0"/>
+                                <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" x="-8" y="0"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Button>
+
+            <Button parentKey="TierBis">
+                <Size y="24"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.TierMust" relativePoint="BOTTOMLEFT"/>
+                    <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture parentKey="Highlight" alphaMode="ADD" file="Interface\QuestFrame\UI-QuestTitleHighlight" setAllPoints="true" hidden="true"/>
+                    </Layer>
+                    <Layer level="ARTWORK">
+                        <Texture parentKey="RadioBg" atlas="common-dropdown-tickradial" useAtlasSize="true">
+                            <Anchors>
+                                <Anchor point="LEFT" x="-3" y="0"/>
+                            </Anchors>
+                        </Texture>
+                        <Texture parentKey="RadioTick" atlas="common-dropdown-icon-radialtick-yellow" useAtlasSize="true" hidden="true">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeKey="$parent.RadioBg" relativePoint="TOPLEFT"/>
+                            </Anchors>
+                        </Texture>
+                        <FontString parentKey="Label" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE">
+                            <Size y="20"/>
+                            <Anchors>
+                                <Anchor point="LEFT" relativeKey="$parent.RadioBg" relativePoint="RIGHT" x="1" y="0"/>
+                                <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" x="-8" y="0"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Button>
+
+            <Frame parentKey="Divider1" hidden="true">
+                <Size y="13"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.TierBis" relativePoint="BOTTOMLEFT"/>
+                    <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" x="-8"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <Texture file="Interface\Common\UI-TooltipDivider-Transparent" setAllPoints="true"/>
+                    </Layer>
+                </Layers>
+            </Frame>
+
+            <Button parentKey="RemoveButton" hidden="true">
+                <Size y="24"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Divider1" relativePoint="BOTTOMLEFT" x="-8"/>
+                    <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture parentKey="Highlight" alphaMode="ADD" file="Interface\QuestFrame\UI-QuestTitleHighlight" setAllPoints="true" hidden="true"/>
+                    </Layer>
+                    <Layer level="ARTWORK">
+                        <FontString parentKey="Label" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE" text="REMOVE">
+                            <Size y="20"/>
+                            <Anchors>
+                                <Anchor point="LEFT" x="8" y="0"/>
+                                <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" x="-8" y="0"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Button>
+
+            <Frame parentKey="Divider2" hidden="true">
+                <Size y="13"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.RemoveButton" relativePoint="BOTTOMLEFT"/>
+                    <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" x="-8"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <Texture file="Interface\Common\UI-TooltipDivider-Transparent" setAllPoints="true"/>
+                    </Layer>
+                </Layers>
+            </Frame>
+
+            <Frame parentKey="VoidcoreTitle" hidden="true">
+                <Size y="20"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Divider2" relativePoint="BOTTOMLEFT" x="-8"/>
+                    <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString parentKey="Label" inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE">
+                            <Size y="20"/>
+                            <Anchors>
+                                <Anchor point="LEFT" x="8" y="0"/>
+                                <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" x="-8" y="0"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Frame>
+
+            <Button parentKey="VoidcoreCheck" hidden="true">
+                <Size y="24"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.VoidcoreTitle" relativePoint="BOTTOMLEFT"/>
+                    <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture parentKey="Highlight" alphaMode="ADD" file="Interface\QuestFrame\UI-QuestTitleHighlight" setAllPoints="true" hidden="true"/>
+                    </Layer>
+                    <Layer level="ARTWORK">
+                        <Texture parentKey="CheckBg" atlas="common-dropdown-ticksquare" useAtlasSize="true">
+                            <Anchors>
+                                <Anchor point="LEFT" x="8" y="0"/>
+                            </Anchors>
+                        </Texture>
+                        <Texture parentKey="CheckTick" atlas="common-dropdown-icon-checkmark-yellow" useAtlasSize="true" hidden="true">
+                            <Anchors>
+                                <Anchor point="CENTER" relativeKey="$parent.CheckBg" relativePoint="CENTER" x="2" y="1"/>
+                            </Anchors>
+                        </Texture>
+                        <FontString parentKey="Label" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE">
+                            <Size y="20"/>
+                            <Anchors>
+                                <Anchor point="LEFT" relativeKey="$parent.CheckBg" relativePoint="RIGHT" x="7" y="1"/>
+                                <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" x="-8" y="0"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Button>
+        </Frames>
+        <Scripts>
+            <OnLoad method="OnLoad"/>
+            <OnShow method="OnShow"/>
+            <OnHide method="OnHide"/>
+            <OnEvent method="OnEvent"/>
+        </Scripts>
+    </Frame>
+</Ui>

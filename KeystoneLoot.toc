@@ -64,6 +64,9 @@ ui/templates/mixins/entry_frame.lua
 ui/templates/mixins/teleport_button.lua
 ui/templates/templates.xml
 
+ui/context_menu/mixins/context_menu.lua
+ui/context_menu/context_menu.xml
+
 ui/dungeons_frame/mixins/dungeons_frame.lua
 ui/dungeons_frame/dungeons_frame.xml
 

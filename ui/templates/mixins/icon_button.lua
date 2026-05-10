@@ -296,62 +296,27 @@ function KeystoneLootLootIconButtonMixin:OnClick()
     else
         currentTier = Favorites:GetTier(self.itemId, specId);
     end
-    local itemId = self.itemId;
 
-    MenuUtil.CreateContextMenu(self, function(ownerRegion, rootDescription)
-        rootDescription:CreateTitle(L["Set Favorite"]);
+    if (KeystoneLootContextMenu:IsShown()) then
+        local isOwnMenu = KeystoneLootContextMenu.data and KeystoneLootContextMenu.data.Button == self;
 
-        rootDescription:CreateRadio(Favorites.TIER_NAME[Favorites.TIER_NICE], function()
-            return currentTier == Favorites.TIER_NICE;
-        end, function()
-            if (currentTier > 0) then
-                Favorites:SetTier(itemId, specId, Favorites.TIER_NICE);
-            else
-                Favorites:Add(sourceId, specId, itemId, icon, Favorites.TIER_NICE);
-            end
-            self:UpdateFavoriteIcon();
-        end);
+        KeystoneLootContextMenu:Close();
 
-        rootDescription:CreateRadio(Favorites.TIER_NAME[Favorites.TIER_MUST], function()
-            return currentTier == Favorites.TIER_MUST;
-        end, function()
-            if (currentTier > 0) then
-                Favorites:SetTier(itemId, specId, Favorites.TIER_MUST);
-            else
-                Favorites:Add(sourceId, specId, itemId, icon, Favorites.TIER_MUST);
-            end
-            self:UpdateFavoriteIcon();
-        end);
-
-        rootDescription:CreateRadio(Favorites.TIER_NAME[Favorites.TIER_BIS], function()
-            return currentTier == Favorites.TIER_BIS;
-        end, function()
-            if (currentTier > 0) then
-                Favorites:SetTier(itemId, specId, Favorites.TIER_BIS);
-            else
-                Favorites:Add(sourceId, specId, itemId, icon, Favorites.TIER_BIS);
-            end
-            self:UpdateFavoriteIcon();
-        end);
-
-        if (currentTier > 0) then
-            rootDescription:CreateDivider();
-            rootDescription:CreateButton(REMOVE, function()
-                Favorites:Remove(itemId, specId);
-                self:UpdateFavoriteIcon();
-            end);
+        if (isOwnMenu) then
+            return;
         end
+    end
 
-        if (Voidcore:IsEligible(itemId)) then
-            rootDescription:CreateDivider();
-            rootDescription:CreateTitle(BONUS_LOOT_LABEL);
-            rootDescription:CreateCheckbox(
-                L["Voidcore used"],
-                function() return Voidcore:IsUsed(itemId); end,
-                function()
-                    Voidcore:SetUsed(itemId, not Voidcore:IsUsed(itemId));
-                end
-            );
-        end
-    end);
+    KeystoneLootContextMenu:Open(self, {
+        Button      = self,
+        itemId      = self.itemId,
+        specId      = specId,
+        sourceId    = sourceId,
+        icon        = icon,
+        currentTier = currentTier,
+    });
+end
+
+function KeystoneLootLootIconButtonMixin:HandlesGlobalMouse(buttonName, event)
+    return KeystoneLootContextMenu:IsShown() and event == "GLOBAL_MOUSE_DOWN" and buttonName == "LeftButton";
 end
