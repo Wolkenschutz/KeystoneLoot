@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.4 - 2026-05-10
+
+### Improvements
+
+- Combination mode for stat highlighting
+
 ## 2.4.3 - 2026-05-07
 
 ### Improvements
