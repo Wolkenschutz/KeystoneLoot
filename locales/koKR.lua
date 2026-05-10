@@ -27,6 +27,7 @@ L["Favorite in item tooltip"] = "아이템 툴팁에 즐겨찾기 표시";
 L["Loot reminder (dungeons)"] = "전리품 리마인더 (던전)";
 L["Highlighting"] = "강조";
 L["No stats"] = "능력치 없음";
+L["Combination mode"] = "조합 모드";
 L["Export..."] = "내보내기...";
 L["Import..."] = "가져오기...";
 L["Export favorites of %s"] = "%s의 즐겨찾기 내보내기";

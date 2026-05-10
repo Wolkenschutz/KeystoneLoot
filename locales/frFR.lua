@@ -27,6 +27,7 @@ L["Favorite in item tooltip"] = "Favori dans l'infobulle de l'objet";
 L["Loot reminder (dungeons)"] = "Rappel de butin (donjons)";
 L["Highlighting"] = "Surlignage";
 L["No stats"] = "Aucune statistique";
+L["Combination mode"] = "Mode combinaison";
 L["Export..."] = "Exporter...";
 L["Import..."] = "Importer...";
 L["Export favorites of %s"] = "Exporter les favoris de %s";

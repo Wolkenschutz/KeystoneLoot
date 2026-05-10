@@ -115,14 +115,55 @@ function KeystoneLootLootIconButtonMixin:UpdateHighlight()
 
     local highlighted = false;
 
-    if (not item.stats) then
-        highlighted = DB:Get("settings.highlighting.noStats");
-    else
-        for _, stat in ipairs(item.stats) do
-            local key = STAT_HIGHLIGHT_KEYS[stat];
-            if (key and DB:Get("settings.highlighting." .. key)) then
-                highlighted = true;
+    if (DB:Get("settings.highlighting.comboMode")) then
+        local anyEnabled = false;
+
+        for _, key in pairs(STAT_HIGHLIGHT_KEYS) do
+            if (DB:Get("settings.highlighting." .. key)) then
+                anyEnabled = true;
                 break;
+            end
+        end
+
+        if (not anyEnabled) then
+            highlighted = not item.stats;
+        elseif (item.stats) then
+            local itemStatSet = {};
+            for _, stat in ipairs(item.stats) do
+                itemStatSet[stat] = true;
+            end
+
+            highlighted = true;
+
+            for stat, key in pairs(STAT_HIGHLIGHT_KEYS) do
+                if (DB:Get("settings.highlighting." .. key)) then
+                    if (not itemStatSet[stat]) then
+                        highlighted = false;
+                        break;
+                    end
+                end
+            end
+
+            if (highlighted) then
+                for _, stat in ipairs(item.stats) do
+                    local key = STAT_HIGHLIGHT_KEYS[stat];
+                    if (not key or not DB:Get("settings.highlighting." .. key)) then
+                        highlighted = false;
+                        break;
+                    end
+                end
+            end
+        end
+    else
+        if (not item.stats) then
+            highlighted = DB:Get("settings.highlighting.noStats");
+        else
+            for _, stat in ipairs(item.stats) do
+                local key = STAT_HIGHLIGHT_KEYS[stat];
+                if (key and DB:Get("settings.highlighting." .. key)) then
+                    highlighted = true;
+                    break;
+                end
             end
         end
     end

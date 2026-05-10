@@ -27,6 +27,7 @@ L["Favorite in item tooltip"] = "Избранное в подсказке пре
 L["Loot reminder (dungeons)"] = "Включить напоминание о добыче";
 L["Highlighting"] = "Подсветка";
 L["No stats"] = "Характеристика отсутствует";
+L["Combination mode"] = "Комбинированный режим";
 L["Export..."] = "Экспорт...";
 L["Import..."] = "Импорт...";
 L["Export favorites of %s"] = "Экспортировать избранное %s";

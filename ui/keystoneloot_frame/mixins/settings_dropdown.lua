@@ -212,12 +212,21 @@ function KeystoneLootSettingsDropdownMixin:Init()
         rootDescription:CreateTitle(L["Highlighting"]);
         for _, entry in ipairs(HIGHLIGHTS) do
             local key = entry.key;
-            rootDescription:CreateCheckbox(
+            local checkbox = rootDescription:CreateCheckbox(
                 entry.label,
                 function() return DB:Get(key); end,
                 function() DB:Set(key, not DB:Get(key)); end
             );
+
+            if (key == "settings.highlighting.noStats") then
+                checkbox:SetEnabled(not DB:Get("settings.highlighting.comboMode"));
+            end
         end
+        rootDescription:CreateCheckbox(
+            L["Combination mode"],
+            function() return DB:Get("settings.highlighting.comboMode"); end,
+            function() DB:Set("settings.highlighting.comboMode", not DB:Get("settings.highlighting.comboMode")); self:GenerateMenu(); end
+        );
 
         -- Favorites
         rootDescription:CreateTitle(FAVORITES);

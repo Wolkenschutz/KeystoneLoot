@@ -27,6 +27,7 @@ L["Favorite in item tooltip"] = "在物品提示中显示收藏";
 L["Loot reminder (dungeons)"] = "拾取专精提醒（地下城）";
 L["Highlighting"] = "高亮显示";
 L["No stats"] = "无属性";
+L["Combination mode"] = "组合模式";
 L["Export..."] = "导出...";
 L["Import..."] = "导入...";
 L["Export favorites of %s"] = "导出 %s 的收藏夹";

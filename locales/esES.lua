@@ -27,6 +27,7 @@ L["Favorite in item tooltip"] = "Favorito en la descripción del objeto";
 L["Loot reminder (dungeons)"] = "Recordatorio de botín (mazmorras)";
 L["Highlighting"] = "Resaltar";
 L["No stats"] = "Sin estadísticas";
+L["Combination mode"] = "Modo combinación";
 L["Export..."] = "Exportar...";
 L["Import..."] = "Importar...";
 L["Export favorites of %s"] = "Exportar favoritos de %s";
