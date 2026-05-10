@@ -9,8 +9,6 @@ local SPECIAL_BONUS_IDS = {
     [178708] = 6917, -- Unbändiger Wechselbalg
     [178715] = 6923, -- Okarina der Nebelruferin
     [243308] = 13503,-- Kettenstiefel des Eindringlings
-    [250247] = 13534,-- Amulett der abyssischen Hymne
-    [249920] = 13534,-- Auge der Mitternacht
 };
 
 local ITEM_LEVEL_BONUS_IDS = {
@@ -92,6 +90,12 @@ function Upgrade:BuildItemLink(itemId)
 
     -- 4. Always add 1674 (epic)
     table.insert(bonusIds, 1674);
+
+    -- 5. Midnight Season 1 bonus rings and amulets
+    local _, _, _, itemEquipLoc = C_Item.GetItemInfoInstant(itemId);
+    if (itemEquipLoc == "INVTYPE_FINGER" or itemEquipLoc == "INVTYPE_NECK") then
+        table.insert(bonusIds, 13534);
+    end
 
     -- Build link
     local playerLevel = UnitLevel("player");
