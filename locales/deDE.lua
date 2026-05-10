@@ -27,6 +27,7 @@ L["The Catalyst"] = "Der Katalysator";
 L["Minimap button"] = "Minimap-Button";
 L["Item level in keystone tooltip"] = "Gegenstandsstufe im Schlüsselstein-Tooltip";
 L["Favorite in item tooltip"] = "Favorit im Gegenstand-Tooltip";
+L['Hide "Other" in All Slots'] = "\"Sonstiges\" in Alle Slots ausblenden";
 L["Loot reminder (dungeons)"] = "Beute-Erinnerung (Dungeons)";
 L["Highlighting"] = "Hervorhebungen";
 L["No stats"] = "Keine Stats";

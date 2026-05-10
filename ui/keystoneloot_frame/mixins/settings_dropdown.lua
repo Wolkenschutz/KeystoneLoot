@@ -158,6 +158,11 @@ function KeystoneLootSettingsDropdownMixin:Init()
             function() DB:Set("settings.favoriteTooltip", not DB:Get("settings.favoriteTooltip")); end
         );
         rootDescription:CreateCheckbox(
+            L['Hide "Other" in All Slots'],
+            function() return DB:Get("settings.hideOtherItems"); end,
+            function() DB:Set("settings.hideOtherItems", not DB:Get("settings.hideOtherItems")); end
+        );
+        rootDescription:CreateCheckbox(
             L["Wide mode"],
             function() return DB:Get("settings.wideMode"); end,
             function() DB:Set("settings.wideMode", not DB:Get("settings.wideMode")); end
@@ -225,7 +230,9 @@ function KeystoneLootSettingsDropdownMixin:Init()
         rootDescription:CreateCheckbox(
             L["Combination mode"],
             function() return DB:Get("settings.highlighting.comboMode"); end,
-            function() DB:Set("settings.highlighting.comboMode", not DB:Get("settings.highlighting.comboMode")); self:GenerateMenu(); end
+            function()
+                DB:Set("settings.highlighting.comboMode", not DB:Get("settings.highlighting.comboMode")); self:GenerateMenu();
+            end
         );
 
         -- Favorites

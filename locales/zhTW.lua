@@ -24,6 +24,7 @@ L["The Catalyst"] = "催化器";
 L["Minimap button"] = "小地圖按鈕";
 L["Item level in keystone tooltip"] = "在傳奇鑰石顯示對應等級";
 L["Favorite in item tooltip"] = "在物品提示中顯示最愛";
+L['Hide "Other" in All Slots'] = "在「所有欄位」中隱藏「其他」物品";
 L["Loot reminder (dungeons)"] = "戰利品提醒（地城）";
 L["Highlighting"] = "高亮顯示";
 L["No stats"] = "無屬性";

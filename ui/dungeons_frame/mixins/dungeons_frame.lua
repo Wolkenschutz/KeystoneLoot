@@ -26,6 +26,7 @@ function KeystoneLootDungeonsFrameMixin:Init()
     DB:AddObserver("ui.selectedCharacterKey", OnChanged);
     DB:AddObserver("ui.selectedTab", OnChanged);
     DB:AddObserver("settings.highlighting.*", OnChanged);
+    DB:AddObserver("settings.hideOtherItems", OnChanged);
     DB:AddObserver("settings.wideMode", OnChanged);
     DB:AddObserver("voidcore", function()
         for Frame in self.entryPool:EnumerateActive() do

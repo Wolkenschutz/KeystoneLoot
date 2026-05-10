@@ -107,6 +107,7 @@ function Query:GetDungeonItems(challengeModeId)
 
     local specId = DB:Get("filters.specId");
     local classId = DB:Get("filters.classId");
+    local hideOtherItems = DB:Get("settings.hideOtherItems");
     local results = {};
 
     for _, dungeon in ipairs(self:GetDungeons()) do
@@ -114,7 +115,8 @@ function Query:GetDungeonItems(challengeModeId)
             for _, itemId in ipairs(dungeon.lootTable) do
                 local item = self:GetItemInfo(itemId);
 
-                if (item and (slotId == -2 or item.slotId == slotId) and item.classes[classId]) then
+                if (item and (slotId == -2 or item.slotId == slotId) and item.classes[classId]
+                        and not (slotId == -2 and hideOtherItems and item.slotId == 14)) then
                     if (specId == 0) then
                         table.insert(results, { itemId = itemId, icon = item.icon });
                     else
@@ -182,6 +184,7 @@ function Query:GetRaidItems(bossId)
     local specId = DB:Get("filters.specId");
     local difficultyId = self:GetRaidDifficultyId();
     local classId = DB:Get("filters.classId");
+    local hideOtherItems = DB:Get("settings.hideOtherItems");
     local results = {};
 
     for _, raid in ipairs(self:GetRaids()) do
@@ -192,7 +195,8 @@ function Query:GetRaidItems(bossId)
                 for _, itemId in ipairs(loot) do
                     local item = self:GetItemInfo(itemId)
 
-                    if (item and (slotId == -2 or item.slotId == slotId) and item.classes[classId]) then
+                    if (item and (slotId == -2 or item.slotId == slotId) and item.classes[classId]
+                            and not (slotId == -2 and hideOtherItems and item.slotId == 14)) then
                         if (specId == 0) then
                             table.insert(results, { itemId = itemId, icon = item.icon });
                         else

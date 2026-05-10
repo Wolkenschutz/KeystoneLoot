@@ -6,7 +6,7 @@ local DB = KeystoneLoot.DB;
 
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 
-local DB_VERSION = 5;
+local DB_VERSION = 6;
 local CHAR_DB_VERSION = 2;
 
 local observers = {};
@@ -97,6 +97,10 @@ function DB:MigrateGlobalDB(fromVersion)
 
     if (fromVersion == 4) then
         KeystoneLootDB.settings.highlighting.comboMode = false;
+    end
+
+    if (fromVersion == 5) then
+        KeystoneLootDB.settings.hideOtherItems = false;
     end
 end
 

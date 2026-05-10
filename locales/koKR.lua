@@ -24,6 +24,7 @@ L["The Catalyst"] = "촉매";
 L["Minimap button"] = "미니맵 버튼";
 L["Item level in keystone tooltip"] = "쐐기돌 툴팁에 장비 수준 표시";
 L["Favorite in item tooltip"] = "아이템 툴팁에 즐겨찾기 표시";
+L['Hide "Other" in All Slots'] = "전체 슬롯에서 \"기타\" 숨기기";
 L["Loot reminder (dungeons)"] = "전리품 리마인더 (던전)";
 L["Highlighting"] = "강조";
 L["No stats"] = "능력치 없음";
