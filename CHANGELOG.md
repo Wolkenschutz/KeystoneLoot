@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.5.1 - 2026-05-15
+
+### Bugfixes
+
+- Switch to all spec after login
+
+### Other Changes
+
+- Merge branch 'main' of https://github.com/Wolkenschutz/KeystoneLoot
+
 ## 2.5.0 - 2026-05-12
 
 ### New Features
