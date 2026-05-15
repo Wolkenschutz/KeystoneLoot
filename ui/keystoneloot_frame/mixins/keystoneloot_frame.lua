@@ -10,7 +10,6 @@ KeystoneLootFrameMixin = {};
 
 function KeystoneLootFrameMixin:OnLoad()
     self:RegisterEvent("PLAYER_ENTERING_WORLD");
-    self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
     self:RegisterEvent("BONUS_ROLL_RESULT");
     self:RegisterForDrag("LeftButton");
 
@@ -59,6 +58,7 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
     end
 
     self:UnregisterEvent("PLAYER_ENTERING_WORLD");
+    self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
 
     DB:Init();
     Favorites:Init();
