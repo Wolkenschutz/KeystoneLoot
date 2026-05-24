@@ -109,7 +109,7 @@ function KeystoneLootReminderFrameMixin:Open(challengeModeId)
         if (PrevFrame) then
             SpecFrame:SetPoint("LEFT", PrevFrame, "RIGHT", SPEC_FRAME_SPACING, 0);
         else
-            SpecFrame:SetPoint("TOPLEFT", self.Container, "TOPLEFT", 0, 0);
+            SpecFrame:SetPoint("TOPLEFT", self.Container);
         end
 
         SpecFrame:Init(entry.displaySpecId, entry.favoSpecId, entry.items, lootSpecId, allSpecItems);

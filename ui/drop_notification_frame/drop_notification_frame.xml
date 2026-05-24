@@ -1,0 +1,134 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\..\..\..\WoW\Data\Interface\AddOns\Blizzard_SharedXML\UI.xsd">
+    <Button name="KeystoneLootDropNotificationRowTemplate" mixin="KeystoneLootDropNotificationRowMixin" virtual="true">
+        <Size x="220" y="40"/>
+        <Frames>
+            <Frame parentKey="IconFrame">
+                <Size x="28" y="28"/>
+                <Anchors>
+                    <Anchor point="LEFT" x="7"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK" textureSubLevel="1">
+                        <Texture parentKey="Icon" setAllPoints="true">
+                            <TexCoords left="0.08" right="0.92" top="0.08" bottom="0.92"/>
+                        </Texture>
+                    </Layer>
+                    <Layer level="ARTWORK" textureSubLevel="2">
+                        <Texture parentKey="IconBorder" file="Interface/Buttons/UI-Quickslot2">
+                            <Size x="52" y="52"/>
+                            <Anchors>
+                                <Anchor point="CENTER" relativeKey="$parent.Icon"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                    <Layer level="ARTWORK" textureSubLevel="3">
+                        <Texture parentKey="FavoriteIcon">
+                            <Size x="18" y="18"/>
+                            <Anchors>
+                                <Anchor point="TOPRIGHT" relativeKey="$parent.Icon" x="5" y="6"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+            </Frame>
+            <Button parentKey="WhisperButton" mixin="KeystoneLootDropNotificationWhisperButtonMixin">
+                <Size x="32" y="32"/>
+                <Anchors>
+                    <Anchor point="RIGHT" x="-1"/>
+                </Anchors>
+                <Scripts>
+                    <OnClick method="OnClick"/>
+                    <OnEnter method="OnEnter"/>
+                    <OnLeave method="OnLeave"/>
+                </Scripts>
+                <NormalTexture file="Interface\ChatFrame\UI-ChatIcon-Chat-Up"/>
+                <PushedTexture file="Interface\ChatFrame\UI-ChatIcon-Chat-Down"/>
+                <DisabledTexture file="Interface\ChatFrame\UI-ChatIcon-Chat-Disabled"/>
+                <HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+            </Button>
+        </Frames>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture atlas="looting_itemcard_bg">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                        <Anchor point="BOTTOMRIGHT"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="BORDER">
+                <Texture atlas="looting_itemcard_stroke_normal">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                        <Anchor point="BOTTOMRIGHT"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture parentKey="HighlightTexture" alphaMode="ADD" atlas="looting_itemcard_stroke_clickstate" alpha="0.7" hidden="true">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                        <Anchor point="BOTTOMRIGHT"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString parentKey="ItemName" inherits="GameFontHighlight" maxLines="1" JustifyH="LEFT" JustifyV="TOP">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="40" y="-7"/>
+                        <Anchor point="RIGHT" relativeKey="$parent.WhisperButton" relativePoint="LEFT"/>
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="PlayerName" inherits="GameFontDisableSmall" maxLines="1" JustifyH="LEFT" JustifyV="BOTTOM">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="40" y="-23"/>
+                        <Anchor point="RIGHT" relativeKey="$parent.WhisperButton" relativePoint="LEFT"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnEnter method="OnEnter"/>
+            <OnLeave method="OnLeave"/>
+            <OnClick method="OnClick"/>
+        </Scripts>
+    </Button>
+
+    <Frame name="KeystoneLootDropNotificationFrame" parent="UIParent" mixin="KeystoneLootDropNotificationFrameMixin" inherits="SimplePanelTemplate" frameStrata="DIALOG" toplevel="true" movable="true" enableMouse="true" clampedToScreen="true" hidden="true">
+        <Size x="280" y="150"/>
+        <Anchors>
+            <Anchor point="CENTER" y="150"/>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="HeadlineBg" file="Interface\QuestFrame\UI-QuestLogTitleHighlight" alphaMode="ADD">
+                    <Size y="26"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="40" y="-21"/>
+                        <Anchor point="TOPRIGHT" x="-40" y="-21"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Title" inherits="GameFontNormal" JustifyH="CENTER">
+                    <Size y="26"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="12" y="-21"/>
+                        <Anchor point="TOPRIGHT" x="-14" y="-21"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Button parentKey="CloseButton" inherits="UIPanelCloseButtonDefaultAnchors"/>
+        </Frames>
+        <Scripts>
+            <OnLoad method="OnLoad"/>
+            <OnShow method="OnShow"/>
+            <OnHide method="OnHide"/>
+            <OnDragStart method="OnDragStart"/>
+            <OnDragStop method="OnDragStop"/>
+            <OnEvent method="OnEvent"/>
+        </Scripts>
+    </Frame>
+</Ui>

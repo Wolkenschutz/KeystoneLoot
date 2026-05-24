@@ -46,6 +46,11 @@ L["Delete all data for %s?"] = "¿Eliminar todos los datos de %s?";
 L["Cannot delete the currently logged in character."] = "No se puede eliminar el personaje con sesión iniciada actualmente.";
 L["This character is hidden."] = "Este personaje está oculto.";
 L["Wide mode"] = "Modo amplio";
+L["Drop alert (favorites)"] = "Alerta de botín (favoritos)";
+L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."] = "Te recuerda al entrar a una mazmorra si tu especialización de botín no coincide con tus favoritos o si cambiarla podría aumentar tus posibilidades de obtenerlos.";
+L["Shows a notification when another player loots an item you have marked as a favorite."] = "Muestra una notificación cuando otro jugador saquea un objeto que has marcado como favorito.";
+L["Whisper message..."] = "Mensaje susurro...";
+L["Whisper message\n{item} will be replaced with the item link."] = "Mensaje susurro\n{item} será reemplazado por el enlace del objeto.";
 
 -- favorites.lua
 L["No favorites found"] = "No se encontraron favoritos";
@@ -66,3 +71,9 @@ L["%s has a smaller loot pool than %s"] = "%s tiene un pool de botín más peque
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "Clic izquierdo: Abrir vista general";
+
+-- drop_notification_frame.lua
+L["Favorite dropped!"] = "¡Favorito obtenido!";
+
+-- whisper_button.lua
+L["Text can be modified in the settings."] = "El texto se puede modificar en los ajustes.";

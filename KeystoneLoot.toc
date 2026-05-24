@@ -81,6 +81,11 @@ ui/loot_reminder_frame/mixins/spec_card.lua
 ui/loot_reminder_frame/mixins/efficiency_icon.lua
 ui/loot_reminder_frame/loot_reminder_frame.xml
 
+ui/drop_notification_frame/mixins/row_frame.lua
+ui/drop_notification_frame/mixins/whisper_button.lua
+ui/drop_notification_frame/mixins/drop_notification_frame.lua
+ui/drop_notification_frame/drop_notification_frame.xml
+
 ui/catalyst_frame/mixins/catalyst_frame.lua
 ui/catalyst_frame/mixins/catalyst_icon.lua
 ui/catalyst_frame/catalyst_frame.xml

@@ -6,7 +6,7 @@ local DB = KeystoneLoot.DB;
 
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 
-local DB_VERSION = 6;
+local DB_VERSION = 7;
 local CHAR_DB_VERSION = 2;
 
 local observers = {};
@@ -101,6 +101,11 @@ function DB:MigrateGlobalDB(fromVersion)
 
     if (fromVersion == 5) then
         KeystoneLootDB.settings.hideOtherItems = false;
+    end
+
+    if (fromVersion == 6) then
+        KeystoneLootDB.settings.lootReminder.dropAlert = true;
+        KeystoneLootDB.settings.lootReminder.whisperMessage = "Can I have {item} please?";
     end
 end
 

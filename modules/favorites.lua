@@ -24,6 +24,7 @@ Favorites.TIER_NAME           = {
     [1] = L["Nice to have"],
     [2] = L["Must have"],
     [3] = L["Best in Slot"],
+    [4] = L["Transmog"],
 };
 
 function Favorites:Init()

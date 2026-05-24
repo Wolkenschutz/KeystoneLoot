@@ -46,6 +46,11 @@ L["Delete all data for %s?"] = "刪除 %s 的所有資料？";
 L["Cannot delete the currently logged in character."] = "無法刪除目前登入的角色。";
 L["This character is hidden."] = "此角色已被隱藏。";
 L["Wide mode"] = "寬屏模式";
+L["Drop alert (favorites)"] = "掉落提醒（最愛）";
+L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."] = "進入地城時，若拾取專精與最愛不符或切換專精可提高獲得機率，則發出提醒。";
+L["Shows a notification when another player loots an item you have marked as a favorite."] = "當其他玩家拾取你標記為最愛的物品時顯示通知。";
+L["Whisper message..."] = "悄悄話訊息...";
+L["Whisper message\n{item} will be replaced with the item link."] = "悄悄話訊息\n{item} 將被替換為物品連結。";
 
 -- favorites.lua
 L["No favorites found"] = "未找到最愛";
@@ -67,3 +72,9 @@ L["%s has a smaller loot pool than %s"] = "%s的戰利品池比%s更小。";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "左鍵點擊：開啟概覽";
+
+-- drop_notification_frame.lua
+L["Favorite dropped!"] = "最愛物品已掉落！";
+
+-- whisper_button.lua
+L["Text can be modified in the settings."] = "可在設定中修改文字。";

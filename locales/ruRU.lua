@@ -46,6 +46,11 @@ L["Delete all data for %s?"] = "Удалить все данные для %s?";
 L["Cannot delete the currently logged in character."] = "Невозможно удалить персонажа, под которым выполнен вход.";
 L["This character is hidden."] = "Этот персонаж скрыт.";
 L["Wide mode"] = "Широкий режим";
+L["Drop alert (favorites)"] = "Уведомление о дропе (избранное)";
+L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."] = "Напоминает при входе в подземелье, если ваша специализация добычи не соответствует избранному или смена специализации может повысить шанс получить нужные предметы.";
+L["Shows a notification when another player loots an item you have marked as a favorite."] = "Показывает уведомление, когда другой игрок получает предмет, отмеченный вами как избранный.";
+L["Whisper message..."] = "Сообщение в шёпот...";
+L["Whisper message\n{item} will be replaced with the item link."] = "Сообщение в шёпот\n{item} будет заменено ссылкой на предмет.";
 
 -- favorites.lua
 L["No favorites found"] = "Избранное не найдено";
@@ -68,3 +73,9 @@ L["%s has a smaller loot pool than %s"] = "%s имеет меньший набо
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "ЛКМ: Открыть окно KeystoneLoot";
+
+-- drop_notification_frame.lua
+L["Favorite dropped!"] = "Избранный предмет выпал!";
+
+-- whisper_button.lua
+L["Text can be modified in the settings."] = "Текст можно изменить в настройках.";

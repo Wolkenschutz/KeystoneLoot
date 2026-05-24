@@ -115,6 +115,33 @@ StaticPopupDialogs.KEYSTONELOOT_IMPORT = {
     hideOnEscape = true
 };
 
+StaticPopupDialogs.KEYSTONELOOT_WHISPER_MESSAGE = {
+    text = L["Whisper message\n{item} will be replaced with the item link."],
+    button1 = SAVE,
+    button2 = CANCEL,
+    hasEditBox = 1,
+    editBoxWidth = 350,
+    OnShow = function(self)
+        self:GetEditBox():SetText(DB:Get("settings.lootReminder.whisperMessage"));
+        self:GetEditBox():HighlightText();
+        self:GetEditBox():SetFocus();
+    end,
+    OnAccept = function(self)
+        local text = self:GetEditBox():GetText();
+        if (text and text ~= "") then
+            DB:Set("settings.lootReminder.whisperMessage", text);
+        end
+    end,
+    OnHide = function(self)
+        ChatFrameUtil.FocusActiveWindow();
+        self:GetEditBox():SetText("");
+    end,
+    timeout = 0,
+    exclusive = true,
+    whileDead = true,
+    hideOnEscape = true
+};
+
 KeystoneLootSettingsDropdownMixin = {};
 
 function KeystoneLootSettingsDropdownMixin:Init()
@@ -207,11 +234,27 @@ function KeystoneLootSettingsDropdownMixin:Init()
 
         -- Notifications
         rootDescription:CreateTitle(COMMUNITIES_NOTIFICATION_SETTINGS);
-        rootDescription:CreateCheckbox(
+        local lootReminderCheckbox = rootDescription:CreateCheckbox(
             L["Loot reminder (dungeons)"],
             function() return DB:Get("settings.lootReminder.dungeons"); end,
             function() DB:Set("settings.lootReminder.dungeons", not DB:Get("settings.lootReminder.dungeons")); end
         );
+        lootReminderCheckbox:SetTooltip(function(tooltip, elementDescription)
+            GameTooltip_AddNormalLine(tooltip, L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."], true);
+        end);
+
+        local dropAlertCheckbox = rootDescription:CreateCheckbox(
+            L["Drop alert (favorites)"],
+            function() return DB:Get("settings.lootReminder.dropAlert"); end,
+            function() DB:Set("settings.lootReminder.dropAlert", not DB:Get("settings.lootReminder.dropAlert")); end
+        );
+        dropAlertCheckbox:SetTooltip(function(tooltip, elementDescription)
+            GameTooltip_AddNormalLine(tooltip, L["Shows a notification when another player loots an item you have marked as a favorite."], true);
+        end);
+
+        rootDescription:CreateButton(L["Whisper message..."], function()
+            StaticPopup_Show("KEYSTONELOOT_WHISPER_MESSAGE");
+        end);
 
         -- Highlights
         rootDescription:CreateTitle(L["Highlighting"]);
