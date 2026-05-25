@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.6.0 - 2026-05-25
+
+### New Features
+
+- Drop notification with whisper button for favorited items
+
+### Other Changes
+
+- Merge branch 'main' of https://github.com/Wolkenschutz/KeystoneLoot
+
 ## 2.5.1 - 2026-05-15
 
 ### Bugfixes
