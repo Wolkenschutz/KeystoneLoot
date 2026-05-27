@@ -23,6 +23,7 @@ function KeystoneLootCatalystFrameMixin:Init()
     DB:AddObserver("filters.specId", OnChanged);
     DB:AddObserver("filters.slotId", OnChanged);
     DB:AddObserver("ui.selectedCharacterKey", OnChanged);
+    DB:AddObserver("settings.multiSlotFilter", OnChanged);
 
     self:Refresh();
 end

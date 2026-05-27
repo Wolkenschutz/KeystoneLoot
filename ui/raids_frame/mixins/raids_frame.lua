@@ -90,6 +90,7 @@ function KeystoneLootRaidsFrameMixin:Init()
     DB:AddObserver("settings.highlighting.*", OnChanged);
     DB:AddObserver("settings.hideOtherItems", OnChanged);
     DB:AddObserver("settings.wideMode", OnChanged);
+    DB:AddObserver("settings.multiSlotFilter", OnChanged);
     DB:AddObserver("voidcore", function()
         for Block in self.blockPool:EnumerateActive() do
             for Frame in Block.entryPool:EnumerateActive() do

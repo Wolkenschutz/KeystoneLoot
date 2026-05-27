@@ -28,6 +28,7 @@ function KeystoneLootDungeonsFrameMixin:Init()
     DB:AddObserver("settings.highlighting.*", OnChanged);
     DB:AddObserver("settings.hideOtherItems", OnChanged);
     DB:AddObserver("settings.wideMode", OnChanged);
+    DB:AddObserver("settings.multiSlotFilter", OnChanged);
     DB:AddObserver("voidcore", function()
         for Frame in self.entryPool:EnumerateActive() do
             for _, Button in Frame.IconScrollBox:EnumerateFrames() do

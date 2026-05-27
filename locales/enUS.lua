@@ -7,4 +7,3 @@ L["Raid Finder"] = PLAYER_DIFFICULTY3;
 L["Normal"] = PLAYER_DIFFICULTY1;
 L["Heroic"] = PLAYER_DIFFICULTY2;
 L["Mythic"] = PLAYER_DIFFICULTY6;
-L["Multiple slot filtering"] = "Multiple slot filtering";

@@ -6,8 +6,6 @@ end
 
 local L = KeystoneLoot.L;
 
-L["Multiple slot filtering"] = "Multiple slot filtering";
-
 -- keystoneloot_frame.lua
 L["%s (%s Season %d)"] = "%s (%s сезон %d)";
 
@@ -53,6 +51,7 @@ L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, 
 L["Shows a notification when another player loots an item you have marked as a favorite."] = "Показывает уведомление, когда другой игрок получает предмет, отмеченный вами как избранный.";
 L["Whisper message..."] = "Сообщение в шёпот...";
 L["Whisper message\n{item} will be replaced with the item link."] = "Сообщение в шёпот\n{item} будет заменено ссылкой на предмет.";
+--L["Multiple slot filtering"] = "";
 
 -- favorites.lua
 L["No favorites found"] = "Избранное не найдено";

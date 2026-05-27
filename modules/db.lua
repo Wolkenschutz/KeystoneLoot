@@ -77,8 +77,7 @@ function DB:MigrateGlobalDB(fromVersion)
                 versatility = true,
                 noStats = true
             },
-            keystoneTooltip = true,
-            multiSlotFilter = false
+            keystoneTooltip = true
         };
 
         KeystoneLootDB.favorites = {};

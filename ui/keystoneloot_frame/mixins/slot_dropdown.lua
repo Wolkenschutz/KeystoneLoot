@@ -139,7 +139,7 @@ function KeystoneLootSlotDropdownMixin:Init()
         end
 
         local function ToggleSlot(data)
-            local selectedSlots = CopyTable(GetSelectedSlots());
+            local selectedSlots = GetSelectedSlots();
             selectedSlots[data.slotId] = not selectedSlots[data.slotId] or nil;
 
             if (HasSelectedSlot(selectedSlots)) then
@@ -191,8 +191,7 @@ function KeystoneLootSlotDropdownMixin:Init()
                 return;
             end
 
-            local selectedSlots = CopyTable(GetSelectedSlots());
-
+            local selectedSlots = GetSelectedSlots();
             for slotId, selected in pairs(selectedSlots) do
                 if (selected and not self:SlotHasItems(slotId)) then
                     selectedSlots[slotId] = nil;
@@ -214,7 +213,6 @@ function KeystoneLootSlotDropdownMixin:Init()
 
     DB:AddObserver("ui.selectedTab", OnChanged);
     DB:AddObserver("ui.selectedRaidTab", OnChanged);
-    DB:AddObserver("filters.classId", OnChanged);
     DB:AddObserver("filters.specId", OnChanged);
     DB:AddObserver("settings.multiSlotFilter", OnChanged);
 end
