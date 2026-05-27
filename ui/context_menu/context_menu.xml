@@ -117,10 +117,42 @@
                 </Layers>
             </Button>
 
+            <Button parentKey="TierTransmog">
+                <Size y="24"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.TierBis" relativePoint="BOTTOMLEFT"/>
+                    <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture parentKey="Highlight" alphaMode="ADD" file="Interface\QuestFrame\UI-QuestTitleHighlight" setAllPoints="true" hidden="true"/>
+                    </Layer>
+                    <Layer level="ARTWORK">
+                        <Texture parentKey="RadioBg" atlas="common-dropdown-tickradial" useAtlasSize="true">
+                            <Anchors>
+                                <Anchor point="LEFT" x="-3" y="0"/>
+                            </Anchors>
+                        </Texture>
+                        <Texture parentKey="RadioTick" atlas="common-dropdown-icon-radialtick-yellow" useAtlasSize="true" hidden="true">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeKey="$parent.RadioBg" relativePoint="TOPLEFT"/>
+                            </Anchors>
+                        </Texture>
+                        <FontString parentKey="Label" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE">
+                            <Size y="20"/>
+                            <Anchors>
+                                <Anchor point="LEFT" relativeKey="$parent.RadioBg" relativePoint="RIGHT" x="1" y="0"/>
+                                <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" x="-8" y="0"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Button>
+
             <Frame parentKey="Divider1" hidden="true">
                 <Size y="13"/>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeKey="$parent.TierBis" relativePoint="BOTTOMLEFT"/>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.TierTransmog" relativePoint="BOTTOMLEFT"/>
                     <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" x="-8"/>
                 </Anchors>
                 <Layers>

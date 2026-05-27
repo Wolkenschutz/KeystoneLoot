@@ -4,9 +4,9 @@ local Favorites               = KeystoneLoot.Favorites;
 local L                       = KeystoneLoot.L;
 local Voidcore                = KeystoneLoot.Voidcore;
 
-local HEIGHT_NO_REMOVE        = 115; -- top(8) + title(20) + 3 rows(72) + bottom(15)
-local HEIGHT_REMOVE           = 152; -- + divider(13) + remove(24)
-local HEIGHT_VOIDCORE         = 57;  -- + divider(13) + voidcore title(20) + voidcore row(24)
+local HEIGHT_NO_REMOVE        = 139; -- top(8) + title(20) + 4 rows(96) + bottom(15)
+local HEIGHT_REMOVE           = 176; -- + divider(13) + remove(24)
+local HEIGHT_VOIDCORE         = 57; -- + divider(13) + voidcore title(20) + voidcore row(24)
 
 local RADIO_WIDTH             = 22;
 local CHECKBOX_WIDTH          = 22;
@@ -36,10 +36,12 @@ function KeystoneLootContextMenuMixin:OnLoad()
     self.TierNice.Label:SetText(Favorites.TIER_NAME[Favorites.TIER_NICE]);
     self.TierMust.Label:SetText(Favorites.TIER_NAME[Favorites.TIER_MUST]);
     self.TierBis.Label:SetText(Favorites.TIER_NAME[Favorites.TIER_BIS]);
+    self.TierTransmog.Label:SetText(Favorites.TIER_NAME[Favorites.TIER_TRANSMOG]);
 
     SetupButtonHighlight(self.TierNice);
     SetupButtonHighlight(self.TierMust);
     SetupButtonHighlight(self.TierBis);
+    SetupButtonHighlight(self.TierTransmog);
     SetupButtonHighlight(self.RemoveButton);
     SetupButtonHighlight(self.VoidcoreCheck);
 
@@ -53,6 +55,10 @@ function KeystoneLootContextMenuMixin:OnLoad()
 
     self.TierBis:SetScript("OnClick", function()
         self:OnTierClicked(Favorites.TIER_BIS);
+    end);
+
+    self.TierTransmog:SetScript("OnClick", function()
+        self:OnTierClicked(Favorites.TIER_TRANSMOG);
     end);
 
     self.RemoveButton:SetScript("OnClick", function()
@@ -77,6 +83,7 @@ function KeystoneLootContextMenuMixin:OnLoad()
     CheckWidth(self.TierNice.Label, radioOffset);
     CheckWidth(self.TierMust.Label, radioOffset);
     CheckWidth(self.TierBis.Label, radioOffset);
+    CheckWidth(self.TierTransmog.Label, radioOffset);
     CheckWidth(self.RemoveButton.Label, 0);
     CheckWidth(self.VoidcoreTitle.Label, 0);
     CheckWidth(self.VoidcoreCheck.Label, checkOffset);
@@ -132,6 +139,8 @@ function KeystoneLootContextMenuMixin:UpdateContent()
     self.TierNice.RadioTick:SetShown(currentTier == Favorites.TIER_NICE);
     self.TierMust.RadioTick:SetShown(currentTier == Favorites.TIER_MUST);
     self.TierBis.RadioTick:SetShown(currentTier == Favorites.TIER_BIS);
+    self.TierTransmog.RadioTick:SetShown(currentTier == Favorites.TIER_TRANSMOG);
+
     self.Divider1:SetShown(hasRemove);
     self.RemoveButton:SetShown(hasRemove);
 
@@ -147,7 +156,7 @@ function KeystoneLootContextMenuMixin:UpdateContent()
         if (hasRemove) then
             self.Divider2:SetPoint("TOPLEFT", self.RemoveButton, "BOTTOMLEFT", 8, 0);
         else
-            self.Divider2:SetPoint("TOPLEFT", self.TierBis, "BOTTOMLEFT");
+            self.Divider2:SetPoint("TOPLEFT", self.TierTransmog, "BOTTOMLEFT");
         end
         self.Divider2:SetPoint("RIGHT", self, "RIGHT");
     end

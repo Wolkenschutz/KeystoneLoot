@@ -13,11 +13,13 @@ local SHARE_PREFIX            = "KeystoneLoot:v1";
 Favorites.TIER_NICE           = 1;
 Favorites.TIER_MUST           = 2;
 Favorites.TIER_BIS            = 3;
+Favorites.TIER_TRANSMOG       = 4;
 
 Favorites.TIER_TEXTURE        = {
     [1] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_nice",
     [2] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_must",
     [3] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_bis",
+    [4] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_transmog",
 };
 
 Favorites.TIER_NAME           = {

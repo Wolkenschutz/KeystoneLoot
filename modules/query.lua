@@ -13,12 +13,20 @@ local DIFFICULTY_MAP = {
     mythic = DifficultyUtil.ID.PrimaryRaidMythic
 };
 
+-- BiS first, then Must have, then Nice to have, then Transmog last
+local TIER_SORT_ORDER = {
+    [3] = 1,
+    [2] = 2,
+    [1] = 3,
+    [4] = 4,
+};
+
 local function SortResult(a, b)
     local aTier = KeystoneLoot.Favorites:GetTier(a.itemId);
     local bTier = KeystoneLoot.Favorites:GetTier(b.itemId);
 
     if (aTier ~= bTier) then
-        return aTier > bTier;
+        return (TIER_SORT_ORDER[aTier] or 99) < (TIER_SORT_ORDER[bTier] or 99);
     end
 
     local aItem = Query:GetItemInfo(a.itemId);
@@ -38,7 +46,7 @@ local function SortResultFavorites(a, b)
     local bTier = KeystoneLoot.Favorites:GetAnyTier(b.itemId);
 
     if (aTier ~= bTier) then
-        return aTier > bTier;
+        return (TIER_SORT_ORDER[aTier] or 99) < (TIER_SORT_ORDER[bTier] or 99);
     end
 
     local aItem = Query:GetItemInfo(a.itemId);
