@@ -6,6 +6,8 @@ end
 
 local L = KeystoneLoot.L;
 
+L["Multiple slot filtering"] = "Filtrage de plusieurs emplacements";
+
 -- keystoneloot_frame.lua
 L["%s (%s Season %d)"] = "%s (%s Saison %d)";
 

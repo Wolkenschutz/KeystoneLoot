@@ -190,6 +190,11 @@ function KeystoneLootSettingsDropdownMixin:Init()
             function() DB:Set("settings.hideOtherItems", not DB:Get("settings.hideOtherItems")); end
         );
         rootDescription:CreateCheckbox(
+            L["Multiple slot filtering"],
+            function() return DB:Get("settings.multiSlotFilter"); end,
+            function() DB:Set("settings.multiSlotFilter", not DB:Get("settings.multiSlotFilter")); end
+        );
+        rootDescription:CreateCheckbox(
             L["Wide mode"],
             function() return DB:Get("settings.wideMode"); end,
             function() DB:Set("settings.wideMode", not DB:Get("settings.wideMode")); end

@@ -91,12 +91,43 @@ local function GetFavoritesListSpecId()
     return 0;
 end
 
+local function GetSlotFilter()
+    local slotId = DB:Get("filters.slotId");
+
+    if (slotId == -1 or slotId == -2) then
+        return slotId;
+    end
+
+    local slotIds = DB:Get("filters.slotIds");
+    if (DB:Get("settings.multiSlotFilter") and type(slotIds) == "table") then
+        for _, selected in pairs(slotIds) do
+            if (selected) then
+                return nil, slotIds;
+            end
+        end
+    end
+
+    return slotId;
+end
+
+local function ItemMatchesSlot(item, slotId, slotIds, hideOtherItems)
+    if (slotId == -2) then
+        return not (hideOtherItems and item.slotId == 14);
+    end
+
+    if (slotIds) then
+        return slotIds[item.slotId] == true;
+    end
+
+    return item.slotId == slotId;
+end
+
 function Query:GetDungeons()
     return KeystoneLoot.DungeonDatabase;
 end
 
 function Query:GetDungeonItems(challengeModeId)
-    local slotId = DB:Get("filters.slotId");
+    local slotId, slotIds = GetSlotFilter();
 
     -- Favorites slot
     if (slotId == -1) then
@@ -115,8 +146,7 @@ function Query:GetDungeonItems(challengeModeId)
             for _, itemId in ipairs(dungeon.lootTable) do
                 local item = self:GetItemInfo(itemId);
 
-                if (item and (slotId == -2 or item.slotId == slotId) and item.classes[classId]
-                        and not (slotId == -2 and hideOtherItems and item.slotId == 14)) then
+                if (item and ItemMatchesSlot(item, slotId, slotIds, hideOtherItems) and item.classes[classId]) then
                     if (specId == 0) then
                         table.insert(results, { itemId = itemId, icon = item.icon });
                     else
@@ -172,7 +202,7 @@ function Query:GetRaids()
 end
 
 function Query:GetRaidItems(bossId)
-    local slotId = DB:Get("filters.slotId");
+    local slotId, slotIds = GetSlotFilter();
 
     -- Favorites slot
     if (slotId == -1) then
@@ -195,8 +225,7 @@ function Query:GetRaidItems(bossId)
                 for _, itemId in ipairs(loot) do
                     local item = self:GetItemInfo(itemId)
 
-                    if (item and (slotId == -2 or item.slotId == slotId) and item.classes[classId]
-                            and not (slotId == -2 and hideOtherItems and item.slotId == 14)) then
+                    if (item and ItemMatchesSlot(item, slotId, slotIds, hideOtherItems) and item.classes[classId]) then
                         if (specId == 0) then
                             table.insert(results, { itemId = itemId, icon = item.icon });
                         else
@@ -259,7 +288,7 @@ end
 
 function Query:GetCatalystItems()
     local classId = DB:Get("filters.classId");
-    local slotId = DB:Get("filters.slotId");
+    local slotId, slotIds = GetSlotFilter();
 
     -- Favorites slot
     if (slotId == -1) then
@@ -271,7 +300,7 @@ function Query:GetCatalystItems()
     local results = {};
 
     for itemId, item in pairs(KeystoneLoot.CatalystDatabase) do
-        if (item.classId == classId and (slotId == -2 or item.slotId == slotId)) then
+        if (item.classId == classId and ItemMatchesSlot(item, slotId, slotIds)) then
             table.insert(results, {
                 itemId = itemId,
                 icon = item.icon
