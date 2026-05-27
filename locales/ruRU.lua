@@ -47,11 +47,11 @@ L["Cannot delete the currently logged in character."] = "Невозможно у
 L["This character is hidden."] = "Этот персонаж скрыт.";
 L["Wide mode"] = "Широкий режим";
 L["Drop alert (favorites)"] = "Уведомление о дропе (избранное)";
-L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."] = "Напоминает при входе в подземелье, если ваша специализация добычи не соответствует избранному или смена специализации может повысить шанс получить нужные предметы.";
-L["Shows a notification when another player loots an item you have marked as a favorite."] = "Показывает уведомление, когда другой игрок получает предмет, отмеченный вами как избранный.";
+L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."] = "Напоминает при входе в подземелье, если Ваша специализация добычи не соответствует избранному или смена специализации может повысить шанс получить нужные предметы.";
+L["Shows a notification when another player loots an item you have marked as a favorite."] = "Показывает уведомление, когда другой игрок получает предмет, отмеченный Вами как избранный.";
 L["Whisper message..."] = "Сообщение в шёпот...";
 L["Whisper message\n{item} will be replaced with the item link."] = "Сообщение в шёпот\n{item} будет заменено ссылкой на предмет.";
---L["Multiple slot filtering"] = "";
+L["Multiple slot filtering"] = "Фильтрация нескольких слотов";
 
 -- favorites.lua
 L["No favorites found"] = "Избранное не найдено";
