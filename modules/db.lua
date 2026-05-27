@@ -6,7 +6,7 @@ local DB = KeystoneLoot.DB;
 
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 
-local DB_VERSION = 7;
+local DB_VERSION = 8;
 local CHAR_DB_VERSION = 2;
 
 local observers = {};
@@ -77,7 +77,8 @@ function DB:MigrateGlobalDB(fromVersion)
                 versatility = true,
                 noStats = true
             },
-            keystoneTooltip = true
+            keystoneTooltip = true,
+            multiSlotFilter = false
         };
 
         KeystoneLootDB.favorites = {};
@@ -106,6 +107,10 @@ function DB:MigrateGlobalDB(fromVersion)
     if (fromVersion == 6) then
         KeystoneLootDB.settings.lootReminder.dropAlert = true;
         KeystoneLootDB.settings.lootReminder.whisperMessage = "Can I have {item} please?";
+    end
+
+    if (fromVersion == 7) then
+        KeystoneLootDB.settings.multiSlotFilter = false;
     end
 end
 

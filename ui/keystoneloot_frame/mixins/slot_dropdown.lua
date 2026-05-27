@@ -25,14 +25,18 @@ KeystoneLootSlotDropdownMixin = {};
 
 local function GetSelectedSlots()
     local slotId = DB:Get("filters.slotId");
-    if (slotId == -1 or slotId == -2) then
+    if (not DB:Get("settings.multiSlotFilter") or slotId == -1 or slotId == -2) then
         return {};
     end
 
     local selectedSlots = DB:Get("filters.slotIds");
 
     if (type(selectedSlots) == "table") then
-        return selectedSlots;
+        for _, selected in pairs(selectedSlots) do
+            if (selected) then
+                return selectedSlots;
+            end
+        end
     end
 
     if (slotId and slotId >= 0) then
@@ -88,6 +92,10 @@ function KeystoneLootSlotDropdownMixin:Init()
             return ALL_INVENTORY_SLOTS;
         end
 
+        if (not DB:Get("settings.multiSlotFilter")) then
+            return SLOTS[slotId + 1];
+        end
+
         local selectedSlots = GetSelectedSlots();
         local count = GetSelectedSlotCount(selectedSlots);
         local firstSlotId = GetFirstSelectedSlot(selectedSlots);
@@ -116,7 +124,16 @@ function KeystoneLootSlotDropdownMixin:Init()
             DB:Set("filters.slotId", data.slotId);
         end
 
+        local function SetSlotSelected(data)
+            DB:Set("filters.slotIds", {});
+            DB:Set("filters.slotId", data.slotId);
+        end
+
         local function IsSlotSelected(data)
+            if (not DB:Get("settings.multiSlotFilter")) then
+                return DB:Get("filters.slotId") == data.slotId;
+            end
+
             local selectedSlots = GetSelectedSlots();
             return selectedSlots[data.slotId];
         end
@@ -140,7 +157,12 @@ function KeystoneLootSlotDropdownMixin:Init()
 
         for index, slotName in ipairs(SLOTS) do
             local slotId = index - 1; -- 0-based
-            local checkbox = rootDescription:CreateCheckbox(slotName, IsSlotSelected, ToggleSlot, { slotId = slotId });
+            local checkbox;
+            if (DB:Get("settings.multiSlotFilter")) then
+                checkbox = rootDescription:CreateCheckbox(slotName, IsSlotSelected, ToggleSlot, { slotId = slotId });
+            else
+                checkbox = rootDescription:CreateRadio(slotName, IsSlotSelected, SetSlotSelected, { slotId = slotId });
+            end
 
             if (not self:SlotHasItems(slotId)) then
                 checkbox:SetEnabled(false);
@@ -158,6 +180,17 @@ function KeystoneLootSlotDropdownMixin:Init()
 
         -- Skip favorites and all-slots modes
         if (currentSlot ~= -1 and currentSlot ~= -2) then
+            if (not DB:Get("settings.multiSlotFilter")) then
+                DB:Set("filters.slotIds", {});
+
+                if (not self:SlotHasItems(currentSlot)) then
+                    DB:Set("filters.slotId", -2);
+                end
+
+                self:GenerateMenu();
+                return;
+            end
+
             local selectedSlots = CopyTable(GetSelectedSlots());
 
             for slotId, selected in pairs(selectedSlots) do
@@ -183,6 +216,7 @@ function KeystoneLootSlotDropdownMixin:Init()
     DB:AddObserver("ui.selectedRaidTab", OnChanged);
     DB:AddObserver("filters.classId", OnChanged);
     DB:AddObserver("filters.specId", OnChanged);
+    DB:AddObserver("settings.multiSlotFilter", OnChanged);
 end
 
 function KeystoneLootSlotDropdownMixin:SlotHasItems(slotId)

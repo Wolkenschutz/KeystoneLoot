@@ -99,7 +99,7 @@ local function GetSlotFilter()
     end
 
     local slotIds = DB:Get("filters.slotIds");
-    if (type(slotIds) == "table") then
+    if (DB:Get("settings.multiSlotFilter") and type(slotIds) == "table") then
         for _, selected in pairs(slotIds) do
             if (selected) then
                 return nil, slotIds;
