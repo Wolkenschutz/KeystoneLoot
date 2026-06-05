@@ -8,6 +8,7 @@ local L = KeystoneLoot.L;
 
 -- keystoneloot_frame.lua
 L["%s (%s Season %d)"] = "%s（%s 第 %d 賽季）";
+L["Import BIS items from |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r"] = "從 |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r 匯入 BIS 物品";
 
 -- itemlevel_dropdown.lua
 L["Veteran"] = "精兵";
@@ -52,6 +53,10 @@ L["Shows a notification when another player loots an item you have marked as a f
 L["Whisper message..."] = "悄悄話訊息...";
 L["Whisper message\n{item} will be replaced with the item link."] = "悄悄話訊息\n{item} 將被替換為物品連結。";
 --L["Multiple slot filtering"] = "";
+
+-- custom_item_icon.lua
+L["Custom Items"] = "自訂物品";
+L["Import items from external sources like www.keystoneloot.io"] = "從 www.keystoneloot.io 等外部來源匯入的物品";
 
 -- favorites.lua
 L["No favorites found"] = "未找到最愛";

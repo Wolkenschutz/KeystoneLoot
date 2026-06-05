@@ -171,7 +171,7 @@ function KeystoneLootContextMenuMixin:OnTierClicked(tier)
     if (data.currentTier > 0) then
         Favorites:SetTier(data.itemId, data.specId, tier);
     else
-        Favorites:Add(data.sourceId, data.specId, data.itemId, data.icon, tier);
+        Favorites:Add(data.sourceId, data.specId, data.itemId, tier);
     end
 
     data.currentTier = tier;

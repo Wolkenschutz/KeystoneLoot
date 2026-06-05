@@ -19,6 +19,8 @@ function KeystoneLootFrameMixin:OnLoad()
     self:SetPortraitToAsset("Interface\\Icons\\INV_Relics_Hourglass_02");
     self:SetTitle(string.format(L['%s (%s Season %d)'], AddonName, KeystoneLoot.Config.expansionName, KeystoneLoot.Config.seasonNumber));
 
+    self.FooterText:SetText("Made with LOVE in Germany - " .. L["Import BIS items from |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r"]);
+
     table.insert(UISpecialFrames, self:GetName());
 end
 
@@ -73,6 +75,7 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
     self.CharacterDropdown:Init();
     self.SettingsDropdown:Init();
     self.CatalystFrame:Init();
+    self.CustomItemFrame:Init();
     KeystoneLootMinimapButton:Init();
 end
 

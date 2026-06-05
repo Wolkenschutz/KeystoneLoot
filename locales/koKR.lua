@@ -8,6 +8,7 @@ local L = KeystoneLoot.L;
 
 -- keystoneloot_frame.lua
 L["%s (%s Season %d)"] = "%s (%s 시즌 %d)";
+L["Import BIS items from |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r"] = "|cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r에서 BIS 아이템 가져오기";
 
 -- itemlevel_dropdown.lua
 L["Veteran"] = "노련가";
@@ -52,6 +53,10 @@ L["Shows a notification when another player loots an item you have marked as a f
 L["Whisper message..."] = "귓속말 메시지...";
 L["Whisper message\n{item} will be replaced with the item link."] = "귓속말 메시지\n{item}은(는) 아이템 링크로 대체됩니다.";
 --L["Multiple slot filtering"] = "";
+
+-- custom_item_icon.lua
+L["Custom Items"] = "커스텀 아이템";
+L["Import items from external sources like www.keystoneloot.io"] = "www.keystoneloot.io 같은 외부 사이트에서 가져온 아이템";
 
 -- favorites.lua
 L["No favorites found"] = "즐겨찾기 없음";

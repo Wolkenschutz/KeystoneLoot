@@ -8,6 +8,7 @@ local L = KeystoneLoot.L;
 
 -- keystoneloot_frame.lua
 L["%s (%s Season %d)"] = "%s (%s Saison %d)";
+L["Import BIS items from |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r"] = "Importiere BIS-Gegenstände von |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r";
 
 -- itemlevel_dropdown.lua
 L["Veteran"] = "Veteran";
@@ -35,7 +36,7 @@ L["Combination mode"] = "Kombinationsmodus";
 L["Export..."] = "Exportieren...";
 L["Import..."] = "Importieren...";
 L["Export favorites of %s"] = "Favoriten von %s exportieren";
-L["Import favorites for %s\nPaste import string here:"] = "Favoriten für %s importieren\nImport-String hier einfügen:";
+L["Import favorites for %s\nPaste import string here:"] = "Favoriten für %s importiert\nImport-String hier einfügen:";
 L["Merge"] = "Zusammenführen";
 L["Overwrite"] = "Überschreiben";
 L["%d |4favorite:favorites; imported%s."] = "%d |4Favorit:Favoriten; importiert%s.";
@@ -55,6 +56,10 @@ L["Shows a notification when another player loots an item you have marked as a f
 L["Whisper message..."] = "Flüsternachricht...";
 L["Whisper message\n{item} will be replaced with the item link."] = "Flüsternachricht\n{item} wird durch den Gegenstandslink ersetzt.";
 L["Multiple slot filtering"] = "Mehrere Slots filtern";
+
+-- custom_item_icon.lua
+L["Custom Items"] = "Individuelle Gegenstände";
+L["Import items from external sources like www.keystoneloot.io"] = "Gegenstände aus externen Quellen wie www.keystoneloot.io importiert";
 
 -- favorites.lua
 L["No favorites found"] = "Keine Favoriten gefunden";

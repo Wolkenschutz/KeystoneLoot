@@ -3,7 +3,8 @@ local AddonName, KeystoneLoot = ...;
 KeystoneLoot.Upgrade = {};
 
 local Upgrade = KeystoneLoot.Upgrade;
-local DB = KeystoneLoot.DB;
+local DB        = KeystoneLoot.DB;
+local Favorites = KeystoneLoot.Favorites;
 
 local SPECIAL_BONUS_IDS = {
     [178708] = 6917, -- Unbändiger Wechselbalg
@@ -71,16 +72,22 @@ function Upgrade:BuildItemLink(itemId)
     -- Calculate bonus IDs needed
     local bonusIds = {};
 
-    -- 1. Item level adjustment bonus
-    local levelDiff = upgrade.ilvl - baseItemLevel;
-    local levelBonusId = ITEM_LEVEL_BONUS_IDS[levelDiff];
-    if (levelBonusId) then
-        table.insert(bonusIds, levelBonusId);
-    end
+    -- 1+2. Use stored bonus IDs from favorites if available, otherwise compute.
+    local storedBonusIds = Favorites:GetBonusIds(itemId);
+    if (storedBonusIds) then
+        for _, id in ipairs(storedBonusIds) do
+            table.insert(bonusIds, id);
+        end
+    else
+        local levelDiff    = upgrade.ilvl - baseItemLevel;
+        local levelBonusId = ITEM_LEVEL_BONUS_IDS[levelDiff];
+        if (levelBonusId) then
+            table.insert(bonusIds, levelBonusId);
+        end
 
-    -- 2. Upgrade track bonus (champion/hero/myth)
-    if (upgrade.bonusId) then
-        table.insert(bonusIds, upgrade.bonusId);
+        if (upgrade.bonusId) then
+            table.insert(bonusIds, upgrade.bonusId);
+        end
     end
 
     -- 3. Special item bonus
@@ -99,7 +106,7 @@ function Upgrade:BuildItemLink(itemId)
 
     -- Build link
     local playerLevel = UnitLevel("player");
-    local specId = DB:Get("filters.specId");
+    local specId      = DB:Get("filters.specId");
     local numBonusIds = #bonusIds;
     local bonusString = table.concat(bonusIds, ":");
 

@@ -5,7 +5,6 @@ local Upgrade = KeystoneLoot.Upgrade;
 local Favorites = KeystoneLoot.Favorites;
 local Character = KeystoneLoot.Character;
 local Query = KeystoneLoot.Query;
-local L = KeystoneLoot.L;
 local Voidcore = KeystoneLoot.Voidcore;
 
 local STAT_HIGHLIGHT_KEYS = {
@@ -97,7 +96,7 @@ function KeystoneLootLootIconButtonMixin:Init(item)
     self.itemId = item.itemId;
     self.isHovered = false;
 
-    self.Content.Icon:SetTexture(item.icon);
+    self.Content.Icon:SetTexture(Query:GetItemIcon(item.itemId));
     self:UpdateFavoriteIcon();
     self:UpdateVoidcoreIcon();
     self:UpdateHighlight();
@@ -283,10 +282,6 @@ function KeystoneLootLootIconButtonMixin:OnClick()
         return;
     end
 
-    local item = KeystoneLoot.ItemDatabase[self.itemId];
-    local catalystItem = KeystoneLoot.CatalystDatabase[self.itemId];
-    local icon = (catalystItem and catalystItem.icon) or (item and item.icon);
-
     local info = Character:ParseKey(Character:GetSelectedKey());
     local classesMatch = info and DB:Get("filters.classId") == info.classId;
 
@@ -312,7 +307,6 @@ function KeystoneLootLootIconButtonMixin:OnClick()
         itemId      = self.itemId,
         specId      = specId,
         sourceId    = sourceId,
-        icon        = icon,
         currentTier = currentTier,
     });
 end

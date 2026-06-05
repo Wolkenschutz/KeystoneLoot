@@ -320,8 +320,26 @@ function Query:GetCatalystItems()
     return results;
 end
 
+function Query:GetCustomItems()
+    local slotId, slotIds = GetSlotFilter();
+
+    -- Favorites slot
+    if (slotId == -1) then
+        local results = KeystoneLoot.Favorites:GetList("custom", GetFavoritesListSpecId());
+        table.sort(results, SortResultFavorites);
+        return results;
+    end
+
+    return {};
+end
+
 function Query:GetItemInfo(itemId)
     return KeystoneLoot.ItemDatabase[itemId];
+end
+
+function Query:GetItemIcon(itemId)
+    local _, _, _, _, icon = C_Item.GetItemInfoInstant(itemId);
+    return icon;
 end
 
 function Query:GetItemSource(itemId)
@@ -332,7 +350,7 @@ function Query:GetItemSource(itemId)
 
     -- Check item info
     if (not self:GetItemInfo(itemId)) then
-        return;
+        return "custom";
     end
 
     -- Check dungeons

@@ -1,0 +1,37 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\..\..\..\WoW\Data\Interface\AddOns\Blizzard_SharedXML\UI.xsd">
+    <Frame name="KeystoneLootCustomItemFrameTemplate" frameLevel="0" mixin="KeystoneLootCustomItemFrameMixin" virtual="true">
+        <Size x="70" y="140"/>
+        <Frames>
+            <Frame parentKey="Border" inherits="DialogBorderTemplate"/>
+            <Frame parentKey="CustomItemIcon" enableMouse="true" mixin="KeystoneLootCustomItemIconMixin">
+                <Size x="32" y="32"/>
+                <Anchors>
+                    <Anchor point="TOP" y="-20"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <Texture parentKey="Icon" setAllPoints="true" atlas="legionmission-icon-currency">
+                            <Size x="38" y="35"/>
+                            <Anchors>
+                                <Anchor point="CENTER"/>
+                            </Anchors>
+                        </Texture>
+                        <Texture parentKey="Arrow" atlas="ItemUpgrade_HelpTipArrow" rotation="-90">
+                            <Size x="20" y="40"/>
+                            <Anchors>
+                                <Anchor point="TOP" y="-31"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnEnter method="OnEnter"/>
+                    <OnLeave method="OnLeave"/>
+                </Scripts>
+            </Frame>
+        </Frames>
+        <Scripts>
+            <OnLoad method="OnLoad"/>
+        </Scripts>
+    </Frame>
+</Ui>

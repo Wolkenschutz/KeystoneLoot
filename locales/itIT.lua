@@ -8,6 +8,7 @@ local L = KeystoneLoot.L;
 
 -- keystoneloot_frame.lua
 L["%s (%s Season %d)"] = "%s (%s Stagione %d)";
+L["Import BIS items from |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r"] = "Importa oggetti BIS da |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r";
 
 -- itemlevel_dropdown.lua
 L["Veteran"] = "Veterano";
@@ -52,6 +53,10 @@ L["Shows a notification when another player loots an item you have marked as a f
 L["Whisper message..."] = "Messaggio sussurro...";
 L["Whisper message\n{item} will be replaced with the item link."] = "Messaggio sussurro\n{item} verrà sostituito con il link dell'oggetto.";
 L["Multiple slot filtering"] = "Filtro slot multipli";
+
+-- custom_item_icon.lua
+L["Custom Items"] = "Oggetti personalizzati";
+L["Import items from external sources like www.keystoneloot.io"] = "Oggetti importati da fonti esterne come www.keystoneloot.io";
 
 -- favorites.lua
 L["No favorites found"] = "Nessun preferito trovato";

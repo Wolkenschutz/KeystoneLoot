@@ -69,11 +69,16 @@
                     <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="-10" y="-40"/>
                 </Anchors>
             </Frame>
+            <Frame parentKey="CustomItemFrame" inherits="KeystoneLootCustomItemFrameTemplate">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="TOPLEFT" x="10" y="-40"/>
+                </Anchors>
+            </Frame>
         </Frames>
         <Layers>
             <Layer level="ARTWORK">
-                <FontString inherits="GameFontDisableSmall" JustifyH="CENTER" JustifyV="MIDDLE" Text="Made with LOVE in Germany">
-                    <Size x="400"/>
+                <FontString parentKey="FooterText" inherits="GameFontDisableSmall" JustifyH="CENTER" JustifyV="MIDDLE">
+                    <Size x="500"/>
                     <Anchors>
                         <Anchor point="BOTTOM" y="8"/>
                     </Anchors>
