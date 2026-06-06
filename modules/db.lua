@@ -117,7 +117,7 @@ function DB:MigrateCharDB(fromVersion)
     if (fromVersion == 0) then
         -- First install
         local _, _, classId = UnitClass("player");
-        local specId = GetSpecializationInfo(GetSpecialization() or 1);
+        local specId = C_SpecializationInfo.GetSpecializationInfo(C_SpecializationInfo.GetSpecialization() or 1);
 
         KeystoneLootCharDB.filters = {
             classId = classId,

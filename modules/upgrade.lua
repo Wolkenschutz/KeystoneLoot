@@ -107,6 +107,9 @@ function Upgrade:BuildItemLink(itemId)
     -- Build link
     local playerLevel = UnitLevel("player");
     local specId      = DB:Get("filters.specId");
+    if (specId == 0) then
+        specId = C_SpecializationInfo.GetSpecializationInfo(C_SpecializationInfo.GetSpecialization() or 1) or 0;
+    end
     local numBonusIds = #bonusIds;
     local bonusString = table.concat(bonusIds, ":");
 
