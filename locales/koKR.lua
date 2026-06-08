@@ -63,6 +63,7 @@ L["No favorites found"] = "즐겨찾기 없음";
 L["Invalid import string."] = "유효하지 않은 가져오기 문자열.";
 L["No character selected."] = "캐릭터가 선택되지 않았습니다.";
 L["No valid items found."] = "유효한 아이템을 찾을 수 없습니다.";
+L["This import string requires a newer version of KeystoneLoot."] = "이 가져오기 문자열에는 더 최신 버전의 KeystoneLoot이(가) 필요합니다.";
 
 -- icon_button.lua / favorites.lua
 L["Set Favorite"] = "즐겨찾기 설정";

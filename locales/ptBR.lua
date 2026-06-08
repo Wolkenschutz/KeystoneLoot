@@ -63,6 +63,7 @@ L["No favorites found"] = "Nenhum favorito encontrado";
 L["Invalid import string."] = "String de importação inválida.";
 L["No character selected."] = "Nenhum personagem selecionado.";
 L["No valid items found."] = "Nenhum item válido encontrado.";
+L["This import string requires a newer version of KeystoneLoot."] = "Esta string de importação requer uma versão mais recente do KeystoneLoot.";
 
 -- icon_button.lua / favorites.lua
 L["Set Favorite"] = "Definir favorito";

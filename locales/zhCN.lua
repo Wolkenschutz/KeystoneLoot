@@ -63,6 +63,7 @@ L["No favorites found"] = "未找到收藏";
 L["Invalid import string."] = "导入字符串无效。";
 L["No character selected."] = "未选择角色。";
 L["No valid items found."] = "未找到有效物品。";
+L["This import string requires a newer version of KeystoneLoot."] = "此导入字符串需要更新版本的 KeystoneLoot。";
 
 -- icon_button.lua / favorites.lua
 L["Set Favorite"] = "设置收藏";

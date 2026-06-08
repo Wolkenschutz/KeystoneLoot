@@ -35,7 +35,7 @@ function Character:GetCurrentClassId()
 end
 
 function Character:GetCurrentSpecId()
-    return GetSpecializationInfo(GetSpecialization() or 1) or 0;
+    return C_SpecializationInfo.GetSpecializationInfo(C_SpecializationInfo.GetSpecialization() or 1) or 0;
 end
 
 function Character:GetClassName(classId)
@@ -62,7 +62,7 @@ end
 function Character:GetLootSpecId()
     local lootSpecId = GetLootSpecialization();
     if (lootSpecId == 0) then
-        lootSpecId = GetSpecializationInfo(GetSpecialization());
+        lootSpecId = Character:GetCurrentSpecId();
     end
 
     return lootSpecId;

@@ -63,6 +63,7 @@ L["No favorites found"] = "Избранное не найдено";
 L["Invalid import string."] = "Неверная строка импорта.";
 L["No character selected."] = "Персонаж не выбран.";
 L["No valid items found."] = "Допустимые предметы не найдены.";
+L["This import string requires a newer version of KeystoneLoot."] = "Эта строка импорта требует более новой версии KeystoneLoot.";
 
 -- icon_button.lua / favorites.lua
 L["Set Favorite"] = "Добавить в избранное";
