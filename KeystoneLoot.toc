@@ -45,6 +45,7 @@ data/raids.lua
 data/catalyst.lua
 data/upgrade_tracks.lua
 data/keystone_mapping.lua
+data/voidcore.lua
 
 # Core Modules
 modules/db.lua

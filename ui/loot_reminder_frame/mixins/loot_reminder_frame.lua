@@ -2,6 +2,7 @@ local AddonName, KeystoneLoot    = ...;
 
 local Keystone                   = KeystoneLoot.Keystone;
 local Query                      = KeystoneLoot.Query;
+local Character                  = KeystoneLoot.Character;
 local DB                         = KeystoneLoot.DB;
 local L                          = KeystoneLoot.L;
 
@@ -88,10 +89,7 @@ function KeystoneLootReminderFrameMixin:Open(challengeModeId)
 
     self.specPool:ReleaseAll();
 
-    local lootSpecId = GetLootSpecialization();
-    if (lootSpecId == 0) then
-        lootSpecId = GetSpecializationInfo(GetSpecialization());
-    end
+    local lootSpecId = Character:GetLootSpecId()
 
     -- Sort by favo spec id for deterministic ordering
     local sortedSpecs = {};

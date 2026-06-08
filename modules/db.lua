@@ -7,7 +7,7 @@ local DB = KeystoneLoot.DB;
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 
 local DB_VERSION = 8;
-local CHAR_DB_VERSION = 2;
+local CHAR_DB_VERSION = 3;
 
 local observers = {};
 
@@ -141,6 +141,10 @@ function DB:MigrateCharDB(fromVersion)
 
     if (fromVersion == 1) then
         KeystoneLootCharDB.voidcore = {};
+    end
+
+    if (fromVersion == 2) then
+        KeystoneLootCharDB.voidcoreChecked = false;
     end
 end
 

@@ -136,10 +136,7 @@ function Keystone:GetLootReminderItemList(challengeModeId)
     end
 
     -- Resolve current loot spec
-    local lootSpecId = GetLootSpecialization();
-    if (lootSpecId == 0) then
-        lootSpecId = GetSpecializationInfo(GetSpecialization());
-    end
+    local lootSpecId = Character:GetLootSpecId()
 
     -- Subset check: remove specs whose item list is fully covered by another spec
     -- Never remove the loot spec, it is the baseline
