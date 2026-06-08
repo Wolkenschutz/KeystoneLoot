@@ -18,7 +18,7 @@ Mark items as favorites on a per-character, per-spec basis, with four priority t
 - **Export & Import** of favorites using a compact string format (`KeystoneLoot:v2,...`), great for sharing wishlists or migrating between accounts
 
 ### Void Core (Bonus Roll) Tracking
-See exactly which items you've already secured with Void Cores and what's still left to collect from each dungeon and raid boss. It even works retroactively: everything you've already collected is filled in automatically the first time you use it, so you're never starting from scratch.
+See exactly which items you've already secured with Void Cores and what's still left to collect from each dungeon and raid boss. It even works retroactively: anything you'd already obtained is filled in automatically when you install it, so you're never starting from scratch.
 
 ### Drop Alert
 When a groupmate loots an item you have marked as a favorite, a notification pops up showing the item and who got it. You can whisper them directly from the notification with a fully customizable message.
