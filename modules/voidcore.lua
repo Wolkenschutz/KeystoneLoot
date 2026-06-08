@@ -153,7 +153,7 @@ function Voidcore:CheckSupply(chestItemId, OnDone)
         attempts = attempts + 1;
 
         if (not HasLootList(data)) then
-            if (attempts < 5) then
+            if (attempts < 10) then
                 C_Timer.After(0.3, Compare);
                 return;
             end
