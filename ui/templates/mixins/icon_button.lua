@@ -20,17 +20,12 @@ local function GetFavoritesSpecId()
         return 0;
     end
 
-    local specId = DB:Get("filters.specId");
-    if (specId == 0) then
-        return 0;
-    end
-
     local classId = DB:Get("filters.classId");
     if (classId ~= info.classId) then
         return 0;
     end
 
-    return specId;
+    return DB:Get("filters.specId");
 end
 
 local function IsItemValidForCharacter()

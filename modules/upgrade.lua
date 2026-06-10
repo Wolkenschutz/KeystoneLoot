@@ -71,11 +71,24 @@ function Upgrade:BuildItemLink(itemId)
         return string.format("item:%d", itemId);
     end
 
+    -- Get the correct specId
+    local slotId = DB:Get("filters.slotId");
+    local specId = DB:Get("filters.specId");
+    local classId = Character:GetCurrentClassId();
+
+    if (slotId == -1 and DB:Get("filters.classId") ~= classId) then
+        specId = 0;
+    end
+
+    if (specId == 0) then
+        specId = Character:GetCurrentSpecId();
+    end
+
     -- Calculate bonus IDs needed
     local bonusIds = {};
 
     -- 1. Use stored bonus IDs from favorites
-    local storedBonusIds = Favorites:GetBonusIds(itemId);
+    local storedBonusIds = Favorites:GetBonusIds(itemId, specId);
     if (storedBonusIds) then
         for _, id in ipairs(storedBonusIds) do
             table.insert(bonusIds, id);
@@ -111,8 +124,8 @@ function Upgrade:BuildItemLink(itemId)
     end
 
     -- 6. Optional enchant and/or gems from favorites
-    local enchant = Favorites:GetEnchant(itemId) or "";
-    local gems    = Favorites:GetGems(itemId);
+    local enchant = Favorites:GetEnchant(itemId, specId) or "";
+    local gems    = Favorites:GetGems(itemId, specId);
     local gem1    = gems and gems[1] or "";
     local gem2    = gems and gems[2] or "";
     local gem3    = gems and gems[3] or "";
@@ -121,10 +134,6 @@ function Upgrade:BuildItemLink(itemId)
 
     -- Build link
     local playerLevel = UnitLevel("player");
-    local specId      = DB:Get("filters.specId");
-    if (specId == 0) then
-        specId = Character:GetCurrentSpecId();
-    end
     local numBonusIds = #bonusIds;
     local bonusString = table.concat(bonusIds, ":");
 

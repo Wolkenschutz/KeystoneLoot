@@ -399,7 +399,7 @@ function Favorites:GetAnyTier(itemId, useCurrentChar)
     return maxTier;
 end
 
-local function GetExtras(itemId, extra)
+local function GetExtras(itemId, extra, specId)
     if (not itemId) then
         return nil;
     end
@@ -412,26 +412,24 @@ local function GetExtras(itemId, extra)
     end
 
     for _, sourceData in pairs(favorites[characterKey]) do
-        for _, specData in pairs(sourceData) do
-            if (specData[itemId] and specData[itemId][extra]) then
-                return specData[itemId][extra];
-            end
+        if (sourceData[specId] and sourceData[specId][itemId]) then
+            return sourceData[specId][itemId][extra];
         end
     end
 
     return nil;
 end
 
-function Favorites:GetBonusIds(itemId)
-    return GetExtras(itemId, "bonusIds");
+function Favorites:GetBonusIds(itemId, specId)
+    return GetExtras(itemId, "bonusIds", specId);
 end
 
-function Favorites:GetGems(itemId)
-    return GetExtras(itemId, "gems");
+function Favorites:GetGems(itemId, specId)
+    return GetExtras(itemId, "gems", specId);
 end
 
-function Favorites:GetEnchant(itemId)
-    return GetExtras(itemId, "enchant");
+function Favorites:GetEnchant(itemId, specId)
+    return GetExtras(itemId, "enchant", specId);
 end
 
 function Favorites:SetTier(itemId, specId, tier)
@@ -534,13 +532,11 @@ function Favorites:GetList(sourceId, specId)
 
         for currentSpecId, specData in pairs(sourceFavorites) do
             for itemId, itemInfo in pairs(specData) do
-                if (sourceId == "catalyst" or sourceId == "custom" or Query:GetItemInfo(itemId)) then
-                    tmp[itemId] = {
-                        itemId = itemId,
-                        specId = currentSpecId,
-                        bonusIds = itemInfo.bonusIds
-                    };
-                end
+                tmp[itemId] = {
+                    itemId = itemId,
+                    specId = currentSpecId,
+                    bonusIds = itemInfo.bonusIds
+                };
             end
         end
 
@@ -549,12 +545,10 @@ function Favorites:GetList(sourceId, specId)
         end
     elseif (sourceFavorites[selectedSpecId]) then
         for itemId, itemInfo in pairs(sourceFavorites[selectedSpecId]) do
-            if (sourceId == "catalyst" or sourceId == "custom" or Query:GetItemInfo(itemId)) then
-                table.insert(itemList, {
-                    itemId = itemId,
-                    bonusIds = itemInfo.bonusIds
-                });
-            end
+            table.insert(itemList, {
+                itemId = itemId,
+                bonusIds = itemInfo.bonusIds
+            });
         end
     end
 
@@ -649,8 +643,9 @@ function Favorites:Import(importStr, overwrite)
     end
 
     -- Track skipped specs due to class mismatch
-    local skippedSpecs  = false;
-    local totalImported = 0;
+    local skippedSpecs    = false;
+    local totalImported   = 0;
+    local skippedExisting = 0;
 
     -- Import items
     for specId, itemList in pairs(importedItems) do
@@ -677,8 +672,17 @@ function Favorites:Import(importStr, overwrite)
                     end
 
                     if (isValid) then
-                        self:Add(sourceId, specId, itemData.itemId, itemData.tier, itemData.bonusIds, itemData.gems, itemData.enchant);
-                        totalImported = totalImported + 1;
+                        local exists = favorites[characterKey]
+                            and favorites[characterKey][sourceId]
+                            and favorites[characterKey][sourceId][specId]
+                            and favorites[characterKey][sourceId][specId][itemData.itemId];
+
+                        if (overwrite or not exists) then
+                            self:Add(sourceId, specId, itemData.itemId, itemData.tier, itemData.bonusIds, itemData.gems, itemData.enchant);
+                            totalImported = totalImported + 1;
+                        else
+                            skippedExisting = skippedExisting + 1;
+                        end
                     end
                 end
             end
@@ -689,6 +693,10 @@ function Favorites:Import(importStr, overwrite)
 
     if (totalImported > 0) then
         return true, totalImported, skippedSpecs;
+    end
+
+    if (skippedExisting > 0) then
+        return true, 0, skippedSpecs;
     end
 
     return false, L["No valid items found."], skippedSpecs;

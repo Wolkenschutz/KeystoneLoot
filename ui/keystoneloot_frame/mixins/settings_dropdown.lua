@@ -35,9 +35,13 @@ local function HandleImportResult(success, result, skippedSpecs, overwrite)
     end
 
     if (success) then
-        local suffix = overwrite and L[" (overwritten)"] or "";
-        print(YELLOW_FONT_COLOR:WrapTextInColorCode(string.format(L["%d |4favorite:favorites; imported%s."], result, suffix)));
-        DB:Set("filters.slotId", -1);
+        if (result > 0) then
+            local suffix = overwrite and L[" (overwritten)"] or "";
+            print(YELLOW_FONT_COLOR:WrapTextInColorCode(string.format(L["%d |4favorite:favorites; imported%s."], result, suffix)));
+            DB:Set("filters.slotId", -1);
+        else
+            print(YELLOW_FONT_COLOR:WrapTextInColorCode(L["All items are already in your favorites."]));
+        end
     else
         print(YELLOW_FONT_COLOR:WrapTextInColorCode(string.format(L["Import failed - %s"], tostring(result))));
     end
@@ -89,7 +93,7 @@ StaticPopupDialogs.KEYSTONELOOT_EXPORT = {
 };
 
 StaticPopupDialogs.KEYSTONELOOT_IMPORT = {
-    text = L["Import favorites for %s\nPaste import string here:"],
+    text = L["Import favorites for %s\nPaste import string here:"] .. "\n\n" .. L["Merge keeps your existing favorites and only adds new items. Overwrite replaces all of them."],
     button1 = L["Merge"],
     button2 = L["Overwrite"],
     button3 = CANCEL,
