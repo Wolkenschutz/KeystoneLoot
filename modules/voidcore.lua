@@ -25,7 +25,7 @@ for _, mirror in pairs(MIRROR_ITEMS) do
 end
 
 local EXCLUDED_ITEMS = {
-    [151299] = true, -- Blizzard bug?
+    [151299] = true, -- Not in the bonus roll chest - Blizzard bug?
 };
 
 local function MatchesSpec(item, classId, specId)
@@ -121,7 +121,7 @@ function Voidcore:GetSourceItems(chestItemId, specId)
     local results = {};
 
     for _, itemId in ipairs(lootTable) do
-        if (not EXCLUDED_ITEMS[itemId] and self:IsEligible(itemId)) then
+        if (not EXCLUDED_ITEMS[itemId] and not IS_MIRROR[itemId] and self:IsEligible(itemId)) then
             local item = Query:GetItemInfo(itemId);
             if (item and MatchesSpec(item, classId, specId)) then
                 table.insert(results, itemId);
@@ -136,10 +136,6 @@ function Voidcore:ApplyResults(chestItemId, candidates, remaining, allRolled)
     for _, itemId in ipairs(candidates) do
         local item = Item:CreateFromItemID(itemId);
         item:ContinueOnItemLoad(function()
-            if (IS_MIRROR[itemId]) then
-                return;
-            end
-
             local name = item:GetItemName();
             local obtained = allRolled or (name ~= nil and not remaining[name]);
 
@@ -164,13 +160,6 @@ function Voidcore:CheckSupply(chestItemId, OnDone)
             OnDone(0);
         end
         return;
-    end
-
-    local realCount = 0;
-    for _, itemId in ipairs(candidates) do
-        if (not IS_MIRROR[itemId]) then
-            realCount = realCount + 1;
-        end
     end
 
     local attempts = 0;
@@ -208,7 +197,7 @@ function Voidcore:CheckSupply(chestItemId, OnDone)
                 self:ApplyResults(chestItemId, candidates, remaining, false);
 
                 if (OnDone) then
-                    OnDone(math.max(0, realCount - count));
+                    OnDone(math.max(0, #candidates - count));
                 end
                 return;
             end

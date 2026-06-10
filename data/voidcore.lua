@@ -1,7 +1,5 @@
 local AddonName, KeystoneLoot = ...;
 
-local L = KeystoneLoot.L;
-
 KeystoneLoot.VoidcoreDatabase = {
     -- Dungeons
     [268470] = { challengeModeId = 161 }, -- Die Himmelsnadel

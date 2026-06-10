@@ -93,7 +93,7 @@ L["Text can be modified in the settings."] = "Der Text kann in den Einstellungen
 
 -- voidcore.lua
 L["Rescanning for bonus rolls..."] = "Bonuswürfe werden erneut gescannt...";
-L["Rescan bonus rolls"] = "Bonuswürfe erneut scannen";
+L["Rescan bonus rolls"] = "Bonuswürfe scannen";
 L["Checking for past bonus rolls (one time)..."] = "Suche nach vergangenen Bonuswürfen (einmalig)...";
 L["%d past |4bonus roll:bonus rolls; detected."] = "%d |4Bonuswurf:Bonuswürfe; erkannt.";
 L["No untracked bonus rolls found."] = "Alle Bonuswürfe sind bereits erfasst.";
