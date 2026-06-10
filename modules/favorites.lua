@@ -651,12 +651,12 @@ function Favorites:Import(importStr, overwrite)
     for specId, itemList in pairs(importedItems) do
         if (validSpecs[specId]) then
             for _, itemData in ipairs(itemList) do
-                local sourceId     = Query:GetItemSource(itemData.itemId);
-                local item         = KeystoneLoot.ItemDatabase[itemData.itemId];
-                local catalystItem = KeystoneLoot.CatalystDatabase[itemData.itemId];
+                local sourceId = Query:GetItemSource(itemData.itemId);
 
                 if (sourceId) then
-                    local isValid = false;
+                    local item         = KeystoneLoot.ItemDatabase[itemData.itemId];
+                    local catalystItem = KeystoneLoot.CatalystDatabase[itemData.itemId];
+                    local isValid      = false;
 
                     if (catalystItem) then
                         isValid = catalystItem.classId == classId;

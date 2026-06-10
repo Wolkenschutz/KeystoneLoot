@@ -321,7 +321,7 @@ function Query:GetCatalystItems()
 end
 
 function Query:GetCustomItems()
-    local slotId, slotIds = GetSlotFilter();
+    local slotId = GetSlotFilter();
 
     -- Favorites slot
     if (slotId == -1) then
