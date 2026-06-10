@@ -88,3 +88,10 @@ L["Favorite dropped!"] = "Избранный предмет выпал!";
 
 -- whisper_button.lua
 L["Text can be modified in the settings."] = "Текст можно изменить в настройках.";
+
+-- voidcore.lua
+L["Rescanning for bonus rolls..."] = "Повторное сканирование бонусных бросков...";
+L["Rescan bonus rolls"] = "Сканировать бонусные броски заново";
+L["Checking for past bonus rolls (one time)..."] = "Поиск прошлых бонусных бросков (однократно)...";
+L["%d past |4bonus roll:bonus rolls; detected."] = "Обнаружено прошлых бонусных бросков: %d.";
+L["No untracked bonus rolls found."] = "Неотслеженных бонусных бросков не найдено.";

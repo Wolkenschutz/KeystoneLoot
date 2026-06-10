@@ -6,8 +6,15 @@ local Voidcore = KeystoneLoot.Voidcore;
 local DB = KeystoneLoot.DB;
 local Query = KeystoneLoot.Query;
 local Character = KeystoneLoot.Character;
+local L = KeystoneLoot.L;
 
 local OTHER_SLOT = 14;
+
+local POLL_INTERVAL = 0.3;
+local EMPTY_ATTEMPTS = 5;
+local STABLE_NEEDED = 3;
+local MAX_ATTEMPTS = 10;
+
 local MIRROR_ITEMS = {
     [249806] = 260235, -- Strahlende Feder - Umbralfeder
 };
@@ -17,19 +24,9 @@ for _, mirror in pairs(MIRROR_ITEMS) do
     IS_MIRROR[mirror] = true;
 end
 
-local function HasLootList(data)
-    if (not data or not data.lines) then
-        return false;
-    end
-
-    for _, line in ipairs(data.lines) do
-        if ((line.leftText or ""):match("^%s*%-%s")) then
-            return true;
-        end
-    end
-
-    return false;
-end
+local EXCLUDED_ITEMS = {
+    [151299] = true, -- Blizzard bug?
+};
 
 local function MatchesSpec(item, classId, specId)
     local specs = item.classes[classId];
@@ -124,7 +121,7 @@ function Voidcore:GetSourceItems(chestItemId, specId)
     local results = {};
 
     for _, itemId in ipairs(lootTable) do
-        if (self:IsEligible(itemId)) then
+        if (not EXCLUDED_ITEMS[itemId] and self:IsEligible(itemId)) then
             local item = Query:GetItemInfo(itemId);
             if (item and MatchesSpec(item, classId, specId)) then
                 table.insert(results, itemId);
@@ -135,78 +132,133 @@ function Voidcore:GetSourceItems(chestItemId, specId)
     return results;
 end
 
+function Voidcore:ApplyResults(chestItemId, candidates, remaining, allRolled)
+    for _, itemId in ipairs(candidates) do
+        local item = Item:CreateFromItemID(itemId);
+        item:ContinueOnItemLoad(function()
+            if (IS_MIRROR[itemId]) then
+                return;
+            end
+
+            local name = item:GetItemName();
+            local obtained = allRolled or (name ~= nil and not remaining[name]);
+
+            if (obtained) then
+                self:SetUsed(itemId, true);
+            end
+
+            local mirror = MIRROR_ITEMS[itemId];
+            if (mirror) then
+                self:SetUsed(mirror, obtained or nil);
+            end
+        end);
+    end
+end
+
 function Voidcore:CheckSupply(chestItemId, OnDone)
     local specId = Character:GetLootSpecId();
     local candidates = self:GetSourceItems(chestItemId, specId);
 
     if (#candidates == 0) then
         if (OnDone) then
-            OnDone();
+            OnDone(0);
         end
         return;
     end
 
-    local attempts = 0;
+    local realCount = 0;
+    for _, itemId in ipairs(candidates) do
+        if (not IS_MIRROR[itemId]) then
+            realCount = realCount + 1;
+        end
+    end
 
-    local function Compare()
-        local data = C_TooltipInfo.GetItemByID(chestItemId);
+    local attempts = 0;
+    local prevCount = -1;
+    local stableHits = 0;
+
+    local function Poll()
         attempts = attempts + 1;
 
-        if (not HasLootList(data)) then
-            if (attempts < 10) then
-                C_Timer.After(0.3, Compare);
-                return;
+        local data = C_TooltipInfo.GetItemByID(chestItemId);
+        local remaining = GetRemainingNames(data);
+
+        local count = 0;
+        for _ in pairs(remaining) do
+            count = count + 1;
+        end
+
+        if (count == 0) then
+            if (attempts >= EMPTY_ATTEMPTS) then
+                -- No loot list found -> do nothing for now (fully-rolled detection deferred until we have live data)
+                if (OnDone) then
+                    OnDone(0);
+                end
+            else
+                C_Timer.After(POLL_INTERVAL, Poll);
             end
 
+            return;
+        end
+
+        if (count == prevCount) then
+            stableHits = stableHits + 1;
+
+            if (stableHits >= STABLE_NEEDED) then
+                self:ApplyResults(chestItemId, candidates, remaining, false);
+
+                if (OnDone) then
+                    OnDone(math.max(0, realCount - count));
+                end
+                return;
+            end
+        else
+            prevCount = count;
+            stableHits = 1;
+        end
+
+        if (attempts >= MAX_ATTEMPTS) then
             if (OnDone) then
-                OnDone();
+                OnDone(0);
             end
             return;
         end
 
-        local remaining = GetRemainingNames(data);
-
-        for _, itemId in ipairs(candidates) do
-            local item = Item:CreateFromItemID(itemId);
-            item:ContinueOnItemLoad(function()
-                if (IS_MIRROR[itemId]) then
-                    return;
-                end
-
-                local name = item:GetItemName();
-                local obtained = name and not remaining[name] or false;
-
-                if (obtained) then
-                    self:SetUsed(itemId, true);
-                end
-
-                local mirror = MIRROR_ITEMS[itemId];
-                if (mirror) then
-                    self:SetUsed(mirror, obtained or nil);
-                end
-            end);
-        end
-
-        if (OnDone) then
-            OnDone();
-        end
+        C_Timer.After(POLL_INTERVAL, Poll);
     end
 
-    Compare();
+    Poll();
 end
 
-function Voidcore:CheckAll()
+function Voidcore:CheckAll(rescan)
     local chestIds = {};
     for chestItemId in pairs(KeystoneLoot.VoidcoreDatabase) do
         table.insert(chestIds, chestItemId);
     end
 
+    local prefix = "|cff9d5db8KeystoneLoot|r: ";
+
+    if (rescan) then
+        print(prefix .. L["Rescanning for bonus rolls..."]);
+    else
+        print(prefix .. L["Checking for past bonus rolls (one time)..."]);
+    end
+
+    local total = 0;
     local index = 0;
 
-    local function Next()
+    local function Next(obtained)
+        total = total + (obtained or 0);
+
         index = index + 1;
         local chestItemId = chestIds[index];
         if (not chestItemId) then
+            if (total > 0) then
+                print(prefix .. string.format(L["%d past |4bonus roll:bonus rolls; detected."], total));
+            else
+                print(prefix .. L["No untracked bonus rolls found."]);
+            end
+
             DB:Set("voidcoreChecked", true);
             return;
         end

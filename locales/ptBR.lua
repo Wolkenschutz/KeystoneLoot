@@ -86,3 +86,10 @@ L["Favorite dropped!"] = "Favorito obtido!";
 
 -- whisper_button.lua
 L["Text can be modified in the settings."] = "O texto pode ser modificado nas configurações.";
+
+-- voidcore.lua
+L["Rescanning for bonus rolls..."] = "Reescaneando rolagens bônus...";
+L["Rescan bonus rolls"] = "Reescanear rolagens bônus";
+L["Checking for past bonus rolls (one time)..."] = "Procurando rolagens bônus anteriores (uma vez)...";
+L["%d past |4bonus roll:bonus rolls; detected."] = "%d |4rolagem bônus anterior detectada:rolagens bônus anteriores detectadas;.";
+L["No untracked bonus rolls found."] = "Nenhuma rolagem bônus não rastreada encontrada.";

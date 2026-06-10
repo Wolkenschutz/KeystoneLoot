@@ -86,3 +86,10 @@ L["Favorite dropped!"] = "Favori obtenu !";
 
 -- whisper_button.lua
 L["Text can be modified in the settings."] = "Le texte peut être modifié dans les paramètres.";
+
+-- voidcore.lua
+L["Rescanning for bonus rolls..."] = "Nouvelle analyse des jets bonus...";
+L["Rescan bonus rolls"] = "Rescanner les jets bonus";
+L["Checking for past bonus rolls (one time)..."] = "Recherche d'anciens jets bonus (unique)...";
+L["%d past |4bonus roll:bonus rolls; detected."] = "%d |4ancien jet bonus détecté:anciens jets bonus détectés;.";
+L["No untracked bonus rolls found."] = "Aucun jet bonus non suivi trouvé.";

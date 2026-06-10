@@ -87,3 +87,10 @@ L["Favorite dropped!"] = "收藏物品已掉落！";
 
 -- whisper_button.lua
 L["Text can be modified in the settings."] = "可在设置中修改文本。";
+
+-- voidcore.lua
+L["Rescanning for bonus rolls..."] = "正在重新扫描额外拾取...";
+L["Rescan bonus rolls"] = "重新扫描额外拾取";
+L["Checking for past bonus rolls (one time)..."] = "正在检查过去的额外拾取（一次性）...";
+L["%d past |4bonus roll:bonus rolls; detected."] = "检测到 %d 次过去的额外拾取。";
+L["No untracked bonus rolls found."] = "未发现未记录的额外拾取。";

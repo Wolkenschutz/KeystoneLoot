@@ -78,16 +78,13 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
     self.CustomItemFrame:Init();
     KeystoneLootMinimapButton:Init();
 
-    local isInitialLogin = ...;
-    if (event == "PLAYER_ENTERING_WORLD" and isInitialLogin) then
-        if (DB:Get("voidcoreChecked")) then
-            return;
-        end
-
-        C_Timer.After(3, function()
-            Voidcore:CheckAll();
-        end);
+    if (DB:Get("voidcoreChecked") or UnitLevel("player") < 90) then
+        return;
     end
+
+    C_Timer.After(3, function()
+        Voidcore:CheckAll();
+    end);
 end
 
 function KeystoneLootFrameMixin:SyncSpecFilter()

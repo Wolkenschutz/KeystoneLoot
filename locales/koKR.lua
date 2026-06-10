@@ -87,3 +87,10 @@ L["Favorite dropped!"] = "즐겨찾기 아이템 드롭!";
 
 -- whisper_button.lua
 L["Text can be modified in the settings."] = "텍스트는 설정에서 수정할 수 있습니다.";
+
+-- voidcore.lua
+L["Rescanning for bonus rolls..."] = "보너스 주사위를 다시 검사하는 중...";
+L["Rescan bonus rolls"] = "보너스 주사위 다시 검사";
+L["Checking for past bonus rolls (one time)..."] = "지난 보너스 주사위 확인 중 (최초 1회)...";
+L["%d past |4bonus roll:bonus rolls; detected."] = "지난 보너스 주사위 %d개를 감지했습니다.";
+L["No untracked bonus rolls found."] = "추적되지 않은 보너스 주사위가 없습니다.";

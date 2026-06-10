@@ -4,6 +4,7 @@ local DB = KeystoneLoot.DB;
 local Favorites = KeystoneLoot.Favorites;
 local Character = KeystoneLoot.Character;
 local L = KeystoneLoot.L;
+local Voidcore = KeystoneLoot.Voidcore;
 
 local HIGHLIGHTS = {
     { key = "settings.highlighting.crit",        label = ITEM_MOD_CRIT_RATING_SHORT },
@@ -204,6 +205,10 @@ function KeystoneLootSettingsDropdownMixin:Init()
             function() DB:Set("settings.wideMode", not DB:Get("settings.wideMode")); end
         );
 
+        local rescanButton = rootDescription:CreateButton(L["Rescan bonus rolls"], function()
+            Voidcore:CheckAll(true);
+        end);
+        rescanButton:SetEnabled(UnitLevel("player") == 90);
 
         local manageButton = rootDescription:CreateButton(L["Manage characters"]);
         local extent = 20;
