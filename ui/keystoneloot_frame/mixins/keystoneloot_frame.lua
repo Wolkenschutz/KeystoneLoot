@@ -53,9 +53,7 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
             return;
         end
 
-        if (Voidcore:IsEligible(itemId)) then
-            Voidcore:SetUsed(itemId, true);
-        end
+        Voidcore:OnBonusRoll(itemId);
         return;
     end
 

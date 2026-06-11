@@ -6,7 +6,7 @@ local Voidcore                = KeystoneLoot.Voidcore;
 
 local HEIGHT_NO_REMOVE        = 139; -- top(8) + title(20) + 4 rows(96) + bottom(15)
 local HEIGHT_REMOVE           = 176; -- + divider(13) + remove(24)
-local HEIGHT_VOIDCORE         = 57; -- + divider(13) + voidcore title(20) + voidcore row(24)
+local HEIGHT_VOIDCORE         = 57;  -- + divider(13) + voidcore title(20) + voidcore row(24)
 
 local RADIO_WIDTH             = 22;
 local CHECKBOX_WIDTH          = 22;

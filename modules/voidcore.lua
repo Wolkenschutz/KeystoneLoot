@@ -8,6 +8,8 @@ local Query = KeystoneLoot.Query;
 local Character = KeystoneLoot.Character;
 local L = KeystoneLoot.L;
 
+local itemChest; -- Cache
+
 local OTHER_SLOT = 14;
 
 local POLL_INTERVAL = 0.3;
@@ -16,16 +18,12 @@ local STABLE_NEEDED = 3;
 local MAX_ATTEMPTS = 10;
 
 local MIRROR_ITEMS = {
-    [249806] = 260235, -- Strahlende Feder - Umbralfeder
+    [249806] = 260235 -- Strahlende Feder - Umbralfeder
 };
-
-local IS_MIRROR = {};
-for _, mirror in pairs(MIRROR_ITEMS) do
-    IS_MIRROR[mirror] = true;
-end
 
 local EXCLUDED_ITEMS = {
     [151299] = true, -- Not in the bonus roll chest - Blizzard bug?
+    [260235] = true -- Umbralfeder
 };
 
 local function MatchesSpec(item, classId, specId)
@@ -81,6 +79,46 @@ function Voidcore:SetUsed(itemId, value)
     local voidcores = DB:Get("voidcore") or {};
     voidcores[itemId] = value or nil;
     DB:Set("voidcore", voidcores);
+
+    local mirror = MIRROR_ITEMS[itemId];
+    if (mirror) then
+        self:SetUsed(mirror, value or nil);
+    end
+end
+
+local function GetLootTable(source)
+    if (source.challengeModeId) then
+        for _, dungeon in ipairs(Query:GetDungeons()) do
+            if (dungeon.challengeModeId == source.challengeModeId) then
+                return dungeon.lootTable;
+            end
+        end
+    elseif (source.bossId) then
+        for _, raid in ipairs(Query:GetRaids()) do
+            for _, boss in ipairs(raid.bossList) do
+                if (boss.bossId == source.bossId) then
+                    return boss.lootTable[DifficultyUtil.ID.PrimaryRaidMythic];
+                end
+            end
+        end
+    end
+end
+
+local function GetItemChest(itemId)
+    if (not itemChest) then
+        itemChest = {};
+
+        for chestItemId, source in pairs(KeystoneLoot.VoidcoreDatabase) do
+            local lootTable = GetLootTable(source);
+            if (lootTable) then
+                for _, id in ipairs(lootTable) do
+                    itemChest[id] = chestItemId;
+                end
+            end
+        end
+    end
+
+    return itemChest[itemId];
 end
 
 function Voidcore:GetSourceItems(chestItemId, specId)
@@ -89,30 +127,7 @@ function Voidcore:GetSourceItems(chestItemId, specId)
         return {};
     end
 
-    local lootTable;
-
-    if (source.challengeModeId) then
-        for _, dungeon in ipairs(Query:GetDungeons()) do
-            if (dungeon.challengeModeId == source.challengeModeId) then
-                lootTable = dungeon.lootTable;
-                break;
-            end
-        end
-    elseif (source.bossId) then
-        for _, raid in ipairs(Query:GetRaids()) do
-            for _, boss in ipairs(raid.bossList) do
-                if (boss.bossId == source.bossId) then
-                    lootTable = boss.lootTable[DifficultyUtil.ID.PrimaryRaidMythic];
-                    break;
-                end
-            end
-
-            if (lootTable) then
-                break;
-            end
-        end
-    end
-
+    local lootTable = GetLootTable(source);
     if (not lootTable) then
         return {};
     end
@@ -121,7 +136,7 @@ function Voidcore:GetSourceItems(chestItemId, specId)
     local results = {};
 
     for _, itemId in ipairs(lootTable) do
-        if (not EXCLUDED_ITEMS[itemId] and not IS_MIRROR[itemId] and self:IsEligible(itemId)) then
+        if (not EXCLUDED_ITEMS[itemId] and self:IsEligible(itemId)) then
             local item = Query:GetItemInfo(itemId);
             if (item and MatchesSpec(item, classId, specId)) then
                 table.insert(results, itemId);
@@ -132,22 +147,23 @@ function Voidcore:GetSourceItems(chestItemId, specId)
     return results;
 end
 
-function Voidcore:ApplyResults(chestItemId, candidates, remaining, allRolled)
+function Voidcore:ApplyResults(candidates, remaining)
     for _, itemId in ipairs(candidates) do
         local item = Item:CreateFromItemID(itemId);
         item:ContinueOnItemLoad(function()
             local name = item:GetItemName();
-            local obtained = allRolled or (name ~= nil and not remaining[name]);
+            local obtained = name ~= nil and not remaining[name];
 
             if (obtained) then
                 self:SetUsed(itemId, true);
             end
-
-            local mirror = MIRROR_ITEMS[itemId];
-            if (mirror) then
-                self:SetUsed(mirror, obtained or nil);
-            end
         end);
+    end
+end
+
+function Voidcore:ResetSource(candidates)
+    for _, itemId in ipairs(candidates) do
+        self:SetUsed(itemId, nil);
     end
 end
 
@@ -179,7 +195,7 @@ function Voidcore:CheckSupply(chestItemId, OnDone)
 
         if (count == 0) then
             if (attempts >= EMPTY_ATTEMPTS) then
-                -- No loot list found -> do nothing for now (fully-rolled detection deferred until we have live data)
+                -- No loot list found -> do nothing
                 if (OnDone) then
                     OnDone(0);
                 end
@@ -194,10 +210,19 @@ function Voidcore:CheckSupply(chestItemId, OnDone)
             stableHits = stableHits + 1;
 
             if (stableHits >= STABLE_NEEDED) then
-                self:ApplyResults(chestItemId, candidates, remaining, false);
+                if (count >= #candidates) then
+                    -- Full pool visible -> fresh character or reset, clear all source items
+                    self:ResetSource(candidates);
 
-                if (OnDone) then
-                    OnDone(math.max(0, #candidates - count));
+                    if (OnDone) then
+                        OnDone(0);
+                    end
+                else
+                    self:ApplyResults(candidates, remaining);
+
+                    if (OnDone) then
+                        OnDone(#candidates - count);
+                    end
                 end
                 return;
             end
@@ -256,4 +281,28 @@ function Voidcore:CheckAll(rescan)
     end
 
     Next();
+end
+
+function Voidcore:OnBonusRoll(itemId)
+    if (not self:IsEligible(itemId)) then
+        return;
+    end
+
+    self:SetUsed(itemId, true);
+
+    local chestItemId = GetItemChest(itemId);
+    if (not chestItemId) then
+        return;
+    end
+
+    -- If this completed the source's pool, Blizzard resets it -> clear that source
+    local candidates = self:GetSourceItems(chestItemId, Character:GetLootSpecId());
+
+    for _, candidateId in ipairs(candidates) do
+        if (not self:IsUsed(candidateId)) then
+            return;
+        end
+    end
+
+    self:ResetSource(candidates);
 end

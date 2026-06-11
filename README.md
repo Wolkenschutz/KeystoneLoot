@@ -15,7 +15,7 @@ Filter displayed items by class, specialization, item slot, and item level. Filt
 Mark items as favorites on a per-character, per-spec basis, with four priority tiers: **Nice to have**, **Must have**, **Best in Slot**, and **Transmog**. The system supports:
 - Favoriting for a single spec or all specs at once
 - Viewing another character's wishlist via the character dropdown
-- **Export & Import** of favorites using a compact string format (`KeystoneLoot:v2,...`), great for sharing wishlists or migrating between accounts
+- **Export & Import** of favorites using a compact string format (`KeystoneLoot:v3,...`), great for sharing wishlists or migrating between accounts
 
 ### Void Core (Bonus Roll) Tracking
 See exactly which items you've already secured with Void Cores and what's still left to collect from each dungeon and raid boss. It even works retroactively: anything you'd already obtained is filled in automatically when you install it, so you're never starting from scratch.
