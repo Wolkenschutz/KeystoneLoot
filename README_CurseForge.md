@@ -1,5 +1,5 @@
 # KeystoneLoot
-Never miss a piece of loot again. **KeystoneLoot** gives you a clean, compact overview of all drops from Mythic+ dungeons, raids, and the Revival Catalyst, filtered exactly to your class and spec.
+Never miss a piece of loot again. **KeystoneLoot** gives you a clean, compact overview of all drops from Mythic+ dungeons, raids, and the Catalyst, filtered exactly to your class and spec.
 
 **Want a head start?** Grab import-ready BiS lists for every class and spec at [keystoneloot.io](https://www.keystoneloot.io).
 
