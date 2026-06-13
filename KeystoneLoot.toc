@@ -55,6 +55,7 @@ modules/favorites.lua
 modules/upgrade.lua
 modules/keystone.lua
 modules/voidcore.lua
+modules/keyCommand.lua
 
 # UI
 ui/keystone_tooltip.lua
