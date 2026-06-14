@@ -112,14 +112,13 @@ function DB:MigrateGlobalDB(fromVersion)
         KeystoneLootDB.settings.multiSlotFilter = false;
     end
 
-		if (fromVersion == 8) then
+    if (fromVersion == 8) then
         KeystoneLootDB.settings.keyCommand = {
-					CHAT_MSG_PARTY = true,
-					CHAT_MSG_PARTY_LEADER = true,
-					CHAT_MSG_GUILD = true
-				};
+            CHAT_MSG_PARTY = true,
+            CHAT_MSG_PARTY_LEADER = true,
+            CHAT_MSG_GUILD = true
+        };
     end
-
 end
 
 function DB:MigrateCharDB(fromVersion)

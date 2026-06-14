@@ -58,19 +58,14 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
 
         Voidcore:OnBonusRoll(itemId);
         return;
-	elseif (event == "CHAT_MSG_PARTY" or event == "CHAT_MSG_PARTY_LEADER" or event == "CHAT_MSG_GUILD") then
+    elseif (event == "CHAT_MSG_PARTY" or event == "CHAT_MSG_PARTY_LEADER" or event == "CHAT_MSG_GUILD") then
         if (not DB:Get("settings.keyCommand." .. event) or isResponsePaused) then
             return;
         end
 
         local msg = ...;
-        if (issecretvalue(msg)) then
-            print(NORMAL_FONT_COLOR:WrapTextInColorCode(L["Automatic Keystone response is currently restricted by game rules."]));
-            return;
-        end    
-
-        if (string.match(string.lower(msg), "^!key")) then
-            local link = Keystone:GetKeystoneLink();
+        if (not issecretvalue(msg) and string.match(string.lower(msg), "^!key")) then
+            local link = Keystone:GetKeystoneItemLink();
             if (not link) then
                 return;
             end
@@ -90,7 +85,7 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
     self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
     self:RegisterEvent("CHAT_MSG_PARTY");
     self:RegisterEvent("CHAT_MSG_PARTY_LEADER");
-	self:RegisterEvent("CHAT_MSG_GUILD");
+    self:RegisterEvent("CHAT_MSG_GUILD");
 
     DB:Init();
     Favorites:Init();

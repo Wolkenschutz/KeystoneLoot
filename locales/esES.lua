@@ -9,7 +9,6 @@ local L = KeystoneLoot.L;
 -- keystoneloot_frame.lua
 L["%s (%s Season %d)"] = "%s (%s temporada %d)";
 L["Import BIS items from |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r"] = "Importa objetos BIS desde |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r";
-L["Automatic Keystone response is currently restricted by game rules."] = "La respuesta automática de sigilo está actualmente restringida por las reglas del juego.";
 
 -- itemlevel_dropdown.lua
 L["Veteran"] = "Veterano";

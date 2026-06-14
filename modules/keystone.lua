@@ -318,7 +318,7 @@ function Keystone:GetRewards(keystoneLevel)
     end
 end
 
-function Keystone:GetKeystoneLink()
+function Keystone:GetKeystoneItemLink()
     for bag = 0, NUM_BAG_SLOTS do
         for slot = 1, C_Container.GetContainerNumSlots(bag) do
             local link = C_Container.GetContainerItemLink(bag, slot);

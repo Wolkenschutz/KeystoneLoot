@@ -9,7 +9,6 @@ local L = KeystoneLoot.L;
 -- keystoneloot_frame.lua
 L["%s (%s Season %d)"] = "%s（%s 第 %d 赛季）";
 L["Import BIS items from |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r"] = "从 |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r 导入 BIS 物品";
-L["Automatic Keystone response is currently restricted by game rules."] = "钥石自动回复目前受游戏规则限制。";
 
 -- itemlevel_dropdown.lua
 L["Veteran"] = "老兵";
