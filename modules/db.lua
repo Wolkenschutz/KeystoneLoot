@@ -6,7 +6,7 @@ local DB = KeystoneLoot.DB;
 
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 
-local DB_VERSION = 8;
+local DB_VERSION = 9;
 local CHAR_DB_VERSION = 3;
 
 local observers = {};
@@ -111,6 +111,15 @@ function DB:MigrateGlobalDB(fromVersion)
     if (fromVersion == 7) then
         KeystoneLootDB.settings.multiSlotFilter = false;
     end
+
+		if (fromVersion == 8) then
+        KeystoneLootDB.settings.keyCommand = {
+					CHAT_MSG_PARTY = true,
+					CHAT_MSG_PARTY_LEADER = true,
+					CHAT_MSG_GUILD = true
+				};
+    end
+
 end
 
 function DB:MigrateCharDB(fromVersion)

@@ -317,3 +317,14 @@ function Keystone:GetRewards(keystoneLevel)
         end
     end
 end
+
+function Keystone:GetKeystoneLink()
+    for bag = 0, NUM_BAG_SLOTS do
+        for slot = 1, C_Container.GetContainerNumSlots(bag) do
+            local link = C_Container.GetContainerItemLink(bag, slot);
+            if (link and string.find(link, "Hkeystone:", 1, true)) then
+                return link;
+            end
+        end
+    end
+end

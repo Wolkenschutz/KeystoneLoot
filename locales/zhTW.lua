@@ -9,6 +9,7 @@ local L = KeystoneLoot.L;
 -- keystoneloot_frame.lua
 L["%s (%s Season %d)"] = "%s（%s 第 %d 賽季）";
 L["Import BIS items from |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r"] = "從 |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r 匯入 BIS 物品";
+L["Automatic Keystone response is currently restricted by game rules."] = "鑰石自動回覆目前受遊戲規則限制。";
 
 -- itemlevel_dropdown.lua
 L["Veteran"] = "精兵";
@@ -55,6 +56,10 @@ L["Shows a notification when another player loots an item you have marked as a f
 L["Whisper message..."] = "悄悄話訊息...";
 L["Whisper message\n{item} will be replaced with the item link."] = "悄悄話訊息\n{item} 將被替換為物品連結。";
 --L["Multiple slot filtering"] = "";
+L["Auto Keystone response"] = "鑰石自動回覆";
+L["Enable party chat"] = "在隊伍聊天中啟用";
+L["Enable guild chat"] = "在公會聊天中啟用";
+L["Automatically responds with your current Mythic+ keystone when someone types \"!keys\" in the selected chat channels. Only works if other group members also have this addon."] = "當有人在所選聊天頻道輸入 \"!keys\" 時，自動回覆你目前的傳奇鑰石。僅當其他隊伍成員也安裝了此插件時才有效。";
 
 -- custom_item_icon.lua
 L["Custom Items"] = "自訂物品";

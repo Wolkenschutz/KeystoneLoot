@@ -9,6 +9,7 @@ local L = KeystoneLoot.L;
 -- keystoneloot_frame.lua
 L["%s (%s Season %d)"] = "%s (%s сезон %d)";
 L["Import BIS items from |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r"] = "Импортируйте БиС-предметы с |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r";
+L["Automatic Keystone response is currently restricted by game rules."] = "Автоответ с ключом сейчас ограничен правилами игры.";
 
 -- itemlevel_dropdown.lua
 L["Veteran"] = "Ветеран";
@@ -55,6 +56,10 @@ L["Shows a notification when another player loots an item you have marked as a f
 L["Whisper message..."] = "Сообщение в шёпот...";
 L["Whisper message\n{item} will be replaced with the item link."] = "Сообщение в шёпот\n{item} будет заменено ссылкой на предмет.";
 L["Multiple slot filtering"] = "Фильтрация нескольких слотов";
+L["Auto Keystone response"] = "Автоответ с ключом";
+L["Enable party chat"] = "Включить в чате группы";
+L["Enable guild chat"] = "Включить в чате гильдии";
+L["Automatically responds with your current Mythic+ keystone when someone types \"!keys\" in the selected chat channels. Only works if other group members also have this addon."] = "Автоматически отправляет ваш текущий ключ Эпохального+, когда кто-то пишет \"!keys\" в выбранных каналах чата. Работает только если у других участников группы тоже установлен этот аддон.";
 
 -- custom_item_icon.lua
 L["Custom Items"] = "Пользовательские предметы";

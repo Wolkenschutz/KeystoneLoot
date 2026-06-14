@@ -9,6 +9,7 @@ local L = KeystoneLoot.L;
 -- keystoneloot_frame.lua
 L["%s (%s Season %d)"] = "%s (%s temporada %d)";
 L["Import BIS items from |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r"] = "Importa objetos BIS desde |cnACCOUNT_WIDE_FONT_COLOR:www.keystoneloot.io|r";
+L["Automatic Keystone response is currently restricted by game rules."] = "La respuesta automática de sigilo está actualmente restringida por las reglas del juego.";
 
 -- itemlevel_dropdown.lua
 L["Veteran"] = "Veterano";
@@ -55,6 +56,10 @@ L["Shows a notification when another player loots an item you have marked as a f
 L["Whisper message..."] = "Mensaje susurro...";
 L["Whisper message\n{item} will be replaced with the item link."] = "Mensaje susurro\n{item} será reemplazado por el enlace del objeto.";
 L["Multiple slot filtering"] = "Filtrado de varios espacios";
+L["Auto Keystone response"] = "Respuesta automática de sigilo";
+L["Enable party chat"] = "Activar chat de grupo";
+L["Enable guild chat"] = "Activar chat de hermandad";
+L["Automatically responds with your current Mythic+ keystone when someone types \"!keys\" in the selected chat channels. Only works if other group members also have this addon."] = "Responde automáticamente con tu sigilo de Mítica+ actual cuando alguien escribe \"!keys\" en los canales de chat seleccionados. Solo funciona si otros miembros del grupo también tienen este addon.";
 
 -- custom_item_icon.lua
 L["Custom Items"] = "Objetos personalizados";
