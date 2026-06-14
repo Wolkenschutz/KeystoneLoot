@@ -210,6 +210,27 @@ function KeystoneLootSettingsDropdownMixin:Init()
         end);
         rescanButton:SetEnabled(UnitLevel("player") == 90);
 
+        local responseButton = rootDescription:CreateButton(L["Auto Keystone response"]);
+        responseButton:SetTooltip(function(tooltip)
+            GameTooltip_AddNormalLine(tooltip, L["Automatically responds with your current Mythic+ keystone when someone types \"!keys\" in the selected chat channels. Only works if other group members also have this addon."], true);
+        end);
+
+        responseButton:CreateCheckbox(
+            L["Enable party chat"],
+            function() return DB:Get("settings.keyCommand.CHAT_MSG_PARTY"); end,
+            function()
+                local responseToggle = not DB:Get("settings.keyCommand.CHAT_MSG_PARTY");
+                DB:Set("settings.keyCommand.CHAT_MSG_PARTY", responseToggle);
+                DB:Set("settings.keyCommand.CHAT_MSG_PARTY_LEADER", responseToggle);
+            end
+        );
+
+        responseButton:CreateCheckbox(
+            L["Enable guild chat"],
+            function() return DB:Get("settings.keyCommand.CHAT_MSG_GUILD"); end,
+            function() DB:Set("settings.keyCommand.CHAT_MSG_GUILD", not DB:Get("settings.keyCommand.CHAT_MSG_GUILD")); end
+        );
+
         local manageButton = rootDescription:CreateButton(L["Manage characters"]);
         local extent = 20;
         local maxCharacters = 18;

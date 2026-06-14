@@ -4,7 +4,10 @@ local DB = KeystoneLoot.DB;
 local Favorites = KeystoneLoot.Favorites;
 local Character = KeystoneLoot.Character;
 local Voidcore = KeystoneLoot.Voidcore;
+local Keystone = KeystoneLoot.Keystone;
 local L = KeystoneLoot.L;
+
+local isResponsePaused = false;
 
 KeystoneLootFrameMixin = {};
 
@@ -55,10 +58,39 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
 
         Voidcore:OnBonusRoll(itemId);
         return;
+	elseif (event == "CHAT_MSG_PARTY" or event == "CHAT_MSG_PARTY_LEADER" or event == "CHAT_MSG_GUILD") then
+        if (not DB:Get("settings.keyCommand." .. event) or isResponsePaused) then
+            return;
+        end
+
+        local msg = ...;
+        if (issecretvalue(msg)) then
+            print(NORMAL_FONT_COLOR:WrapTextInColorCode(L["Automatic Keystone response is currently restricted by game rules."]));
+            return;
+        end    
+
+        if (string.match(string.lower(msg), "^!key")) then
+            local link = Keystone:GetKeystoneLink();
+            if (not link) then
+                return;
+            end
+
+            local channel = event == "CHAT_MSG_GUILD" and "GUILD" or "PARTY";
+            C_ChatInfo.SendChatMessage("[KeystoneLoot]: " .. link, channel);
+
+            isResponsePaused = true;
+            C_Timer.After(2, function()
+                isResponsePaused = false;
+            end);
+        end
+        return;
     end
 
     self:UnregisterEvent("PLAYER_ENTERING_WORLD");
     self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
+    self:RegisterEvent("CHAT_MSG_PARTY");
+    self:RegisterEvent("CHAT_MSG_PARTY_LEADER");
+	self:RegisterEvent("CHAT_MSG_GUILD");
 
     DB:Init();
     Favorites:Init();
