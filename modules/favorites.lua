@@ -30,6 +30,14 @@ Favorites.TIER_NAME           = {
     [4] = L["Transmog"],
 };
 
+local function FireEvent(event, ...)
+    local API = KeystoneLoot.APIInternal;
+
+    if (API) then
+        API.Fire(event, ...);
+    end
+end
+
 local function SplitOutsideParens(str, delimiter)
     local result = {};
     local depth  = 0;
@@ -219,12 +227,12 @@ function Favorites:Init()
     DB:Set("ui.selectedCharacterKey", characterKey);
 end
 
-function Favorites:Add(sourceId, specId, itemId, tier, bonusIds, gems, enchant)
+function Favorites:Add(sourceId, specId, itemId, tier, bonusIds, gems, enchant, characterKey)
     if (not sourceId or specId == nil or not itemId) then
         return false;
     end
 
-    local characterKey = Character:GetSelectedKey();
+    characterKey = characterKey or Character:GetSelectedKey();
 
     -- Resolve specId = 0 to all valid specs for this item/class
     if (specId == 0) then
@@ -239,7 +247,7 @@ function Favorites:Add(sourceId, specId, itemId, tier, bonusIds, gems, enchant)
             -- Catalyst: add for all specs of the class
             for index = 1, C_SpecializationInfo.GetNumSpecializationsForClassID(classId) do
                 local resolvedSpecId = GetSpecializationInfoForClassID(classId, index);
-                self:Add(sourceId, resolvedSpecId, itemId, tier, bonusIds, gems, enchant);
+                self:Add(sourceId, resolvedSpecId, itemId, tier, bonusIds, gems, enchant, characterKey);
             end
 
             return true;
@@ -249,7 +257,7 @@ function Favorites:Add(sourceId, specId, itemId, tier, bonusIds, gems, enchant)
         if (item and item.classes[classId]) then
             -- Regular item: add only for specs that can use it
             for _, resolvedSpecId in ipairs(item.classes[classId]) do
-                self:Add(sourceId, resolvedSpecId, itemId, tier, bonusIds, gems, enchant);
+                self:Add(sourceId, resolvedSpecId, itemId, tier, bonusIds, gems, enchant, characterKey);
             end
 
             return true;
@@ -284,15 +292,17 @@ function Favorites:Add(sourceId, specId, itemId, tier, bonusIds, gems, enchant)
     -- Save to DB
     DB:Set("favorites", favorites);
 
+    FireEvent("FAVORITE_ADDED", characterKey, itemId, specId, tier or self.TIER_MUST);
+
     return true;
 end
 
-function Favorites:Remove(itemId, specId)
+function Favorites:Remove(itemId, specId, characterKey)
     if (not itemId) then
         return false;
     end
 
-    local characterKey = Character:GetSelectedKey();
+    characterKey = characterKey or Character:GetSelectedKey();
     local favorites = DB:Get("favorites");
 
     if (not favorites or not favorites[characterKey]) then
@@ -325,6 +335,8 @@ function Favorites:Remove(itemId, specId)
     if (removed) then
         -- Save to DB
         DB:Set("favorites", favorites);
+
+        FireEvent("FAVORITE_REMOVED", characterKey, itemId, specId);
     end
 
     return removed;
@@ -432,12 +444,12 @@ function Favorites:GetEnchant(itemId, specId)
     return GetExtras(itemId, "enchant", specId);
 end
 
-function Favorites:SetTier(itemId, specId, tier)
+function Favorites:SetTier(itemId, specId, tier, characterKey)
     if (not itemId) then
         return false;
     end
 
-    local characterKey = Character:GetSelectedKey();
+    characterKey = characterKey or Character:GetSelectedKey();
     local favorites = DB:Get("favorites");
 
     if (not favorites or not favorites[characterKey]) then
@@ -462,6 +474,8 @@ function Favorites:SetTier(itemId, specId, tier)
 
     if (updated) then
         DB:Set("favorites", favorites);
+
+        FireEvent("FAVORITE_TIER_CHANGED", characterKey, itemId, specId, tier);
     end
 
     return updated;
@@ -555,8 +569,38 @@ function Favorites:GetList(sourceId, specId)
     return itemList;
 end
 
-function Favorites:Export()
-    local characterKey = Character:GetSelectedKey();
+function Favorites:IsValidForSpec(itemId, specId, classId)
+    local sourceId = Query:GetItemSource(itemId);
+
+    if (not sourceId) then
+        return false, nil;
+    end
+
+    local catalystItem = KeystoneLoot.CatalystDatabase[itemId];
+    if (catalystItem) then
+        return catalystItem.classId == classId, sourceId;
+    end
+
+    local item = KeystoneLoot.ItemDatabase[itemId];
+    if (item and item.classes[classId]) then
+        for _, itemSpecId in ipairs(item.classes[classId]) do
+            if (itemSpecId == specId) then
+                return true, sourceId;
+            end
+        end
+
+        return false, sourceId;
+    end
+
+    if (sourceId == "custom") then
+        return Query:GetItemIcon(itemId) ~= nil, sourceId;
+    end
+
+    return false, sourceId;
+end
+
+function Favorites:Export(characterKey)
+    characterKey = characterKey or Character:GetSelectedKey();
     local favorites = DB:Get("favorites");
 
     if (not favorites or not favorites[characterKey]) then
@@ -600,7 +644,7 @@ function Favorites:Export()
     return EXPORT_PREFIX .. "," .. encoded;
 end
 
-function Favorites:Import(importStr, overwrite)
+function Favorites:Import(importStr, overwrite, characterKey)
     if (not importStr) then
         return false, L["Invalid import string."], false;
     end
@@ -614,7 +658,7 @@ function Favorites:Import(importStr, overwrite)
         return false, L["Invalid import string."], false;
     end
 
-    local characterKey = Character:GetSelectedKey();
+    characterKey = characterKey or Character:GetSelectedKey();
     local info = Character:ParseKey(characterKey);
     if (not info) then
         return false, L["No character selected."], false;
@@ -651,38 +695,19 @@ function Favorites:Import(importStr, overwrite)
     for specId, itemList in pairs(importedItems) do
         if (validSpecs[specId]) then
             for _, itemData in ipairs(itemList) do
-                local sourceId = Query:GetItemSource(itemData.itemId);
+                local isValid, sourceId = self:IsValidForSpec(itemData.itemId, specId, classId);
 
-                if (sourceId) then
-                    local item         = KeystoneLoot.ItemDatabase[itemData.itemId];
-                    local catalystItem = KeystoneLoot.CatalystDatabase[itemData.itemId];
-                    local isValid      = false;
+                if (isValid) then
+                    local exists = favorites[characterKey]
+                        and favorites[characterKey][sourceId]
+                        and favorites[characterKey][sourceId][specId]
+                        and favorites[characterKey][sourceId][specId][itemData.itemId];
 
-                    if (catalystItem) then
-                        isValid = catalystItem.classId == classId;
-                    elseif (item and item.classes[classId]) then
-                        for _, itemSpecId in ipairs(item.classes[classId]) do
-                            if (itemSpecId == specId) then
-                                isValid = true;
-                                break;
-                            end
-                        end
-                    elseif (sourceId == "custom") then
-                        isValid = Query:GetItemIcon(itemData.itemId) ~= nil;
-                    end
-
-                    if (isValid) then
-                        local exists = favorites[characterKey]
-                            and favorites[characterKey][sourceId]
-                            and favorites[characterKey][sourceId][specId]
-                            and favorites[characterKey][sourceId][specId][itemData.itemId];
-
-                        if (overwrite or not exists) then
-                            self:Add(sourceId, specId, itemData.itemId, itemData.tier, itemData.bonusIds, itemData.gems, itemData.enchant);
-                            totalImported = totalImported + 1;
-                        else
-                            skippedExisting = skippedExisting + 1;
-                        end
+                    if (overwrite or not exists) then
+                        self:Add(sourceId, specId, itemData.itemId, itemData.tier, itemData.bonusIds, itemData.gems, itemData.enchant, characterKey);
+                        totalImported = totalImported + 1;
+                    else
+                        skippedExisting = skippedExisting + 1;
                     end
                 end
             end
@@ -692,6 +717,8 @@ function Favorites:Import(importStr, overwrite)
     end
 
     if (totalImported > 0) then
+        FireEvent("FAVORITES_IMPORTED", characterKey, totalImported);
+
         return true, totalImported, skippedSpecs;
     end
 

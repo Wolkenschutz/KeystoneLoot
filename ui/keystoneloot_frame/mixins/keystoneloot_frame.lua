@@ -103,6 +103,8 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
     self.CustomItemFrame:Init();
     KeystoneLootMinimapButton:Init();
 
+    KeystoneLoot.APIInternal.SetReady();
+
     if (DB:Get("voidcoreChecked") or UnitLevel("player") < 90) then
         return;
     end

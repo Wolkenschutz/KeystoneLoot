@@ -65,21 +65,28 @@ function KeystoneLootRaidsFrameMixin:SetAllRaids(raids)
     self:RefreshSize();
 end
 
+function KeystoneLootRaidsFrameMixin:Refresh()
+    local raids = Query:GetRaids();
+
+    if (self.stackedMode) then
+        self:SetAllRaids(raids);
+    else
+        self:SetRaid(self.currentRaid or raids[1]);
+    end
+end
+
 function KeystoneLootRaidsFrameMixin:Init()
     local raids = Query:GetRaids();
 
     local stackedMode = Query:GetTotalRaidBosses() <= 10;
+    self.stackedMode = stackedMode;
 
     local function OnChanged()
         if (not self:IsShown()) then
             return;
         end
 
-        if (stackedMode) then
-            self:SetAllRaids(raids);
-        else
-            self:SetRaid(self.currentRaid);
-        end
+        self:Refresh();
     end
 
     DB:AddObserver("filters.specId", OnChanged);

@@ -16,6 +16,7 @@ Mark items as favorites on a per-character, per-spec basis, with four priority t
 - Favoriting for a single spec or all specs at once
 - Viewing another character's wishlist via the character dropdown
 - **Export & Import** of favorites using a compact string format (`KeystoneLoot:v3,...`), great for sharing wishlists or migrating between accounts. Building your own tool? See [Import String Format](#import-string-format-v3).
+- A public **addon API** (`KeystoneLootAPI`) so other addons can read, change, and react to favorites. See [Addon API](#addon-api).
 
 ### Void Core (Bonus Roll) Tracking
 See exactly which items you've already secured with Void Cores and what's still left to collect from each dungeon and raid boss. It even works retroactively: anything you'd already obtained is filled in automatically when you install it, so you're never starting from scratch.
@@ -117,3 +118,151 @@ Tier values:
 - The legacy `KeystoneLoot:v1` and `KeystoneLoot:v2` formats are still parsed for backwards compatibility, but `v3` is the current format and the one you should generate.
 
 The canonical implementation lives in [`modules/favorites.lua`](modules/favorites.lua) (`Favorites:Export` and `ParseV3`) if you want to match it exactly.
+
+---
+
+## Addon API
+
+KeystoneLoot exposes a global table `KeystoneLootAPI` that other addons can use to read, modify, and react to favorites. The implementation lives in [`modules/api.lua`](modules/api.lua).
+
+All functions are called with a colon (`KeystoneLootAPI:GetFavorites()`). Invalid arguments never throw - read functions return `nil` or an empty table, write functions return `false`.
+
+### Getting started
+
+```lua
+if (not KeystoneLootAPI) then
+    return; -- KeystoneLoot is not installed
+end
+
+KeystoneLootAPI:RegisterCallback("READY", function()
+    for _, entry in ipairs(KeystoneLootAPI:GetFavorites()) do
+        print(entry.itemId, entry.specId, entry.tierName);
+    end
+end, "MyAddon");
+```
+
+The saved variables are only available once the player has entered the world. Until then `KeystoneLootAPI:IsReady()` returns `false` and all favorite functions return empty results. Registering for `READY` after it already fired calls your callback immediately, so it is always safe to use.
+
+### Terms
+
+| Term | Description |
+| --- | --- |
+| `characterKey` | Identifies a character as `"Realm-Name-ClassId"`. Defaults to the character currently selected in the addon. |
+| `specId` | A Blizzard specialization ID. `0` means "all specs" (add for every usable spec, remove/read across all specs). |
+| `tier` | Favorite tier `1`-`4`, see `KeystoneLootAPI.Tier`. |
+| `sourceId` | Where an item comes from: a `challengeModeId` (dungeon), a `bossId` (raid), `"catalyst"` or `"custom"`. |
+
+### Constants
+
+```lua
+KeystoneLootAPI.Tier   -- { NICE = 1, MUST = 2, BIS = 3, TRANSMOG = 4 }
+KeystoneLootAPI.Event  -- { READY, FAVORITE_ADDED, FAVORITE_REMOVED,
+                       --   FAVORITE_TIER_CHANGED, FAVORITES_IMPORTED, FAVORITES_CHANGED }
+```
+
+### Functions
+
+**Meta**
+
+| Function | Returns |
+| --- | --- |
+| `:GetVersion()` | API version (number) and addon version (string). |
+| `:IsReady()` | `true` once the database is loaded. |
+
+**Tiers**
+
+| Function | Returns |
+| --- | --- |
+| `:GetTierName(tier)` | Localized tier name. |
+| `:GetTierTexture(tier)` | Texture path of the tier icon. |
+
+**Characters**
+
+| Function | Returns |
+| --- | --- |
+| `:GetCurrentCharacterKey()` | The key of the character you are logged in with. |
+| `:GetSelectedCharacterKey()` | The key of the character currently shown in the addon. |
+| `:GetCharacters(includeHidden)` | List of `{ key, name, realm, classId, className, classFile, isHidden }`. |
+| `:ParseCharacterKey(characterKey)` | `{ realm, name, classId }` or `nil`. |
+
+**Reading favorites**
+
+| Function | Returns |
+| --- | --- |
+| `:GetFavorites(characterKey)` | All favorites as a flat list of entries. |
+| `:GetFavoritesBySpec(specId, characterKey)` | Favorites of a single spec. |
+| `:GetFavorite(itemId, specId, characterKey)` | A single entry, or `nil`. With `specId = 0`/`nil` the entry with the highest tier. |
+| `:IsFavorite(itemId, specId, characterKey)` | `true`/`false`. |
+| `:GetTier(itemId, specId, characterKey)` | Tier `1`-`4`, or `0` if it is not a favorite. |
+| `:GetItemSpecs(itemId, characterKey)` | List of specIds the item is favorited for. |
+
+An entry looks like this:
+
+```lua
+{
+    itemId   = 178712,
+    specId   = 250,
+    sourceId = 161,             -- challengeModeId, bossId, "catalyst" or "custom"
+    tier     = 3,
+    tierName = "Best in Slot",  -- localized
+    bonusIds = { 6652, 1498 },  -- optional
+    gems     = { 213743 },      -- optional
+    enchant  = 7334,            -- optional
+}
+```
+
+**Items**
+
+| Function | Returns |
+| --- | --- |
+| `:GetItemSource(itemId)` | The `sourceId` of an item. |
+| `:GetSourceInfo(sourceId)` | `{ type = "dungeon"/"raid"/"catalyst"/"custom", name, ... }`. |
+| `:GetItemInfo(itemId)` | `{ itemId, slotId, icon, isCatalyst, isCustom, classes }`, where `classes` maps a classId to the specIds that can use the item. Custom Items are not in the database, so only `itemId`, `icon` and `isCustom` are set; `nil` for items that don't exist. |
+
+**Writing favorites**
+
+| Function | Returns |
+| --- | --- |
+| `:AddFavorite(itemId, specId, tier, options)` | `true` if the item was added. |
+| `:RemoveFavorite(itemId, specId, characterKey)` | `true` if something was removed. |
+| `:SetTier(itemId, specId, tier, characterKey)` | `true` if the tier of an already favorited item was changed. |
+| `:Import(importString, overwrite, characterKey)` | `success, importedCount or error message, skippedSpecs`. |
+| `:Export(characterKey)` | Import string of that character, or `nil` if there is nothing to export. |
+
+`options` for `:AddFavorite` are all optional: `{ bonusIds = { ... }, gems = { ... }, enchant = 0, characterKey = "..." }`. `tier` defaults to *Must have*.
+
+Items are validated exactly like an import: known dungeon, raid, and Catalyst items must be usable by the target class/spec, and unknown items are stored as Custom Items as long as the item really exists. The open window is redrawn automatically after a write.
+
+```lua
+-- Mark an item as BiS for the current character's active spec
+local specId = C_SpecializationInfo.GetSpecializationInfo(C_SpecializationInfo.GetSpecialization());
+
+KeystoneLootAPI:AddFavorite(178712, specId, KeystoneLootAPI.Tier.BIS, {
+    bonusIds     = { 6652, 1498 },
+    characterKey = KeystoneLootAPI:GetCurrentCharacterKey(),
+});
+```
+
+### Events
+
+`:RegisterCallback(event, callback, owner)` registers a callback, `:UnregisterCallback(event, owner)` removes it again. `owner` is the handle used to unregister and defaults to the callback itself. The callback always receives the event name as its first argument:
+
+| Event | Payload |
+| --- | --- |
+| `READY` | - |
+| `FAVORITE_ADDED` | `characterKey, itemId, specId, tier` |
+| `FAVORITE_REMOVED` | `characterKey, itemId, specId` |
+| `FAVORITE_TIER_CHANGED` | `characterKey, itemId, specId, tier` |
+| `FAVORITES_IMPORTED` | `characterKey, importedCount` |
+| `FAVORITES_CHANGED` | `characterKey` - fired after every one of the above |
+
+Events fire for every change, no matter whether it came from the UI, an import, or the API itself. Adding an item for all specs (`specId = 0`) fires one `FAVORITE_ADDED` per resolved spec.
+
+```lua
+local function OnFavoritesChanged(event, characterKey)
+    print("KeystoneLoot favorites changed for", characterKey);
+end
+
+KeystoneLootAPI:RegisterCallback("FAVORITES_CHANGED", OnFavoritesChanged, "MyAddon");
+KeystoneLootAPI:UnregisterCallback("FAVORITES_CHANGED", "MyAddon");
+```
