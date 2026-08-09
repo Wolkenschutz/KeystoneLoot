@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.11.0 - 2026-08-09
+
+### New Features
+
+- Add a public favorites API (KeystoneLootAPI see README) #60
+
+### Bugfixes
+
+- Dropdowns no longer break Blizzard's menus
+
 ## 2.10.4 - 2026-07-19
 
 ### Other Changes
