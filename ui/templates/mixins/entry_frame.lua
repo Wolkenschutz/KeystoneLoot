@@ -37,7 +37,7 @@ function KeystoneLootEntryFrameMixin:Init(index, instance, lootTable, isLastEntr
     if (instance.bossId) then
         name = EJ_GetEncounterInfo(instance.bossId);
         local _, _, _, creatureDisplayID = EJ_GetCreatureInfo(1, instance.bossId);
-        SetPortraitTextureFromCreatureDisplayID(self.TeleportButton.Icon, creatureDisplayID);
+        SetPortraitTextureFromCreatureDisplayID(self.TeleportButton.Icon, creatureDisplayID or 134400);
     else
         name, _, _, texture = C_ChallengeMode.GetMapUIInfo(instance.challengeModeId);
         self.TeleportButton:Init(instance, texture);

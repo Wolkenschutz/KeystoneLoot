@@ -19,7 +19,7 @@ function KeystoneLootTeleportButtonMixin:Init(dungeon, texture)
     self.teleportSpellId = teleportSpellId;
 
     local spellInfo = C_Spell.GetSpellInfo(teleportSpellId);
-    self.Icon:SetTexture(spellInfo.iconID);
+    self.Icon:SetTexture(spellInfo and spellInfo.iconID or 134400);
     self:UpdateCooldown();
 
     if (InCombatLockdown()) then
