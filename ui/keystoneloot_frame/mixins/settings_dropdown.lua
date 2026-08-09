@@ -147,7 +147,7 @@ StaticPopupDialogs.KEYSTONELOOT_WHISPER_MESSAGE = {
     hideOnEscape = true
 };
 
-KeystoneLootSettingsDropdownMixin = {};
+KeystoneLootSettingsDropdownMixin = CreateFromMixins(KSLDropdownButtonMixin);
 
 function KeystoneLootSettingsDropdownMixin:Init()
     self:SetupMenu(function(dropdown, rootDescription)

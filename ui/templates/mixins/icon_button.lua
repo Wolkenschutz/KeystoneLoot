@@ -6,6 +6,7 @@ local Favorites = KeystoneLoot.Favorites;
 local Character = KeystoneLoot.Character;
 local Query = KeystoneLoot.Query;
 local Voidcore = KeystoneLoot.Voidcore;
+local L = KeystoneLoot.L;
 
 local STAT_HIGHLIGHT_KEYS = {
     [0] = "crit",
@@ -13,6 +14,65 @@ local STAT_HIGHLIGHT_KEYS = {
     [2] = "mastery",
     [3] = "versatility"
 };
+
+local TIERS = {
+    Favorites.TIER_NICE,
+    Favorites.TIER_MUST,
+    Favorites.TIER_BIS,
+    Favorites.TIER_TRANSMOG
+};
+
+local function GenerateContextMenu(Button, rootDescription, specId, sourceId, currentTier)
+    local itemId = Button.itemId;
+
+    local function IsTierSelected(tier)
+        return currentTier == tier;
+    end
+
+    local function SetTierSelected(tier)
+        if (currentTier > 0) then
+            Favorites:SetTier(itemId, specId, tier);
+        else
+            Favorites:Add(sourceId, specId, itemId, tier);
+        end
+
+        currentTier = tier;
+        Button:UpdateFavoriteIcon();
+    end
+
+    rootDescription:CreateTitle(L["Set Favorite"]);
+
+    for _, tier in ipairs(TIERS) do
+        rootDescription:CreateRadio(Favorites.TIER_NAME[tier], IsTierSelected, SetTierSelected, tier);
+    end
+
+    if (currentTier > 0) then
+        rootDescription:CreateDivider();
+        rootDescription:CreateButton(REMOVE, function()
+            Favorites:Remove(itemId, specId);
+
+            currentTier = 0;
+            Button:UpdateFavoriteIcon();
+        end);
+    end
+
+    if (not Voidcore:IsEligible(itemId)) then
+        return;
+    end
+
+    local function IsVoidcoreUsed()
+        return Voidcore:IsUsed(itemId);
+    end
+
+    local function SetVoidcoreUsed()
+        Voidcore:SetUsed(itemId, not Voidcore:IsUsed(itemId));
+        Button:UpdateVoidcoreIcon();
+    end
+
+    rootDescription:CreateDivider();
+    rootDescription:CreateTitle(BONUS_LOOT_LABEL);
+    rootDescription:CreateCheckbox(L["Voidcore used"], IsVoidcoreUsed, SetVoidcoreUsed);
+end
 
 local function GetFavoritesSpecId()
     local info = Character:ParseKey(Character:GetSelectedKey());
@@ -260,25 +320,6 @@ function KeystoneLootLootIconButtonMixin:OnClick()
         currentTier = Favorites:GetTier(self.itemId, specId);
     end
 
-    if (KeystoneLootContextMenu:IsShown()) then
-        local isOwnMenu = KeystoneLootContextMenu.data and KeystoneLootContextMenu.data.Button == self;
-
-        KeystoneLootContextMenu:Close();
-
-        if (isOwnMenu) then
-            return;
-        end
-    end
-
-    KeystoneLootContextMenu:Open(self, {
-        Button      = self,
-        itemId      = self.itemId,
-        specId      = specId,
-        sourceId    = sourceId,
-        currentTier = currentTier,
-    });
-end
-
-function KeystoneLootLootIconButtonMixin:HandlesGlobalMouse(buttonName, event)
-    return KeystoneLootContextMenu:IsShown() and event == "GLOBAL_MOUSE_DOWN" and buttonName == "LeftButton";
+    GameTooltip:Hide();
+    KSLMenuUtil.CreateContextMenu(self, GenerateContextMenu, specId, sourceId, currentTier);
 end

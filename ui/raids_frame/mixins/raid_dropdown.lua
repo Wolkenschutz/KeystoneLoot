@@ -2,7 +2,7 @@ local AddonName, KeystoneLoot = ...;
 
 local DB = KeystoneLoot.DB;
 
-KeystoneLootRaidDropdownMixin = {};
+KeystoneLootRaidDropdownMixin = CreateFromMixins(KSLDropdownButtonMixin);
 
 function KeystoneLootRaidDropdownMixin:Init(raids)
     self.selectedIndex = 1;

@@ -39,17 +39,17 @@
                     <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="11" y="2"/>
                 </Anchors>
             </Frame>
-            <DropdownButton parentKey="SlotDropdown" inherits="WowStyle1DropdownTemplate" mixin="KeystoneLootSlotDropdownMixin">
+            <DropdownButton parentKey="SlotDropdown" inherits="KSLStyle1DropdownTemplate" mixin="KeystoneLootSlotDropdownMixin">
                 <Anchors>
                     <Anchor point="TOP" y="-30"/>
                 </Anchors>
             </DropdownButton>
-            <DropdownButton parentKey="ClassDropdown" inherits="WowStyle1DropdownTemplate" mixin="KeystoneLootClassDropdownMixin">
+            <DropdownButton parentKey="ClassDropdown" inherits="KSLStyle1DropdownTemplate" mixin="KeystoneLootClassDropdownMixin">
                 <Anchors>
                     <Anchor point="RIGHT" relativeKey="$parent.SlotDropdown" relativePoint="LEFT" x="-10"/>
                 </Anchors>
             </DropdownButton>
-            <DropdownButton parentKey="ItemLevelDropdown" inherits="WowStyle1DropdownTemplate" mixin="KeystoneLootItemLevelDropdownMixin">
+            <DropdownButton parentKey="ItemLevelDropdown" inherits="KSLStyle1DropdownTemplate" mixin="KeystoneLootItemLevelDropdownMixin">
                 <Anchors>
                     <Anchor point="LEFT" relativeKey="$parent.SlotDropdown" relativePoint="RIGHT" x="10"/>
                 </Anchors>

@@ -4,7 +4,7 @@ local DB = KeystoneLoot.DB;
 local Character = KeystoneLoot.Character;
 local L = KeystoneLoot.L;
 
-KeystoneLootCharacterDropdownMixin = {};
+KeystoneLootCharacterDropdownMixin = CreateFromMixins(KSLDropdownButtonMixin);
 
 function KeystoneLootCharacterDropdownMixin:Init()
     self:Refresh();

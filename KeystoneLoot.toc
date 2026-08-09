@@ -21,6 +21,21 @@
 ## SavedVariables: KeystoneLootDB
 ## SavedVariablesPerCharacter: KeystoneLootCharDB
 
+# Libs
+libs/menu/MenuConstants.lua
+libs/menu/Mainline/MenuConstants.lua
+libs/menu/MenuVariants.lua
+libs/menu/Mainline/MenuVariants.lua
+libs/menu/Compositor.lua
+libs/menu/Menu.lua
+libs/menu/Menu.xml
+libs/menu/DropdownButton.lua
+libs/menu/MenuTemplates.lua
+libs/menu/MenuTemplates.xml
+libs/menu/Mainline/MenuTemplates.lua
+libs/menu/Mainline/MenuTemplates.xml
+libs/menu/MenuUtil.lua
+
 # Initialization
 config.lua
 app.lua
@@ -65,9 +80,6 @@ ui/templates/mixins/icon_button.lua
 ui/templates/mixins/entry_frame.lua
 ui/templates/mixins/teleport_button.lua
 ui/templates/templates.xml
-
-ui/context_menu/mixins/context_menu.lua
-ui/context_menu/context_menu.xml
 
 ui/dungeons_frame/mixins/dungeons_frame.lua
 ui/dungeons_frame/dungeons_frame.xml
