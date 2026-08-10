@@ -94,7 +94,7 @@
         </Scripts>
     </Button>
 
-    <Frame name="KeystoneLootDropNotificationFrame" parent="UIParent" mixin="KeystoneLootDropNotificationFrameMixin" inherits="SimplePanelTemplate" frameStrata="DIALOG" toplevel="true" movable="true" enableMouse="true" clampedToScreen="true" hidden="true">
+    <Frame name="KeystoneLootDropNotificationFrameTemplate" mixin="KeystoneLootDropNotificationFrameMixin" inherits="SimplePanelTemplate" frameStrata="DIALOG" toplevel="true" movable="true" enableMouse="true" clampedToScreen="true" hidden="true" virtual="true">
         <Size x="280" y="150"/>
         <Anchors>
             <Anchor point="CENTER" y="150"/>
