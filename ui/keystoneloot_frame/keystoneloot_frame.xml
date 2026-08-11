@@ -29,7 +29,7 @@
         </Scripts>
     </DropdownButton>
 
-    <Frame name="KeystoneLootFrame" parent="UIParent" inherits="ButtonFrameBaseTemplate, TabSystemOwnerTemplate, CallbackRegistrantTemplate" toplevel="true" movable="true" enableMouse="true" clampedToScreen="true" hidden="true" mixin="KeystoneLootFrameMixin">
+    <Frame name="KeystoneLootFrameTemplate" inherits="ButtonFrameBaseTemplate, TabSystemOwnerTemplate, CallbackRegistrantTemplate" toplevel="true" movable="true" enableMouse="true" clampedToScreen="true" hidden="true" mixin="KeystoneLootFrameMixin" virtual="true">
         <Anchors>
             <Anchor point="CENTER"/>
         </Anchors>

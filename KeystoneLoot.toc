@@ -118,3 +118,5 @@ ui/keystoneloot_frame/mixins/character_dropdown.lua
 ui/keystoneloot_frame/mixins/settings_dropdown.lua
 ui/keystoneloot_frame/mixins/keystoneloot_frame.lua
 ui/keystoneloot_frame/keystoneloot_frame.xml
+
+ui/bootstrap.lua
