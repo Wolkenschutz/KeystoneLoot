@@ -32,13 +32,13 @@ local BLACKLIST_ITEMS = {
 };
 
 function Upgrade:IsUpgradeable(itemId)
-    local _, _, _, _, _, classId = C_Item.GetItemInfoInstant(itemId);
+    local _, _, _, _, _, classId, subClassId = C_Item.GetItemInfoInstant(itemId);
 
-    if (not classId or BLACKLIST_ITEMS[itemId]) then
+    if (not classId or BLACKLIST_ITEMS[itemId] or (classId == Enum.ItemClass.Armor and subClassId == Enum.ItemArmorSubclass.Cosmetic)) then
         return false;
     end
 
-    return classId == Enum.ItemClass.Armor or classId == Enum.ItemClass.Weapon;
+    return (classId == Enum.ItemClass.Armor or classId == Enum.ItemClass.Weapon);
 end
 
 function Upgrade:GetCurrentTrack()
@@ -101,19 +101,19 @@ function Upgrade:BuildItemLink(itemId)
 
     if (Query:GetItemSource(itemId) ~= "custom") then
         -- 2. New Midnight raid has a fixed item level
-        if (Query:IsItemFromRaid(itemId, 1592)) then
-            local difficultyId = Query:GetRaidDifficultyId();
+        -- if (Query:IsItemFromRaid(itemId, 1592)) then
+        --     local difficultyId = Query:GetRaidDifficultyId();
 
-            if (difficultyId == DifficultyUtil.ID.PrimaryRaidLFR) then
-                table.insert(bonusIds, 13789);
-            elseif (difficultyId == DifficultyUtil.ID.PrimaryRaidNormal) then
-                table.insert(bonusIds, 13788);
-            elseif (difficultyId == DifficultyUtil.ID.PrimaryRaidHeroic) then
-                table.insert(bonusIds, 13787);
-            elseif (difficultyId == DifficultyUtil.ID.PrimaryRaidMythic) then
-                table.insert(bonusIds, 13786);
-            end
-        else
+        --     if (difficultyId == DifficultyUtil.ID.PrimaryRaidLFR) then
+        --         table.insert(bonusIds, 13789);
+        --     elseif (difficultyId == DifficultyUtil.ID.PrimaryRaidNormal) then
+        --         table.insert(bonusIds, 13788);
+        --     elseif (difficultyId == DifficultyUtil.ID.PrimaryRaidHeroic) then
+        --         table.insert(bonusIds, 13787);
+        --     elseif (difficultyId == DifficultyUtil.ID.PrimaryRaidMythic) then
+        --         table.insert(bonusIds, 13786);
+        --     end
+        -- else
             -- 3. Item level adjustment bonus
             local levelDiff    = upgrade.ilvl - baseItemLevel;
             local levelBonusId = ITEM_LEVEL_BONUS_IDS[levelDiff];
@@ -125,7 +125,7 @@ function Upgrade:BuildItemLink(itemId)
             if (upgrade.bonusId) then
                 table.insert(bonusIds, upgrade.bonusId);
             end
-        end
+        -- end
     end
 
     -- 5. Special item bonus
