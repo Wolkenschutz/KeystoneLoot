@@ -72,7 +72,7 @@ KeystoneLoot.UpgradeTracks = {
         mythic = {
             CreateTrackEntry(318, 12849, Enum.ItemQuality.Epic, BOSS),
             CreateTrackEntry(321, 12850, Enum.ItemQuality.Epic, BOSS),
-            CreateTrackEntry(279, 12851, Enum.ItemQuality.Epic, BOSS),
+            CreateTrackEntry(324, 12851, Enum.ItemQuality.Epic, BOSS),
             CreateTrackEntry(328, 12852, Enum.ItemQuality.Epic, BOSS),
             CreateTrackEntry(331, 12853, Enum.ItemQuality.Legendary, ITEM_UPGRADE),
             CreateTrackEntry(334, 12854, Enum.ItemQuality.Legendary, ITEM_UPGRADE)
