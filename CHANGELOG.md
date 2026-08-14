@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.11.2 - 2026-08-14
+
+### Bugfixes
+
+- Allow unlimited characters in export and import dialogs
+
 ## 2.11.1 - 2026-08-12
 
 ### Other Changes
