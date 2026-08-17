@@ -25,6 +25,7 @@ L["The Catalyst"] = "Le catalyseur";
 L["Minimap button"] = "Bouton de la mini-carte";
 L["Item level in keystone tooltip"] = "Niveau d'objet dans l'infobulle de la clé";
 L["Favorite in item tooltip"] = "Favori dans l'infobulle de l'objet";
+L["Favorite on item icons"] = "Favori sur les icônes d'objet";
 L['Hide "Other" in All Slots'] = "Masquer « Autre » dans Tous les emplacements";
 L["Loot reminder (dungeons)"] = "Rappel de butin (donjons)";
 L["Highlighting"] = "Surlignage";

@@ -510,11 +510,14 @@ function Favorites:GetTier(itemId, specId)
 end
 
 function Favorites:GetAnyTier(itemId, useCurrentChar)
-    if (not itemId) then
+    return self:GetAnyTierForKey(itemId, useCurrentChar and Character:GetKey() or Character:GetSelectedKey());
+end
+
+function Favorites:GetAnyTierForKey(itemId, characterKey)
+    if (not itemId or not characterKey) then
         return 0;
     end
 
-    local characterKey = useCurrentChar and Character:GetKey() or Character:GetSelectedKey();
     local favorites = DB:Get("favorites");
 
     if (not favorites or not favorites[characterKey]) then

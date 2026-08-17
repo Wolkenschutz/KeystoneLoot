@@ -75,6 +75,7 @@ modules/api.lua
 # UI
 ui/keystone_tooltip.lua
 ui/item_tooltip.lua
+ui/favorite_icon.lua
 
 ui/templates/mixins/icon_button.lua
 ui/templates/mixins/entry_frame.lua

@@ -6,7 +6,7 @@ local DB = KeystoneLoot.DB;
 
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 
-local DB_VERSION = 9;
+local DB_VERSION = 10;
 local CHAR_DB_VERSION = 3;
 
 local observers = {};
@@ -118,6 +118,10 @@ function DB:MigrateGlobalDB(fromVersion)
             CHAT_MSG_PARTY_LEADER = true,
             CHAT_MSG_GUILD = true
         };
+    end
+
+    if (fromVersion == 9) then
+        KeystoneLootDB.settings.favoriteIcon = true;
     end
 end
 

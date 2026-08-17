@@ -29,6 +29,29 @@ function Character:ParseKey(characterKey)
     end
 end
 
+local function NormalizeRealm(realm)
+    return realm and string.lower(string.gsub(realm, "%s+", "")) or nil;
+end
+
+function Character:FindKey(name, realm)
+    if (not name or name == "") then
+        return nil;
+    end
+
+    name = string.lower(name);
+    realm = NormalizeRealm(realm) or NormalizeRealm(GetRealmName());
+
+    for characterKey in pairs(DB:Get("favorites") or {}) do
+        local info = self:ParseKey(characterKey);
+
+        if (info and string.lower(info.name) == name and NormalizeRealm(info.realm) == realm) then
+            return characterKey;
+        end
+    end
+
+    return nil;
+end
+
 function Character:GetCurrentClassId()
     local _, _, classId = UnitClass("player");
     return classId;
