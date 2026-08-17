@@ -17,6 +17,8 @@ local ICON_ANCHOR = {
     BOTTOMLEFT = { 1, 1 },
 };
 
+local trackedButtons = setmetatable({}, { __mode = "k" });
+
 local function SetTier(Button, tier, point)
     if (not tier or tier == 0) then
         if (Button.KeystoneLootTierIcon) then
@@ -44,6 +46,12 @@ local function UpdateByItemId(Button, itemId, characterKey, point)
     if (characterKey == nil) then
         characterKey = Character:GetKey();
     end
+
+    Button.KeystoneLootItemId = itemId;
+    Button.KeystoneLootCharacterKey = characterKey;
+    Button.KeystoneLootPoint = point;
+
+    trackedButtons[Button] = itemId and true or nil;
 
     local tier = itemId and DB:Get("settings.favoriteIcon")
         and Favorites:GetAnyTierForKey(itemId, characterKey) or 0;
@@ -314,3 +322,13 @@ EventUtil.ContinueOnAddOnLoaded("BetterBags", function()
         end
     end);
 end);
+
+local function RefreshTrackedButtons()
+    for Button in pairs(trackedButtons) do
+        if (Button:IsVisible()) then
+            UpdateByItemId(Button, Button.KeystoneLootItemId, Button.KeystoneLootCharacterKey, Button.KeystoneLootPoint);
+        end
+    end
+end
+
+KeystoneLoot.API:RegisterCallback("FAVORITES_CHANGED", RefreshTrackedButtons, AddonName);
