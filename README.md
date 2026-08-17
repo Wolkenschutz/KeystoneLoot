@@ -12,7 +12,7 @@ KeystoneLoot is a World of Warcraft addon that gives you a compact, filterable o
 Filter displayed items by class, specialization, item slot, and item level. Filters automatically sync when you switch characters via the character dropdown, so you always see what's relevant to your current alt.
 
 ### Favorites System
-Mark items as favorites on a per-character, per-spec basis, with four priority tiers: **Nice to have**, **Must have**, **Best in Slot**, and **Transmog**. The system supports:
+Mark items as favorites on a per-character, per-spec basis, with five priority tiers: **Nice to have**, **Must have**, **Best in Slot**, **Transmog**, and **Catalyst** (only for items the Catalyst can convert). The system supports:
 - Favoriting for a single spec or all specs at once
 - Viewing another character's wishlist via the character dropdown
 - **Export & Import** of favorites using a compact string format (`KeystoneLoot:v3,...`), great for sharing wishlists or migrating between accounts. Building your own tool? See [Import String Format](#import-string-format-v3).
@@ -94,7 +94,7 @@ Fields per item entry:
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `itemId` | integer | yes | The item's ID. |
-| `tier` | integer | no | Favorite tier, `1`-`4`. Defaults to `2`. |
+| `tier` | integer | no | Favorite tier, `1`-`5`. Defaults to `2`. |
 | `bonusIds` | integer[] | no | Bonus IDs applied to the item. |
 | `gems` | integer[] | no | Socketed gem item IDs. |
 | `enchant` | integer | no | Enchant ID. |
@@ -109,10 +109,20 @@ Tier values:
 | `2` | Must have |
 | `3` | Best in Slot |
 | `4` | Transmog |
+| `5` | Catalyst |
+
+`1` (Nice to have) and `2` (Must have) work on every item. The other three depend on the item's slot:
+
+| Tier | Only valid for |
+| --- | --- |
+| `3` Best in Slot | Anything except *Other* - items that aren't a gear piece can't be rated as one. |
+| `4` Transmog | Same as Best in Slot. |
+| `5` Catalyst | Head, shoulder, back, chest, wrist, hands, legs and feet - the slots the Catalyst can convert. |
 
 ### Things to know when generating strings
 
 - On import, entries for specs that don't belong to the importing character's class are **skipped**.
+- A `tier` that is unknown, or not allowed for that item (see the table above), falls back to `2` - the item itself is still imported.
 - Known items (Mythic+ dungeon, raid, or Catalyst loot) are imported only if they are valid for the target class/spec.
 - Any item that isn't in KeystoneLoot's database is imported as a **Custom Item**, as long as it's a real, existing item. Custom Items aren't validated against class/spec the way known items are (anything unknown is simply treated as custom), but they are still keyed under a spec, so that spec must belong to the character's class. Custom Items also do **not** inherit the addon's configured item level; if it matters (e.g. for crafted gear), set it explicitly via `bonusIds`.
 - The legacy `KeystoneLoot:v1` and `KeystoneLoot:v2` formats are still parsed for backwards compatibility, but `v3` is the current format and the one you should generate.
@@ -149,16 +159,18 @@ The saved variables are only available once the player has entered the world. Un
 | --- | --- |
 | `characterKey` | Identifies a character as `"Realm-Name-ClassId"`. Defaults to the character currently selected in the addon. |
 | `specId` | A Blizzard specialization ID. `0` means "all specs" (add for every usable spec, remove/read across all specs). |
-| `tier` | Favorite tier `1`-`4`, see `KeystoneLootAPI.Tier`. |
+| `tier` | Favorite tier `1`-`5`, see `KeystoneLootAPI.Tier`. |
 | `sourceId` | Where an item comes from: a `challengeModeId` (dungeon), a `bossId` (raid), `"catalyst"` or `"custom"`. |
 
 ### Constants
 
 ```lua
-KeystoneLootAPI.Tier   -- { NICE = 1, MUST = 2, BIS = 3, TRANSMOG = 4 }
+KeystoneLootAPI.Tier   -- { NICE = 1, MUST = 2, BIS = 3, TRANSMOG = 4, CATALYST = 5 }
 KeystoneLootAPI.Event  -- { READY, FAVORITE_ADDED, FAVORITE_REMOVED,
                        --   FAVORITE_TIER_CHANGED, FAVORITES_IMPORTED, FAVORITES_CHANGED }
 ```
+
+Don't hardcode this list. `:GetTiers()` (below) returns whatever tiers the installed version has, so your addon keeps working if the list ever grows again.
 
 ### Functions
 
@@ -169,12 +181,35 @@ KeystoneLootAPI.Event  -- { READY, FAVORITE_ADDED, FAVORITE_REMOVED,
 | `:GetVersion()` | API version (number) and addon version (string). |
 | `:IsReady()` | `true` once the database is loaded. |
 
+The API version is currently `2`. Version `2` added the **Catalyst** tier plus `:GetTiers` and `:IsTierValidForItem`; check it if you need to support older installs.
+
 **Tiers**
 
 | Function | Returns |
 | --- | --- |
+| `:GetTiers(itemId)` | Every tier, most important first. With an `itemId` only the tiers that item accepts. |
 | `:GetTierName(tier)` | Localized tier name. |
 | `:GetTierTexture(tier)` | Texture path of the tier icon. |
+| `:IsTierValidForItem(tier, itemId)` | `true` if that tier can be used for that item. |
+
+`:GetTiers` is the way to stay independent of the tier list. It returns them in the addon's own order - Best in Slot, Must have, Nice to have, Catalyst, Transmog - which is the same order the right-click menu and the sorted item lists use, so a menu built from it matches the addon. Each entry looks like this:
+
+```lua
+{
+    tier    = 5,
+    name    = "Catalyst",  -- localized
+    texture = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_catalyst",
+}
+```
+
+Not every tier works on every item - **Catalyst** needs a slot the Catalyst can convert, **Best in Slot** and **Transmog** need an actual gear piece (see [Tier values](#import-string-format-v3)). Passing an `itemId` to `:GetTiers` filters the list down to what `:AddFavorite` and `:SetTier` will actually accept for that item, which is why you should prefer it over hardcoding `KeystoneLootAPI.Tier`.
+
+```lua
+-- Build a tier menu for an item without knowing which tiers exist
+for _, tierInfo in ipairs(KeystoneLootAPI:GetTiers(itemId)) do
+    print(string.format("|T%s:16:16|t %s", tierInfo.texture, tierInfo.name), tierInfo.tier);
+end
+```
 
 **Characters**
 
@@ -193,7 +228,7 @@ KeystoneLootAPI.Event  -- { READY, FAVORITE_ADDED, FAVORITE_REMOVED,
 | `:GetFavoritesBySpec(specId, characterKey)` | Favorites of a single spec. |
 | `:GetFavorite(itemId, specId, characterKey)` | A single entry, or `nil`. With `specId = 0`/`nil` the entry with the highest tier. |
 | `:IsFavorite(itemId, specId, characterKey)` | `true`/`false`. |
-| `:GetTier(itemId, specId, characterKey)` | Tier `1`-`4`, or `0` if it is not a favorite. |
+| `:GetTier(itemId, specId, characterKey)` | Tier `1`-`5`, or `0` if it is not a favorite. |
 | `:GetItemSpecs(itemId, characterKey)` | List of specIds the item is favorited for. |
 
 An entry looks like this:
@@ -232,6 +267,8 @@ An entry looks like this:
 `options` for `:AddFavorite` are all optional: `{ bonusIds = { ... }, gems = { ... }, enchant = 0, characterKey = "..." }`. `tier` defaults to *Must have*.
 
 Items are validated exactly like an import: known dungeon, raid, and Catalyst items must be usable by the target class/spec, and unknown items are stored as Custom Items as long as the item really exists. The open window is redrawn automatically after a write.
+
+The `tier` is validated too. Unlike an import, `:AddFavorite` and `:SetTier` return `false` instead of falling back to a default, so check with `:IsTierValidForItem(tier, itemId)` or use `:GetTiers(itemId)` when the tier can be a restricted one such as `Tier.CATALYST`.
 
 ```lua
 -- Mark an item as BiS for the current character's active spec

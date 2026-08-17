@@ -14,7 +14,7 @@ Whether you're pushing keys, progging a raid, or converting gear at the Catalyst
 Filter by class, specialization, item slot, and item level. Switching characters in the dropdown automatically adjusts the filters, perfect for alt-heavy players.
 
 [B]Favorites[/B]
-Found an item you need? Mark it as a favorite with one of four priority tiers: Nice to have, Must have, Best in Slot, or Transmog. Favorites are saved per character and per spec, so your Warrior wishlist won't interfere with your Druid's. Use the character dropdown to switch between your alts and manage each one's wishlist independently. You can also export and import favorites as a short string, handy for sharing with your guild or syncing between characters.
+Found an item you need? Mark it as a favorite with one of five priority tiers: Nice to have, Must have, Best in Slot, Transmog, or Catalyst (for items the Catalyst can convert). Favorites are saved per character and per spec, so your Warrior wishlist won't interfere with your Druid's. Use the character dropdown to switch between your alts and manage each one's wishlist independently. You can also export and import favorites as a short string, handy for sharing with your guild or syncing between characters.
 
 [B]Void Core (Bonus Roll) Tracking[/B]
 See exactly which items you've already secured with Void Cores and what's still left to collect from each dungeon and raid boss. It even works retroactively: anything you'd already obtained is filled in automatically when you install it, so you're never starting from scratch.

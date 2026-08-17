@@ -10,7 +10,7 @@ function KeystoneLootDropNotificationRowMixin:Init(drop)
     local _, _, _, _, icon = C_Item.GetItemInfoInstant(drop.itemId);
     local tier = Favorites:GetAnyTier(drop.itemId);
 
-    self.IconFrame.FavoriteIcon:SetTexture(Favorites.TIER_TEXTURE[tier]);
+    self.IconFrame.FavoriteIcon:SetTexture(Favorites:GetTierIcon(tier));
     self.IconFrame.Icon:SetTexture(icon);
 
     self.ItemName:SetText(string.gsub(drop.itemLink, "[%[%]]", ""));

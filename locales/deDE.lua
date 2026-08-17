@@ -78,6 +78,7 @@ L["This import string requires a newer version of KeystoneLoot."] = "Dieser Impo
 L["Set Favorite"] = "Favorit festlegen";
 L["Nice to have"] = "Wäre schön";
 L["Must have"] = "Muss haben";
+L["Catalyst"] = "Katalysator";
 L["Voidcore used"] = "Leerenkern benutzt";
 
 -- loot_reminder_frame.lua

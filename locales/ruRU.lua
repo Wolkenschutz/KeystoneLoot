@@ -76,6 +76,7 @@ L["Set Favorite"] = "Добавить в избранное";
 L["Nice to have"] = "Желательно";
 L["Must have"] = "Обязательно";
 L["Best in Slot"] = "БиС";
+L["Catalyst"] = "Катализатор";
 L["Voidcore used"] = "Использован сердечник Бездны";
 
 -- loot_reminder_frame.lua

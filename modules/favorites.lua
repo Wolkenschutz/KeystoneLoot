@@ -15,19 +15,85 @@ Favorites.TIER_NICE           = 1;
 Favorites.TIER_MUST           = 2;
 Favorites.TIER_BIS            = 3;
 Favorites.TIER_TRANSMOG       = 4;
+Favorites.TIER_CATALYST       = 5;
 
-Favorites.TIER_TEXTURE        = {
+Favorites.TIER_ORDER          = {
+    Favorites.TIER_BIS,
+    Favorites.TIER_MUST,
+    Favorites.TIER_NICE,
+    Favorites.TIER_CATALYST,
+    Favorites.TIER_TRANSMOG,
+};
+
+Favorites.TIER_SORT_INDEX     = {};
+
+for index, tier in ipairs(Favorites.TIER_ORDER) do
+    Favorites.TIER_SORT_INDEX[tier] = index;
+end
+
+Favorites.TIER_TEXTURE = {
     [1] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_nice",
     [2] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_must",
     [3] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_bis",
     [4] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_transmog",
+    [5] = "Interface\\AddOns\\KeystoneLoot\\assets\\tier_catalyst",
 };
 
-Favorites.TIER_NAME           = {
+Favorites.TIER_NAME    = {
     [1] = L["Nice to have"],
     [2] = L["Must have"],
     [3] = L["Best in Slot"],
     [4] = L["Transmog"],
+    [5] = L["Catalyst"],
+};
+
+local OTHER_SLOT       = 14;
+
+local CATALYST_SLOTS   = {
+    [0] = true, -- Head
+    [2] = true, -- Shoulder
+    [3] = true, -- Back
+    [4] = true, -- Chest
+    [5] = true, -- Wrist
+    [6] = true, -- Hands
+    [8] = true, -- Legs
+    [9] = true, -- Feet
+};
+
+local TIER_SLOT_RULE   = {
+    [Favorites.TIER_BIS]      = function(slotId)
+        return slotId ~= OTHER_SLOT;
+    end,
+    [Favorites.TIER_TRANSMOG] = function(slotId)
+        return slotId ~= OTHER_SLOT;
+    end,
+    [Favorites.TIER_CATALYST] = function(slotId)
+        return CATALYST_SLOTS[slotId] == true;
+    end,
+};
+
+local EQUIP_LOC_SLOT   = {
+    INVTYPE_HEAD           = 0,
+    INVTYPE_NECK           = 1,
+    INVTYPE_SHOULDER       = 2,
+    INVTYPE_CLOAK          = 3,
+    INVTYPE_CHEST          = 4,
+    INVTYPE_ROBE           = 4,
+    INVTYPE_WRIST          = 5,
+    INVTYPE_HAND           = 6,
+    INVTYPE_WAIST          = 7,
+    INVTYPE_LEGS           = 8,
+    INVTYPE_FEET           = 9,
+    INVTYPE_WEAPON         = 10,
+    INVTYPE_2HWEAPON       = 10,
+    INVTYPE_WEAPONMAINHAND = 10,
+    INVTYPE_RANGED         = 10,
+    INVTYPE_RANGEDRIGHT    = 10,
+    INVTYPE_WEAPONOFFHAND  = 11,
+    INVTYPE_HOLDABLE       = 11,
+    INVTYPE_SHIELD         = 11,
+    INVTYPE_FINGER         = 12,
+    INVTYPE_TRINKET        = 13,
 };
 
 local function FireEvent(event, ...)
@@ -227,8 +293,66 @@ function Favorites:Init()
     DB:Set("ui.selectedCharacterKey", characterKey);
 end
 
+function Favorites:GetItemSlotId(itemId)
+    if (not itemId) then
+        return nil;
+    end
+
+    local catalystItem = KeystoneLoot.CatalystDatabase[itemId];
+    if (catalystItem) then
+        return catalystItem.slotId;
+    end
+
+    local item = KeystoneLoot.ItemDatabase[itemId];
+    if (item) then
+        return item.slotId;
+    end
+
+    local _, _, _, itemEquipLoc = C_Item.GetItemInfoInstant(itemId);
+    return EQUIP_LOC_SLOT[itemEquipLoc] or OTHER_SLOT;
+end
+
+function Favorites:IsValidTier(tier)
+    return tier ~= nil and self.TIER_NAME[tier] ~= nil;
+end
+
+function Favorites:IsTierAllowedForItem(tier, itemId)
+    if (not self:IsValidTier(tier)) then
+        return false;
+    end
+
+    local rule = TIER_SLOT_RULE[tier];
+    if (not rule) then
+        return true;
+    end
+
+    return rule(self:GetItemSlotId(itemId));
+end
+
+function Favorites:GetTiers(itemId)
+    local tiers = {};
+
+    for _, tier in ipairs(self.TIER_ORDER) do
+        if (itemId == nil or self:IsTierAllowedForItem(tier, itemId)) then
+            table.insert(tiers, tier);
+        end
+    end
+
+    return tiers;
+end
+
+function Favorites:GetTierIcon(tier)
+    return self.TIER_TEXTURE[tier];
+end
+
 function Favorites:Add(sourceId, specId, itemId, tier, bonusIds, gems, enchant, characterKey)
     if (not sourceId or specId == nil or not itemId) then
+        return false;
+    end
+
+    tier = tier or self.TIER_MUST;
+
+    if (not self:IsTierAllowedForItem(tier, itemId)) then
         return false;
     end
 
@@ -283,7 +407,7 @@ function Favorites:Add(sourceId, specId, itemId, tier, bonusIds, gems, enchant, 
 
     -- Add item
     favorites[characterKey][sourceId][specId][itemId] = {
-        tier     = tier or self.TIER_MUST,
+        tier     = tier,
         bonusIds = bonusIds,
         gems     = gems,
         enchant  = enchant,
@@ -292,7 +416,7 @@ function Favorites:Add(sourceId, specId, itemId, tier, bonusIds, gems, enchant, 
     -- Save to DB
     DB:Set("favorites", favorites);
 
-    FireEvent("FAVORITE_ADDED", characterKey, itemId, specId, tier or self.TIER_MUST);
+    FireEvent("FAVORITE_ADDED", characterKey, itemId, specId, tier);
 
     return true;
 end
@@ -445,7 +569,7 @@ function Favorites:GetEnchant(itemId, specId)
 end
 
 function Favorites:SetTier(itemId, specId, tier, characterKey)
-    if (not itemId) then
+    if (not itemId or not self:IsTierAllowedForItem(tier, itemId)) then
         return false;
     end
 
@@ -704,7 +828,12 @@ function Favorites:Import(importStr, overwrite, characterKey)
                         and favorites[characterKey][sourceId][specId][itemData.itemId];
 
                     if (overwrite or not exists) then
-                        self:Add(sourceId, specId, itemData.itemId, itemData.tier, itemData.bonusIds, itemData.gems, itemData.enchant, characterKey);
+                        local tier = itemData.tier;
+                        if (not self:IsTierAllowedForItem(tier, itemData.itemId)) then
+                            tier = self.TIER_MUST;
+                        end
+
+                        self:Add(sourceId, specId, itemData.itemId, tier, itemData.bonusIds, itemData.gems, itemData.enchant, characterKey);
                         totalImported = totalImported + 1;
                     else
                         skippedExisting = skippedExisting + 1;

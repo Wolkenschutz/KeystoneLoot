@@ -76,6 +76,7 @@ L["Set Favorite"] = "設定最愛";
 L["Nice to have"] = "有更好";
 L["Must have"] = "必須取得";
 L["Best in Slot"] = "最佳裝備";
+L["Catalyst"] = "催化器";
 
 -- loot_reminder_frame.lua
 L["Correct loot specialization set?"] = "戰利品專精的設定是否正確？";

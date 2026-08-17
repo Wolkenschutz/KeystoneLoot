@@ -12,7 +12,7 @@ local DB                      = KeystoneLoot.DB;
 local Favorites               = KeystoneLoot.Favorites;
 local Query                   = KeystoneLoot.Query;
 
-local API_VERSION             = 1;
+local API_VERSION             = 2;
 
 local isReady                 = false;
 local isRefreshPending        = false;
@@ -23,6 +23,7 @@ API.Tier                      = {
     MUST     = Favorites.TIER_MUST,
     BIS      = Favorites.TIER_BIS,
     TRANSMOG = Favorites.TIER_TRANSMOG,
+    CATALYST = Favorites.TIER_CATALYST,
 };
 
 API.Event                     = {
@@ -216,7 +217,43 @@ function API:GetTierTexture(tier)
         return nil;
     end
 
-    return Favorites.TIER_TEXTURE[tier];
+    return Favorites:GetTierIcon(tier);
+end
+
+-- Not every tier works on every item, some are limited to certain slots
+function API:IsTierValidForItem(tier, itemId)
+    tier = ToTier(tier);
+    itemId = ToItemId(itemId);
+
+    if (not tier or not itemId) then
+        return false;
+    end
+
+    return Favorites:IsTierAllowedForItem(tier, itemId);
+end
+
+-- Every tier, most important first: { tier, name, texture }
+-- With an itemId only the tiers that can be used for that item
+function API:GetTiers(itemId)
+    if (itemId ~= nil) then
+        itemId = ToItemId(itemId);
+
+        if (not itemId) then
+            return {};
+        end
+    end
+
+    local tiers = {};
+
+    for _, tier in ipairs(Favorites:GetTiers(itemId)) do
+        table.insert(tiers, {
+            tier    = tier,
+            name    = Favorites.TIER_NAME[tier],
+            texture = Favorites:GetTierIcon(tier),
+        });
+    end
+
+    return tiers;
 end
 
 -- Key of the character you are logged in with

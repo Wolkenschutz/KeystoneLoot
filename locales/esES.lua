@@ -75,6 +75,7 @@ L["This import string requires a newer version of KeystoneLoot."] = "Esta cadena
 L["Set Favorite"] = "Establecer favorito";
 L["Nice to have"] = "Estaría bien tenerlo";
 L["Must have"] = "Imprescindible";
+L["Catalyst"] = "Catalizador";
 
 -- loot_reminder_frame.lua
 L["Correct loot specialization set?"] = "¿Especialización de botín correcta?";

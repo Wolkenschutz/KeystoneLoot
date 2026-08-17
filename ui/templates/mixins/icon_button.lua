@@ -15,13 +15,6 @@ local STAT_HIGHLIGHT_KEYS = {
     [3] = "versatility"
 };
 
-local TIERS = {
-    Favorites.TIER_NICE,
-    Favorites.TIER_MUST,
-    Favorites.TIER_BIS,
-    Favorites.TIER_TRANSMOG
-};
-
 local function GenerateContextMenu(Button, rootDescription, specId, sourceId, currentTier)
     local itemId = Button.itemId;
 
@@ -42,7 +35,7 @@ local function GenerateContextMenu(Button, rootDescription, specId, sourceId, cu
 
     rootDescription:CreateTitle(L["Set Favorite"]);
 
-    for _, tier in ipairs(TIERS) do
+    for _, tier in ipairs(Favorites:GetTiers(itemId)) do
         rootDescription:CreateRadio(Favorites.TIER_NAME[tier], IsTierSelected, SetTierSelected, tier);
     end
 
@@ -219,11 +212,11 @@ function KeystoneLootLootIconButtonMixin:UpdateFavoriteIcon()
     end
 
     if (tier > 0) then
-        self.Content.FavoriteIcon:SetTexture(Favorites.TIER_TEXTURE[tier]);
+        self.Content.FavoriteIcon:SetTexture(Favorites:GetTierIcon(tier));
         self.Content.FavoriteIcon:SetDesaturated(false);
         self.Content.FavoriteIcon:Show();
     elseif (self.isHovered and (isFavoritesSlot or classesMatch)) then
-        self.Content.FavoriteIcon:SetTexture(Favorites.TIER_TEXTURE[Favorites.TIER_MUST]);
+        self.Content.FavoriteIcon:SetTexture(Favorites:GetTierIcon(Favorites.TIER_MUST));
         self.Content.FavoriteIcon:SetDesaturated(true);
         self.Content.FavoriteIcon:Show();
     else

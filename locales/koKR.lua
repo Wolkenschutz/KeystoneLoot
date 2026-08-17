@@ -76,6 +76,7 @@ L["Set Favorite"] = "즐겨찾기 설정";
 L["Nice to have"] = "있으면 좋음";
 L["Must have"] = "필수";
 L["Best in Slot"] = "최고 장비";
+L["Catalyst"] = "촉매";
 
 -- loot_reminder_frame.lua
 L["Correct loot specialization set?"] = "올바른 전리품 전문화 설정?";
