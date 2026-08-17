@@ -251,9 +251,6 @@ EventUtil.ContinueOnAddOnLoaded("ArkInventory", function()
     end);
 end);
 
--- On hold: WanderingFox (https://github.com/WanderingFox) wants to write an addon
--- for this, so we leave Baganator to them
---[[
 EventUtil.ContinueOnAddOnLoaded("Baganator", function()
     local function GetViewCharacterKey(CornerFrame)
         local Frame = CornerFrame;
@@ -296,7 +293,6 @@ EventUtil.ContinueOnAddOnLoaded("Baganator", function()
         { corner = "top_left", priority = 1 }
     );
 end);
-]]
 
 EventUtil.ContinueOnAddOnLoaded("BetterBags", function()
     local betterBags = LibStub("AceAddon-3.0", true):GetAddon("BetterBags", true);
