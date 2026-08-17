@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.12.0 - 2026-08-17
+
+### New Features
+
+- Show the favorite icon on item buttons in bags, bank, character sheet and loot
+
+### Improvements
+
+- Add Catalyst favorite tier and expose the ordered tier list via the API (see README)
+
+### Other Changes
+
+- Update data
+
 ## 2.11.2 - 2026-08-14
 
 ### Bugfixes
