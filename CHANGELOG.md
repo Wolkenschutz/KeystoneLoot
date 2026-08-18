@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.12.1 - 2026-08-18
+
+### Improvements
+
+- Added Baganator for the icon buttons. All credit for this goes to @WanderingFox - Thanks!
+- Update the favorite icon right away when a favorite changes
+
 ## 2.12.0 - 2026-08-17
 
 ### New Features
