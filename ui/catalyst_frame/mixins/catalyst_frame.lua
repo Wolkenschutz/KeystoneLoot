@@ -29,6 +29,12 @@ function KeystoneLootCatalystFrameMixin:Init()
     self:Refresh();
 end
 
+function KeystoneLootCatalystFrameMixin:RefreshOwnedIcons()
+    for Icon in self.iconPool:EnumerateActive() do
+        Icon:UpdateOwnedIcon();
+    end
+end
+
 function KeystoneLootCatalystFrameMixin:Refresh()
     self.iconPool:ReleaseAll();
 

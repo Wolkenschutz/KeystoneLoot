@@ -27,6 +27,9 @@ L["Item level in keystone tooltip"] = "Показать уровень пред�
 L["Favorite in item tooltip"] = "Избранное в подсказке предмета";
 L["Favorite on item icons"] = "Избранное на значках предметов";
 L["Slot name on item icons"] = "Название слота на значках предметов";
+L["Owned in item tooltip"] = "Наличие в подсказке предмета";
+L["Shows in the item tooltip where the item is: equipped, bags or bank."] = "Показывает в подсказке предмета, где он находится: надет, сумки или банк.";
+L["Already shown by another addon."] = "Уже отображается другим аддоном.";
 L['Hide "Other" in All Slots'] = "Скрывать \"Прочее\" при показе всех слотов";
 L["Loot reminder (dungeons)"] = "Включить напоминание о добыче";
 L["Own favorites"] = "Своё избранное";
@@ -112,6 +115,11 @@ L["Shield"] = "Щит";
 L["Ranged"] = "Дальн.";
 L["Ring"] = "Кольцо";
 L["Trinket"] = "Аксесс.";
+
+-- owned.lua
+L["Already equipped"] = "Уже надет";
+L["In your bags"] = "В сумках";
+L["In your bank"] = "В банке";
 
 -- copy_popup.lua
 L["Press CTRL+C to copy"] = "Нажмите CTRL+C, чтобы скопировать";

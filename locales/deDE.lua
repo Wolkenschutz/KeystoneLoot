@@ -30,6 +30,9 @@ L["Item level in keystone tooltip"] = "Gegenstandsstufe im Schlüsselstein-Toolt
 L["Favorite in item tooltip"] = "Favorit im Gegenstand-Tooltip";
 L["Favorite on item icons"] = "Favorit auf Gegenstand-Icons";
 L["Slot name on item icons"] = "Slot-Name auf Gegenstand-Icons";
+L["Owned in item tooltip"] = "Besitz im Gegenstand-Tooltip";
+L["Shows in the item tooltip where the item is: equipped, bags or bank."] = "Zeigt im Gegenstand-Tooltip, wo sich der Gegenstand befindet: angelegt, Taschen oder Bank.";
+L["Already shown by another addon."] = "Wird bereits von einem anderen Addon angezeigt.";
 L['Hide "Other" in All Slots'] = "\"Sonstiges\" in Alle Slots ausblenden";
 L["Loot reminder (dungeons)"] = "Beute-Erinnerung (Dungeons)";
 L["Own favorites"] = "Eigene Favoriten";
@@ -114,6 +117,11 @@ L["Shield"] = "Schild";
 L["Ranged"] = "Fern";
 L["Ring"] = "Ring";
 L["Trinket"] = "Schmuck";
+
+-- owned.lua
+L["Already equipped"] = "Bereits angelegt";
+L["In your bags"] = "In deinen Taschen";
+L["In your bank"] = "In deiner Bank";
 
 -- copy_popup.lua
 L["Press CTRL+C to copy"] = "STRG+C zum Kopieren";

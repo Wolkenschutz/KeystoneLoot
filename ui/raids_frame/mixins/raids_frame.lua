@@ -9,6 +9,16 @@ function KeystoneLootRaidsFrameMixin:OnLoad()
     self.blockPool = CreateFramePool("Frame", self, "KeystoneLootRaidBlockTemplate");
 end
 
+function KeystoneLootRaidsFrameMixin:RefreshOwnedIcons()
+    for Block in self.blockPool:EnumerateActive() do
+        for Frame in Block.entryPool:EnumerateActive() do
+            for _, Button in Frame.IconScrollBox:EnumerateFrames() do
+                Button:UpdateOwnedIcon();
+            end
+        end
+    end
+end
+
 function KeystoneLootRaidsFrameMixin:RefreshSize()
     local Parent = self:GetParent();
     if (Parent.raidsTabId) then

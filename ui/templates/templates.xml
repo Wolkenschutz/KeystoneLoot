@@ -33,6 +33,12 @@
                                 <Anchor point="TOPRIGHT" relativeKey="$parent.Icon" x="5" y="6"/>
                             </Anchors>
                         </Texture>
+                        <Texture parentKey="OwnedIcon" atlas="common-icon-checkmark" hidden="true">
+                            <Size x="20" y="20"/>
+                            <Anchors>
+                                <Anchor point="TOPRIGHT" relativeKey="$parent.Icon" x="5" y="6"/>
+                            </Anchors>
+                        </Texture>
                         <Texture parentKey="VoidcoreIcon" atlas="lootroll-toast-icon-need-up">
                             <Size x="18" y="18"/>
                             <Anchors>

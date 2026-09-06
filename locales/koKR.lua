@@ -27,6 +27,9 @@ L["Item level in keystone tooltip"] = "쐐기돌 툴팁에 장비 수준 표시"
 L["Favorite in item tooltip"] = "아이템 툴팁에 즐겨찾기 표시";
 L["Favorite on item icons"] = "아이템 아이콘에 즐겨찾기 표시";
 L["Slot name on item icons"] = "아이템 아이콘에 착용 부위 표시";
+L["Owned in item tooltip"] = "아이템 툴팁에 보유 여부 표시";
+L["Shows in the item tooltip where the item is: equipped, bags or bank."] = "아이템 툴팁에 해당 아이템의 위치를 표시합니다: 착용 중, 가방 또는 은행.";
+L["Already shown by another addon."] = "다른 애드온이 이미 표시하고 있습니다.";
 L['Hide "Other" in All Slots'] = "전체 슬롯에서 \"기타\" 숨기기";
 L["Loot reminder (dungeons)"] = "전리품 리마인더 (던전)";
 L["Own favorites"] = "내 즐겨찾기";
@@ -111,6 +114,11 @@ L["Shield"] = "방패";
 L["Ranged"] = "원거리";
 L["Ring"] = "반지";
 L["Trinket"] = "장신구";
+
+-- owned.lua
+L["Already equipped"] = "이미 착용 중";
+L["In your bags"] = "가방에 있음";
+L["In your bank"] = "은행에 있음";
 
 -- copy_popup.lua
 L["Press CTRL+C to copy"] = "CTRL+C를 눌러 복사";

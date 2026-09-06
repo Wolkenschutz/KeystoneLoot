@@ -6,8 +6,12 @@ local Favorites = KeystoneLoot.Favorites;
 local Character = KeystoneLoot.Character;
 local Query = KeystoneLoot.Query;
 local Voidcore = KeystoneLoot.Voidcore;
+local Owned = KeystoneLoot.Owned;
 local CopyPopup = KeystoneLoot.CopyPopup;
 local L = KeystoneLoot.L;
+
+local OWNED_ICON_ALPHA = 0.3;
+local OWNED_TEXT_ALPHA = 0.7;
 
 local STAT_HIGHLIGHT_KEYS = {
     [0] = "crit",
@@ -169,6 +173,28 @@ local function IsItemValidForCharacter()
     end
 
     return DB:Get("filters.classId") == info.classId;
+end
+
+local function IsOwnCharacterSelected()
+    return Character:GetSelectedKey() == Character:GetKey();
+end
+
+local function AddOwnedLineToTooltip(itemId)
+    if (not DB:Get("settings.ownedTooltip") or not IsOwnCharacterSelected() or Owned:IsBagSyncLoaded()) then
+        return;
+    end
+
+    local locations = Owned:GetLocations(itemId);
+    if (#locations == 0) then
+        return;
+    end
+
+    GameTooltip:AddLine(" ");
+
+    for _, location in ipairs(locations) do
+        GameTooltip:AddLine(string.format("|A:common-icon-checkmark:14:14:0:0|a %s", location),
+            GREEN_FONT_COLOR:GetRGB());
+    end
 end
 
 local function AddSpecLinesToTooltip(itemId)
@@ -393,7 +419,9 @@ end
 
 function KeystoneLootLootIconButtonMixin:UpdateFavoriteIcon()
     if (not self:IsEnabled()) then
-        self.Content.FavoriteIcon:Hide();
+        self.hasFavorite = false;
+        self.showFavoriteIcon = false;
+        self:UpdateOwnedIcon();
         return;
     end
 
@@ -413,14 +441,28 @@ function KeystoneLootLootIconButtonMixin:UpdateFavoriteIcon()
     if (tier > 0) then
         self.Content.FavoriteIcon:SetTexture(Favorites:GetTierIcon(tier));
         self.Content.FavoriteIcon:SetDesaturated(false);
-        self.Content.FavoriteIcon:Show();
+        self.showFavoriteIcon = true;
     elseif (self.isHovered and (isFavoritesSlot or classesMatch)) then
         self.Content.FavoriteIcon:SetTexture(Favorites:GetTierIcon(Favorites.TIER_MUST));
         self.Content.FavoriteIcon:SetDesaturated(true);
-        self.Content.FavoriteIcon:Show();
+        self.showFavoriteIcon = true;
     else
-        self.Content.FavoriteIcon:Hide();
+        self.showFavoriteIcon = false;
     end
+
+    self.hasFavorite = tier > 0;
+    self:UpdateOwnedIcon();
+end
+
+function KeystoneLootLootIconButtonMixin:UpdateOwnedIcon()
+    local isOwned = self:IsEnabled() and self.hasFavorite and IsOwnCharacterSelected()
+        and Owned:Has(self.itemId);
+
+    self.Content.OwnedIcon:SetShown(isOwned);
+    self.Content.FavoriteIcon:SetShown(self.showFavoriteIcon and not isOwned);
+
+    self.Content.Icon:SetAlpha(isOwned and OWNED_ICON_ALPHA or 1);
+    self.Content.SlotText:SetAlpha(isOwned and OWNED_TEXT_ALPHA or 1);
 end
 
 function KeystoneLootLootIconButtonMixin:UpdateVoidcoreIcon()
@@ -460,6 +502,7 @@ function KeystoneLootLootIconButtonMixin:OnEnter()
     end
 
     AddSpecLinesToTooltip(self.itemId);
+    AddOwnedLineToTooltip(self.itemId);
     GameTooltip:Show();
 
     if (IsModifiedClick("DRESSUP")) then

@@ -27,6 +27,9 @@ L["Item level in keystone tooltip"] = "在史诗钥匙显示对应等级";
 L["Favorite in item tooltip"] = "在物品提示中显示收藏";
 L["Favorite on item icons"] = "在物品图标上显示收藏";
 L["Slot name on item icons"] = "在物品图标上显示部位";
+L["Owned in item tooltip"] = "在物品提示中显示拥有情况";
+L["Shows in the item tooltip where the item is: equipped, bags or bank."] = "在物品提示中显示该物品的位置：已装备、背包或银行。";
+L["Already shown by another addon."] = "已由其他插件显示。";
 L['Hide "Other" in All Slots'] = "在「全部栏位」中隐藏「其他」物品";
 L["Loot reminder (dungeons)"] = "拾取专精提醒（地下城）";
 L["Own favorites"] = "自己的收藏";
@@ -111,6 +114,11 @@ L["Shield"] = "盾牌";
 L["Ranged"] = "远程";
 L["Ring"] = "戒指";
 L["Trinket"] = "饰品";
+
+-- owned.lua
+L["Already equipped"] = "已装备";
+L["In your bags"] = "在背包中";
+L["In your bank"] = "在银行中";
 
 -- copy_popup.lua
 L["Press CTRL+C to copy"] = "按 CTRL+C 复制";

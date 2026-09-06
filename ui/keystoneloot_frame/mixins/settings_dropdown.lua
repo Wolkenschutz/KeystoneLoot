@@ -5,6 +5,7 @@ local Favorites = KeystoneLoot.Favorites;
 local Character = KeystoneLoot.Character;
 local L = KeystoneLoot.L;
 local Voidcore = KeystoneLoot.Voidcore;
+local Owned = KeystoneLoot.Owned;
 
 local NORMAL_R, NORMAL_G, NORMAL_B = NORMAL_FONT_COLOR:GetRGB();
 
@@ -218,6 +219,19 @@ function KeystoneLootSettingsDropdownMixin:Init()
         CreateSettingCheckbox(generalMenu, L["Favorite in item tooltip"], "settings.favoriteTooltip");
         CreateSettingCheckbox(generalMenu, L["Favorite on item icons"], "settings.favoriteIcon");
         CreateSettingCheckbox(generalMenu, L["Slot name on item icons"], "settings.slotName");
+
+        local ownedTooltipCheckbox = generalMenu:CreateCheckbox(
+            L["Owned in item tooltip"],
+            function() return not Owned:IsBagSyncLoaded() and DB:Get("settings.ownedTooltip"); end,
+            function() DB:Set("settings.ownedTooltip", not DB:Get("settings.ownedTooltip")); end
+        );
+
+        if (Owned:IsBagSyncLoaded()) then
+            ownedTooltipCheckbox:SetEnabled(false);
+            SetTooltip(ownedTooltipCheckbox, L["Already shown by another addon."]);
+        else
+            SetTooltip(ownedTooltipCheckbox, L["Shows in the item tooltip where the item is: equipped, bags or bank."]);
+        end
 
         generalMenu:CreateDivider();
         CreateSettingCheckbox(generalMenu, L['Hide "Other" in All Slots'], "settings.hideOtherItems");

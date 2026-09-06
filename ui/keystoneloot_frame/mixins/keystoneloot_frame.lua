@@ -54,6 +54,9 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
     if (event == "ACTIVE_TALENT_GROUP_CHANGED") then
         self:SyncSpecFilter();
         return;
+    elseif (event == "BAG_UPDATE_DELAYED" or event == "PLAYER_EQUIPMENT_CHANGED") then
+        self:RefreshOwnedIcons();
+        return;
     elseif (event == "BONUS_ROLL_RESULT") then
         local rewardType, rewardLink = ...;
         if (rewardType ~= "item" or not rewardLink) then
@@ -153,12 +156,26 @@ function KeystoneLootFrameMixin:SetTab(tabId)
     self:RefreshSize(tabId);
 end
 
+function KeystoneLootFrameMixin:RefreshOwnedIcons()
+    for _, Frame in ipairs({ self.DungeonsFrame, self.RaidsFrame, self.CatalystFrame, self.CustomItemFrame }) do
+        Frame:RefreshOwnedIcons();
+    end
+end
+
 function KeystoneLootFrameMixin:OnShow()
     PlaySound(SOUNDKIT.IG_QUEST_LIST_OPEN);
+
+    self:RegisterEvent("BAG_UPDATE_DELAYED");
+    self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
+
+    self:RefreshOwnedIcons();
 end
 
 function KeystoneLootFrameMixin:OnHide()
     PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE);
+
+    self:UnregisterEvent("BAG_UPDATE_DELAYED");
+    self:UnregisterEvent("PLAYER_EQUIPMENT_CHANGED");
 end
 
 function KeystoneLootFrameMixin:OnDragStart()

@@ -6,7 +6,7 @@ local DB = KeystoneLoot.DB;
 
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 
-local DB_VERSION = 13;
+local DB_VERSION = 14;
 local CHAR_DB_VERSION = 3;
 
 local observers = {};
@@ -134,6 +134,10 @@ function DB:MigrateGlobalDB(fromVersion)
 
     if (fromVersion == 12) then
         KeystoneLootDB.settings.lootReminder.party = true;
+    end
+
+    if (fromVersion == 13) then
+        KeystoneLootDB.settings.ownedTooltip = true;
     end
 end
 

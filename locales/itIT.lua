@@ -27,6 +27,9 @@ L["Item level in keystone tooltip"] = "Livello oggetto nel tooltip della chiave"
 L["Favorite in item tooltip"] = "Preferito nel tooltip dell'oggetto";
 L["Favorite on item icons"] = "Preferito sulle icone degli oggetti";
 L["Slot name on item icons"] = "Nome dello slot sulle icone degli oggetti";
+L["Owned in item tooltip"] = "Posseduto nel tooltip dell'oggetto";
+L["Shows in the item tooltip where the item is: equipped, bags or bank."] = "Mostra nel tooltip dell'oggetto dove si trova: equipaggiato, inventario o banca.";
+L["Already shown by another addon."] = "Già mostrato da un altro addon.";
 L['Hide "Other" in All Slots'] = "Nascondi \"Altro\" in Tutti gli slot";
 L["Loot reminder (dungeons)"] = "Promemoria bottino (sotterranei)";
 L["Own favorites"] = "Preferiti propri";
@@ -110,6 +113,11 @@ L["Shield"] = "Scudo";
 L["Ranged"] = "Dist.";
 L["Ring"] = "Anello";
 L["Trinket"] = "Monile";
+
+-- owned.lua
+L["Already equipped"] = "Già equipaggiato";
+L["In your bags"] = "Nel tuo inventario";
+L["In your bank"] = "Nella tua banca";
 
 -- copy_popup.lua
 L["Press CTRL+C to copy"] = "Premi CTRL+C per copiare";

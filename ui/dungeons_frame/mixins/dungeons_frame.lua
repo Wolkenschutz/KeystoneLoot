@@ -42,6 +42,14 @@ function KeystoneLootDungeonsFrameMixin:Init()
     self:Refresh();
 end
 
+function KeystoneLootDungeonsFrameMixin:RefreshOwnedIcons()
+    for Frame in self.entryPool:EnumerateActive() do
+        for _, Button in Frame.IconScrollBox:EnumerateFrames() do
+            Button:UpdateOwnedIcon();
+        end
+    end
+end
+
 function KeystoneLootDungeonsFrameMixin:RefreshSize()
     local Parent = self:GetParent();
     if (Parent.dungeonsTabId) then

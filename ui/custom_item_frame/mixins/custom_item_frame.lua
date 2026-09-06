@@ -28,6 +28,12 @@ function KeystoneLootCustomItemFrameMixin:Init()
     self:Refresh();
 end
 
+function KeystoneLootCustomItemFrameMixin:RefreshOwnedIcons()
+    for Icon in self.iconPool:EnumerateActive() do
+        Icon:UpdateOwnedIcon();
+    end
+end
+
 function KeystoneLootCustomItemFrameMixin:Refresh()
     self.iconPool:ReleaseAll();
 
