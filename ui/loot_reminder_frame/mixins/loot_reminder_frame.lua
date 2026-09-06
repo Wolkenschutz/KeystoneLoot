@@ -207,8 +207,7 @@ function KeystoneLootReminderFrameMixin:OnAddonMessage(text, sender)
         return;
     end
 
-    local name = Ambiguate(sender, "none");
-    local guid = UnitGUID(name);
+    local guid = UnitGUID(Ambiguate(sender, "none"));
     if (not guid) then
         return;
     end
@@ -224,7 +223,7 @@ function KeystoneLootReminderFrameMixin:OnAddonMessage(text, sender)
     end
 
     self.partyFavorites[challengeMapId][guid] = {
-        name    = name,
+        name    = Ambiguate(sender, "short"),
         itemIds = itemIds,
     };
 
@@ -330,7 +329,7 @@ function KeystoneLootReminderFrameMixin:GetPartyItems()
                     items[itemId] = {};
                 end
 
-                table.insert(items[itemId], data.name);
+                table.insert(items[itemId], HIGHLIGHT_FONT_COLOR:WrapTextInColorCode(data.name));
             end
         end
     end
