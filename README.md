@@ -33,6 +33,9 @@ If you have no favorites in a Mythic+ dungeon, KeystoneLoot checks which items y
 ### Teleport Buttons
 Quick-teleport buttons on dungeon entries let you jump straight to a dungeon entrance without leaving the addon.
 
+### Teleport Notification
+When you join a Mythic+ group or the group fills up, a popup shows the dungeon and your role with a teleport button.
+
 ### The Catalyst
 View all Catalyst-convertible items for your class and spec directly within the addon, no need to look them up externally.
 

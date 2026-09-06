@@ -32,6 +32,9 @@ If you have no favorites in a Mythic+ dungeon, KeystoneLoot checks which items y
 **Teleport Buttons**
 Teleport directly to a dungeon entrance with one click, no more digging through your spellbook.
 
+**Teleport Notification**
+When you join a Mythic+ group or the group fills up, a popup shows the dungeon and your role with a teleport button.
+
 **The Catalyst**
 See all Catalyst-eligible items for your class and spec right inside the addon.
 
