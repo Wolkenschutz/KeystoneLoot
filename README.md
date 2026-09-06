@@ -21,11 +21,14 @@ Mark items as favorites on a per-character, per-spec basis, with five priority t
 ### Void Core (Bonus Roll) Tracking
 See exactly which items you've already secured with Void Cores and what's still left to collect from each dungeon and raid boss. It even works retroactively: anything you'd already obtained is filled in automatically when you install it, so you're never starting from scratch.
 
-### Drop Alert
+### Drop Notification
 When a groupmate loots an item you have marked as a favorite, a notification pops up showing the item and who got it. You can whisper them directly from the notification with a fully customizable message.
 
 ### Loot Spec Reminder
 When you enter a Mythic+ dungeon, KeystoneLoot checks whether your active loot specialization matches your favorited items. It also compares loot pool sizes across specs, so if a different spec has a smaller pool but can still drop what you want, it recommends that one instead for better odds.
+
+### Group Favorites Reminder
+If you have no favorites in a Mythic+ dungeon, KeystoneLoot checks which items your groupmates have marked as favorites there. It shows you the loot spec that lets those items drop for you, so you can trade them afterwards. Only works if your groupmates also use KeystoneLoot.
 
 ### Teleport Buttons
 Quick-teleport buttons on dungeon entries let you jump straight to a dungeon entrance without leaving the addon.
