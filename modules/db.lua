@@ -6,7 +6,7 @@ local DB = KeystoneLoot.DB;
 
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 
-local DB_VERSION = 12;
+local DB_VERSION = 13;
 local CHAR_DB_VERSION = 3;
 
 local observers = {};
@@ -130,6 +130,10 @@ function DB:MigrateGlobalDB(fromVersion)
 
     if (fromVersion == 11) then
         KeystoneLootDB.settings.mythicPlusNotification = true;
+    end
+
+    if (fromVersion == 12) then
+        KeystoneLootDB.settings.lootReminder.party = true;
     end
 end
 

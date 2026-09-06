@@ -82,6 +82,114 @@ local function GetBestSpecForItems(items, classId, lootTable, lootSpecId, favoSp
     return bestSpec;
 end
 
+function Keystone:GetCurrentChallengeMapId()
+    local _, instanceType, difficultyId, _, _, _, _, instanceId = GetInstanceInfo();
+    if (instanceType ~= "party") then
+        return nil;
+    end
+
+    if (difficultyId == 0) then
+        difficultyId = GetDungeonDifficultyID();
+    end
+
+    if (difficultyId ~= DifficultyUtil.ID.DungeonMythic) then
+        return nil;
+    end
+
+    for _, dungeon in ipairs(Query:GetDungeons()) do
+        if (dungeon.instanceId == instanceId) then
+            return dungeon.challengeModeId;
+        end
+    end
+
+    return nil;
+end
+
+function Keystone:GetPartyLootReminderItemList(challengeModeId, partyItems)
+    local classId = Character:GetCurrentClassId();
+    local lootSpecId = Character:GetLootSpecId();
+
+    local lootTable;
+    for _, dungeon in ipairs(Query:GetDungeons()) do
+        if (dungeon.challengeModeId == challengeModeId) then
+            lootTable = dungeon.lootTable;
+            break;
+        end
+    end
+
+    if (not lootTable) then
+        return {}, {};
+    end
+
+    local wanted = {};
+    for itemId, players in pairs(partyItems) do
+        local item = Query:GetItemInfo(itemId);
+        local dropSpecs = item and item.classes[classId];
+
+        if (dropSpecs) then
+            table.insert(wanted, {
+                itemId    = itemId,
+                icon      = Query:GetItemIcon(itemId),
+                players   = players,
+                dropSpecs = dropSpecs,
+            });
+        end
+    end
+
+    local coverage = {};
+    for i = 1, GetNumSpecializations() do
+        local specId = GetSpecializationInfo(i);
+        coverage[specId] = 0;
+
+        for _, entry in ipairs(wanted) do
+            if (tContains(entry.dropSpecs, specId)) then
+                coverage[specId] = coverage[specId] + 1;
+            end
+        end
+    end
+
+    local currentCoverage = coverage[lootSpecId];
+    local bestCoverage = currentCoverage;
+    local bestPoolSize = math.huge;
+
+    for specId, count in pairs(coverage) do
+        if (specId ~= lootSpecId and count > currentCoverage) then
+            local poolSize = GetSpecPoolSize(lootTable, specId, classId);
+
+            if (count > bestCoverage or (count == bestCoverage and poolSize < bestPoolSize)) then
+                bestCoverage = count;
+                bestPoolSize = poolSize;
+            end
+        end
+    end
+
+    if (bestCoverage == currentCoverage) then
+        return {}, {};
+    end
+
+    local itemList = {};
+    for specId, count in pairs(coverage) do
+        local poolSize = GetSpecPoolSize(lootTable, specId, classId);
+
+        if (specId ~= lootSpecId and count == bestCoverage and poolSize == bestPoolSize) then
+            local items = {};
+            for _, entry in ipairs(wanted) do
+                if (tContains(entry.dropSpecs, specId) and not tContains(entry.dropSpecs, lootSpecId)) then
+                    table.insert(items, entry);
+                end
+            end
+
+            itemList[specId] = {
+                items         = items,
+                displaySpecId = specId,
+                favoSpecId    = specId,
+            };
+        end
+    end
+
+    return itemList, {};
+end
+
 function Keystone:GetLootReminderItemList(challengeModeId)
     local favorites = DB:Get("favorites");
     local characterKey = Character:GetKey();

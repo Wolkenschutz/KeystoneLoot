@@ -106,7 +106,7 @@ function KeystoneLootReminderSpecMixin:SetIcons(items, allSpecItems)
             Icon:SetPoint("LEFT", LastIcon, "RIGHT", ICON_SPACING_X, 0);
         end
 
-        Icon:Init(item.itemId, item.icon, allSpecItems[item.itemId] ~= nil);
+        Icon:Init(item.itemId, item.icon, allSpecItems[item.itemId] ~= nil, item.players);
         LastIcon = Icon;
     end
 end

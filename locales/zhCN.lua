@@ -29,6 +29,8 @@ L["Favorite on item icons"] = "在物品图标上显示收藏";
 L["Slot name on item icons"] = "在物品图标上显示部位";
 L['Hide "Other" in All Slots'] = "在「全部栏位」中隐藏「其他」物品";
 L["Loot reminder (dungeons)"] = "拾取专精提醒（地下城）";
+L["Own favorites"] = "自己的收藏";
+L["Group favorites"] = "队伍收藏";
 L["Highlighting"] = "高亮显示";
 L["No stats"] = "无属性";
 L["Combination mode"] = "组合模式";
@@ -58,6 +60,7 @@ L["This character is hidden."] = "该角色已被隐藏。";
 L["Wide mode"] = "宽屏模式";
 L["Drop notification (favorites)"] = "掉落提醒（收藏）";
 L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."] = "进入地下城时，若拾取专精与收藏夹不符或切换专精可提高获得概率，则发出提醒。";
+L["If you have no favorites in a dungeon, shows you the loot spec that lets items drop for you which your group members have marked as favorites. Only works if other group members also have this addon."] = "当你在某地下城没有收藏时，显示可以让队伍成员收藏的物品掉落给你的拾取专精。仅当其他队伍成员也安装了此插件时才有效。";
 L["Shows a notification when another player loots an item you have marked as a favorite."] = "当其他玩家拾取你标记为收藏的物品时显示通知。";
 L["Mythic+ notification"] = "史诗+通知";
 L["Shows the dungeon and your role with a teleport button when you join a Mythic+ group or the group becomes full."] = "当你加入史诗+队伍或队伍满员时，显示地下城和你的职责，并提供传送按钮。";
@@ -117,6 +120,8 @@ L["Correct loot specialization set?"] = "拾取专精是否正确？";
 L["+1 item dropping for all specs."] = "+1 件物品对所有专精掉落。";
 L["+%d items dropping for all specs."] = "+%d 件物品对所有专精掉落。";
 L["%s has a smaller loot pool than %s"] = "%s的战利品池比%s更小。";
+L["Your group needs loot from here"] = "你的队伍需要这里的战利品";
+L["Wanted by %s"] = "%s想要";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "左键点击：打开概览";

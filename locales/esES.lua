@@ -29,6 +29,8 @@ L["Favorite on item icons"] = "Favorito en los iconos de objeto";
 L["Slot name on item icons"] = "Nombre del espacio en los iconos de objeto";
 L['Hide "Other" in All Slots'] = "Ocultar \"Otro\" en Todos los espacios";
 L["Loot reminder (dungeons)"] = "Recordatorio de botín (mazmorras)";
+L["Own favorites"] = "Favoritos propios";
+L["Group favorites"] = "Favoritos del grupo";
 L["Highlighting"] = "Resaltar";
 L["No stats"] = "Sin estadísticas";
 L["Combination mode"] = "Modo combinación";
@@ -58,6 +60,7 @@ L["This character is hidden."] = "Este personaje está oculto.";
 L["Wide mode"] = "Modo amplio";
 L["Drop notification (favorites)"] = "Alerta de botín (favoritos)";
 L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."] = "Te recuerda al entrar a una mazmorra si tu especialización de botín no coincide con tus favoritos o si cambiarla podría aumentar tus posibilidades de obtenerlos.";
+L["If you have no favorites in a dungeon, shows you the loot spec that lets items drop for you which your group members have marked as favorites. Only works if other group members also have this addon."] = "Si no tienes favoritos en una mazmorra, te muestra la especialización de botín con la que pueden caerte objetos que los miembros de tu grupo han marcado como favoritos. Solo funciona si otros miembros del grupo también tienen este addon.";
 L["Shows a notification when another player loots an item you have marked as a favorite."] = "Muestra una notificación cuando otro jugador saquea un objeto que has marcado como favorito.";
 L["Mythic+ notification"] = "Notificación de Mítica+";
 L["Shows the dungeon and your role with a teleport button when you join a Mythic+ group or the group becomes full."] = "Muestra la mazmorra y tu rol con un botón de teletransporte cuando te unes a un grupo de Mítica+ o el grupo se completa.";
@@ -116,6 +119,8 @@ L["Correct loot specialization set?"] = "¿Especialización de botín correcta?"
 L["+1 item dropping for all specs."] = "+1 objeto que cae para todas las especializaciones.";
 L["+%d items dropping for all specs."] = "+%d objetos que caen para todas las especializaciones.";
 L["%s has a smaller loot pool than %s"] = "%s tiene un pool de botín más pequeño que %s";
+L["Your group needs loot from here"] = "Tu grupo necesita botín de aquí";
+L["Wanted by %s"] = "Deseado por %s";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "Clic izquierdo: Abrir vista general";

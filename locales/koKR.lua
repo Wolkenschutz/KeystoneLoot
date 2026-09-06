@@ -29,6 +29,8 @@ L["Favorite on item icons"] = "아이템 아이콘에 즐겨찾기 표시";
 L["Slot name on item icons"] = "아이템 아이콘에 착용 부위 표시";
 L['Hide "Other" in All Slots'] = "전체 슬롯에서 \"기타\" 숨기기";
 L["Loot reminder (dungeons)"] = "전리품 리마인더 (던전)";
+L["Own favorites"] = "내 즐겨찾기";
+L["Group favorites"] = "그룹 즐겨찾기";
 L["Highlighting"] = "강조";
 L["No stats"] = "능력치 없음";
 L["Combination mode"] = "조합 모드";
@@ -58,6 +60,7 @@ L["This character is hidden."] = "이 캐릭터는 숨겨져 있습니다.";
 L["Wide mode"] = "넓은 모드";
 L["Drop notification (favorites)"] = "드롭 알림 (즐겨찾기)";
 L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."] = "던전 입장 시 전리품 전문화가 즐겨찾기와 맞지 않거나 변경 시 획득 확률이 높아질 경우 알려줍니다.";
+L["If you have no favorites in a dungeon, shows you the loot spec that lets items drop for you which your group members have marked as favorites. Only works if other group members also have this addon."] = "던전에 즐겨찾기가 없으면, 그룹원이 즐겨찾기로 표시한 아이템이 당신에게 드롭될 수 있는 전리품 전문화를 보여줍니다. 다른 그룹원도 이 애드온을 설치한 경우에만 작동합니다.";
 L["Shows a notification when another player loots an item you have marked as a favorite."] = "다른 플레이어가 즐겨찾기로 표시한 아이템을 획득하면 알림을 표시합니다.";
 L["Mythic+ notification"] = "신화+ 알림";
 L["Shows the dungeon and your role with a teleport button when you join a Mythic+ group or the group becomes full."] = "신화+ 파티에 참여하거나 파티가 가득 차면 던전과 역할을 순간이동 버튼과 함께 표시합니다.";
@@ -117,6 +120,8 @@ L["Correct loot specialization set?"] = "올바른 전리품 전문화 설정?";
 L["+1 item dropping for all specs."] = "+1 모든 전문화에 드롭되는 아이템.";
 L["+%d items dropping for all specs."] = "+%d 모든 전문화에 드롭되는 아이템.";
 L["%s has a smaller loot pool than %s"] = "%s은(는) %s보다 전리품 풀이 더 작습니다.";
+L["Your group needs loot from here"] = "그룹원이 이곳의 전리품을 원합니다";
+L["Wanted by %s"] = "%s 님이 원함";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "왼쪽 클릭: 개요 열기";

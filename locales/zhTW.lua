@@ -29,6 +29,8 @@ L["Favorite on item icons"] = "在物品圖示上顯示最愛";
 L["Slot name on item icons"] = "在物品圖示上顯示部位";
 L['Hide "Other" in All Slots'] = "在「所有欄位」中隱藏「其他」物品";
 L["Loot reminder (dungeons)"] = "戰利品提醒（地城）";
+L["Own favorites"] = "自己的最愛";
+L["Group favorites"] = "隊伍最愛";
 L["Highlighting"] = "高亮顯示";
 L["No stats"] = "無屬性";
 L["Combination mode"] = "組合模式";
@@ -58,6 +60,7 @@ L["This character is hidden."] = "此角色已被隱藏。";
 L["Wide mode"] = "寬屏模式";
 L["Drop notification (favorites)"] = "掉落提醒（最愛）";
 L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."] = "進入地城時，若拾取專精與最愛不符或切換專精可提高獲得機率，則發出提醒。";
+L["If you have no favorites in a dungeon, shows you the loot spec that lets items drop for you which your group members have marked as favorites. Only works if other group members also have this addon."] = "當你在某地城沒有最愛時，顯示可以讓隊伍成員標記為最愛的物品掉落給你的拾取專精。僅當其他隊伍成員也安裝了此插件時才有效。";
 L["Shows a notification when another player loots an item you have marked as a favorite."] = "當其他玩家拾取你標記為最愛的物品時顯示通知。";
 L["Mythic+ notification"] = "傳奇+通知";
 L["Shows the dungeon and your role with a teleport button when you join a Mythic+ group or the group becomes full."] = "當你加入傳奇+隊伍或隊伍滿員時，顯示地城和你的職責，並提供傳送按鈕。";
@@ -117,6 +120,8 @@ L["Correct loot specialization set?"] = "戰利品專精的設定是否正確？
 L["+1 item dropping for all specs."] = "+1 件物品對所有專精掉落。";
 L["+%d items dropping for all specs."] = "+%d 件物品對所有專精掉落。";
 L["%s has a smaller loot pool than %s"] = "%s的戰利品池比%s更小。";
+L["Your group needs loot from here"] = "你的隊伍需要這裡的戰利品";
+L["Wanted by %s"] = "%s想要";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "左鍵點擊：開啟概覽";

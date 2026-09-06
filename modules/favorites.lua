@@ -724,8 +724,8 @@ function Favorites:GetItemSpecTiers(itemId, useCurrentChar)
     return specTiers;
 end
 
-function Favorites:GetList(sourceId, specId)
-    local characterKey = Character:GetSelectedKey();
+function Favorites:GetList(sourceId, specId, useCurrentChar)
+    local characterKey = useCurrentChar and Character:GetKey() or Character:GetSelectedKey();
     local favorites = DB:Get("favorites");
 
     if (not favorites or not favorites[characterKey] or not favorites[characterKey][sourceId]) then

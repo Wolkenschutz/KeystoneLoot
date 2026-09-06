@@ -29,6 +29,8 @@ L["Favorite on item icons"] = "Избранное на значках предм
 L["Slot name on item icons"] = "Название слота на значках предметов";
 L['Hide "Other" in All Slots'] = "Скрывать \"Прочее\" при показе всех слотов";
 L["Loot reminder (dungeons)"] = "Включить напоминание о добыче";
+L["Own favorites"] = "Своё избранное";
+L["Group favorites"] = "Избранное группы";
 L["Highlighting"] = "Подсветка";
 L["No stats"] = "Характеристика отсутствует";
 L["Combination mode"] = "Комбинированный режим";
@@ -58,6 +60,7 @@ L["This character is hidden."] = "Этот персонаж скрыт.";
 L["Wide mode"] = "Широкий режим";
 L["Drop notification (favorites)"] = "Уведомление о выпадении (избранное)";
 L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."] = "Напоминает при входе в подземелье, если Ваша специализация добычи не соответствует избранному или смена специализации может повысить шанс получить нужные предметы.";
+L["If you have no favorites in a dungeon, shows you the loot spec that lets items drop for you which your group members have marked as favorites. Only works if other group members also have this addon."] = "Если у Вас нет избранного в подземелье, показывает специализацию добычи, при которой Вам могут выпасть предметы, добавленные участниками Вашей группы в избранное. Работает только если у других участников группы тоже установлен этот аддон.";
 L["Shows a notification when another player loots an item you have marked as a favorite."] = "Показывает уведомление, когда другой игрок получает предмет, отмеченный Вами как избранный.";
 L["Mythic+ notification"] = "Уведомление М+";
 L["Shows the dungeon and your role with a teleport button when you join a Mythic+ group or the group becomes full."] = "Показывает подземелье и Вашу роль с кнопкой телепортации, когда Вы вступаете в группу М+ или группа заполняется.";
@@ -118,6 +121,8 @@ L["Correct loot specialization set?"] = "Правильная установка
 L["+1 item dropping for all specs."] = "+1 предмет выпадает для всех специализаций.";
 L["+%d items dropping for all specs."] = "+%d предметов выпадает для всех специализаций.";
 L["%s has a smaller loot pool than %s"] = "%s имеет меньший набор добычи, чем %s";
+L["Your group needs loot from here"] = "Вашей группе нужна добыча отсюда";
+L["Wanted by %s"] = "Нужно: %s";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "ЛКМ: Открыть окно KeystoneLoot";

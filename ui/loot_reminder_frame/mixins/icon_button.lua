@@ -1,11 +1,13 @@
 local AddonName, KeystoneLoot = ...;
 
 local Upgrade = KeystoneLoot.Upgrade;
+local L = KeystoneLoot.L;
 
 KeystoneLootReminderIconMixin = {};
 
-function KeystoneLootReminderIconMixin:Init(itemId, icon, isShared)
+function KeystoneLootReminderIconMixin:Init(itemId, icon, isShared, players)
     self.itemId = itemId;
+    self.players = players;
 
     self.Icon:SetTexture(icon);
     self.Icon:SetDesaturated(isShared);
@@ -22,6 +24,12 @@ function KeystoneLootReminderIconMixin:OnEnter()
 
     GameTooltip.KeystoneLootOwned = true;
     GameTooltip:SetHyperlink(Upgrade:BuildItemLink(self.itemId));
+
+    if (self.players) then
+        GameTooltip:AddLine(" ");
+        GameTooltip:AddLine(string.format(L["Wanted by %s"], table.concat(self.players, ", ")), nil, nil, nil, true);
+    end
+
     GameTooltip:Show();
 
     self.UpdateTooltip = self.OnEnter;

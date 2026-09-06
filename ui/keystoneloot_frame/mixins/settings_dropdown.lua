@@ -232,8 +232,13 @@ function KeystoneLootSettingsDropdownMixin:Init()
 
         local notificationMenu = rootDescription:CreateButton(COMMUNITIES_NOTIFICATION_SETTINGS);
 
-        local lootReminderCheckbox = CreateSettingCheckbox(notificationMenu, L["Loot reminder (dungeons)"], "settings.lootReminder.dungeons");
-        SetTooltip(lootReminderCheckbox, L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."]);
+        local lootReminderMenu = notificationMenu:CreateButton(L["Loot reminder (dungeons)"]);
+
+        local ownReminderCheckbox = CreateSettingCheckbox(lootReminderMenu, L["Own favorites"], "settings.lootReminder.dungeons");
+        SetTooltip(ownReminderCheckbox, L["Reminds you on dungeon entry if your loot spec doesn't match your favorites, or if switching it could increase your chances of getting them."]);
+
+        local partyReminderCheckbox = CreateSettingCheckbox(lootReminderMenu, L["Group favorites"], "settings.lootReminder.party");
+        SetTooltip(partyReminderCheckbox, L["If you have no favorites in a dungeon, shows you the loot spec that lets items drop for you which your group members have marked as favorites. Only works if other group members also have this addon."]);
 
         local mythicPlusNotificationCheckbox = CreateSettingCheckbox(notificationMenu, L["Mythic+ notification"], "settings.mythicPlusNotification");
         SetTooltip(mythicPlusNotificationCheckbox, L["Shows the dungeon and your role with a teleport button when you join a Mythic+ group or the group becomes full."]);
