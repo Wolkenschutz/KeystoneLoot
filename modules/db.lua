@@ -5,8 +5,9 @@ KeystoneLoot.DB = {};
 local DB = KeystoneLoot.DB;
 
 local CURRENT_SEASON = KeystoneLoot.Config.season;
+local DEFAULT_WHISPER_MESSAGE = KeystoneLoot.Config.whisperMessage;
 
-local DB_VERSION = 14;
+local DB_VERSION = 15;
 local CHAR_DB_VERSION = 3;
 
 local observers = {};
@@ -105,7 +106,7 @@ function DB:MigrateGlobalDB(fromVersion)
 
     if (fromVersion == 6) then
         KeystoneLootDB.settings.lootReminder.dropAlert = true;
-        KeystoneLootDB.settings.lootReminder.whisperMessage = "Can I have {item} please?";
+        KeystoneLootDB.settings.lootReminder.whisperMessage = DEFAULT_WHISPER_MESSAGE;
     end
 
     if (fromVersion == 7) then
@@ -138,6 +139,14 @@ function DB:MigrateGlobalDB(fromVersion)
 
     if (fromVersion == 13) then
         KeystoneLootDB.settings.ownedTooltip = true;
+    end
+
+    if (fromVersion == 14) then
+        KeystoneLootDB.settings.lootReminder.share = true;
+
+        if (KeystoneLootDB.settings.lootReminder.whisperMessage == "Can I have {item} please?") then
+            KeystoneLootDB.settings.lootReminder.whisperMessage = DEFAULT_WHISPER_MESSAGE;
+        end
     end
 end
 

@@ -3,7 +3,7 @@ local AddonName, KeystoneLoot = ...;
 local DB                      = KeystoneLoot.DB;
 local L                       = KeystoneLoot.L;
 
-local DEFAULT_WHISPER_MESSAGE = "Can I have {item} please?";
+local DEFAULT_WHISPER_MESSAGE = KeystoneLoot.Config.whisperMessage;
 
 local function BuildWhisperMessage(itemLink)
     local template = DB:Get("settings.lootReminder.whisperMessage") or DEFAULT_WHISPER_MESSAGE;
