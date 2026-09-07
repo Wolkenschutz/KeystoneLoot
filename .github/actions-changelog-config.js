@@ -9,18 +9,23 @@ module.exports = {
 	],
 	
 	excludeTypes: [ "Skip" ],
-
+	
 	renderTypeSection: function (label, commits) {
-		let text = `\n## ${label}\n`;
-
-		commits.forEach(commit => {
-			text += `- ${commit.subject}\n`;
-			if (commit.body) {
-				text += `${commit.body}\n`;
-			}
-		});
-
-		return text;
+	    const filtered = commits.filter(commit => !/^Merge /.test(commit.subject));
+	    if (filtered.length === 0) {
+	        return "";
+	    }
+	
+	    let text = `\n## ${label}\n`;
+	
+	    filtered.forEach(commit => {
+	        text += `- ${commit.subject}\n`;
+	        if (commit.body) {
+	            text += `${commit.body}\n`;
+	        }
+	    });
+	
+	    return text;
 	},
 
 	renderChangelog: function (release, changes) {
