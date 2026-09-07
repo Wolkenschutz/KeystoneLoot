@@ -23,7 +23,6 @@ end
 
 function KeystoneLootDropNotificationWhisperButtonMixin:OnEnter()
     local Parent     = self:GetParent();
-    local playerName = Parent.PlayerName:GetText();
     local itemLink   = Parent.itemLink;
     local message    = BuildWhisperMessage(itemLink);
 
