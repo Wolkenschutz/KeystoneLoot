@@ -419,7 +419,6 @@ end
 
 function KeystoneLootLootIconButtonMixin:UpdateFavoriteIcon()
     if (not self:IsEnabled()) then
-        self.hasFavorite = false;
         self.showFavoriteIcon = false;
         self:UpdateOwnedIcon();
         return;
@@ -450,13 +449,11 @@ function KeystoneLootLootIconButtonMixin:UpdateFavoriteIcon()
         self.showFavoriteIcon = false;
     end
 
-    self.hasFavorite = tier > 0;
     self:UpdateOwnedIcon();
 end
 
 function KeystoneLootLootIconButtonMixin:UpdateOwnedIcon()
-    local isOwned = self:IsEnabled() and self.hasFavorite and IsOwnCharacterSelected()
-        and Owned:Has(self.itemId);
+    local isOwned = self:IsEnabled() and IsOwnCharacterSelected() and Owned:Has(self.itemId);
 
     self.Content.OwnedIcon:SetShown(isOwned);
     self.Content.FavoriteIcon:SetShown(self.showFavoriteIcon and not isOwned);
