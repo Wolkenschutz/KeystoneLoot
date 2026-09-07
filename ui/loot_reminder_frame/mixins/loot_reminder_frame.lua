@@ -184,11 +184,13 @@ function KeystoneLootReminderFrameMixin:SendFavorites(msgType)
     end
 
     local itemIds = {};
-    for _, itemInfo in ipairs(Favorites:GetList(self.challengeMapId, 0, true)) do
-        for classId in pairs(Query:GetItemInfo(itemInfo.itemId).classes) do
-            if (groupClassIds[classId]) then
-                table.insert(itemIds, itemInfo.itemId);
-                break;
+    if (DB:Get("settings.lootReminder.share")) then
+        for _, itemInfo in ipairs(Favorites:GetList(self.challengeMapId, 0, true)) do
+            for classId in pairs(Query:GetItemInfo(itemInfo.itemId).classes) do
+                if (groupClassIds[classId]) then
+                    table.insert(itemIds, itemInfo.itemId);
+                    break;
+                end
             end
         end
     end
