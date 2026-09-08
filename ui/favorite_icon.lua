@@ -84,7 +84,7 @@ local function UpdateBank(Panel)
 
     for ItemButton in Panel:EnumerateValidItems() do
         if (canUseBank) then
-            UpdateByContainerSlot(ItemButton, ItemButton:GetBankTabID(), ItemButton:GetContainerSlotID());
+            UpdateByContainerSlot(ItemButton, ItemButton:GetBankTabID(), ItemButton:GetContainerSlotID(), nil, "BOTTOMLEFT");
         else
             SetTier(ItemButton, 0);
         end
@@ -101,7 +101,7 @@ local function UpdateEquippedSlot(Button, unit)
         return;
     end
 
-    UpdateByItemId(Button, GetInventoryItemID(unit, slotId));
+    UpdateByItemId(Button, GetInventoryItemID(unit, slotId), nil, "BOTTOMLEFT");
 end
 
 hooksecurefunc("PaperDollItemSlotButton_Update", function(Button)
@@ -137,7 +137,7 @@ end
 hooksecurefunc("EquipmentFlyout_UpdateItems", function()
     for _, Button in ipairs(EquipmentFlyoutFrame.buttons) do
         if (Button:IsShown()) then
-            UpdateByItemId(Button, GetFlyoutItemId(Button));
+            UpdateByItemId(Button, GetFlyoutItemId(Button), nil, "BOTTOMLEFT");
         else
             SetTier(Button, 0);
         end
@@ -151,7 +151,7 @@ LootFrame.ScrollBox:RegisterCallback("OnUpdate", function()
         end
 
         local data = Frame:GetElementData();
-        UpdateByItemLink(Frame.Item, data and data.slotIndex and GetLootSlotLink(data.slotIndex));
+        UpdateByItemLink(Frame.Item, data and data.slotIndex and GetLootSlotLink(data.slotIndex), nil, "BOTTOMLEFT");
     end);
 end);
 
