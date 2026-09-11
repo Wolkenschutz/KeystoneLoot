@@ -42,6 +42,9 @@ jobs:
       - name: Create Latest Changelog    
         run: echo "${{ steps.changelog.outputs.changes }}" >> CHANGELOG_LATEST.md
 
+      - name: Restore TOC
+        run: echo "${{ secrets.ADDON_TOC }}" | base64 -d > KeystoneLoot.toc
+
       - name: Pack it up and upload it
         uses: BigWigsMods/packager@v2
         with:
