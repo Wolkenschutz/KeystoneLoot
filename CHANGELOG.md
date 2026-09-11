@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.16.1 - 2026-09-11
+
+### Bugfixes
+
+- Update function calls to include missing parameters for item updates
+
+### Improvements
+
+- Bag icon in the top left corner for owned items
+
 ## 2.16.0 - 2026-09-07
 
 ### New Features
