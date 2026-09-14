@@ -6,7 +6,6 @@ ignore:
   - .github
   - .luacheckrc
   - CHANGELOG.md
-  - LICENSE.md
   - README.md
   - README_CurseForge.md
   - README_WoWInterface.txt
