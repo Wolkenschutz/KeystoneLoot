@@ -76,6 +76,13 @@ L["Auto Keystone response"] = "쐐기돌 자동 응답";
 L["Enable party chat"] = "파티 채팅에서 활성화";
 L["Enable guild chat"] = "길드 채팅에서 활성화";
 L["Automatically responds with your current Mythic+ keystone when someone types \"!keys\" in the selected chat channels. Only works if other group members also have this addon."] = "누군가 선택한 채팅 채널에서 \"!keys\"를 입력하면 현재 신화+ 쐐기돌로 자동 응답합니다. 다른 그룹원도 이 애드온을 설치한 경우에만 작동합니다.";
+L["Auto role check"] = "역할 확인 자동 수락";
+L["Accepts the role check window for you. The roles used are the ones you have selected in the Dungeon Finder."] = "역할 확인 창을 대신 수락합니다. 던전 찾기에서 선택한 역할이 사용됩니다.";
+L["Mythic+ only"] = "신화+ 전용";
+L["Only when your group signs up for Mythic+ in the group finder."] = "파티 찾기에서 그룹이 신화+에 등록할 때만 적용됩니다.";
+L["Everywhere"] = "항상";
+L["Every role check, including Dungeon Finder and Raid Finder queues."] = "던전 찾기와 공격대 찾기 대기열을 포함한 모든 역할 확인.";
+L["Disabled"] = "비활성화";
 
 -- custom_item_icon.lua
 L["Custom Items"] = "커스텀 아이템";
