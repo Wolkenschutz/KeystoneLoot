@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.17.0 - 2026-09-16
+
+### New Features
+
+- Automatic role check confirmation
+
 ## 2.16.1 - 2026-09-11
 
 ### Bugfixes
