@@ -6,6 +6,7 @@ local Character = KeystoneLoot.Character;
 local L = KeystoneLoot.L;
 local Voidcore = KeystoneLoot.Voidcore;
 local Owned = KeystoneLoot.Owned;
+local RoleCheck = KeystoneLoot.RoleCheck;
 
 local NORMAL_R, NORMAL_G, NORMAL_B = NORMAL_FONT_COLOR:GetRGB();
 
@@ -15,6 +16,23 @@ local HIGHLIGHTS = {
     { key = "settings.highlighting.mastery",     label = ITEM_MOD_MASTERY_RATING_SHORT },
     { key = "settings.highlighting.versatility", label = ITEM_MOD_VERSATILITY },
     { key = "settings.highlighting.noStats",     label = L["No stats"] },
+};
+
+local ROLE_CHECK_MODES = {
+    {
+        mode    = RoleCheck.MODE_MYTHIC_PLUS,
+        label   = L["Mythic+ only"],
+        tooltip = L["Only when your group signs up for Mythic+ in the group finder."]
+    },
+    {
+        mode    = RoleCheck.MODE_EVERYWHERE,
+        label   = L["Everywhere"],
+        tooltip = L["Every role check, including Dungeon Finder and Raid Finder queues."]
+    },
+    {
+        mode  = RoleCheck.MODE_DISABLED,
+        label = L["Disabled"]
+    },
 };
 
 local function GetColoredCharacterName()
@@ -280,6 +298,22 @@ function KeystoneLootSettingsDropdownMixin:Init()
             end
         );
         CreateSettingCheckbox(responseButton, L["Enable guild chat"], "settings.keyCommand.CHAT_MSG_GUILD");
+
+        local roleCheckButton = rootDescription:CreateButton(L["Auto role check"]);
+        SetTooltip(roleCheckButton, L["Accepts the role check window for you. The roles used are the ones you have selected in the Dungeon Finder."]);
+
+        for _, entry in ipairs(ROLE_CHECK_MODES) do
+            local radio = roleCheckButton:CreateRadio(
+                entry.label,
+                function(mode) return DB:Get("settings.roleCheck") == mode; end,
+                function(mode) DB:Set("settings.roleCheck", mode); end,
+                entry.mode
+            );
+
+            if (entry.tooltip) then
+                SetTooltip(radio, entry.tooltip);
+            end
+        end
 
         local manageButton = rootDescription:CreateButton(L["Manage characters"]);
         local extent = 20;

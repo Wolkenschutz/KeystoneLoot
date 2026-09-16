@@ -4,6 +4,7 @@ local DB = KeystoneLoot.DB;
 local Favorites = KeystoneLoot.Favorites;
 local Character = KeystoneLoot.Character;
 local Voidcore = KeystoneLoot.Voidcore;
+local RoleCheck = KeystoneLoot.RoleCheck;
 local Keystone = KeystoneLoot.Keystone;
 local CopyPopup = KeystoneLoot.CopyPopup;
 local L = KeystoneLoot.L;
@@ -17,6 +18,7 @@ KeystoneLootFrameMixin = {};
 function KeystoneLootFrameMixin:OnLoad()
     self:RegisterEvent("PLAYER_ENTERING_WORLD");
     self:RegisterEvent("BONUS_ROLL_RESULT");
+    self:RegisterEvent("LFG_ROLE_CHECK_SHOW");
     self:RegisterForDrag("LeftButton");
 
     CallbackRegistryMixin.OnLoad(self);
@@ -69,6 +71,9 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
         end
 
         Voidcore:OnBonusRoll(itemId);
+        return;
+    elseif (event == "LFG_ROLE_CHECK_SHOW") then
+        RoleCheck:OnRoleCheckShow();
         return;
     elseif (event == "CHAT_MSG_PARTY" or event == "CHAT_MSG_PARTY_LEADER" or event == "CHAT_MSG_GUILD") then
         if (not DB:Get("settings.keyCommand." .. event) or isResponsePaused) then

@@ -76,6 +76,13 @@ L["Auto Keystone response"] = "鑰石自動回覆";
 L["Enable party chat"] = "在隊伍聊天中啟用";
 L["Enable guild chat"] = "在公會聊天中啟用";
 L["Automatically responds with your current Mythic+ keystone when someone types \"!keys\" in the selected chat channels. Only works if other group members also have this addon."] = "當有人在所選聊天頻道輸入 \"!keys\" 時，自動回覆你目前的傳奇鑰石。僅當其他隊伍成員也安裝了此插件時才有效。";
+L["Auto role check"] = "自動確認職責";
+L["Accepts the role check window for you. The roles used are the ones you have selected in the Dungeon Finder."] = "替你確認職責檢查視窗。使用的是你在地城搜尋器中選擇的職責。";
+L["Mythic+ only"] = "僅限傳奇+";
+L["Only when your group signs up for Mythic+ in the group finder."] = "僅當你的隊伍在隊伍搜尋器中報名傳奇+時生效。";
+L["Everywhere"] = "全部";
+L["Every role check, including Dungeon Finder and Raid Finder queues."] = "所有職責檢查，包括地城搜尋器和團隊搜尋器的排隊。";
+L["Disabled"] = "已停用";
 
 -- custom_item_icon.lua
 L["Custom Items"] = "自訂物品";
