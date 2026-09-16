@@ -76,6 +76,13 @@ L["Auto Keystone response"] = "Resposta automática de chave";
 L["Enable party chat"] = "Ativar chat do grupo";
 L["Enable guild chat"] = "Ativar chat de guilda";
 L["Automatically responds with your current Mythic+ keystone when someone types \"!keys\" in the selected chat channels. Only works if other group members also have this addon."] = "Responde automaticamente com sua chave Mítica+ atual quando alguém digita \"!keys\" nos canais de chat selecionados. Funciona apenas se outros membros do grupo também tiverem este addon.";
+L["Auto role check"] = "Confirmação automática de função";
+L["Accepts the role check window for you. The roles used are the ones you have selected in the Dungeon Finder."] = "Confirma a janela de verificação de funções para você. São usadas as funções que você selecionou no Localizador de Masmorras.";
+L["Mythic+ only"] = "Somente Mítica+";
+L["Only when your group signs up for Mythic+ in the group finder."] = "Somente quando seu grupo se inscreve para uma Mítica+ no localizador de grupos.";
+L["Everywhere"] = "Em todo lugar";
+L["Every role check, including Dungeon Finder and Raid Finder queues."] = "Todas as verificações de função, incluindo filas do Localizador de Masmorras e de Raides.";
+L["Disabled"] = "Desativado";
 
 -- custom_item_icon.lua
 L["Custom Items"] = "Itens personalizados";

@@ -7,7 +7,7 @@ local DB = KeystoneLoot.DB;
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 local DEFAULT_WHISPER_MESSAGE = KeystoneLoot.Config.whisperMessage;
 
-local DB_VERSION = 15;
+local DB_VERSION = 16;
 local CHAR_DB_VERSION = 3;
 
 local observers = {};
@@ -147,6 +147,10 @@ function DB:MigrateGlobalDB(fromVersion)
         if (KeystoneLootDB.settings.lootReminder.whisperMessage == "Can I have {item} please?") then
             KeystoneLootDB.settings.lootReminder.whisperMessage = DEFAULT_WHISPER_MESSAGE;
         end
+    end
+
+    if (fromVersion == 15) then
+        KeystoneLootDB.settings.roleCheck = KeystoneLoot.RoleCheck.MODE_MYTHIC_PLUS;
     end
 end
 
