@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.18.0 - 2026-09-19
+
+### New Features
+
+- Window scale option under accessibility
+- Re-added owned items checkmark, now with a track threshold
+
+### Bugfixes
+
+- Teleport notification when the group signs up again
+- Automatic role check confirmation for Mythic+
+
+### Other Changes
+
+- Update data
+
 ## 2.17.0 - 2026-09-16
 
 ### New Features
