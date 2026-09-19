@@ -108,6 +108,7 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
     Favorites:Init();
 
     self:InitSpecFilter();
+    self:InitScale();
 
     self:InitializeTabSystem();
 
@@ -138,6 +139,14 @@ function KeystoneLootFrameMixin:SyncSpecFilter()
         DB:Set("filters.classId", currentClassId);
         DB:Set("filters.specId", Character:GetCurrentSpecId());
     end
+end
+
+function KeystoneLootFrameMixin:InitScale()
+    self:SetScale(DB:Get("settings.windowScale") / 100);
+
+    DB:AddObserver("settings.windowScale", function(percent)
+        self:SetScale(percent / 100);
+    end);
 end
 
 function KeystoneLootFrameMixin:InitSpecFilter()

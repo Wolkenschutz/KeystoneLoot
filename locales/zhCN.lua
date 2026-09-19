@@ -82,6 +82,7 @@ L["Mythic+ only"] = "仅史诗+";
 L["Only when your group signs up for Mythic+ in the group finder."] = "仅当你的队伍在队伍查找器中报名史诗+时生效。";
 L["Everywhere"] = "全部";
 L["Every role check, including Dungeon Finder and Raid Finder queues."] = "所有职责检查，包括地下城查找器和团队查找器的排队。";
+L["Window scale"] = "窗口缩放";
 L["Disabled"] = "已禁用";
 
 -- custom_item_icon.lua

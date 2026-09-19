@@ -82,6 +82,7 @@ L["Mythic+ only"] = "Somente Mítica+";
 L["Only when your group signs up for Mythic+ in the group finder."] = "Somente quando seu grupo se inscreve para uma Mítica+ no localizador de grupos.";
 L["Everywhere"] = "Em todo lugar";
 L["Every role check, including Dungeon Finder and Raid Finder queues."] = "Todas as verificações de função, incluindo filas do Localizador de Masmorras e de Raides.";
+L["Window scale"] = "Escala da janela";
 L["Disabled"] = "Desativado";
 
 -- custom_item_icon.lua

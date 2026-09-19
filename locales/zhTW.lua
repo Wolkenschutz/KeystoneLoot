@@ -82,6 +82,7 @@ L["Mythic+ only"] = "僅限傳奇+";
 L["Only when your group signs up for Mythic+ in the group finder."] = "僅當你的隊伍在隊伍搜尋器中報名傳奇+時生效。";
 L["Everywhere"] = "全部";
 L["Every role check, including Dungeon Finder and Raid Finder queues."] = "所有職責檢查，包括地城搜尋器和團隊搜尋器的排隊。";
+L["Window scale"] = "視窗縮放";
 L["Disabled"] = "已停用";
 
 -- custom_item_icon.lua

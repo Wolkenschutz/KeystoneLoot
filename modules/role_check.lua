@@ -1,13 +1,13 @@
 local AddonName, KeystoneLoot = ...;
 
-KeystoneLoot.RoleCheck     = {};
+KeystoneLoot.RoleCheck        = {};
 
-local RoleCheck            = KeystoneLoot.RoleCheck;
-local DB                   = KeystoneLoot.DB;
+local RoleCheck               = KeystoneLoot.RoleCheck;
+local DB                      = KeystoneLoot.DB;
 
-RoleCheck.MODE_DISABLED    = 0;
-RoleCheck.MODE_MYTHIC_PLUS = 1;
-RoleCheck.MODE_EVERYWHERE  = 2;
+RoleCheck.MODE_DISABLED       = 0;
+RoleCheck.MODE_MYTHIC_PLUS    = 1;
+RoleCheck.MODE_EVERYWHERE     = 2;
 
 local function IsMythicPlusRoleCheck()
     local isLFGList, activityId = C_LFGList.GetRoleCheckInfo();

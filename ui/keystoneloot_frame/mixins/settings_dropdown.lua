@@ -18,6 +18,8 @@ local HIGHLIGHTS = {
     { key = "settings.highlighting.noStats",     label = L["No stats"] },
 };
 
+local WINDOW_SCALES = { 80, 90, 100, 110, 120, 130, 140, 150, 160 };
+
 local ROLE_CHECK_MODES = {
     {
         mode    = RoleCheck.MODE_MYTHIC_PLUS,
@@ -261,6 +263,18 @@ function KeystoneLootSettingsDropdownMixin:Init()
             Voidcore:CheckAll(true);
         end);
         rescanButton:SetEnabled(UnitLevel("player") == 90);
+
+        local accessibilityMenu = rootDescription:CreateButton(ACCESSIBILITY_LABEL);
+
+        local scaleMenu = accessibilityMenu:CreateButton(L["Window scale"]);
+        for _, percent in ipairs(WINDOW_SCALES) do
+            scaleMenu:CreateRadio(
+                string.format(PERCENTAGE_STRING, percent),
+                function(value) return DB:Get("settings.windowScale") == value; end,
+                function(value) DB:Set("settings.windowScale", value); end,
+                percent
+            );
+        end
 
         local notificationMenu = rootDescription:CreateButton(COMMUNITIES_NOTIFICATION_SETTINGS);
 

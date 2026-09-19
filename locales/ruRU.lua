@@ -82,6 +82,7 @@ L["Mythic+ only"] = "Только М+";
 L["Only when your group signs up for Mythic+ in the group finder."] = "Только когда Ваша группа записывается на М+ в поиске групп.";
 L["Everywhere"] = "Везде";
 L["Every role check, including Dungeon Finder and Raid Finder queues."] = "Все проверки ролей, включая очереди поиска подземелий и поиска рейда.";
+L["Window scale"] = "Масштаб окна";
 L["Disabled"] = "Отключено";
 
 -- custom_item_icon.lua

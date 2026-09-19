@@ -82,6 +82,7 @@ L["Mythic+ only"] = "신화+ 전용";
 L["Only when your group signs up for Mythic+ in the group finder."] = "파티 찾기에서 그룹이 신화+에 등록할 때만 적용됩니다.";
 L["Everywhere"] = "항상";
 L["Every role check, including Dungeon Finder and Raid Finder queues."] = "던전 찾기와 공격대 찾기 대기열을 포함한 모든 역할 확인.";
+L["Window scale"] = "창 크기";
 L["Disabled"] = "비활성화";
 
 -- custom_item_icon.lua
