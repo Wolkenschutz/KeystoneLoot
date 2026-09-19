@@ -83,6 +83,8 @@ L["Only when your group signs up for Mythic+ in the group finder."] = "Somente q
 L["Everywhere"] = "Em todo lugar";
 L["Every role check, including Dungeon Finder and Raid Finder queues."] = "Todas as verificações de função, incluindo filas do Localizador de Masmorras e de Raides.";
 L["Window scale"] = "Escala da janela";
+L["Owned items"] = "Itens que você possui";
+L["Shows a checkmark on items you already own, starting at the selected upgrade track. Bank items count once you have opened your bank at least once."] = "Mostra uma marca nos itens que você já possui a partir da trilha de aprimoramento selecionada. Os itens no banco contam depois de você abrir o banco pelo menos uma vez.";
 L["Disabled"] = "Desativado";
 
 -- custom_item_icon.lua

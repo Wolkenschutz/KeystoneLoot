@@ -11,6 +11,13 @@ local function CreateTrackEntry(ilvl, bonusId, quality, suffix, rank)
     };
 end
 
+-- https://wago.tools/db2/SharedString
+KeystoneLoot.TrackStrings = {
+    { key = "champion", trackId = 973, label = L["Champion"] },
+    { key = "hero",     trackId = 974, label = L["Hero"] },
+    { key = "myth",     trackId = 978, label = L["Myth"] }
+};
+
 KeystoneLoot.UpgradeTrackOrder = {
     dungeon = { "champion", "hero", "greatvault" },
     raid = { "lfr", "normal", "heroic", "mythic" }

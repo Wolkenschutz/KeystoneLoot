@@ -276,6 +276,24 @@ function KeystoneLootSettingsDropdownMixin:Init()
             );
         end
 
+        local ownedMenu = rootDescription:CreateButton(L["Owned items"]);
+        SetTooltip(ownedMenu, L["Shows a checkmark on items you already own, starting at the selected upgrade track. Bank items count once you have opened your bank at least once."]);
+
+        ownedMenu:CreateRadio(
+            L["Disabled"],
+            function() return not DB:Get("settings.ownedCheck"); end,
+            function() DB:Set("settings.ownedCheck", false); end
+        );
+
+        for _, entry in ipairs(KeystoneLoot.TrackStrings) do
+            ownedMenu:CreateRadio(
+                entry.label,
+                function(key) return DB:Get("settings.ownedCheck") == key; end,
+                function(key) DB:Set("settings.ownedCheck", key); end,
+                entry.key
+            );
+        end
+
         local notificationMenu = rootDescription:CreateButton(COMMUNITIES_NOTIFICATION_SETTINGS);
 
         local lootReminderMenu = notificationMenu:CreateButton(L["Loot reminder (dungeons)"]);

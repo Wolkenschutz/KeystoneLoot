@@ -83,6 +83,8 @@ L["Only when your group signs up for Mythic+ in the group finder."] = "파티 �
 L["Everywhere"] = "항상";
 L["Every role check, including Dungeon Finder and Raid Finder queues."] = "던전 찾기와 공격대 찾기 대기열을 포함한 모든 역할 확인.";
 L["Window scale"] = "창 크기";
+L["Owned items"] = "보유한 아이템";
+L["Shows a checkmark on items you already own, starting at the selected upgrade track. Bank items count once you have opened your bank at least once."] = "선택한 상향 단계 이상으로 이미 보유한 아이템에 체크 표시를 합니다. 은행의 아이템은 은행을 한 번 열어본 뒤부터 반영됩니다.";
 L["Disabled"] = "비활성화";
 
 -- custom_item_icon.lua

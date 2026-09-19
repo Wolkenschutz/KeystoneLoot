@@ -83,6 +83,8 @@ L["Only when your group signs up for Mythic+ in the group finder."] = "僅當你
 L["Everywhere"] = "全部";
 L["Every role check, including Dungeon Finder and Raid Finder queues."] = "所有職責檢查，包括地城搜尋器和團隊搜尋器的排隊。";
 L["Window scale"] = "視窗縮放";
+L["Owned items"] = "已擁有的物品";
+L["Shows a checkmark on items you already own, starting at the selected upgrade track. Bank items count once you have opened your bank at least once."] = "在你已擁有且達到所選升級軌道的物品上顯示勾號。銀行中的物品在你開啟過一次銀行後開始計入。";
 L["Disabled"] = "已停用";
 
 -- custom_item_icon.lua
