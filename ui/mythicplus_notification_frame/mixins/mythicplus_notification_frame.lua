@@ -1,6 +1,7 @@
 local AddonName, KeystoneLoot                = ...;
 
 local DB                                     = KeystoneLoot.DB;
+local Keystone                               = KeystoneLoot.Keystone;
 local Query                                  = KeystoneLoot.Query;
 local L                                      = KeystoneLoot.L;
 
@@ -63,17 +64,24 @@ function KeystoneLootMythicPlusNotificationFrameMixin:OnEvent(event, ...)
     if (event == "PLAYER_REGEN_ENABLED") then
         self:UnregisterEvent("PLAYER_REGEN_ENABLED");
 
-        local pendingOpen = self.pendingOpen;
-        if (pendingOpen) then
+        local groupInfo = self.groupInfo;
+        if (groupInfo and self.pendingOpen) then
             self.pendingOpen = nil;
-            self:Open(pendingOpen.instanceId, pendingOpen.activityName, pendingOpen.isFull);
+            self:Open(groupInfo.instanceId, groupInfo.activityName, self.pendingIsFull);
         end
 
         return;
     end
 
     if (event == "GROUP_LEFT") then
-        self:Reset();
+        self.groupInfo = nil;
+        self.pendingOpen = nil;
+        self.suppressResultId = nil;
+        self.appliedRole = nil;
+
+        self:UnregisterEvent("GROUP_ROSTER_UPDATE");
+        self:UnregisterEvent("GROUP_LEFT");
+        self:UnregisterEvent("PLAYER_REGEN_ENABLED");
         return;
     end
 
@@ -112,26 +120,10 @@ function KeystoneLootMythicPlusNotificationFrameMixin:OnEvent(event, ...)
     self.suppressResultId = searchResultId;
     self:HideJoinDialog();
 
-    self.groupInfo = {
-        instanceId   = activityInfo.mapID,
-        activityName = activityInfo.fullName
-    };
-
     self:RegisterEvent("GROUP_ROSTER_UPDATE");
     self:RegisterEvent("GROUP_LEFT");
 
     self:Open(activityInfo.mapID, activityInfo.fullName, false);
-end
-
-function KeystoneLootMythicPlusNotificationFrameMixin:Reset()
-    self.groupInfo = nil;
-    self.pendingOpen = nil;
-    self.suppressResultId = nil;
-    self.appliedRole = nil;
-
-    self:UnregisterEvent("GROUP_ROSTER_UPDATE");
-    self:UnregisterEvent("GROUP_LEFT");
-    self:UnregisterEvent("PLAYER_REGEN_ENABLED");
 end
 
 function KeystoneLootMythicPlusNotificationFrameMixin:CheckActiveEntry()
@@ -150,8 +142,9 @@ function KeystoneLootMythicPlusNotificationFrameMixin:CheckActiveEntry()
     end
 
     self.groupInfo = {
-        instanceId   = activityInfo.mapID,
-        activityName = activityInfo.fullName
+        instanceId    = activityInfo.mapID,
+        activityName  = activityInfo.fullName,
+        sawIncomplete = GetNumGroupMembers() < FULL_GROUP_SIZE
     };
 
     self:RegisterEvent("GROUP_ROSTER_UPDATE");
@@ -177,27 +170,36 @@ function KeystoneLootMythicPlusNotificationFrameMixin:CheckFullGroup()
         return;
     end
 
-    if (not groupInfo.sawIncomplete) then
-        return;
-    end
+    self:UnregisterEvent("GROUP_ROSTER_UPDATE");
 
-    self:Open(groupInfo.instanceId, groupInfo.activityName, true);
+    if (groupInfo.sawIncomplete) then
+        self:Open(groupInfo.instanceId, groupInfo.activityName, true);
+    else
+        self.groupInfo = nil;
+    end
 end
 
 function KeystoneLootMythicPlusNotificationFrameMixin:Open(instanceId, activityName, isFull)
-    if (InCombatLockdown()) then
-        self.pendingOpen = {
-            instanceId   = instanceId,
-            activityName = activityName,
-            isFull       = isFull
-        };
+    local dungeon = instanceIdToDungeon[instanceId];
+    if (dungeon and Keystone:GetCurrentChallengeMapId() == dungeon.challengeModeId) then
+        self.groupInfo = nil;
+        return;
+    end
 
+    local groupInfo = self.groupInfo or {};
+
+    groupInfo.instanceId = instanceId;
+    groupInfo.activityName = activityName;
+    self.groupInfo = groupInfo;
+
+    if (InCombatLockdown()) then
+        self.pendingOpen = true;
+        self.pendingIsFull = isFull;
         self:RegisterEvent("PLAYER_REGEN_ENABLED");
         return;
     end
 
     local Card = self.Card;
-    local dungeon = instanceIdToDungeon[instanceId];
     local dungeonName = activityName;
 
     if (dungeon) then
@@ -232,7 +234,7 @@ function KeystoneLootMythicPlusNotificationFrameMixin:Open(instanceId, activityN
     self:Show();
 
     if (isFull) then
-        self:Reset();
+        self.groupInfo = nil;
     end
 end
 
