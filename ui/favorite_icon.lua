@@ -13,13 +13,15 @@ local DB = KeystoneLoot.DB;
 local ICON_SIZE = 18;
 
 local ICON_ANCHOR = {
-    TOPLEFT    = { 1, -1 },
-    BOTTOMLEFT = { 1, 1 },
+    TOPLEFT     = { 1, -1 },
+    TOPRIGHT    = { -1, -1 },
+    BOTTOMLEFT  = { 1, 1 },
+    BOTTOMRIGHT = { -1, 1 },
 };
 
 local trackedButtons = setmetatable({}, { __mode = "k" });
 
-local function SetTier(Button, tier, point)
+local function SetTier(Button, tier)
     if (not tier or tier == 0) then
         if (Button.KeystoneLootTierIcon) then
             Button.KeystoneLootTierIcon:Hide();
@@ -28,48 +30,52 @@ local function SetTier(Button, tier, point)
         return;
     end
 
-    if (not Button.KeystoneLootTierIcon) then
-        point = point or "TOPLEFT";
-
-        local Icon = Button:CreateTexture(nil, "OVERLAY", nil, 5);
+    local Icon = Button.KeystoneLootTierIcon;
+    if (not Icon) then
+        Icon = Button:CreateTexture(nil, "OVERLAY", nil, 5);
         Icon:SetSize(ICON_SIZE, ICON_SIZE);
-        Icon:SetPoint(point, unpack(ICON_ANCHOR[point]));
 
         Button.KeystoneLootTierIcon = Icon;
     end
 
-    Button.KeystoneLootTierIcon:SetTexture(Favorites:GetTierIcon(tier));
-    Button.KeystoneLootTierIcon:Show();
+    local point = DB:Get("settings.favoriteIcon");
+    if (Icon.point ~= point) then
+        Icon:ClearAllPoints();
+        Icon:SetPoint(point, unpack(ICON_ANCHOR[point]));
+        Icon.point = point;
+    end
+
+    Icon:SetTexture(Favorites:GetTierIcon(tier));
+    Icon:Show();
 end
 
-local function UpdateByItemId(Button, itemId, characterKey, point)
+local function UpdateByItemId(Button, itemId, characterKey)
     if (characterKey == nil) then
         characterKey = Character:GetKey();
     end
 
     Button.KeystoneLootItemId = itemId;
     Button.KeystoneLootCharacterKey = characterKey;
-    Button.KeystoneLootPoint = point;
 
     trackedButtons[Button] = itemId and true or nil;
 
     local tier = itemId and DB:Get("settings.favoriteIcon")
         and Favorites:GetAnyTierForKey(itemId, characterKey) or 0;
 
-    SetTier(Button, tier, point);
+    SetTier(Button, tier);
 end
 
-local function UpdateByItemLink(Button, itemLink, characterKey, point)
-    UpdateByItemId(Button, itemLink and tonumber(string.match(itemLink, "item:(%d+)")), characterKey, point);
+local function UpdateByItemLink(Button, itemLink, characterKey)
+    UpdateByItemId(Button, itemLink and tonumber(string.match(itemLink, "item:(%d+)")), characterKey);
 end
 
-local function UpdateByContainerSlot(Button, bagId, slotId, characterKey, point)
-    UpdateByItemId(Button, bagId and slotId and C_Container.GetContainerItemID(bagId, slotId), characterKey, point);
+local function UpdateByContainerSlot(Button, bagId, slotId, characterKey)
+    UpdateByItemId(Button, bagId and slotId and C_Container.GetContainerItemID(bagId, slotId), characterKey);
 end
 
 local function UpdateContainer(Frame)
     for _, ItemButton in Frame:EnumerateValidItems() do
-        UpdateByContainerSlot(ItemButton, ItemButton:GetBagID(), ItemButton:GetID(), nil, "BOTTOMLEFT");
+        UpdateByContainerSlot(ItemButton, ItemButton:GetBagID(), ItemButton:GetID());
     end
 end
 
@@ -84,7 +90,7 @@ local function UpdateBank(Panel)
 
     for ItemButton in Panel:EnumerateValidItems() do
         if (canUseBank) then
-            UpdateByContainerSlot(ItemButton, ItemButton:GetBankTabID(), ItemButton:GetContainerSlotID(), nil, "BOTTOMLEFT");
+            UpdateByContainerSlot(ItemButton, ItemButton:GetBankTabID(), ItemButton:GetContainerSlotID());
         else
             SetTier(ItemButton, 0);
         end
@@ -101,7 +107,7 @@ local function UpdateEquippedSlot(Button, unit)
         return;
     end
 
-    UpdateByItemId(Button, GetInventoryItemID(unit, slotId), nil, "BOTTOMLEFT");
+    UpdateByItemId(Button, GetInventoryItemID(unit, slotId));
 end
 
 hooksecurefunc("PaperDollItemSlotButton_Update", function(Button)
@@ -137,7 +143,7 @@ end
 hooksecurefunc("EquipmentFlyout_UpdateItems", function()
     for _, Button in ipairs(EquipmentFlyoutFrame.buttons) do
         if (Button:IsShown()) then
-            UpdateByItemId(Button, GetFlyoutItemId(Button), nil, "BOTTOMLEFT");
+            UpdateByItemId(Button, GetFlyoutItemId(Button));
         else
             SetTier(Button, 0);
         end
@@ -151,7 +157,7 @@ LootFrame.ScrollBox:RegisterCallback("OnUpdate", function()
         end
 
         local data = Frame:GetElementData();
-        UpdateByItemLink(Frame.Item, data and data.slotIndex and GetLootSlotLink(data.slotIndex), nil, "BOTTOMLEFT");
+        UpdateByItemLink(Frame.Item, data and data.slotIndex and GetLootSlotLink(data.slotIndex));
     end);
 end);
 
@@ -255,7 +261,7 @@ EventUtil.ContinueOnAddOnLoaded("ArkInventory", function()
     hooksecurefunc(ArkInventory.API, "ItemFrameUpdated", function(Frame, locId, bagId)
         local item = ArkInventory.API.ItemFrameItemTableGet(Frame);
 
-        UpdateByItemLink(Frame, item and item.h, GetCharacterKey(locId, bagId), "BOTTOMLEFT");
+        UpdateByItemLink(Frame, item and item.h, GetCharacterKey(locId, bagId));
     end);
 end);
 
@@ -307,7 +313,7 @@ for _, addon in ipairs({ "EllesmereUIBags", "EUIStandaloneBags" }) do
         local function UpdateSlots(Frame)
             for _, Child in ipairs({ Frame:GetChildren() }) do
                 if (Child.SetItemButtonTexture) then
-                    UpdateByContainerSlot(Child, Child:GetParent():GetID(), Child:GetID(), nil, "BOTTOMLEFT");
+                    UpdateByContainerSlot(Child, Child:GetParent():GetID(), Child:GetID());
                 else
                     UpdateSlots(Child);
                 end
@@ -350,9 +356,10 @@ end);
 local function RefreshTrackedButtons()
     for Button in pairs(trackedButtons) do
         if (Button:IsVisible()) then
-            UpdateByItemId(Button, Button.KeystoneLootItemId, Button.KeystoneLootCharacterKey, Button.KeystoneLootPoint);
+            UpdateByItemId(Button, Button.KeystoneLootItemId, Button.KeystoneLootCharacterKey);
         end
     end
 end
 
 KeystoneLoot.API:RegisterCallback("FAVORITES_CHANGED", RefreshTrackedButtons, AddonName);
+DB:AddObserver("settings.favoriteIcon", RefreshTrackedButtons);

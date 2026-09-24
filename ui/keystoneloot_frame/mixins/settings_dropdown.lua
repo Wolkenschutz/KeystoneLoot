@@ -20,6 +20,14 @@ local HIGHLIGHTS = {
 
 local WINDOW_SCALES = { 80, 90, 100, 110, 120, 130, 140, 150, 160 };
 
+local FAVORITE_ICON_POSITIONS = {
+    { point = false,         label = L["Disabled"] },
+    { point = "TOPLEFT",     label = L["Top left"] },
+    { point = "TOPRIGHT",    label = L["Top right"] },
+    { point = "BOTTOMLEFT",  label = L["Bottom left"] },
+    { point = "BOTTOMRIGHT", label = L["Bottom right"] },
+};
+
 local ROLE_CHECK_MODES = {
     {
         mode    = RoleCheck.MODE_MYTHIC_PLUS,
@@ -237,7 +245,19 @@ function KeystoneLootSettingsDropdownMixin:Init()
         generalMenu:CreateDivider();
         CreateSettingCheckbox(generalMenu, L["Item level in keystone tooltip"], "settings.keystoneTooltip");
         CreateSettingCheckbox(generalMenu, L["Favorite in item tooltip"], "settings.favoriteTooltip");
-        CreateSettingCheckbox(generalMenu, L["Favorite on item icons"], "settings.favoriteIcon");
+        local favoriteIconMenu = generalMenu:CreateButton(L["Favorite on item icons"]);
+        if (C_AddOns.IsAddOnLoaded("Baganator")) then
+            SetTooltip(favoriteIconMenu, L["Baganator: The position in the bags is set in the Baganator settings under Icons."]);
+        end
+
+        for _, entry in ipairs(FAVORITE_ICON_POSITIONS) do
+            favoriteIconMenu:CreateRadio(
+                entry.label,
+                function(point) return DB:Get("settings.favoriteIcon") == point; end,
+                function(point) DB:Set("settings.favoriteIcon", point); end,
+                entry.point
+            );
+        end
         CreateSettingCheckbox(generalMenu, L["Slot name on item icons"], "settings.slotName");
 
         local ownedTooltipCheckbox = generalMenu:CreateCheckbox(

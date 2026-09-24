@@ -7,7 +7,7 @@ local DB = KeystoneLoot.DB;
 local CURRENT_SEASON = KeystoneLoot.Config.season;
 local DEFAULT_WHISPER_MESSAGE = KeystoneLoot.Config.whisperMessage;
 
-local DB_VERSION = 19;
+local DB_VERSION = 20;
 local CHAR_DB_VERSION = 4;
 
 local observers = {};
@@ -167,6 +167,10 @@ function DB:MigrateGlobalDB(fromVersion)
             joined = enabled,
             full = enabled
         };
+    end
+
+    if (fromVersion == 19) then
+        KeystoneLootDB.settings.favoriteIcon = KeystoneLootDB.settings.favoriteIcon and "BOTTOMLEFT";
     end
 end
 
