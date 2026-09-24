@@ -69,6 +69,8 @@ L["Shares your favorites with your group members so they can choose their loot s
 L["Shows a notification when another player loots an item you have marked as a favorite."] = "Mostra una notifica quando un altro giocatore ottiene un oggetto che hai contrassegnato come preferito.";
 L["Teleport notification (Mythic+)"] = "Notifica di teletrasporto (Mitica+)";
 L["Shows the dungeon and your role with a teleport button when you join a Mythic+ group or the group becomes full."] = "Mostra il sotterraneo e il tuo ruolo con un pulsante di teletrasporto quando entri in un gruppo Mitica+ o il gruppo si completa.";
+L["When joining a group"] = "Quando entri in un gruppo";
+L["When the group is full"] = "Quando il gruppo è completo";
 L["Whisper message..."] = "Messaggio sussurro...";
 L["Whisper message\n{item} will be replaced with the item link."] = "Messaggio sussurro\n{item} verrà sostituito con il link dell'oggetto.";
 L["Multiple slot filtering"] = "Filtro slot multipli";

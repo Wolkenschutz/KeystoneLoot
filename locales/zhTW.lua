@@ -69,6 +69,8 @@ L["Shares your favorites with your group members so they can choose their loot s
 L["Shows a notification when another player loots an item you have marked as a favorite."] = "當其他玩家拾取你標記為最愛的物品時顯示通知。";
 L["Teleport notification (Mythic+)"] = "傳送通知（傳奇+）";
 L["Shows the dungeon and your role with a teleport button when you join a Mythic+ group or the group becomes full."] = "當你加入傳奇+隊伍或隊伍滿員時，顯示地城和你的職責，並提供傳送按鈕。";
+L["When joining a group"] = "加入隊伍時";
+L["When the group is full"] = "隊伍滿員時";
 L["Whisper message..."] = "悄悄話訊息...";
 L["Whisper message\n{item} will be replaced with the item link."] = "悄悄話訊息\n{item} 將被替換為物品連結。";
 L["Multiple slot filtering"] = "多欄位篩選";

@@ -100,7 +100,8 @@ function KeystoneLootMythicPlusNotificationFrameMixin:OnEvent(event, ...)
         return;
     end
 
-    if (not DB:Get("settings.mythicPlusNotification")) then
+    local showJoined = DB:Get("settings.mythicPlusNotification.joined");
+    if (not showJoined and not DB:Get("settings.mythicPlusNotification.full")) then
         return;
     end
 
@@ -117,17 +118,25 @@ function KeystoneLootMythicPlusNotificationFrameMixin:OnEvent(event, ...)
     local _, _, _, _, role = C_LFGList.GetApplicationInfo(searchResultId);
     self.appliedRole = role;
 
-    self.suppressResultId = searchResultId;
-    self:HideJoinDialog();
-
     self:RegisterEvent("GROUP_ROSTER_UPDATE");
     self:RegisterEvent("GROUP_LEFT");
 
-    self:Open(activityInfo.mapID, activityInfo.fullName, false);
+    if (showJoined) then
+        self.suppressResultId = searchResultId;
+        self:HideJoinDialog();
+
+        self:Open(activityInfo.mapID, activityInfo.fullName, false);
+    else
+        self.groupInfo = {
+            instanceId    = activityInfo.mapID,
+            activityName  = activityInfo.fullName,
+            sawIncomplete = true
+        };
+    end
 end
 
 function KeystoneLootMythicPlusNotificationFrameMixin:CheckActiveEntry()
-    if (self.groupInfo or not DB:Get("settings.mythicPlusNotification")) then
+    if (self.groupInfo or not DB:Get("settings.mythicPlusNotification.full")) then
         return;
     end
 
@@ -172,7 +181,7 @@ function KeystoneLootMythicPlusNotificationFrameMixin:CheckFullGroup()
 
     self:UnregisterEvent("GROUP_ROSTER_UPDATE");
 
-    if (groupInfo.sawIncomplete) then
+    if (groupInfo.sawIncomplete and DB:Get("settings.mythicPlusNotification.full")) then
         self:Open(groupInfo.instanceId, groupInfo.activityName, true);
     else
         self.groupInfo = nil;

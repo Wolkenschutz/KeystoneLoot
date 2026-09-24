@@ -69,6 +69,8 @@ L["Shares your favorites with your group members so they can choose their loot s
 L["Shows a notification when another player loots an item you have marked as a favorite."] = "다른 플레이어가 즐겨찾기로 표시한 아이템을 획득하면 알림을 표시합니다.";
 L["Teleport notification (Mythic+)"] = "순간이동 알림 (신화+)";
 L["Shows the dungeon and your role with a teleport button when you join a Mythic+ group or the group becomes full."] = "신화+ 파티에 참여하거나 파티가 가득 차면 던전과 역할을 순간이동 버튼과 함께 표시합니다.";
+L["When joining a group"] = "파티 참여 시";
+L["When the group is full"] = "파티가 가득 찼을 때";
 L["Whisper message..."] = "귓속말 메시지...";
 L["Whisper message\n{item} will be replaced with the item link."] = "귓속말 메시지\n{item}은(는) 아이템 링크로 대체됩니다.";
 L["Multiple slot filtering"] = "다중 슬롯 필터링";
