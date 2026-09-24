@@ -137,8 +137,14 @@ function Upgrade:BuildItemLink(itemId)
     end
 
     -- 5. Special item bonus
-    if (SPECIAL_BONUS_IDS[itemId]) then
-        table.insert(bonusIds, SPECIAL_BONUS_IDS[itemId]);
+    local specialItemId = itemId;
+    local catalystItem = KeystoneLoot.CatalystDatabase[itemId];
+    if (catalystItem) then
+        specialItemId = Favorites:GetCatalystItemForSlot(catalystItem.slotId);
+    end
+
+    if (SPECIAL_BONUS_IDS[specialItemId]) then
+        table.insert(bonusIds, SPECIAL_BONUS_IDS[specialItemId]);
     end
 
     -- 6. Always add 1674 (epic)
