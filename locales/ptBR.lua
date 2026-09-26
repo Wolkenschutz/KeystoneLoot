@@ -169,5 +169,8 @@ L["Checking for past bonus rolls (one time)..."] = "Procurando rolagens bônus a
 L["%d past |4bonus roll:bonus rolls; detected."] = "%d |4rolagem bônus anterior detectada:rolagens bônus anteriores detectadas;.";
 L["No untracked bonus rolls found."] = "Nenhuma rolagem bônus não rastreada encontrada.";
 
+-- role_check.lua
+L["Role check confirmed automatically."] = "Verificação de funções confirmada automaticamente.";
+
 -- bindings.lua
 L["Toggle Window"] = "Mostrar/Ocultar janela";

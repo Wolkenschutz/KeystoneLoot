@@ -171,5 +171,8 @@ L["Checking for past bonus rolls (one time)..."] = "Поиск прошлых б
 L["%d past |4bonus roll:bonus rolls; detected."] = "Обнаружено прошлых бонусных бросков: %d.";
 L["No untracked bonus rolls found."] = "Неотслеженных бонусных бросков не найдено.";
 
+-- role_check.lua
+L["Role check confirmed automatically."] = "Проверка ролей подтверждена автоматически.";
+
 -- bindings.lua
 L["Toggle Window"] = "Показать/скрыть окно";

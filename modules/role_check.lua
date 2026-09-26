@@ -4,6 +4,7 @@ KeystoneLoot.RoleCheck        = {};
 
 local RoleCheck               = KeystoneLoot.RoleCheck;
 local DB                      = KeystoneLoot.DB;
+local L                       = KeystoneLoot.L;
 
 RoleCheck.MODE_DISABLED       = 0;
 RoleCheck.MODE_MYTHIC_PLUS    = 1;
@@ -30,5 +31,6 @@ function RoleCheck:OnRoleCheckShow()
         return;
     end
 
+    print("|cff9d5db8KeystoneLoot|r: " .. L["Role check confirmed automatically."]);
     RunNextFrame(LFDRoleCheckPopupAccept_OnClick);
 end

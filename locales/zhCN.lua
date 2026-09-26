@@ -170,5 +170,8 @@ L["Checking for past bonus rolls (one time)..."] = "正在检查过去的额外�
 L["%d past |4bonus roll:bonus rolls; detected."] = "检测到 %d 次过去的额外拾取。";
 L["No untracked bonus rolls found."] = "未发现未记录的额外拾取。";
 
+-- role_check.lua
+L["Role check confirmed automatically."] = "已自动确认职责检查。";
+
 -- bindings.lua
 L["Toggle Window"] = "打开/关闭窗口";

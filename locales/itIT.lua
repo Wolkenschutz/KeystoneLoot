@@ -169,5 +169,8 @@ L["Checking for past bonus rolls (one time)..."] = "Ricerca di tiri bonus passat
 L["%d past |4bonus roll:bonus rolls; detected."] = "%d |4tiro bonus passato rilevato:tiri bonus passati rilevati;.";
 L["No untracked bonus rolls found."] = "Nessun tiro bonus non tracciato trovato.";
 
+-- role_check.lua
+L["Role check confirmed automatically."] = "Controllo dei ruoli confermato automaticamente.";
+
 -- bindings.lua
 L["Toggle Window"] = "Finestra";
