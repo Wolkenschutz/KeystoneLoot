@@ -1,17 +1,6 @@
 local AddonName, KeystoneLoot = ...;
 
 local DB = KeystoneLoot.DB;
-local L = KeystoneLoot.L;
-
-local TRACK_LABELS = {
-    champion   = L["Champion"],
-    hero       = L["Hero"],
-    greatvault = L["Great Vault"],
-    lfr        = L["Raid Finder"],
-    normal     = L["Normal"],
-    heroic     = L["Heroic"],
-    mythic     = L["Mythic"],
-};
 
 KeystoneLootItemLevelDropdownMixin = {};
 
@@ -34,57 +23,33 @@ function KeystoneLootItemLevelDropdownMixin:Init()
 
         local selectedTab = DB:Get("ui.selectedTab");
         if (selectedTab == "dungeons") then
-            self:BuildDungeonMenu(rootDescription);
+            self:BuildTrackMenu(rootDescription, "dungeon", "track");
         else
-            self:BuildRaidMenu(rootDescription);
+            self:BuildTrackMenu(rootDescription, "raid", "difficulty");
         end
     end);
 
     DB:AddObserver("ui.selectedTab", function() self:GenerateMenu(); end);
 end
 
-function KeystoneLootItemLevelDropdownMixin:BuildDungeonMenu(rootDescription)
-    local tracks = KeystoneLoot.UpgradeTracks.dungeon;
-    local trackOrder = KeystoneLoot.UpgradeTrackOrder.dungeon;
+function KeystoneLootItemLevelDropdownMixin:BuildTrackMenu(rootDescription, context, trackSetting)
+    local trackPath = "filters." .. context .. "." .. trackSetting;
+    local rankPath = "filters." .. context .. ".rank";
 
     local function IsSelected(data)
-        return DB:Get("filters.dungeon.track") == data.track and DB:Get("filters.dungeon.rank") == data.rank;
+        return DB:Get(trackPath) == data.key and DB:Get(rankPath) == data.rank;
     end
 
     local function SetSelected(data)
-        DB:Set("filters.dungeon.track", data.track);
-        DB:Set("filters.dungeon.rank", data.rank);
+        DB:Set(trackPath, data.key);
+        DB:Set(rankPath, data.rank);
     end
 
-    for _, trackName in ipairs(trackOrder) do
-        local trackData = tracks[trackName];
-        local trackMenu = rootDescription:CreateButton(TRACK_LABELS[trackName] or trackName:upper());
+    for _, menu in ipairs(KeystoneLoot.UpgradeTrackMenus[context]) do
+        local trackMenu = rootDescription:CreateButton(menu.label);
 
-        for rank, data in ipairs(trackData or {}) do
-            trackMenu:CreateRadio(data.label, IsSelected, SetSelected, { track = trackName, rank = rank, label = data.label });
-        end
-    end
-end
-
-function KeystoneLootItemLevelDropdownMixin:BuildRaidMenu(rootDescription)
-    local tracks = KeystoneLoot.UpgradeTracks.raid;
-    local difficultyOrder = KeystoneLoot.UpgradeTrackOrder.raid;
-
-    local function IsSelected(data)
-        return DB:Get("filters.raid.difficulty") == data.difficulty and DB:Get("filters.raid.rank") == data.rank;
-    end
-
-    local function SetSelected(data)
-        DB:Set("filters.raid.difficulty", data.difficulty);
-        DB:Set("filters.raid.rank", data.rank);
-    end
-
-    for _, difficultyName in ipairs(difficultyOrder) do
-        local difficultyData = tracks[difficultyName];
-        local difficultyMenu = rootDescription:CreateButton(TRACK_LABELS[difficultyName] or difficultyName:upper());
-
-        for rank, data in ipairs(difficultyData or {}) do
-            difficultyMenu:CreateRadio(data.label, IsSelected, SetSelected, { difficulty = difficultyName, rank = rank, label = data.label });
+        for rank, entry in ipairs(menu.entries) do
+            trackMenu:CreateRadio(entry.label, IsSelected, SetSelected, { key = menu.key, rank = rank, label = entry.label });
         end
     end
 end

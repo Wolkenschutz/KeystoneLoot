@@ -1,88 +1,68 @@
 local AddonName, KeystoneLoot = ...;
 
-local L = KeystoneLoot.L;
+-- Generated automatically by KeystoneLoot Updater v2.0.4
+-- Timestamp: 2026-09-26 18:19:00
+-- WoW Build: 12.1.0 (69933)
+-- Season: 17
+-- WARNING: This file is auto-generated - manual changes will be overwritten!
 
-local function CreateTrackEntry(ilvl, bonusId, quality, suffix, rank)
-    return {
-        rank = rank,
-        ilvl = ilvl,
-        bonusId = bonusId,
-        label = string.format(RECENT_ALLY_RAID_NAME_STRING_FORMAT, ColorManager.GetFormattedStringForItemQuality(ilvl, quality), suffix)
-    };
-end
-
--- https://wago.tools/db2/SharedString
-KeystoneLoot.TrackStrings = {
-    { key = "champion", trackId = 973, label = L["Champion"] },
-    { key = "hero",     trackId = 974, label = L["Hero"] },
-    { key = "myth",     trackId = 978, label = L["Myth"] }
-};
-
-KeystoneLoot.UpgradeTrackOrder = {
-    dungeon = { "champion", "hero", "greatvault" },
-    raid = { "lfr", "normal", "heroic", "mythic" }
-};
-
-
-KeystoneLoot.UpgradeTracks = {
-    dungeon = {
-        champion = {
-            CreateTrackEntry(292, 12833, Enum.ItemQuality.Uncommon, "+0", L["Champion"]),
-            CreateTrackEntry(295, 12834, Enum.ItemQuality.Uncommon, "+2 +3", L["Champion"]),
-            CreateTrackEntry(298, 12835, Enum.ItemQuality.Uncommon, "+4", L["Champion"]),
-            CreateTrackEntry(302, 12836, Enum.ItemQuality.Uncommon, "+5", L["Champion"]),
-            CreateTrackEntry(305, 12837, Enum.ItemQuality.Rare, ITEM_UPGRADE, L["Champion"]),
-            CreateTrackEntry(308, 12838, Enum.ItemQuality.Rare, ITEM_UPGRADE, L["Champion"])
-        },
-        hero = {
-            CreateTrackEntry(305, 12841, Enum.ItemQuality.Rare, "+6 +7", L["Hero"]),
-            CreateTrackEntry(308, 12842, Enum.ItemQuality.Rare, "+8 +9", L["Hero"]),
-            CreateTrackEntry(311, 12843, Enum.ItemQuality.Rare, "+10", L["Hero"]),
-            CreateTrackEntry(315, 12844, Enum.ItemQuality.Rare, ITEM_UPGRADE, L["Hero"]),
-            CreateTrackEntry(318, 12845, Enum.ItemQuality.Epic, ITEM_UPGRADE, L["Hero"]),
-            CreateTrackEntry(321, 12846, Enum.ItemQuality.Epic, ITEM_UPGRADE, L["Hero"])
-        },
-        greatvault = {
-            CreateTrackEntry(318, 12849, Enum.ItemQuality.Epic, "+10", L["Myth"]),
-            CreateTrackEntry(321, 12850, Enum.ItemQuality.Epic, ITEM_UPGRADE, L["Myth"]),
-            CreateTrackEntry(324, 12851, Enum.ItemQuality.Epic, ITEM_UPGRADE, L["Myth"]),
-            CreateTrackEntry(328, 12852, Enum.ItemQuality.Epic, ITEM_UPGRADE, L["Myth"]),
-            CreateTrackEntry(331, 12853, Enum.ItemQuality.Legendary, ITEM_UPGRADE, L["Myth"]),
-            CreateTrackEntry(334, 12854, Enum.ItemQuality.Legendary, ITEM_UPGRADE, L["Myth"])
+KeystoneLoot.UpgradeTrackData = {
+    veteran = {
+        trackId = 972,
+        ranks = {
+            { ilvl = 279, bonusId = 12825 },
+            { ilvl = 282, bonusId = 12826 },
+            { ilvl = 285, bonusId = 12827 },
+            { ilvl = 289, bonusId = 12828 },
+            { ilvl = 292, bonusId = 12829 },
+            { ilvl = 295, bonusId = 12830 }
         }
     },
-    raid = {
-        lfr = {
-            CreateTrackEntry(279, 12825, Enum.ItemQuality.Poor, BOSS),
-            CreateTrackEntry(282, 12826, Enum.ItemQuality.Poor, BOSS),
-            CreateTrackEntry(285, 12827, Enum.ItemQuality.Poor, BOSS),
-            CreateTrackEntry(289, 12828, Enum.ItemQuality.Poor, BOSS),
-            CreateTrackEntry(292, 12829, Enum.ItemQuality.Uncommon, ITEM_UPGRADE),
-            CreateTrackEntry(295, 12830, Enum.ItemQuality.Uncommon, ITEM_UPGRADE)
-        },
-        normal = {
-            CreateTrackEntry(292, 12833, Enum.ItemQuality.Uncommon, BOSS),
-            CreateTrackEntry(295, 12834, Enum.ItemQuality.Uncommon, BOSS),
-            CreateTrackEntry(298, 12835, Enum.ItemQuality.Uncommon, BOSS),
-            CreateTrackEntry(302, 12836, Enum.ItemQuality.Uncommon, BOSS),
-            CreateTrackEntry(305, 12837, Enum.ItemQuality.Rare, ITEM_UPGRADE),
-            CreateTrackEntry(308, 12838, Enum.ItemQuality.Rare, ITEM_UPGRADE)
-        },
-        heroic = {
-            CreateTrackEntry(305, 12841, Enum.ItemQuality.Rare, BOSS),
-            CreateTrackEntry(308, 12842, Enum.ItemQuality.Rare, BOSS),
-            CreateTrackEntry(311, 12843, Enum.ItemQuality.Rare, BOSS),
-            CreateTrackEntry(315, 12844, Enum.ItemQuality.Rare, BOSS),
-            CreateTrackEntry(318, 12845, Enum.ItemQuality.Epic, ITEM_UPGRADE),
-            CreateTrackEntry(321, 12846, Enum.ItemQuality.Epic, ITEM_UPGRADE)
-        },
-        mythic = {
-            CreateTrackEntry(318, 12849, Enum.ItemQuality.Epic, BOSS),
-            CreateTrackEntry(321, 12850, Enum.ItemQuality.Epic, BOSS),
-            CreateTrackEntry(324, 12851, Enum.ItemQuality.Epic, BOSS),
-            CreateTrackEntry(328, 12852, Enum.ItemQuality.Epic, BOSS),
-            CreateTrackEntry(331, 12853, Enum.ItemQuality.Legendary, ITEM_UPGRADE),
-            CreateTrackEntry(334, 12854, Enum.ItemQuality.Legendary, ITEM_UPGRADE)
+    champion = {
+        trackId = 973,
+        ranks = {
+            { ilvl = 292, bonusId = 12833 },
+            { ilvl = 295, bonusId = 12834 },
+            { ilvl = 298, bonusId = 12835 },
+            { ilvl = 302, bonusId = 12836 },
+            { ilvl = 305, bonusId = 12837 },
+            { ilvl = 308, bonusId = 12838 }
+        }
+    },
+    hero = {
+        trackId = 974,
+        ranks = {
+            { ilvl = 305, bonusId = 12841 },
+            { ilvl = 308, bonusId = 12842 },
+            { ilvl = 311, bonusId = 12843 },
+            { ilvl = 315, bonusId = 12844 },
+            { ilvl = 318, bonusId = 12845 },
+            { ilvl = 321, bonusId = 12846 }
+        }
+    },
+    myth = {
+        trackId = 978,
+        ranks = {
+            { ilvl = 318, bonusId = 12849 },
+            { ilvl = 321, bonusId = 12850 },
+            { ilvl = 324, bonusId = 12851 },
+            { ilvl = 328, bonusId = 12852 },
+            { ilvl = 331, bonusId = 12853 },
+            { ilvl = 334, bonusId = 12854 }
         }
     }
+};
+
+KeystoneLoot.RaidBossRanks = 4;
+
+KeystoneLoot.GreatVaultRewards = {
+    [2] = { track = "hero", rank = 1 },
+    [3] = { track = "hero", rank = 1 },
+    [4] = { track = "hero", rank = 2 },
+    [5] = { track = "hero", rank = 2 },
+    [6] = { track = "hero", rank = 3 },
+    [7] = { track = "hero", rank = 4 },
+    [8] = { track = "hero", rank = 4 },
+    [9] = { track = "hero", rank = 4 },
+    [10] = { track = "myth", rank = 1 }
 };

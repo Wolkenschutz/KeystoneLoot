@@ -6,6 +6,7 @@ local Keystone = KeystoneLoot.Keystone;
 local DB = KeystoneLoot.DB;
 local Query = KeystoneLoot.Query;
 local Character = KeystoneLoot.Character;
+local Upgrade = KeystoneLoot.Upgrade;
 
 local function GetSpecPoolSize(lootTable, specId, classId)
     local count = 0;
@@ -387,6 +388,18 @@ function Keystone:GetLootReminderItemList(challengeModeId)
     return itemList, allSpecItems;
 end
 
+local function GetReward(reward)
+    local rankData = reward and KeystoneLoot.UpgradeTrackData[reward.track].ranks[reward.rank];
+    if (not rankData) then
+        return;
+    end
+
+    return {
+        level = rankData.ilvl,
+        rank = Upgrade:GetTrackLabel(reward.track)
+    };
+end
+
 function Keystone:GetRewards(keystoneLevel)
     if (not keystoneLevel or keystoneLevel < 2) then
         return;
@@ -396,34 +409,16 @@ function Keystone:GetRewards(keystoneLevel)
         keystoneLevel = 10;
     end
 
-    local mapping = KeystoneLoot.KeystoneMapping
-    if (not mapping or not mapping.rules) then
+    local endOfRun = GetReward(KeystoneLoot.EndOfRunRewards[keystoneLevel]);
+    local greatVault = GetReward(KeystoneLoot.GreatVaultRewards[keystoneLevel]);
+    if (not endOfRun or not greatVault) then
         return;
     end
 
-    -- Find matching rule
-    for _, rule in ipairs(mapping.rules) do
-        for _, level in ipairs(rule.keystones) do
-            if (level == keystoneLevel) then
-                -- Get upgrade tracks
-                local endTrack = KeystoneLoot.UpgradeTracks.dungeon[rule.endOfRun.track][rule.endOfRun.rank];
-                local vaultTrack = KeystoneLoot.UpgradeTracks.dungeon[rule.greatVault.track][rule.greatVault.rank];
-
-                return {
-                    endOfRun = {
-                        level = endTrack.ilvl,
-                        text = endTrack.label,
-                        rank = endTrack.rank
-                    },
-                    greatVault = {
-                        level = vaultTrack.ilvl,
-                        text = vaultTrack.label,
-                        rank = vaultTrack.rank
-                    }
-                };
-            end
-        end
-    end
+    return {
+        endOfRun = endOfRun,
+        greatVault = greatVault
+    };
 end
 
 function Keystone:GetKeystoneItemLink()

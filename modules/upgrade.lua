@@ -7,6 +7,7 @@ local DB        = KeystoneLoot.DB;
 local Favorites = KeystoneLoot.Favorites;
 local Character = KeystoneLoot.Character;
 local Query     = KeystoneLoot.Query;
+local L         = KeystoneLoot.L;
 
 local SPECIAL_BONUS_IDS = {
     [178708] = 6917,  -- Unbändiger Wechselbalg
@@ -38,6 +39,101 @@ local ITEM_LEVEL_BONUS_IDS = {
 local BLACKLIST_ITEMS = {
     --[268280] = true
 };
+
+local TRACK_LABELS = {
+    champion = L["Champion"],
+    hero     = L["Hero"],
+    myth     = L["Myth"]
+};
+
+local TRACK_MENUS = {
+    dungeon = {
+        { key = "champion",   track = "champion", label = L["Champion"],    rewards = KeystoneLoot.EndOfRunRewards },
+        { key = "hero",       track = "hero",     label = L["Hero"],        rewards = KeystoneLoot.EndOfRunRewards },
+        { key = "greatvault", track = "myth",     label = L["Great Vault"], rewards = KeystoneLoot.GreatVaultRewards }
+    },
+    raid = {
+        { key = "lfr",    track = "veteran",  label = L["Raid Finder"] },
+        { key = "normal", track = "champion", label = L["Normal"] },
+        { key = "heroic", track = "hero",     label = L["Heroic"] },
+        { key = "mythic", track = "myth",     label = L["Mythic"] }
+    }
+};
+
+local function GetQuality(itemLevel)
+    local tracks = KeystoneLoot.UpgradeTrackData;
+
+    if (itemLevel > tracks.myth.ranks[KeystoneLoot.RaidBossRanks].ilvl) then
+        return Enum.ItemQuality.Legendary;
+    elseif (itemLevel >= tracks.myth.ranks[1].ilvl) then
+        return Enum.ItemQuality.Epic;
+    elseif (itemLevel >= tracks.hero.ranks[1].ilvl) then
+        return Enum.ItemQuality.Rare;
+    elseif (itemLevel >= tracks.champion.ranks[1].ilvl) then
+        return Enum.ItemQuality.Uncommon;
+    end
+
+    return Enum.ItemQuality.Poor;
+end
+
+local function GetSuffix(menu, rank)
+    if (not menu.rewards) then
+        return rank <= KeystoneLoot.RaidBossRanks and BOSS or ITEM_UPGRADE;
+    end
+
+    local keystoneLevels = {};
+    for keystoneLevel, reward in pairs(menu.rewards) do
+        if (reward.track == menu.track and reward.rank == rank) then
+            table.insert(keystoneLevels, keystoneLevel);
+        end
+    end
+
+    if (#keystoneLevels == 0) then
+        return ITEM_UPGRADE;
+    end
+
+    table.sort(keystoneLevels);
+
+    for index, keystoneLevel in ipairs(keystoneLevels) do
+        keystoneLevels[index] = "+" .. keystoneLevel;
+    end
+
+    return table.concat(keystoneLevels, " ");
+end
+
+KeystoneLoot.UpgradeTracks = { dungeon = {}, raid = {} };
+KeystoneLoot.UpgradeTrackMenus = TRACK_MENUS;
+
+for context, menus in pairs(TRACK_MENUS) do
+    for _, menu in ipairs(menus) do
+        menu.entries = {};
+
+        for rank, rankData in ipairs(KeystoneLoot.UpgradeTrackData[menu.track].ranks) do
+            local itemLevelText = ColorManager.GetFormattedStringForItemQuality(rankData.ilvl, GetQuality(rankData.ilvl));
+
+            table.insert(menu.entries, {
+                ilvl = rankData.ilvl,
+                bonusId = rankData.bonusId,
+                label = string.format(RECENT_ALLY_RAID_NAME_STRING_FORMAT, itemLevelText, GetSuffix(menu, rank))
+            });
+        end
+
+        KeystoneLoot.UpgradeTracks[context][menu.key] = menu.entries;
+    end
+end
+
+KeystoneLoot.TrackStrings = {};
+for _, key in ipairs({ "champion", "hero", "myth" }) do
+    table.insert(KeystoneLoot.TrackStrings, {
+        key = key,
+        trackId = KeystoneLoot.UpgradeTrackData[key].trackId,
+        label = TRACK_LABELS[key]
+    });
+end
+
+function Upgrade:GetTrackLabel(track)
+    return TRACK_LABELS[track];
+end
 
 function Upgrade:IsUpgradeable(itemId)
     local _, _, _, _, _, classId = C_Item.GetItemInfoInstant(itemId);

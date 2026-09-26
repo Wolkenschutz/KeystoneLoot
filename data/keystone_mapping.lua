@@ -1,41 +1,14 @@
 local AddonName, KeystoneLoot = ...;
 
-KeystoneLoot.KeystoneMapping = {
-    rules = {
-        {
-            keystones = { 2, 3 },
-            endOfRun = { track = "champion", rank = 2 },
-            greatVault = { track = "hero", rank = 1 }
-        },
-        {
-            keystones = { 4 },
-            endOfRun = { track = "champion", rank = 3 },
-            greatVault = { track = "hero", rank = 2 }
-        },
-        {
-            keystones = { 5 },
-            endOfRun = { track = "champion", rank = 4 },
-            greatVault = { track = "hero", rank = 2 }
-        },
-        {
-            keystones = { 6 },
-            endOfRun = { track = "hero", rank = 1 },
-            greatVault = { track = "hero", rank = 3 }
-        },
-        {
-            keystones = { 7 },
-            endOfRun = { track = "hero", rank = 1 },
-            greatVault = { track = "hero", rank = 4 }
-        },
-        {
-            keystones = { 8, 9 },
-            endOfRun = { track = "hero", rank = 2 },
-            greatVault = { track = "hero", rank = 4 }
-        },
-        {
-            keystones = { 10 },
-            endOfRun = { track = "hero", rank = 3 },
-            greatVault = { track = "greatvault", rank = 1 }
-        }
-    }
-}
+KeystoneLoot.EndOfRunRewards = {
+    [0] = { track = "champion", rank = 1 },
+    [2] = { track = "champion", rank = 2 },
+    [3] = { track = "champion", rank = 2 },
+    [4] = { track = "champion", rank = 3 },
+    [5] = { track = "champion", rank = 4 },
+    [6] = { track = "hero", rank = 1 },
+    [7] = { track = "hero", rank = 1 },
+    [8] = { track = "hero", rank = 2 },
+    [9] = { track = "hero", rank = 2 },
+    [10] = { track = "hero", rank = 3 }
+};
