@@ -9,6 +9,10 @@ end
 
 function KeystoneLootTeleportButtonMixin:Init(dungeon, texture)
     local teleportSpellId = dungeon.teleportSpellId;
+    if (type(teleportSpellId) == "function") then
+        teleportSpellId = teleportSpellId();
+    end
+
     if (not teleportSpellId) then
         self.Icon:SetTexture(texture);
         self.Cooldown:Hide();
