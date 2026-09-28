@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.18.2 - 2026-09-28
+
+### Improvements
+
+- Chat message when a role check is confirmed automatically
+
+### Other Changes
+
+- Update enchant mapping
+- Support faction-dependent teleport spell
+- Update data
+
 ## 2.18.1 - 2026-09-24
 
 ### Bugfixes
