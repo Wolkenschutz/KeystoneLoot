@@ -81,6 +81,7 @@ function KeystoneLootReminderFrameMixin:OnEvent(event, ...)
         if (not self.challengeMapId) then
             self:UnregisterEvent("CHALLENGE_MODE_START");
             self:UnregisterEvent("ZONE_CHANGED_NEW_AREA");
+            self:RestoreLootSpec();
             return;
         end
 
@@ -141,6 +142,20 @@ function KeystoneLootReminderFrameMixin:OnEvent(event, ...)
         if (prefix == ADDON_PREFIX) then
             self:OnAddonMessage(text, sender);
         end
+    end
+end
+
+function KeystoneLootReminderFrameMixin:RestoreLootSpec()
+    local previousLootSpecId = DB:Get("previousLootSpecId");
+    if (previousLootSpecId == nil) then
+        return;
+    end
+
+    DB:Set("previousLootSpecId", nil);
+
+    if (GetLootSpecialization() ~= previousLootSpecId) then
+        SetLootSpecialization(previousLootSpecId);
+        print("|cff9d5db8KeystoneLoot|r: " .. L["Loot specialization restored after leaving the dungeon."]);
     end
 end
 

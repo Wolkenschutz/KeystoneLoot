@@ -148,6 +148,7 @@ L["+%d items dropping for all specs."] = "+%d itens caindo para todas as especia
 L["%s has a smaller loot pool than %s"] = "%s tem um pool de saque menor que %s";
 L["Your group needs loot from here"] = "Seu grupo precisa de saque daqui";
 L["Wanted by %s"] = "Desejado por %s";
+L["Loot specialization restored after leaving the dungeon."] = "Especialização de saque restaurada ao sair da masmorra.";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "Clique esquerdo: Abrir visão geral";

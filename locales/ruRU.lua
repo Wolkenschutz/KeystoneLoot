@@ -150,6 +150,7 @@ L["+%d items dropping for all specs."] = "+%d предметов выпадае�
 L["%s has a smaller loot pool than %s"] = "%s имеет меньший набор добычи, чем %s";
 L["Your group needs loot from here"] = "Вашей группе нужна добыча отсюда";
 L["Wanted by %s"] = "Нужно: %s";
+L["Loot specialization restored after leaving the dungeon."] = "Специализация для добычи восстановлена после выхода из подземелья.";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "ЛКМ: Открыть окно KeystoneLoot";

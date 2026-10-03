@@ -152,6 +152,7 @@ L["+%d items dropping for all specs."] = "+%d weitere Gegenstände, die bei alle
 L["%s has a smaller loot pool than %s"] = "%s hat eine kleinere Beutetabelle als %s";
 L["Your group needs loot from here"] = "Deine Gruppe braucht Beute von hier";
 L["Wanted by %s"] = "Gewünscht von %s";
+L["Loot specialization restored after leaving the dungeon."] = "Beutespezialisierung nach Verlassen des Dungeons zurückgesetzt.";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "Linksklick: Übersicht öffnen";

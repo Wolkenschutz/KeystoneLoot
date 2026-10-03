@@ -44,12 +44,6 @@
                 <Anchors>
                     <Anchor point="TOP" relativePoint="BOTTOM" y="-10"/>
                 </Anchors>
-                <Scripts>
-                    <OnClick>
-                        SetLootSpecialization(self:GetParent().specId);
-                        PlaySound(SOUNDKIT.UI_CLASS_TALENT_SPEC_ACTIVATE);
-                    </OnClick>
-                </Scripts>
                 <Frames>
                     <Frame parentKey="EfficiencyIcon" mixin="KeystoneLootReminderEfficiencyIconMixin" enableMouse="true" hidden="true">
                         <Size x="17" y="21"/>

@@ -149,6 +149,7 @@ L["+%d items dropping for all specs."] = "+%d 件物品對所有專精掉落。"
 L["%s has a smaller loot pool than %s"] = "%s的戰利品池比%s更小。";
 L["Your group needs loot from here"] = "你的隊伍需要這裡的戰利品";
 L["Wanted by %s"] = "%s想要";
+L["Loot specialization restored after leaving the dungeon."] = "離開地城後，戰利品專精已恢復。";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "左鍵點擊：開啟概覽";

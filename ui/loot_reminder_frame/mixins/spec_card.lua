@@ -1,6 +1,7 @@
 local AddonName, KeystoneLoot = ...;
 
 local Character               = KeystoneLoot.Character;
+local DB                      = KeystoneLoot.DB;
 local L                       = KeystoneLoot.L;
 
 -- Blizzard_PlayerSpells\ClassSpecializations\Blizzard_ClassSpecializationsFrame.lua
@@ -58,6 +59,8 @@ KeystoneLootReminderSpecMixin = {};
 
 function KeystoneLootReminderSpecMixin:OnLoad()
     self.iconPool = CreateFramePool("Button", self, "KeystoneLootReminderIconTemplate");
+
+    self.LootSpecButton:SetScript("OnClick", GenerateClosure(self.OnLootSpecButtonClick, self));
 end
 
 function KeystoneLootReminderSpecMixin:Init(displaySpecId, favoSpecId, items, lootSpecId, allSpecItems)
@@ -109,6 +112,15 @@ function KeystoneLootReminderSpecMixin:SetIcons(items, allSpecItems)
         Icon:Init(item.itemId, item.icon, allSpecItems[item.itemId] ~= nil, item.players);
         LastIcon = Icon;
     end
+end
+
+function KeystoneLootReminderSpecMixin:OnLootSpecButtonClick()
+    if (DB:Get("previousLootSpecId") == nil) then
+        DB:Set("previousLootSpecId", GetLootSpecialization());
+    end
+
+    SetLootSpecialization(self.specId);
+    PlaySound(SOUNDKIT.UI_CLASS_TALENT_SPEC_ACTIVATE);
 end
 
 function KeystoneLootReminderSpecMixin:UpdateLootSpec(lootSpecId)

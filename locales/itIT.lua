@@ -148,6 +148,7 @@ L["+%d items dropping for all specs."] = "+%d oggetti che cadono per tutte le sp
 L["%s has a smaller loot pool than %s"] = "%s ha un pool di bottino più piccolo di %s";
 L["Your group needs loot from here"] = "Il tuo gruppo ha bisogno di bottino da qui";
 L["Wanted by %s"] = "Desiderato da %s";
+L["Loot specialization restored after leaving the dungeon."] = "Specializzazione bottino ripristinata dopo aver lasciato la spedizione.";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "Clic sinistro: Apri panoramica";

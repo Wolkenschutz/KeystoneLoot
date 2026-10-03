@@ -149,6 +149,7 @@ L["+%d items dropping for all specs."] = "+%d 모든 전문화에 드롭되는 �
 L["%s has a smaller loot pool than %s"] = "%s은(는) %s보다 전리품 풀이 더 작습니다.";
 L["Your group needs loot from here"] = "그룹원이 이곳의 전리품을 원합니다";
 L["Wanted by %s"] = "%s 님이 원함";
+L["Loot specialization restored after leaving the dungeon."] = "던전을 떠나 전리품 전문화를 이전 설정으로 되돌렸습니다.";
 
 -- minimap_button.lua
 L["Left click: Open overview"] = "왼쪽 클릭: 개요 열기";
