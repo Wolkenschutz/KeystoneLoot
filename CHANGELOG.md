@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.18.3 - 2026-10-03
+
+### Improvements
+
+- Loot specialization is restored after leaving the dungeon
+
 ## 2.18.2 - 2026-09-28
 
 ### Improvements
