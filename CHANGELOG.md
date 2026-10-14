@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.18.4 - 2026-10-14
+
+### Other Changes
+
+- Update to 12.1.5
+
 ## 2.18.3 - 2026-10-03
 
 ### Improvements
