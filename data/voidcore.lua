@@ -1,8 +1,8 @@
 local AddonName, KeystoneLoot = ...;
 
 -- Generated automatically by KeystoneLoot Updater v2.0.4
--- Timestamp: 2026-09-26 20:15:35
--- WoW Build: 12.1.0 (69933)
+-- Timestamp: 2026-10-14 11:42:10
+-- WoW Build: 12.1.5 (70391)
 -- Season: 17
 -- WARNING: This file is auto-generated - manual changes will be overwritten!
 
@@ -45,4 +45,5 @@ KeystoneLoot.VoidcoreDatabase = {
     [278289] = { bossId = 2887 }, -- Die Zwillingsfänge
     [278290] = { bossId = 2883 }, -- Der Gewundene Altar
     [278284] = { bossId = 2895 }, -- Ula'tek
+    [286019] = { bossId = 2896 }, -- Kith'ix
 };
