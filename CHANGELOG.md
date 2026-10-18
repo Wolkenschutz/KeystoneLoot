@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.19.0 - 2026-10-18
+
+### Bugfixes
+
+- Missing equip effects on item tooltips (#74)
+
 ## 2.18.4 - 2026-10-14
 
 ### Other Changes
