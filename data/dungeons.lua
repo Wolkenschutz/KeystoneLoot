@@ -1,8 +1,8 @@
 local AddonName, KeystoneLoot = ...;
 
 -- Generated automatically by KeystoneLoot Updater v2.0.4
--- Timestamp: 2026-10-14 11:42:10
--- WoW Build: 12.1.5 (70391)
+-- Timestamp: 2026-10-18 18:38:10
+-- WoW Build: 12.1.5 (70448)
 -- Season: 17
 -- WARNING: This file is auto-generated - manual changes will be overwritten!
 
