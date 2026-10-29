@@ -164,11 +164,8 @@ L["Group is full!"] = "Grupo completo!";
 L["Text can be modified in the settings."] = "O texto pode ser modificado nas configurações.";
 
 -- voidcore.lua
-L["Rescanning for bonus rolls..."] = "Reescaneando rolagens bônus...";
 L["Rescan bonus rolls"] = "Reescanear rolagens bônus";
-L["Checking for past bonus rolls (one time)..."] = "Procurando rolagens bônus anteriores (uma vez)...";
-L["%d past |4bonus roll:bonus rolls; detected."] = "%d |4rolagem bônus anterior detectada:rolagens bônus anteriores detectadas;.";
-L["No untracked bonus rolls found."] = "Nenhuma rolagem bônus não rastreada encontrada.";
+L["Blizzard no longer shows which bonus rolls have been used, so past rolls can no longer be detected."] = "A Blizzard não mostra mais quais rolagens bônus foram usadas, então rolagens anteriores não podem mais ser detectadas.";
 
 -- role_check.lua
 L["Role check confirmed automatically."] = "Verificação de funções confirmada automaticamente.";

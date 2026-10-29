@@ -19,7 +19,7 @@ Mark items as favorites on a per-character, per-spec basis, with five priority t
 - A public **addon API** (`KeystoneLootAPI`) so other addons can read, change, and react to favorites. See [Addon API](#addon-api).
 
 ### Void Core (Bonus Roll) Tracking
-See exactly which items you've already secured with Void Cores and what's still left to collect from each dungeon and raid boss. It even works retroactively: anything you'd already obtained is filled in automatically when you install it, so you're never starting from scratch.
+See exactly which items you've already secured with Void Cores and what's still left to collect from each dungeon and raid boss. Every bonus roll is tracked as you use it.
 
 ### Drop Notification
 When a groupmate loots an item you have marked as a favorite, a notification pops up showing the item and who got it. You can whisper them directly from the notification with a fully customizable message.

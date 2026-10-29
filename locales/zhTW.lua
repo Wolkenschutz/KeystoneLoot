@@ -165,11 +165,8 @@ L["Group is full!"] = "隊伍已滿員！";
 L["Text can be modified in the settings."] = "可在設定中修改文字。";
 
 -- voidcore.lua
-L["Rescanning for bonus rolls..."] = "正在重新掃描額外擲骰...";
 L["Rescan bonus rolls"] = "重新掃描額外擲骰";
-L["Checking for past bonus rolls (one time)..."] = "正在檢查過去的額外擲骰（單次）...";
-L["%d past |4bonus roll:bonus rolls; detected."] = "偵測到 %d 次過去的額外擲骰。";
-L["No untracked bonus rolls found."] = "未發現未記錄的額外擲骰。";
+L["Blizzard no longer shows which bonus rolls have been used, so past rolls can no longer be detected."] = "暴雪不再顯示哪些額外擲骰已被使用，因此無法再偵測過去的額外擲骰。";
 
 -- role_check.lua
 L["Role check confirmed automatically."] = "已自動確認職責檢查。";

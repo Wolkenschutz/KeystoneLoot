@@ -164,11 +164,8 @@ L["Group is full!"] = "¡Grupo completo!";
 L["Text can be modified in the settings."] = "El texto se puede modificar en los ajustes.";
 
 -- voidcore.lua
-L["Rescanning for bonus rolls..."] = "Volviendo a escanear tiradas bonificadas...";
 L["Rescan bonus rolls"] = "Volver a escanear tiradas bonificadas";
-L["Checking for past bonus rolls (one time)..."] = "Buscando tiradas bonificadas anteriores (una vez)...";
-L["%d past |4bonus roll:bonus rolls; detected."] = "%d |4tirada bonificada anterior detectada:tiradas bonificadas anteriores detectadas;.";
-L["No untracked bonus rolls found."] = "No se encontraron tiradas bonificadas sin registrar.";
+L["Blizzard no longer shows which bonus rolls have been used, so past rolls can no longer be detected."] = "Blizzard ya no muestra qué tiradas bonificadas se han usado, por lo que ya no se pueden detectar las tiradas anteriores.";
 
 -- role_check.lua
 L["Role check confirmed automatically."] = "Comprobación de roles confirmada automáticamente.";

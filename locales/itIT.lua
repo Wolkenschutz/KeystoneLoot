@@ -164,11 +164,8 @@ L["Group is full!"] = "Gruppo al completo!";
 L["Text can be modified in the settings."] = "Il testo può essere modificato nelle impostazioni.";
 
 -- voidcore.lua
-L["Rescanning for bonus rolls..."] = "Nuova scansione dei tiri bonus...";
 L["Rescan bonus rolls"] = "Riscansiona i tiri bonus";
-L["Checking for past bonus rolls (one time)..."] = "Ricerca di tiri bonus passati (una volta)...";
-L["%d past |4bonus roll:bonus rolls; detected."] = "%d |4tiro bonus passato rilevato:tiri bonus passati rilevati;.";
-L["No untracked bonus rolls found."] = "Nessun tiro bonus non tracciato trovato.";
+L["Blizzard no longer shows which bonus rolls have been used, so past rolls can no longer be detected."] = "Blizzard non mostra più quali tiri bonus sono stati usati, quindi i tiri passati non possono più essere rilevati.";
 
 -- role_check.lua
 L["Role check confirmed automatically."] = "Controllo dei ruoli confermato automaticamente.";

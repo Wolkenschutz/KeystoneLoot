@@ -130,14 +130,6 @@ function KeystoneLootFrameMixin:OnEvent(event, ...)
     KeystoneLootMinimapButton:Init();
 
     KeystoneLoot.APIInternal.SetReady();
-
-    if (DB:Get("voidcoreChecked") or UnitLevel("player") < 90) then
-        return;
-    end
-
-    C_Timer.After(3, function()
-        Voidcore:CheckAll();
-    end);
 end
 
 function KeystoneLootFrameMixin:SyncSpecFilter()
@@ -198,6 +190,11 @@ function KeystoneLootFrameMixin:OnShow()
     self:RegisterEvent("BAG_UPDATE_DELAYED");
     self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
     self:RegisterEvent("ITEM_DATA_LOAD_RESULT");
+
+    if (SimulationCraftDB and not DB:Get("simcImported")) then
+        Voidcore:ImportSimc();
+        DB:Set("simcImported", true);
+    end
 
     self:RefreshOwnedIcons();
 end

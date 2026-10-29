@@ -165,11 +165,8 @@ L["Group is full!"] = "파티가 가득 찼습니다!";
 L["Text can be modified in the settings."] = "텍스트는 설정에서 수정할 수 있습니다.";
 
 -- voidcore.lua
-L["Rescanning for bonus rolls..."] = "보너스 주사위를 다시 검사하는 중...";
 L["Rescan bonus rolls"] = "보너스 주사위 다시 검사";
-L["Checking for past bonus rolls (one time)..."] = "지난 보너스 주사위 확인 중 (최초 1회)...";
-L["%d past |4bonus roll:bonus rolls; detected."] = "지난 보너스 주사위 %d개를 감지했습니다.";
-L["No untracked bonus rolls found."] = "추적되지 않은 보너스 주사위가 없습니다.";
+L["Blizzard no longer shows which bonus rolls have been used, so past rolls can no longer be detected."] = "블리자드가 더 이상 사용한 보너스 주사위를 표시하지 않아 지난 주사위를 감지할 수 없습니다.";
 
 -- role_check.lua
 L["Role check confirmed automatically."] = "역할 확인을 자동으로 수락했습니다.";

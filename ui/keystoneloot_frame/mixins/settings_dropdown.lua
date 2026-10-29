@@ -4,7 +4,6 @@ local DB = KeystoneLoot.DB;
 local Favorites = KeystoneLoot.Favorites;
 local Character = KeystoneLoot.Character;
 local L = KeystoneLoot.L;
-local Voidcore = KeystoneLoot.Voidcore;
 local Owned = KeystoneLoot.Owned;
 local RoleCheck = KeystoneLoot.RoleCheck;
 
@@ -279,10 +278,9 @@ function KeystoneLootSettingsDropdownMixin:Init()
         CreateSettingCheckbox(generalMenu, L["Wide mode"], "settings.wideMode");
 
         generalMenu:CreateDivider();
-        local rescanButton = generalMenu:CreateButton(L["Rescan bonus rolls"], function()
-            Voidcore:CheckAll(true);
-        end);
-        rescanButton:SetEnabled(UnitLevel("player") == 90);
+        local rescanButton = generalMenu:CreateButton(L["Rescan bonus rolls"]);
+        rescanButton:SetEnabled(false);
+        SetTooltip(rescanButton, L["Blizzard no longer shows which bonus rolls have been used, so past rolls can no longer be detected."]);
 
         local accessibilityMenu = rootDescription:CreateButton(ACCESSIBILITY_LABEL);
 

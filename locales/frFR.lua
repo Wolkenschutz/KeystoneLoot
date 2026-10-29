@@ -164,11 +164,8 @@ L["Group is full!"] = "Groupe complet !";
 L["Text can be modified in the settings."] = "Le texte peut être modifié dans les paramètres.";
 
 -- voidcore.lua
-L["Rescanning for bonus rolls..."] = "Nouvelle analyse des jets bonus...";
 L["Rescan bonus rolls"] = "Rescanner les jets bonus";
-L["Checking for past bonus rolls (one time)..."] = "Recherche d'anciens jets bonus (unique)...";
-L["%d past |4bonus roll:bonus rolls; detected."] = "%d |4ancien jet bonus détecté:anciens jets bonus détectés;.";
-L["No untracked bonus rolls found."] = "Aucun jet bonus non suivi trouvé.";
+L["Blizzard no longer shows which bonus rolls have been used, so past rolls can no longer be detected."] = "Blizzard n'indique plus quels jets bonus ont été utilisés, les jets passés ne peuvent donc plus être détectés.";
 
 -- role_check.lua
 L["Role check confirmed automatically."] = "Vérification des rôles confirmée automatiquement.";

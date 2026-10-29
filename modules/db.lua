@@ -8,7 +8,7 @@ local CURRENT_SEASON = KeystoneLoot.Config.season;
 local DEFAULT_WHISPER_MESSAGE = KeystoneLoot.Config.whisperMessage;
 
 local DB_VERSION = 20;
-local CHAR_DB_VERSION = 4;
+local CHAR_DB_VERSION = 5;
 
 local observers = {};
 
@@ -210,6 +210,10 @@ function DB:MigrateCharDB(fromVersion)
 
     if (fromVersion == 3) then
         KeystoneLootCharDB.bankTracks = {};
+    end
+
+    if (fromVersion == 4) then
+        KeystoneLootCharDB.simcImported = false;
     end
 end
 

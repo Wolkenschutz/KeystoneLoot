@@ -166,11 +166,8 @@ L["Group is full!"] = "Группа заполнена!";
 L["Text can be modified in the settings."] = "Текст можно изменить в настройках.";
 
 -- voidcore.lua
-L["Rescanning for bonus rolls..."] = "Повторное сканирование бонусных бросков...";
 L["Rescan bonus rolls"] = "Сканировать бонусные броски заново";
-L["Checking for past bonus rolls (one time)..."] = "Поиск прошлых бонусных бросков (однократно)...";
-L["%d past |4bonus roll:bonus rolls; detected."] = "Обнаружено прошлых бонусных бросков: %d.";
-L["No untracked bonus rolls found."] = "Неотслеженных бонусных бросков не найдено.";
+L["Blizzard no longer shows which bonus rolls have been used, so past rolls can no longer be detected."] = "Blizzard больше не показывает, какие бонусные броски уже использованы, поэтому прошлые броски больше нельзя обнаружить.";
 
 -- role_check.lua
 L["Role check confirmed automatically."] = "Проверка ролей подтверждена автоматически.";
