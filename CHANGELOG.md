@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.19.1 - 2026-10-29
+
+### Other Changes
+
+- Blizzard broke the bonus roll tooltip, so past rolls can no longer be detecte
+
 ## 2.19.0 - 2026-10-18
 
 ### Bugfixes
